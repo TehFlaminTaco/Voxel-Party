@@ -26,7 +26,7 @@ public sealed class AtlasResource : GameResource
 		/// <summary>
 		/// Do we want to load this texture directly from an image?
 		/// </summary>
-		[KeyProperty, ShowIf( nameof( UseRegion ), false )]
+		[KeyProperty, ImageAssetPath, ShowIf( nameof( UseRegion ), false )]
 		public Texture Texture { get; set; }
 
 		/// <summary>

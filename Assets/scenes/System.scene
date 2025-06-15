@@ -1,49 +1,15 @@
 {
-  "__guid": "325a4042-0696-43dd-a79d-dcc314299ba3",
+  "__guid": "34a5a960-ca25-4392-bb89-abd1d5e68bd7",
   "GameObjects": [
     {
-      "__guid": "bfc59c12-1ed2-4f91-8956-a95a315eac3c",
+      "__guid": "461b4b03-f4a2-442a-a6b3-ada4a1b61130",
       "__version": 1,
       "Flags": 0,
-      "Name": "Sun",
-      "Position": "0,0,0",
-      "Rotation": "-0.0729315,0.4822396,0.1305433,0.8631827",
-      "Scale": "1,1,1",
-      "Tags": "light_directional,light",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "NetworkOrphaned": 0,
-      "OwnerTransfer": 1,
-      "Components": [
-        {
-          "__type": "Sandbox.DirectionalLight",
-          "__guid": "d3659344-a90d-48fa-927a-095f70fe041f",
-          "__enabled": true,
-          "FogMode": "Enabled",
-          "FogStrength": 1,
-          "LightColor": "0.94419,0.97767,1,1",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "Shadows": true,
-          "SkyColor": "0.2532,0.32006,0.35349,1"
-        }
-      ],
-      "Children": []
-    },
-    {
-      "__guid": "00344a8c-fa5e-45ae-b12a-10bb781a1dc3",
-      "__version": 1,
-      "Flags": 0,
-      "Name": "2D Skybox",
+      "Name": "Game Manager",
       "Position": "0,0,0",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
-      "Tags": "skybox",
+      "Tags": "",
       "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
@@ -51,52 +17,21 @@
       "OwnerTransfer": 1,
       "Components": [
         {
-          "__type": "Sandbox.SkyBox2D",
-          "__guid": "de79e9e0-5c37-4c54-ac67-bfcdb1d5483b",
+          "__type": "GameManager",
+          "__guid": "af91899f-e0cd-425c-950e-75a8f612ae3a",
           "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "SkyIndirectLighting": true,
-          "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Sandbox.EnvmapProbe",
-          "__guid": "f3e304db-baab-4c1a-a4ec-8442585c2d62",
-          "__enabled": true,
-          "Bounds": {
-            "Mins": "-512,-512,-512",
-            "Maxs": "512,512,512"
-          },
-          "DelayBetweenUpdates": 0.1,
-          "Feathering": 0.02,
-          "FrameInterval": 5,
-          "MaxDistance": 512,
-          "MultiBounce": false,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "Projection": "Sphere",
-          "RenderDynamically": false,
-          "Resolution": "Small",
-          "Texture": "textures/cubemaps/default2.vtex",
-          "TintColor": "1,1,1,1",
-          "UpdateStrategy": "OnEnabled",
-          "ZFar": 4096,
-          "ZNear": 16
+          "OnComponentUpdate": null
         }
       ],
       "Children": []
     },
     {
-      "__guid": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
+      "__guid": "92b3adcd-4f01-49ec-a291-e4967e6b5283",
       "__version": 1,
       "Flags": 0,
       "Name": "Camera",
@@ -112,7 +47,7 @@
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
-          "__guid": "cf3cbf96-22b6-4be4-a5d0-672a96c17f9f",
+          "__guid": "028194bd-49c1-4f70-a1c7-045e0d7d1d61",
           "__enabled": true,
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
@@ -137,7 +72,7 @@
         },
         {
           "__type": "Sandbox.Bloom",
-          "__guid": "d73ef723-c888-41d4-802e-f797c79318be",
+          "__guid": "d9674652-fbc9-4b2f-a980-27b2e614a99b",
           "__enabled": true,
           "__version": 1,
           "Gamma": 2.2,
@@ -154,7 +89,7 @@
         },
         {
           "__type": "Sandbox.Tonemapping",
-          "__guid": "9d76f362-7227-40eb-a189-69353c780c46",
+          "__guid": "a3223212-3598-4a8d-8a62-8f4dd917f455",
           "__enabled": true,
           "__version": 3,
           "AutoExposureEnabled": true,
@@ -173,7 +108,7 @@
         },
         {
           "__type": "Sandbox.Sharpen",
-          "__guid": "0bffee5e-19f2-41c4-88f9-faefbcce6bf4",
+          "__guid": "0b965842-658d-434c-a91c-442363cf582b",
           "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
@@ -187,36 +122,40 @@
       "Children": []
     },
     {
-      "__guid": "29d73259-f492-41a6-9b65-a3172e1d1e40",
+      "__guid": "c60e85c0-3c2d-426c-bdd5-c8dc26ca7f6a",
       "__version": 1,
       "Flags": 0,
-      "Name": "Voxel Map",
-      "Position": "0,0,0",
+      "Name": "UI",
+      "Position": "-61.44048,-23.03696,64.55441",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
-      "Enabled": false,
+      "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
       "NetworkOrphaned": 0,
       "OwnerTransfer": 1,
       "Components": [
         {
-          "__type": "Boxfish.Library.NetworkedVoxelVolume",
-          "__guid": "14ac3c2a-277e-4e92-8e8d-b8057c810d53",
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "db037d74-11b6-4f6a-af21-931847f82c4e",
           "__enabled": true,
-          "Atlas": "resources/base.voxatlas",
+          "AutoScreenScale": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
-          "VoxelScale": 39.37008
+          "Opacity": 1,
+          "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
+          "TargetCamera": null,
+          "ZIndex": 100
         },
         {
-          "__type": "VoxelBuilder",
-          "__guid": "b0dd8f43-d3c5-4769-85f9-1f4a37a6c8f1",
+          "__type": "Chat",
+          "__guid": "ed0b40da-cd08-4c8e-98b8-b92fc9ce711b",
           "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,

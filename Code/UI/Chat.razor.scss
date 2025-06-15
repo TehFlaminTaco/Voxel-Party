@@ -1,0 +1,59 @@
+Chat {
+	position: absolute;
+	bottom: 10%;
+	left: 5%;
+	width: 600px;
+	justify-content: center;
+	align-items: stretch;
+	font-weight: bold;
+	border-radius: 20px;
+	flex-direction: column;
+	font-size: 20px;
+	font-family: "Courier New";
+	gap: 10px;
+
+	.output {
+		flex-grow: 1;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: stretch;
+		gap: 5px;
+
+		.chat_entry {
+			//background-color: #222d;
+			padding: 2px;
+			gap: 10px;
+			text-shadow: 2px 2px 2px #000a;
+			align-items: center;
+
+			.avatar {
+				width: 32px;
+				height: 32px;
+				background-position: center;
+				background-size: cover;
+			}
+
+			.author {
+				text-shadow: 3px 3px #000000;
+				color: #fab004;
+				white-space: nowrap;
+				flex-shrink: 0;
+			}
+
+			.message {
+				color: #fff;
+			}
+		}
+	}
+
+	.input {
+		color: white;
+	}
+
+	&.open {
+		.input {
+			background-color: rgba(0, 0, 0, 0.15);
+			border-bottom: 4px solid #000000;
+		}
+	}
+}
