@@ -1,10 +1,10 @@
 public static class ItemRegistry {
-    public static List<Item> Items { get; } = new();
+    public static List<Item> Items { get; set; } = new();
 
-    public static void UpdateRegistry() {
-	    var items = ResourceLibrary.GetAll<Item>()
-		    .OrderBy( x => x.ID );
-
+    public static void UpdateRegistry()
+    {
+	    var items = ResourceLibrary.GetAll<Item>();
+	    
 	    foreach ( var i in items )
 	    {
 		    Items.Add( i );

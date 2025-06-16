@@ -11,13 +11,10 @@ public class ItemStack {
         get {
             return Item?.ID ?? 0; // Return the item ID if the item is not null, otherwise return 0
         }
-        set {
-	        Log.Info(value);
-            if ( ItemRegistry.Items[value].IsValid() ) {
-                Item = ItemRegistry.Items[value]; // Set the item from the registry if it exists
-            } else {
-                Item = null; // If the item ID is not found, set the item to null
-            }
+        set
+        {
+	        var item = ItemRegistry.GetItem( value );
+	        Item = item.IsValid() ? item : null;
         }
     }
 
