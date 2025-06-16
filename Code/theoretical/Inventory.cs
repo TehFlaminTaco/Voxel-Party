@@ -1,7 +1,7 @@
 using System;
 
 public class Inventory {
-    public List<ItemStack> Items { get; private set; } = new List<ItemStack>();
+    public List<ItemStack> Items { get; private set; } = new();
     public virtual int MaxSize { get; set; } = 36; // Default inventory size
 
     public Inventory( int maxSize = 36 ) {
@@ -74,5 +74,33 @@ public class Inventory {
         }
 
         return stack; // If we reach here, the stack could not be fully inserted
+    }
+
+    [ConCmd]
+    public static void GiveItem( int itemID, int amount)
+    {
+	    var player = Game.ActiveScene?.GetAllComponents<VoxelPlayer>()
+		    .FirstOrDefault( x => x.Network.Owner == Rpc.Caller );
+	    if ( !player.IsValid() ) {
+		    Log.Warning("Player not found");
+		    return;
+	    }
+	    
+	    var stack = new ItemStack( ItemRegistry.Items[itemID] );
+	    player.inventory.PutInFirstAvailableSlot(stack);
+    }
+    
+    [ConCmd]
+    public static void GiveItem( string itemName, int amount)
+    {
+	    var player = Game.ActiveScene?.GetAllComponents<VoxelPlayer>()
+		    .FirstOrDefault( x => x.Network.Owner == Rpc.Caller );
+	    if ( !player.IsValid() ) {
+		    Log.Warning("Player not found");
+		    return;
+	    }
+	    
+	    var stack = new ItemStack( ItemRegistry.Items.FirstOrDefault( x => x.Name == itemName ) );
+	    player.inventory.PutInFirstAvailableSlot(stack);
     }
 }

@@ -12,6 +12,6 @@ public struct BlockData {
 	public BlockData( int blockType ) : this( (byte)blockType, 0 ) { }
 
 	public Block GetBlock() {
-		return BlockRegistry.GetBlock( BlockID );
+		return ItemRegistry.GetBlock( BlockID );
 	}
 }

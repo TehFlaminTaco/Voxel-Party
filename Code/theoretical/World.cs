@@ -9,19 +9,26 @@ public class World : BlockSpace {
 
 	public World() {
 		Active = this; // Set the active world to this instance.
-		BlockRegistry.UpdateRegistry(); // Ensure the block registry is up to date.
+		ItemRegistry.UpdateRegistry(); // Ensure the block registry is up to date.
 		ItemRegistry.UpdateRegistry(); // Ensure the item registry is up to date.
 		MakeSpawnPlatform();
 	}
 
-	public void MakeSpawnPlatform() {
+	public void MakeSpawnPlatform()
+	{
 		// Create a simple dirt platform at the origin.
-		for ( int z = -1; z <= 1; z++ ) {
-			for ( int y = -1; y <= 4; y++ ) {
-				for ( int x = -1; x <= 4; x++ ) {
+		for ( int z = -1; z <= 1; z++ )
+		{
+			for ( int y = -1; y <= 4; y++ )
+			{
+				for ( int x = -1; x <= 4; x++ )
+				{
 					if ( x > 1 && y > 1 ) continue;
 					var pos = new Vector3Int( x, y, z );
-					SetBlock( pos, new BlockData( z < 1 ? Blocks.Dirt.BlockID : Blocks.Grass.BlockID ) );
+					SetBlock( pos,
+						new BlockData( z < 1
+							? ItemRegistry.Items.FirstOrDefault( x => x.Name == "Dirt" ).ID
+							: ItemRegistry.Items.FirstOrDefault( y => y.Name == "Grass" ).ID ) );
 				}
 			}
 		}

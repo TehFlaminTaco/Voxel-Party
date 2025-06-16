@@ -36,11 +36,11 @@ public sealed class SpeedBuild : Component
 			foreach ( var i in Scene.GetAllComponents<PlayerController>() )
 			{
 				Players.Add( i );
-				SetPlayerTransform( i, Spawn.WorldPosition, Rotation.Identity );
+				//SetPlayerTransform( i, Spawn.WorldPosition, Rotation.Identity );
 			}
 		}
 		
-		await Task.DelayRealtimeSeconds( 5 );
+		//await Task.DelayRealtimeSeconds( 5 );
 		
 		var index = 0;
 		foreach ( var i in Players )

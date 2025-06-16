@@ -5,24 +5,20 @@ using Sandbox.UI;
  * All eg. Stone, refer to the same Block instance which is mapped via BlockData.BlockID.
  */
 public class Block {
-	public int BlockID { get; set; } // Unique ID for this block type.
-
-	public virtual string Name { get; set; } // Name of the block type, e.g. "Stone", "Dirt".
-	public virtual bool Opaque { get; set; } = true; // Whether the block is opaque (blocks light).
-	public virtual bool IsSolidBlock { get; set; } = true; // Is this block considered a full solid block
-	public virtual bool IsSolid { get; set; } = true; // Whether the block is solid (blocks movement).
-
-	public virtual int Hardness { get; set; } = 1; // Hardness of the block, used for mining speed calculations.
-
-	public virtual Vector2Int TextureIndex { get; set; } = Vector2Int.Zero; // Default texture index for the block, used for rendering.
-	public virtual Vector2Int? TopTextureIndex { get; set; } = null; // Default texture index for the top face of the block.
-	public virtual Vector2Int? SideTextureIndex { get; set; } = null; // Default texture index for the side faces of the block.
-	public virtual Vector2Int? NorthTextureIndex { get; set; } = null; // Default texture index for the north face of the block.
-	public virtual Vector2Int? SouthTextureIndex { get; set; } = null; // Default texture index for the south face of the block.
-	public virtual Vector2Int? EastTextureIndex { get; set; } = null; // Default texture index for the east face of the block.
-	public virtual Vector2Int? WestTextureIndex { get; set; } = null; // Default texture index for the west face of the block.
-	public virtual Vector2Int? BottomTextureIndex { get; set; } = null; // Default texture index for the bottom face of the block.
-	public virtual ItemStack[] Drops { get; set; } = []; // Items that drop when the block is broken, default is empty stack.
+	public bool Opaque { get; set; } = true; // Whether the block is opaque (blocks light).
+	public bool IsSolidBlock { get; set; } = true; // Is this block considered a full solid block
+	public bool IsSolid { get; set; } = true; // Whether the block is solid (blocks movement).
+	public int Hardness { get; set; } = 1; // Hardness of the block, used for mining speed calculations.
+	
+	public Vector2Int TextureIndex { get; set; } = Vector2Int.Zero; // Default texture index for the block, used for rendering.
+	public Vector2Int? TopTextureIndex { get; set; } = null; // Default texture index for the top face of the block.
+	public Vector2Int? SideTextureIndex { get; set; } = null; // Default texture index for the side faces of the block.
+	public Vector2Int? NorthTextureIndex { get; set; } = null; // Default texture index for the north face of the block.
+	public Vector2Int? SouthTextureIndex { get; set; } = null; // Default texture index for the south face of the block.
+	public Vector2Int? EastTextureIndex { get; set; } = null; // Default texture index for the east face of the block.
+	public Vector2Int? WestTextureIndex { get; set; } = null; // Default texture index for the west face of the block.
+	public Vector2Int? BottomTextureIndex { get; set; } = null; // Default texture index for the bottom face of the block.
+	public ItemStack[] Drops { get; set; } = []; // Items that drop when the block is broken, default is empty stack.
 
 	public virtual Vector2Int GetTextureIndex( World world, Vector3Int blockPos, Direction face ) => face switch {
 		Direction.North => NorthTextureIndex ?? SideTextureIndex ?? TextureIndex,
@@ -105,7 +101,7 @@ public class Block {
 		// Check if the adjacent block in the direction of the face is solid.
 		var adjacentPos = blockPos + face.Forward();
 		var adjacentBlockData = world.GetBlock( adjacentPos );
-		var adjacentBlock = BlockRegistry.GetBlock( adjacentBlockData.BlockID );
+		var adjacentBlock = ItemRegistry.GetBlock( adjacentBlockData.BlockID );
 		if ( adjacentBlock == null ) {
 			return true; // If no adjacent block, show the face.
 		}

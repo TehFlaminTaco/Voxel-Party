@@ -1,0 +1,23 @@
+{
+  "ID": 0,
+  "Name": "Air",
+  "MaxStackSize": 0,
+  "IsBlock": true,
+  "Block": {
+    "Opaque": false,
+    "IsSolidBlock": false,
+    "IsSolid": false,
+    "Hardness": -1,
+    "TextureIndex": "0,0",
+    "TopTextureIndex": null,
+    "SideTextureIndex": null,
+    "NorthTextureIndex": null,
+    "SouthTextureIndex": null,
+    "EastTextureIndex": null,
+    "WestTextureIndex": null,
+    "BottomTextureIndex": null,
+    "Drops": []
+  },
+  "__references": [],
+  "__version": 0
+}

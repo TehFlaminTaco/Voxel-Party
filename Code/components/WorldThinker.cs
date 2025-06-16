@@ -10,6 +10,7 @@ public sealed class WorldThinker : Component {
 	public World World = new();
 	protected override void OnUpdate() {
 		if ( IsProxy ) return;
+		
 		// Iterate (randomly) through every loaded chunk, check if it's outside of the forget radius from any player, and if so, unload it.
 		List<Vector3Int> forgetList = new();
 		foreach ( var kv in Random.Shared.TakeRandom( World.SimulatedChunks, UnloadBatchSize ) ) {
@@ -79,6 +80,7 @@ public sealed class WorldThinker : Component {
 			Log.Info( $"Creating chunk at {pos}. {chunk.Dirty} {chunk.IsRendered}" );
 			World.GetChunk( pos ).Render( Scene );
 		}
+		
 	}
 
 	[Rpc.Broadcast]

@@ -5,15 +5,16 @@ public class ItemStack {
     public static readonly ItemStack Empty = new ItemStack { ItemID = 0, Count = 0 };
 
     public Item Item { get; set; } // The ID of the item in the stack, e.g. 0x01 for Stone.
-    public short Count { get; set; } // The number of items in the stack
+    public int Count { get; set; } // The number of items in the stack
 
-    public short ItemID {
+    public int ItemID {
         get {
             return Item?.ID ?? 0; // Return the item ID if the item is not null, otherwise return 0
         }
         set {
-            if ( ItemRegistry.Items.TryGetValue( value, out var item ) ) {
-                Item = item; // Set the item from the registry if it exists
+	        Log.Info(value);
+            if ( ItemRegistry.Items[value].IsValid() ) {
+                Item = ItemRegistry.Items[value]; // Set the item from the registry if it exists
             } else {
                 Item = null; // If the item ID is not found, set the item to null
             }
@@ -39,7 +40,7 @@ public class ItemStack {
         Count = 0; // Default count
     }
 
-    public ItemStack( Item item, short count = 1 ) {
+    public ItemStack( Item item, int count = 1 ) {
         if ( item == null ) {
             Item = null;
             Count = 0;
@@ -72,8 +73,8 @@ public class ItemStack {
     public ItemStack Merge( ItemStack other, bool simulate = false ) {
         if ( !CanMerge( other ) )
             return other; // Do not mutate the original stack, return the other stack if they cannot be merged
-        short newValue = (short)Math.Min( Count + other.Count, Item.MaxStackSize );
-        short delta = (short)(newValue - Count); // Calculate the difference to determine how many items to add
+        int newValue = Math.Min( Count + other.Count, Item.MaxStackSize );
+        int delta = newValue - Count; // Calculate the difference to determine how many items to add
         if ( !simulate ) {
             Count = newValue; // Update the count of this stack
         } else {

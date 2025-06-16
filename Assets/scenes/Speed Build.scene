@@ -344,7 +344,7 @@
         },
         {
           "__type": "VoxelPlayer",
-          "__guid": "820417fb-b145-4d87-8876-325640fb854a",
+          "__guid": "34e9119e-9286-4911-a01e-b8901f914c14",
           "__enabled": true,
           "CreativeMode": true,
           "OnComponentDestroy": null,
@@ -353,20 +353,6 @@
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null
-        },
-        {
-          "__type": "MoveModeFly",
-          "__guid": "b05539bf-f6af-4467-bd7c-98b1015df94d",
-          "__enabled": true,
-          "GroundAngle": 45,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "StepDownHeight": 18,
-          "StepUpHeight": 18
         }
       ],
       "Children": [
@@ -558,22 +544,6 @@
             "_type": "gameobject",
             "go": "849bc8e6-7016-4b71-8ccf-483ee6abdfa7"
           }
-        },
-        {
-          "__type": "WorldThinker",
-          "__guid": "d33f6520-8811-4e0f-9727-31da5e9dd60f",
-          "__enabled": true,
-          "BatchSize": 10,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "RenderChunkRadius": 10,
-          "RenderForgetRadius": 20,
-          "TextureAtlas": "materials/textureatlas.vmat",
-          "UnloadBatchSize": 10
         }
       ],
       "Children": []
@@ -2106,6 +2076,40 @@
           "Static": true,
           "Surface": null,
           "SurfaceVelocity": "0,0,0"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "e1ceffcb-886a-4c00-bf38-aad3d1005d5f",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "World",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "WorldThinker",
+          "__guid": "7c898bcd-cdc8-46e7-af73-7d1f9280f1ed",
+          "__enabled": true,
+          "BatchSize": 10,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RenderChunkRadius": 10,
+          "RenderForgetRadius": 20,
+          "TextureAtlas": "materials/textureatlas.vmat",
+          "UnloadBatchSize": 10
         }
       ],
       "Children": []
