@@ -341,6 +341,32 @@
           "OnComponentUpdate": null,
           "Priority": 5,
           "Speed": 1
+        },
+        {
+          "__type": "VoxelPlayer",
+          "__guid": "820417fb-b145-4d87-8876-325640fb854a",
+          "__enabled": true,
+          "CreativeMode": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        },
+        {
+          "__type": "MoveModeFly",
+          "__guid": "b05539bf-f6af-4467-bd7c-98b1015df94d",
+          "__enabled": true,
+          "GroundAngle": 45,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "StepDownHeight": 18,
+          "StepUpHeight": 18
         }
       ],
       "Children": [

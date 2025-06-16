@@ -6,6 +6,8 @@ public class VoxelPlayer : Component
 
     public Inventory inventory = new Inventory( 9 + (9 * 3) ); // 9 slots for the hotbar, and 27 slots for the inventory (3 rows of 9 slots each)
 
+    [Property] public bool CreativeMode = true;
+
     protected override void OnStart()
     {
         base.OnStart();
@@ -69,6 +71,17 @@ public class VoxelPlayer : Component
     }
     public void HandleBreak()
     {
+        if ( CreativeMode )
+        {
+            if ( !Input.Pressed( "Attack1" ) )
+                return;
+            var tr = EyeTrace();
+            if ( !tr.Hit )
+                return;
+
+            world.Thinker.BreakBlock( tr.HitBlockPosition );
+        }
+
         blockBreakEffect.Transform = global::Transform.Zero.WithPosition( WorldPosition );
         BreakTime += Time.Delta;
         if ( !Input.Down( "Attack1" ) )
