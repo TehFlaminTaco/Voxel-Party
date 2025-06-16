@@ -90,6 +90,33 @@ public class Inventory
         return stack; // If we reach here, the stack could not be fully inserted
     }
 
+    public ItemStack TakeItem( int slot, int count )
+    {
+        if ( slot < 0 || slot >= MaxSize )
+        {
+            throw new ArgumentOutOfRangeException( nameof( slot ), "Slot index is out of range." );
+        }
+
+        var currentStack = GetItem( slot );
+        if ( ItemStack.IsNullOrEmpty( currentStack ) || currentStack.Count < count )
+        {
+            return ItemStack.Empty; // Not enough items to take
+        }
+
+        var takenStack = currentStack.Clone();
+        takenStack.Count = Math.Min( count, takenStack.Count );
+        currentStack.Count -= takenStack.Count;
+        if ( currentStack.Count <= 0 )
+        {
+            SetItem( slot, ItemStack.Empty ); // Clear the slot if empty
+        }
+        else
+        {
+            SetItem( slot, currentStack ); // Update the slot with the remaining items
+        }
+        return takenStack; // Return the stack of items taken
+    }
+
     [ConCmd]
     public static void GiveItem( int itemID, int amount )
     {

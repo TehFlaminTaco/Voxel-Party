@@ -30,5 +30,10 @@ Hotbar {
     aspect-ratio: 1;
     border: 2px white;
     border-radius: 15px;
+
+    &.selected
+    {
+      border: 2px black;
+    }
   }
 }
