@@ -9,7 +9,8 @@ public struct BlockTraceResult {
 
 }
 
-public class BlockTrace {
+public class BlockTrace
+{
 	public Func<Vector3Int, bool> IgnoreFilter { get; set; } = _ => false;
 	public Vector3 Start { get; set; }
 	public Vector3 Dir { get; set; }
@@ -134,8 +135,6 @@ public class BlockTrace {
 public class BlockSpace {
 	// SimulatedChunks refer to chunks that have been loaded into memory, and thus can be interacted with.
 	public Dictionary<Vector3Int, Chunk> SimulatedChunks { get; private set; } = new();
-
-
 
 	public Chunk GetChunk( Vector3Int position ) {
 		if ( !SimulatedChunks.ContainsKey( position ) )

@@ -1,50 +1,49 @@
-public static class ItemRegistry {
-    public static Dictionary<short, Item> Items { get; } = new Dictionary<short, Item>();
+public static class ItemRegistry
+{
+	public static void UpdateRegistry()
+	{
 
-    public static void UpdateRegistry() {
-        Items.Clear();
-        foreach ( var member in TypeLibrary.GetTypes().SelectMany( c => c.Members ).Where( c => c.Attributes.Any( a => a is RegisterItemAttribute ) ) ) {
-            if ( !member.IsField && !member.IsProperty )
-                throw new System.Exception( $"Member {member.TypeDescription.Name}.{member.Name} is not a field or property. (Got {member.GetType()})" );
-            if ( member.IsStatic == false )
-                throw new System.Exception( $"Member {member.TypeDescription.Name}.{member.Name} is not static." );
+	}
 
-            object val;
-            if ( member is FieldDescription fd ) {
-                val = fd.GetValue( null );
-            } else if ( member is PropertyDescription pd ) {
-                val = pd.GetValue( null );
-            } else {
-                throw new System.Exception( $"Member {member.TypeDescription.Name}.{member.Name} is not a field or property. (Impossible?)" );
-            }
+	public static Item GetItem( int ID )
+	{
+		var item = ResourceLibrary.GetAll<Item>().FirstOrDefault( x => x.ID == ID );
+		if ( item != null && item.IsValid() )
+			return item;
+		return null;
+	}
 
-            if ( val is not Item item )
-                throw new System.Exception( $"Member {member.TypeDescription.Name}.{member.Name} is not an Item." );
+	public static Item GetItem( string name )
+	{
+		var item = ResourceLibrary.GetAll<Item>().FirstOrDefault( x => x.Name == name );
+		if ( item is not null && item.IsValid() )
+			return item;
+		return null;
+	}
 
-            var attr = member.Attributes.OfType<RegisterItemAttribute>().FirstOrDefault();
-            if ( attr == null )
-                throw new System.Exception( $"Member {member.TypeDescription.Name}.{member.Name} does not have a RegisterItemAttribute. (Impossible?)" );
+	public static Block GetBlock( int itemID )
+	{
+		var item = ResourceLibrary.GetAll<Item>().FirstOrDefault( x => x.ID == itemID );
+		if ( item != null && item.IsValid() )
+			return item.Block;
+		return null;
+	}
 
-            if ( Items.ContainsKey( (short)attr.ItemID ) )
-                throw new System.Exception( $"Item with ID {attr.ItemID} already registered to {Items[attr.ItemID].Name}" );
-
-            Items.Add( (short)attr.ItemID, item );
-            item.ID = (short)attr.ItemID; // Ensure the item has the correct ID set.
-            Log.Info( $"Registered item {item.Name} with ID {attr.ItemID}" );
-        }
-    }
-
-    public static Item GetItem( short itemID ) {
-        if ( Items.TryGetValue( itemID, out var item ) )
-            return item;
-        throw new System.Exception( $"Item with ID {itemID} not found in registry." );
-    }
+	public static Block GetBlock( string name )
+	{
+		var item = ResourceLibrary.GetAll<Item>().FirstOrDefault( x => x.Name == name );
+		if ( item != null && item.IsValid() )
+			return item.Block;
+		return null;
+	}
 }
 
-public class RegisterItemAttribute : System.Attribute {
-    public short ItemID { get; }
+public class RegisterItemAttribute : System.Attribute
+{
+	public int ItemID { get; }
 
-    public RegisterItemAttribute( short itemID ) {
-        ItemID = itemID;
-    }
+	public RegisterItemAttribute( int itemID )
+	{
+		ItemID = itemID;
+	}
 }

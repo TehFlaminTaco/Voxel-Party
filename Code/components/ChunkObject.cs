@@ -69,7 +69,7 @@ public sealed class ChunkObject : Component {
 	public void AddBlockMesh( Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector2> uvs ) {
 		// For testing, let's start by just creating a full single block for every block
 		var blockData = WorldInstance.GetBlock( blockPos );
-		var block = BlockRegistry.GetBlock( blockData.BlockID );
+		var block = ItemRegistry.GetBlock( blockData.BlockID );
 		if ( block == null ) {
 			Log.Warning( $"Block with ID {blockData.BlockID} not found at position {blockPos}." );
 			return;
@@ -91,7 +91,7 @@ public sealed class ChunkObject : Component {
 					var blockPos = new Vector3Int( x, y, z );
 					AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), Verts, Normals, UVs );
 					var blockID = WorldInstance.GetBlock( blockPos + (ChunkPosition * Chunk.SIZE) );
-					var block = BlockRegistry.GetBlock( blockID.BlockID );
+					var block = ItemRegistry.GetBlock( blockID.BlockID );
 					if ( block.IsSolid ) {
 						var aabb = block.GetCollisionAABB( WorldInstance, blockPos + (ChunkPosition * Chunk.SIZE) );
 						mb.AddCollisionBox( aabb.Size, aabb.Center );

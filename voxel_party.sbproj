@@ -1,7 +1,7 @@
 {
   "Title": "Voxel Party",
   "Type": "game",
-  "Org": "local",
+  "Org": "longfox",
   "Ident": "voxel_party",
   "Schema": 1,
   "IncludeSourceFiles": false,

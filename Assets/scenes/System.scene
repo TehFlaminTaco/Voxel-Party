@@ -126,7 +126,7 @@
       "__version": 1,
       "Flags": 0,
       "Name": "UI",
-      "Position": "-61.44048,-23.03696,64.55441",
+      "Position": "1102.36,0,570.865",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
@@ -156,6 +156,17 @@
         {
           "__type": "Chat",
           "__guid": "ed0b40da-cd08-4c8e-98b8-b92fc9ce711b",
+          "__enabled": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        },
+        {
+          "__type": "Hotbar",
+          "__guid": "fe49752b-6f4d-437e-8ea6-c8825986633d",
           "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,

@@ -7,7 +7,7 @@ public class WorldItem : Component {
     private bool Spent = false;
 
     [Property]
-    public short ItemID {
+    public int ItemID {
         get => stack.ItemID;
         set {
             if ( stack.ItemID == value ) return;
@@ -15,7 +15,7 @@ public class WorldItem : Component {
         }
     }
     [Property]
-    public short Count {
+    public int Count {
         get => stack.Count;
         set {
             if ( stack.Count == value ) return;

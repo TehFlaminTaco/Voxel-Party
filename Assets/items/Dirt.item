@@ -1,0 +1,29 @@
+{
+  "ID": 2,
+  "Name": "Dirt",
+  "MaxStackSize": 64,
+  "IsBlock": true,
+  "Block": {
+    "Opaque": true,
+    "IsSolidBlock": true,
+    "IsSolid": true,
+    "Hardness": 1,
+    "TextureIndex": "1,0",
+    "TopTextureIndex": null,
+    "SideTextureIndex": null,
+    "NorthTextureIndex": null,
+    "SouthTextureIndex": null,
+    "EastTextureIndex": null,
+    "WestTextureIndex": null,
+    "BottomTextureIndex": null,
+    "Drops": [
+      {
+        "Item": "items/dirt.item",
+        "Count": 1,
+        "ItemID": 2
+      }
+    ]
+  },
+  "__references": [],
+  "__version": 0
+}

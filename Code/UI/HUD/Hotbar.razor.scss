@@ -1,0 +1,34 @@
+Hotbar {
+  position: absolute;
+  color: white;
+  font-family: "Courier Prime";
+  border-radius: 30px;
+  flex-direction: row;
+  pointer-events: none;
+  align-self: flex-end;
+  width: 100%;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: center;
+  
+  .container
+  {
+    background-color: rgba(147, 147, 147, 0.2);
+    padding: 10px;
+    width: 42%;
+    height: 10%;
+    margin-bottom: 20px;
+    border: 2px white;
+    border-radius: 30px;
+    justify-content: space-evenly;
+  }
+  
+  .item-slot
+  {
+    background-color: rgba(147, 147, 147, 0.8);
+    width: auto;
+    aspect-ratio: 1;
+    border: 2px white;
+    border-radius: 15px;
+  }
+}

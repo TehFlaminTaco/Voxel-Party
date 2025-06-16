@@ -10,13 +10,11 @@ public class VoxelPlayer : Component
 
     protected override void OnStart()
     {
-        base.OnStart();
         SpawnBlockBreakingEffect();
     }
 
     protected override void OnUpdate()
     {
-        base.OnUpdate();
         if ( IsProxy )
             return;
 
@@ -73,6 +71,8 @@ public class VoxelPlayer : Component
     {
         if ( CreativeMode )
         {
+            BreakingBlock = null;
+            BreakTime = 0f;
             if ( !Input.Pressed( "Attack1" ) )
                 return;
             var tr = EyeTrace();
@@ -80,6 +80,7 @@ public class VoxelPlayer : Component
                 return;
 
             world.Thinker.BreakBlock( tr.HitBlockPosition );
+            return;
         }
 
         blockBreakEffect.Transform = global::Transform.Zero.WithPosition( WorldPosition );
