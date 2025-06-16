@@ -1,0 +1,24 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	<div class="container">
+		@foreach ( var i in Player.inventory.Items.Slice( 0, 9 ) )
+		{
+			<div class="item-slot"></div>
+		}
+	</div>
+</root>
+
+@code
+{
+	PlayerController Controller { get; set; }
+	VoxelPlayer Player { get; set; }
+
+	protected override void OnStart()
+	{
+		Controller = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => x.Network.Owner == Network.Owner );
+		Player = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Network.Owner );
+	}
+}
