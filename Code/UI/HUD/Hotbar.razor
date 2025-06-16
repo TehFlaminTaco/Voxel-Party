@@ -1,12 +1,13 @@
 @using Sandbox;
 @using Sandbox.UI;
+@using System;
 @inherits PanelComponent
 
 <root>
 	<div class="container">
 		@for (int i = 0; i < 9; i++)
 		{
-			<div class="item-slot">
+			<div class="item-slot @(VoxelPlayer.SelectedSlot == i ? "selected" : "")">
 				<ItemIcon Slot=@(i)></ItemIcon>
 			</div>
 		}
@@ -23,4 +24,6 @@
 		Controller = Scene.GetAllComponents<PlayerController>().FirstOrDefault(x => x.Network.Owner == Network.Owner);
 		Player = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault(x => x.Network.Owner == Network.Owner);
 	}
+
+	protected override int BuildHash() => HashCode.Combine($"{VoxelPlayer.SelectedSlot}");
 }

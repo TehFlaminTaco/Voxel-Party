@@ -24,6 +24,8 @@ public class VoxelPlayer : Component
 
         ShowHoveredFace();
         HandleBreak();
+        HandlePlace();
+        HandleHotbar();
     }
 
     public BlockTraceResult EyeTrace()
@@ -39,6 +41,8 @@ public class VoxelPlayer : Component
     public Vector3Int? BreakingBlock = null;
     public Direction BreakingFace = Direction.None;
     SceneCustomObject blockBreakEffect;
+
+    public static int SelectedSlot = 0;
     public void SpawnBlockBreakingEffect()
     {
         blockBreakEffect = new SceneCustomObject( Scene.SceneWorld );
@@ -126,6 +130,26 @@ public class VoxelPlayer : Component
 
     }
 
+    public void HandlePlace()
+    {
+        if ( Input.Pressed( "Attack2" ) )
+        {
+            var item = inventory.GetItem( SelectedSlot );
+            if ( ItemStack.IsNullOrEmpty( item ) )
+                return;
+            if ( item.Item.Block == null )
+            {
+                return; // TODO: Other item use actions, other placement styles?
+            }
+            var trace = EyeTrace();
+            if ( !trace.Hit )
+                return;
+            var placePos = trace.HitBlockPosition + trace.HitFace.Forward();
+            inventory.TakeItem( SelectedSlot, 1 ); // Remove one item from the hotbar slot
+            world.SetBlock( placePos, new BlockData( (byte)item.Item.ID, 0 ) );
+        }
+    }
+
     public void ShowHoveredFace()
     {
         var trace = EyeTrace();
@@ -154,5 +178,26 @@ public class VoxelPlayer : Component
         Gizmo.Draw.Color = Color.Black;
         Gizmo.Draw.LineThickness = 2f;
         Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( facePos, boxSize ) );
+    }
+
+    public void HandleHotbar()
+    {
+        for ( int i = 0; i < 9; i++ )
+        {
+            if ( Input.Pressed( $"Slot{i + 1}" ) )
+                SelectedSlot = i;
+        }
+        if ( Input.Pressed( "NextSlot" ) )
+        {
+            SelectedSlot++;
+            if ( SelectedSlot >= 9 )
+                SelectedSlot = 0;
+        }
+        if ( Input.Pressed( "LastSlot" ) )
+        {
+            SelectedSlot--;
+            if ( SelectedSlot < 0 )
+                SelectedSlot = 8;
+        }
     }
 }

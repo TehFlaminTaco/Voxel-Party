@@ -1,7 +1,7 @@
 {
   "Title": "Voxel Party",
   "Type": "game",
-  "Org": "longfox",
+  "Org": "local",
   "Ident": "voxel_party",
   "Schema": 1,
   "IncludeSourceFiles": false,
@@ -25,6 +25,11 @@
     "CsProjName": "",
     "StartupScene": "scenes/menu.scene",
     "LaunchMode": "Normal",
-    "SystemScene": "scenes/system.scene"
+    "SystemScene": "scenes/system.scene",
+    "ControlModes": {
+      "Keyboard": false,
+      "VR": false,
+      "Gamepad": false
+    }
   }
 }
