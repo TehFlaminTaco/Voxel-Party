@@ -10,13 +10,11 @@ public class VoxelPlayer : Component
 
     protected override void OnStart()
     {
-        base.OnStart();
         SpawnBlockBreakingEffect();
     }
 
     protected override void OnUpdate()
     {
-        base.OnUpdate();
         if ( IsProxy )
             return;
 
