@@ -16,7 +16,13 @@
     "EastTextureIndex": null,
     "WestTextureIndex": null,
     "BottomTextureIndex": null,
-    "Drops": []
+    "Drops": [
+      {
+        "Item": "items/dirt.item",
+        "Count": 1,
+        "ItemID": 2
+      }
+    ]
   },
   "__references": [],
   "__version": 0

@@ -63,10 +63,6 @@ public class Inventory
         if ( currentStack.CanMerge( stack ) )
         {
             var mergedStack = currentStack.Merge( stack, simulate );
-            if ( !simulate )
-            {
-                SetItem( slot, mergedStack );
-            }
             return ItemStack.IsNullOrEmpty( mergedStack ) ? ItemStack.Empty : mergedStack;
         }
 

@@ -4,9 +4,11 @@
 
 <root>
 	<div class="container">
-		@foreach ( var i in Player.inventory.Items.Slice( 0, 9 ) )
+		@for (int i = 0; i < 9; i++)
 		{
-			<div class="item-slot"></div>
+			<div class="item-slot">
+				<ItemIcon Slot=@(i)></ItemIcon>
+			</div>
 		}
 	</div>
 </root>
@@ -18,7 +20,7 @@
 
 	protected override void OnStart()
 	{
-		Controller = Scene.GetAllComponents<PlayerController>().FirstOrDefault( x => x.Network.Owner == Network.Owner );
-		Player = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Network.Owner );
+		Controller = Scene.GetAllComponents<PlayerController>().FirstOrDefault(x => x.Network.Owner == Network.Owner);
+		Player = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault(x => x.Network.Owner == Network.Owner);
 	}
 }

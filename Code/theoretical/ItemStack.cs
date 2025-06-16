@@ -1,5 +1,6 @@
 // Defines a stack of items as well as their data
 using System;
+using Sandbox;
 
 public class ItemStack
 {
