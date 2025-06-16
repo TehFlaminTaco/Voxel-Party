@@ -2,7 +2,7 @@ using System;
 
 public class Inventory {
     public List<ItemStack> Items { get; private set; } = new();
-    public virtual int MaxSize { get; set; } = 36; // Default inventory size
+    public int MaxSize { get; set; }
 
     public Inventory( int maxSize = 36 ) {
         MaxSize = maxSize;

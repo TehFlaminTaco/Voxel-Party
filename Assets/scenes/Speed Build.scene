@@ -341,18 +341,6 @@
           "OnComponentUpdate": null,
           "Priority": 5,
           "Speed": 1
-        },
-        {
-          "__type": "VoxelPlayer",
-          "__guid": "34e9119e-9286-4911-a01e-b8901f914c14",
-          "__enabled": true,
-          "CreativeMode": true,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null
         }
       ],
       "Children": [

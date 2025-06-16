@@ -12,11 +12,18 @@ public static class ItemRegistry {
 	    }
     }
 
-    public static Item GetItem( int itemID ) {
-	    var item = Items.FirstOrDefault( x => x.ID == itemID );
+    public static Item GetItem( int ID ) {
+	    var item = Items.FirstOrDefault( x => x.ID == ID );
 	    if ( item.IsValid() )
 		    return item;
-        throw new System.Exception( $"Item with ID {itemID} not found in registry." );
+        throw new System.Exception( $"Item with ID {ID} not found in registry." );
+    }
+    
+    public static Item GetItem( string name ) {
+	    var item = Items.FirstOrDefault( x => x.Name == name );
+	    if ( item.IsValid() )
+		    return item;
+	    throw new System.Exception( $"Item with name {name} not found in registry." );
     }
 
     public static Block GetBlock( int itemID )
@@ -25,6 +32,14 @@ public static class ItemRegistry {
 	    if ( item.IsValid() )
 		    return item.Block;
 	    throw new System.Exception( $"Item with ID {itemID} not found in registry." );
+    }
+    
+    public static Block GetBlock( string name )
+    {
+	    var item = Items.FirstOrDefault( x => x.Name == name );
+	    if ( item.IsValid() )
+		    return item.Block;
+	    throw new System.Exception( $"Item with ID {name} not found in registry." );
     }
 }
 

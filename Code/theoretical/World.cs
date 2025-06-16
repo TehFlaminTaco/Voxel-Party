@@ -25,10 +25,9 @@ public class World : BlockSpace {
 				{
 					if ( x > 1 && y > 1 ) continue;
 					var pos = new Vector3Int( x, y, z );
-					SetBlock( pos,
-						new BlockData( z < 1
-							? ItemRegistry.Items.FirstOrDefault( x => x.Name == "Dirt" ).ID
-							: ItemRegistry.Items.FirstOrDefault( y => y.Name == "Grass" ).ID ) );
+					SetBlock( pos, new BlockData( z < 1
+							? ItemRegistry.GetItem( "Dirt" ).ID
+							: ItemRegistry.GetItem( "Grass" ).ID ) );
 				}
 			}
 		}
