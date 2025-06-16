@@ -8,7 +8,10 @@ public sealed class WorldThinker : Component {
 	[Property] public int BatchSize { get; set; } = 10; // Number of chunks to load in each batch
 	[Property] public int UnloadBatchSize { get; set; } = 10; // Number of chunks to check to unload in each batch
 	public World World = new();
-	protected override void OnUpdate() {
+
+	[ConVar, DefaultValue(0)] public static int vp_debug_showchunkborders { get; set; } = 0;
+	
+	protected override void OnFixedUpdate() {
 		if ( IsProxy ) return;
 		
 		// Iterate (randomly) through every loaded chunk, check if it's outside of the forget radius from any player, and if so, unload it.
@@ -16,8 +19,10 @@ public sealed class WorldThinker : Component {
 		foreach ( var kv in Random.Shared.TakeRandom( World.SimulatedChunks, UnloadBatchSize ) ) {
 			// If the chunk manhatten distance is greater than the forget radius, append it to the forget list
 			var chunk = kv.Value;
-			var chunkDistance = Scene.GetAll<PlayerController>()
-				.Select( c => ((c.WorldPosition / World.BlockScale / Chunk.SIZE).Floor() - chunk.Position).Components().Select( Math.Abs ).Max() ).Min();
+			var chunkDistance = Scene.GetAllComponents<PlayerController>()
+				.Select( c => ((c.WorldPosition / World.BlockScale / Chunk.SIZE).Floor() - chunk.Position)
+					.Components().Select( Math.Abs ).Max() ).Min();
+			
 			if ( chunkDistance > RenderForgetRadius ) {
 				forgetList.Add( chunk.Position );
 			}
@@ -120,11 +125,21 @@ public sealed class WorldThinker : Component {
 
 		// Remove the block at the specified position.
 		World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
-
-
 	}
 
-	protected override void OnStart() {
-		base.OnStart();
+	protected override void OnPreRender()
+	{
+		if ( vp_debug_showchunkborders == 1 )
+		{
+			foreach ( var i in World.SimulatedChunks )
+			{
+				var pos = Helpers.VoxelToWorld( i.Key );
+				var size = Chunk.SIZE * World.BlockScale;
+				var mins = pos - size / 2;
+				var maxs = pos + size / 2;
+				var bbox = new BBox( mins, maxs );
+				Gizmo.Draw.LineBBox( bbox );
+			}
+		}
 	}
 }

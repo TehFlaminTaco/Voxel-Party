@@ -8,6 +8,10 @@ public class VoxelPlayer : Component
 
     [Property] public bool CreativeMode = true;
 
+    [Property, Alias( "Reach Distance" ), Description( "In blocks, not inches" )]
+    public float ReachDistanceProperty { get; set; } = 3.5f;
+    public float ReachDistance => ReachDistanceProperty * World.BlockScale;
+
     protected override void OnStart()
     {
         SpawnBlockBreakingEffect();
@@ -29,7 +33,7 @@ public class VoxelPlayer : Component
         var pc = GetComponent<PlayerController>();
         return Scene.GetAll<WorldThinker>().First().World.Trace(
             pc.EyePosition,
-            pc.EyePosition + pc.EyeAngles.Forward * 1024f
+            pc.EyePosition + pc.EyeAngles.Forward * ReachDistance
         ).Run();
     }
 

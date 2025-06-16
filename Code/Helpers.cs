@@ -86,4 +86,14 @@ public static class Helpers {
 		yield return vector.y;
 		yield return vector.z;
 	}
+	
+	public static Vector3 VoxelToWorld( Vector3 position )
+	{
+		return position * Chunk.SIZE * World.BlockScale;
+	}
+	
+	public static Vector3 WorldToVoxel( WorldThinker world, Vector3 position )
+	{
+		return position / World.BlockScale * Chunk.SIZE;
+	}
 }

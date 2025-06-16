@@ -1,7 +1,6 @@
 public class Chunk {
 	public static readonly Vector3Int SIZE = new Vector3Int( 16, 16, 16 );
 
-
 	public Vector3Int Position;
 
 	private BlockData[,,] blocks = new BlockData[SIZE.x, SIZE.y, SIZE.z];
@@ -70,7 +69,7 @@ public class Chunk {
 		obj.Parent = scene.Get<WorldThinker>().GameObject;
 		var chunkObj = obj.AddComponent<ChunkObject>();
 		chunkObj.ChunkPosition = Position;
-		obj.WorldPosition = Position * SIZE * World.BlockScale;
+		obj.WorldPosition = Helpers.VoxelToWorld( Position );
 		ChunkObject = chunkObj;
 		obj.Network.AssignOwnership( Connection.Host );
 		obj.NetworkSpawn();
