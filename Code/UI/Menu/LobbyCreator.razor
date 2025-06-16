@@ -68,7 +68,7 @@
 {
 	private TextEntry LobbyNameInput { get; set; }
 	private string LobbyName => LobbyNameInput?.Text.Length > 0 ? LobbyNameInput?.Text : Connection.Local.DisplayName + "'s Lobby";
-	private int MaxPlayers { get; set; } = 16;
+	private int MaxPlayers { get; set; } = 8;
 	private int Privacy { get; set; } = 0;
 	private bool Hidden { get; set; } = true;
 	private bool DestroyWhenHostLeaves { get; set; } = true;
@@ -79,7 +79,7 @@
 	
 	private void AdjustMaxPlayers( int delta )
 	{
-		MaxPlayers = Math.Clamp( MaxPlayers + delta, 1, 16 );
+		MaxPlayers = Math.Clamp( MaxPlayers + delta, 1, 8 );
 		StateHasChanged();
 	}
 
