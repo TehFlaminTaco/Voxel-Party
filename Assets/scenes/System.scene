@@ -135,18 +135,6 @@
           "Quality": "High",
           "Radius": 128,
           "ThinCompensation": 0
-        },
-        {
-          "__type": "Sandbox.Pixelate",
-          "__guid": "1f46e615-5131-4f56-9703-cd2ae84fe313",
-          "__enabled": true,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "Scale": 5
         }
       ],
       "Children": []
