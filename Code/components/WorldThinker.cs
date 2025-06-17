@@ -40,9 +40,17 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 		{
 			// If the chunk manhatten distance is greater than the forget radius, append it to the forget list
 			var chunk = kv.Value;
-			var chunkDistance = Scene.GetAllComponents<PlayerController>()
-				.Select( c => ((c.WorldPosition / World.BlockScale / Chunk.SIZE).Floor() - chunk.Position)
-					.Components().Select( Math.Abs ).Max() ).Min();
+			var chunkDistance = 0;
+			if ( Game.IsEditor )
+			{
+				chunkDistance = ( Game.ActiveScene.Camera.WorldPosition - chunk.Position ).Length.FloorToInt();
+			}
+			else
+			{
+				chunkDistance = Scene.GetAllComponents<PlayerController>()
+					.Select( c => ((c.WorldPosition / World.BlockScale / Chunk.SIZE).Floor() - chunk.Position)
+						.Components().Select( Math.Abs ).Max() ).Min();
+			}
 
 			if ( chunkDistance > RenderForgetRadius )
 			{

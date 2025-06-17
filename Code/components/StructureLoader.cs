@@ -103,7 +103,7 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 		foreach ( var child in GameObject.Children )
 		{
 			// Get the coordinates from the name in the form of "Chunk (x, y, z)"
-			// THIS IS A DIRTY HACK, but it works for now.
+			// TODO: THIS IS A DIRTY HACK, but it works for now.
 			if ( child.Name.StartsWith( "Chunk (" ) )
 			{
 				var coords = child.Name.Substring( 7, child.Name.Length - 8 ).Split( ", " );

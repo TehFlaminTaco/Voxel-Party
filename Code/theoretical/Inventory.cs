@@ -120,8 +120,7 @@ public class Inventory
     [ConCmd]
     public static void GiveItem( int itemID, int amount )
     {
-        var player = Game.ActiveScene?.GetAllComponents<VoxelPlayer>()
-            .FirstOrDefault( x => x.Network.Owner == Rpc.Caller );
+	    var player = VoxelPlayer.LocalPlayer();
         if ( !player.IsValid() )
         {
             Log.Warning( "Player not found" );

@@ -201,4 +201,16 @@ public class VoxelPlayer : Component
         //         SelectedSlot = 8;
         // }
     }
+
+    public static VoxelPlayer LocalPlayer()
+    {
+	    Log.Info(Game.ActiveScene?.GetAllComponents<VoxelPlayer>().FirstOrDefault());
+	    var player = Game.ActiveScene?.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Connection.Local );
+	    if ( !player.IsValid() )
+	    {
+		    Log.Warning("No local player found");
+		    return null;
+	    }
+	    return Game.ActiveScene?.GetAllComponents<VoxelPlayer>().First( x => x.Network.Owner == Connection.Local );
+    }
 }

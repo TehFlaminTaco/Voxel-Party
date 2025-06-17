@@ -50,7 +50,7 @@ public class StructureWriter : EditorTool
             }
             
             var structure = new Structure { StructureData = World.Active.SerializeRegion( FirstPosition, SecondPosition ) };
-            var path = EditorUtility.SaveFileDialog( "new structure", ".struct", FileSystem.Content.GetFullPath( "/structures" ) );
+            var path = EditorUtility.SaveFileDialog( "Save Your Structure", ".struct", FileSystem.Content.GetFullPath( "/structures" ) );
 	        File.WriteAllText(path, structure.Serialize().ToString());
         };
 
