@@ -64,7 +64,8 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			}
 		}
 	}
-	public WorldThinker WorldThinkerInstance => Scene.Get<WorldThinker>();
+	public WorldThinker WorldThinkerInstanceOverride = null;
+	public WorldThinker WorldThinkerInstance => WorldThinkerInstanceOverride ?? Scene.Get<WorldThinker>();
 	public World WorldInstance => WorldThinkerInstance?.World;
 
 	protected override void OnUpdate()
@@ -95,7 +96,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		block.AddBlockMesh( WorldInstance, blockPos, verts, normals, uvs );
 	}
 
-	public async void UpdateMesh()
+	public void UpdateMesh()
 	{
 		WorldInstance.GetChunk( ChunkPosition ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
 		List<Vector3> Verts = new List<Vector3>();
@@ -103,7 +104,6 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		List<Vector3> UVs = new List<Vector3>();
 
 		var mb = new ModelBuilder();
-		await GameTask.WorkerThread();
 		for ( int z = 0; z < Chunk.SIZE.z; z++ )
 		{
 			for ( int y = 0; y < Chunk.SIZE.y; y++ )
@@ -122,7 +122,6 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 				}
 			}
 		}
-		await GameTask.MainThread();
 
 		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
 

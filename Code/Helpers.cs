@@ -24,6 +24,15 @@ public static class Helpers
 		);
 	}
 
+	public static Vector3Int Ceil( this Vector3 vector )
+	{
+		return new Vector3Int(
+			(int)System.Math.Ceiling( vector.x ),
+			(int)System.Math.Ceiling( vector.y ),
+			(int)System.Math.Ceiling( vector.z )
+		);
+	}
+
 	// Modulo and Remainder methods for Vector3
 	// a modulo b is defined as (a % b + b) % b to ensure the result is always positive.
 	// Where as remainder is simply a % b, which can be negative if a is negative.
