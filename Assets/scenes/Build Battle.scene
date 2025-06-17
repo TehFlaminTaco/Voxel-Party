@@ -185,48 +185,6 @@
         }
       ],
       "Children": []
-    },
-    {
-      "__guid": "29d73259-f492-41a6-9b65-a3172e1d1e40",
-      "__version": 1,
-      "Flags": 0,
-      "Name": "Voxel Map",
-      "Position": "0,0,0",
-      "Rotation": "0,0,0,1",
-      "Scale": "1,1,1",
-      "Tags": "",
-      "Enabled": false,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "NetworkOrphaned": 0,
-      "OwnerTransfer": 1,
-      "Components": [
-        {
-          "__type": "Boxfish.Library.NetworkedVoxelVolume",
-          "__guid": "14ac3c2a-277e-4e92-8e8d-b8057c810d53",
-          "__enabled": true,
-          "Atlas": "resources/base.voxatlas",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "VoxelScale": 39.37008
-        },
-        {
-          "__type": "VoxelBuilder",
-          "__guid": "b0dd8f43-d3c5-4769-85f9-1f4a37a6c8f1",
-          "__enabled": true,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null
-        }
-      ],
-      "Children": []
     }
   ],
   "SceneProperties": {

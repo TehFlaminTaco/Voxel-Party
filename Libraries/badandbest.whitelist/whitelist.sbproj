@@ -1,0 +1,13 @@
+{
+  "Title": "Whitelist Helper",
+  "Type": "library",
+  "Org": "badandbest",
+  "Ident": "whitelist",
+  "Schema": 1,
+  "IncludeSourceFiles": false,
+  "Resources": null,
+  "PackageReferences": [],
+  "EditorReferences": null,
+  "IsStandaloneOnly": false,
+  "Metadata": {}
+}

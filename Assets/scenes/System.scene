@@ -31,7 +31,7 @@
       "Children": []
     },
     {
-      "__guid": "92b3adcd-4f01-49ec-a291-e4967e6b5283",
+      "__guid": "54db2712-127c-4656-863c-99050c5f96db",
       "__version": 1,
       "Flags": 0,
       "Name": "Camera",
@@ -47,7 +47,7 @@
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
-          "__guid": "028194bd-49c1-4f70-a1c7-045e0d7d1d61",
+          "__guid": "4d74572f-6a11-4e2a-be3f-9df41e25a6f4",
           "__enabled": true,
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
@@ -72,7 +72,7 @@
         },
         {
           "__type": "Sandbox.Bloom",
-          "__guid": "d9674652-fbc9-4b2f-a980-27b2e614a99b",
+          "__guid": "383571e0-fe04-4507-abeb-434712f3d61d",
           "__enabled": true,
           "__version": 1,
           "Gamma": 2.2,
@@ -89,7 +89,7 @@
         },
         {
           "__type": "Sandbox.Tonemapping",
-          "__guid": "a3223212-3598-4a8d-8a62-8f4dd917f455",
+          "__guid": "5fb14d18-2e56-444e-bb4f-a26159eb18a7",
           "__enabled": true,
           "__version": 3,
           "AutoExposureEnabled": true,
@@ -97,7 +97,7 @@
           "ExposureMethod": "RGB",
           "MaximumExposure": 2,
           "MinimumExposure": 1,
-          "Mode": "HableFilmic",
+          "Mode": "ReinhardJodie",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -108,7 +108,7 @@
         },
         {
           "__type": "Sandbox.Sharpen",
-          "__guid": "0b965842-658d-434c-a91c-442363cf582b",
+          "__guid": "362575e6-7fac-4ee5-83f3-5cd6efe4d6c3",
           "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,

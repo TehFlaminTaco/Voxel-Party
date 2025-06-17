@@ -42,15 +42,42 @@
     "SouthTexture": null,
     "EastTexture": null,
     "WestTexture": null,
-    "BottomTexture": null,
+    "BottomTexture": {
+      "$compiler": "texture",
+      "$source": "imagefile",
+      "data": {
+        "FilePath": "materials/block/dirt.png",
+        "MaxSize": 4096,
+        "ConvertHeightToNormals": false,
+        "NormalScale": 1,
+        "Rotate": 0,
+        "FlipVertical": false,
+        "FlipHorizontal": false,
+        "Padding": {
+          "Size": "0,0",
+          "EdgeSize": "0,0"
+        },
+        "Sharpen": 0,
+        "InvertColor": false,
+        "Blur": 0,
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1,
+        "Hue": 0,
+        "Colorize": false,
+        "TargetColor": "0,1,0,1",
+        "CacheToDisk": true
+      },
+      "compiled": "textures/generated/imagefile/9b061b6d15c32b16.vtex"
+    },
     "TextureIndex": 0,
-    "TopTextureIndex": null,
+    "TopTextureIndex": 1,
     "SideTextureIndex": null,
     "NorthTextureIndex": null,
     "SouthTextureIndex": null,
     "EastTextureIndex": null,
     "WestTextureIndex": null,
-    "BottomTextureIndex": null,
+    "BottomTextureIndex": 2,
     "Drops": [
       {
         "Item": "items/dirt.item",
