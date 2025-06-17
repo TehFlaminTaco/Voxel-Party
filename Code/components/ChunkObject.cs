@@ -79,7 +79,6 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 
 	protected override void OnStart()
 	{
-		base.OnStart();
 		UpdateMesh();
 	}
 

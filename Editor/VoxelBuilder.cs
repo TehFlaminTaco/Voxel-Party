@@ -9,7 +9,7 @@ using Editor.Audio;
 [Icon( "view_in_ar" )]
 [Alias( "voxelbuilder" )]
 [Group( "8" )]
-public class VoxelBuilder : EditorTool
+public partial class VoxelBuilder : EditorTool
 {
 	const float MAX_DISTANCE = 8096;
 	public int SelectedItemID { get; set; } = 0; // Default to Grass block

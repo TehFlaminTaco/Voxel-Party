@@ -4,7 +4,7 @@ public static class TexArrayTool
 {
     public static void UpdateMaterialTexture( Material material )
     {
-        Log.Info( "Updating material texture with texture atlas." );
+        //Log.Info( "Updating material texture with texture atlas." );
         material.Set( "Abledo", BuildTextureArray() );
     }
 

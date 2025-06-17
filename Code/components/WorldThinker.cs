@@ -25,7 +25,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 		foreach ( var child in GameObject.Children.ToList() )
 			child.DestroyImmediate();
 		World.SimulatedChunks.Clear();
-		this.World.MakeSpawnPlatform();
+		World.MakeSpawnPlatform();
 
 	}
 
@@ -112,7 +112,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 				break; // Stop loading if we exceed the time limit
 			}
 			var chunk = World.GetChunk( pos );
-			Log.Info( $"Creating chunk at {pos}. {chunk.Dirty} {chunk.IsRendered}" );
+			//Log.Info( $"Creating chunk at {pos}. {chunk.Dirty} {chunk.IsRendered}" );
 			World.GetChunk( pos ).Render( Scene );
 		}
 

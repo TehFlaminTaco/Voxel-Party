@@ -1,4 +1,7 @@
+using System.IO;
 using System.Runtime.Serialization;
+using Sandbox.theoretical;
+using FileSystem = Editor.FileSystem;
 
 [EditorTool]
 [Title( "Structure Writer" )]
@@ -38,8 +41,6 @@ public class StructureWriter : EditorTool
 
         var save = new Button( "Save Structure" );
 
-        var textarea = new TextEdit();
-
         save.Clicked = () =>
         {
             if ( !FirstPositionSet || !SecondPositionSet )
@@ -47,36 +48,13 @@ public class StructureWriter : EditorTool
                 Log.Error( "You must set both positions before saving." );
                 return;
             }
-
-            textarea.PlainText = World.Active.SerializeRegion( FirstPosition, SecondPosition );
-
+            
+            var structure = new Structure { StructureData = World.Active.SerializeRegion( FirstPosition, SecondPosition ) };
+            var path = EditorUtility.SaveFileDialog( "new structure", ".struct", FileSystem.Content.GetFullPath( "/structures" ) );
+	        File.WriteAllText(path, structure.Serialize().ToString());
         };
 
         window.Layout.Add( save );
-
-        window.Layout.Add( textarea );
-
-        var load = new Button( "Load Structure" );
-        load.Clicked = () =>
-        {
-            if ( !FirstPositionSet || !SecondPositionSet )
-            {
-                Log.Error( "You must set both positions before loading." );
-                return;
-            }
-
-            try
-            {
-                World.Active.LoadStructure( FirstPosition, textarea.PlainText );
-                Log.Info( "Structure loaded successfully." );
-            }
-            catch ( System.Exception ex )
-            {
-                Log.Error( $"Failed to load structure: {ex.Message}" );
-            }
-        };
-        window.Layout.Add( load );
-
 
         AddOverlay( window, TextFlag.RightTop, 10 );
     }
