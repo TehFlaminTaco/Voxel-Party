@@ -145,9 +145,9 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 			particle.Acceleration = Vector3.Down * 9.81f * 85f; // Gravity effect.
 			particle.Damping = 0.99f; // Damping to slow down the particles.
 			particle.Lifetime = Random.Shared.Float( 0.5f, 1.5f ); // Random lifetime for the particles.
-			Vector2 texCoord = block.TextureIndex;
-			texCoord += new Vector2( Random.Shared.Float( 0.0f, 1f - (1f / 16f) ), Random.Shared.Float( 0.0f, 1f - (2f / 16f) ) );
-			particle.TextureRect = Rect.FromPoints( texCoord / 16f, texCoord / 16f + new Vector2( 2f / 16f, 2f / 16f ) / 16f );
+			Vector2 texCoord = new Vector2( Random.Shared.Float() * 14 / 16f, Random.Shared.Float() * 14 / 16f );
+			particle.TextureRect = Rect.FromPoints( texCoord, texCoord + new Vector2( 2 / 16f, 2 / 16f ) );
+			particle.TextureID = block.TextureIndex;
 			particle.Scale = new Curve( new List<Curve.Frame>
 			{
 				new Curve.Frame(0f, 10f, -MathF.PI, MathF.PI),

@@ -1,6 +1,6 @@
 {
-  "ID": 2,
-  "Name": "Dirt",
+  "ID": 4,
+  "Name": "Bedrock",
   "MaxStackSize": 64,
   "IsBlock": true,
   "Block": {
@@ -12,7 +12,7 @@
       "$compiler": "texture",
       "$source": "imagefile",
       "data": {
-        "FilePath": "materials/block/dirt.png",
+        "FilePath": "materials/block/bedrock.png",
         "MaxSize": 4096,
         "ConvertHeightToNormals": false,
         "NormalScale": 1,
@@ -51,13 +51,7 @@
     "EastTextureIndex": null,
     "WestTextureIndex": null,
     "BottomTextureIndex": null,
-    "Drops": [
-      {
-        "Item": "items/dirt.item",
-        "Count": 1,
-        "ItemID": 2
-      }
-    ]
+    "Drops": []
   },
   "__references": [],
   "__version": 0

@@ -1,9 +1,11 @@
 using System;
 
-public class SimpleParticle : Component {
+public class SimpleParticle : Component
+{
     public Material Material { get; set; }
 
     public Rect TextureRect { get; set; } = new Rect( 0, 0, 1, 1 ); // TextureRect defines the portion of the texture to use for this particle.
+    public int TextureID { get; set; } = 0; // TextureID is used to identify which texture to use for the particle, if applicable.
 
     public Vector3 Velocity { get; set; } = Vector3.Zero; // Velocity is the speed and direction of the particle's movement.
     public Vector3 Acceleration { get; set; } = Vector3.Zero; // Acceleration is the change in velocity over time, affecting the particle's movement.
@@ -23,7 +25,8 @@ public class SimpleParticle : Component {
     public Curve Scale { get; set; } = new Curve( new Curve.Frame( 0, 10 ), new Curve.Frame( 1, 10 ) ); // Scale defines how the particle's size changes over its lifetime.
 
     private SceneCustomObject sceneObject;
-    protected override void OnStart() {
+    protected override void OnStart()
+    {
         MaxLifetime = Lifetime; // Initialize MaxLifetime to the initial Lifetime value.
         sceneObject = new SceneCustomObject( Scene.SceneWorld );
         sceneObject.Position = WorldPosition; // Set the initial position of the scene object to the particle's world position.
@@ -33,7 +36,8 @@ public class SimpleParticle : Component {
 
 
         var col = Color.FromBytes( Random.Shared.Int( 0, 255 ), Random.Shared.Int( 0, 255 ), Random.Shared.Int( 0, 255 ) );
-        sceneObject.RenderOverride = ( obj ) => {
+        sceneObject.RenderOverride = ( obj ) =>
+        {
             Vector3 Right = Graphics.CameraRotation.Right;
             Vector3 Up = Graphics.CameraRotation.Up;
             float scale = Scale.Evaluate( 1 - Lifetime / MaxLifetime ); // Evaluate the scale based on the remaining lifetime.
@@ -44,22 +48,25 @@ public class SimpleParticle : Component {
             var p3 = p1 + Up * scale;
             var p4 = p2 + Up * scale;
 
-            var v1 = new Sandbox.Vertex( p1, TextureRect.BottomLeft, Color.White );
-            var v2 = new Sandbox.Vertex( p2, TextureRect.BottomRight, Color.White );
-            var v3 = new Sandbox.Vertex( p3, TextureRect.TopLeft, Color.White );
-            var v4 = new Sandbox.Vertex( p4, TextureRect.TopRight, Color.White );
+            var v1 = new Sandbox.Vertex( p1, new Vector4( new Vector3( TextureRect.BottomLeft, TextureID ), 0f ), Color.White );
+            var v2 = new Sandbox.Vertex( p2, new Vector4( new Vector3( TextureRect.BottomRight, TextureID ), 0f ), Color.White );
+            var v3 = new Sandbox.Vertex( p3, new Vector4( new Vector3( TextureRect.TopLeft, TextureID ), 0f ), Color.White );
+            var v4 = new Sandbox.Vertex( p4, new Vector4( new Vector3( TextureRect.TopRight, TextureID ), 0f ), Color.White );
             Graphics.Draw( new List<Sandbox.Vertex>() { v1, v2, v3, v4 }, 4, Material, new RenderAttributes(), Graphics.PrimitiveType.TriangleStrip );
 
         };
     }
 
-    protected override void OnDestroy() {
+    protected override void OnDestroy()
+    {
         base.OnDestroy();
         sceneObject.Delete();
     }
-    protected override void OnUpdate() {
+    protected override void OnUpdate()
+    {
         Lifetime -= Time.Delta; // Decrease the lifetime by the time since the last update.
-        if ( Lifetime <= 0 ) {
+        if ( Lifetime <= 0 )
+        {
             // If the lifetime is less than or equal to zero, we remove the particle.
             GameObject.Destroy();
             return;
@@ -73,7 +80,8 @@ public class SimpleParticle : Component {
         var trace = Scene.Trace.Ray( WorldPosition, WorldPosition + Velocity * Time.Delta )
             .Run();
         WorldPosition = trace.EndPosition;
-        if ( trace.Hit ) {
+        if ( trace.Hit )
+        {
             // Cancel out our velocity along the normal of the hit surface.
             var normal = trace.Normal;
             Velocity -= normal * Vector3.Dot( Velocity, normal );
