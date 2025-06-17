@@ -11,8 +11,26 @@ public class VoxelBuilder : EditorTool
 	public override void OnEnabled()
 	{
 		AllowGameObjectSelection = false;
+
+		var window = new WidgetWindow( SceneOverlay );
+		window.Layout = Layout.Grid();
+		window.Layout.Margin = 16;
+
+		window.WindowTitle = "Voxel Pallete";
+		int i = 0;
+		foreach ( var item in ResourceLibrary.GetAll<Item>().OrderBy( c => c.ID ) )
+		{
+			if ( item.IsBlock )
+			{
+				var icon = new Button( item.ID + "" );
+				icon.Size = new Vector2( 64, 64 );
+				(window.Layout as GridLayout).AddCell( i % 4, i++ / 4, icon );
+			}
+		}
+
+		AddOverlay( window, TextFlag.RightTop, 10 );
 	}
-	
+
 	public override void OnUpdate()
 	{
 		var trace = World.Active
@@ -24,14 +42,14 @@ public class VoxelBuilder : EditorTool
 		{
 			var planeTrace = new Plane( Vector3.Zero, Vector3.Up ).Trace( Gizmo.CurrentRay, true, MAX_DISTANCE );
 			if ( planeTrace == null ) return;
-			
+
 			hitPos = Helpers.WorldToVoxel( planeTrace.Value );
 			hitDirection = Direction.Up;
 		}
 
 		var faceCenter = (hitPos + 0.5f) * World.BlockScale + hitDirection.Forward() * World.BlockScale * 0.5f;
-		Vector3 boxSize = new Vector3(World.BlockScale, World.BlockScale, World.BlockScale);
-		switch (hitDirection)
+		Vector3 boxSize = new Vector3( World.BlockScale, World.BlockScale, World.BlockScale );
+		switch ( hitDirection )
 		{
 			case Direction.North:
 			case Direction.South:
@@ -46,10 +64,10 @@ public class VoxelBuilder : EditorTool
 				boxSize.z *= 0.01f;
 				break;
 		}
-		
+
 		Gizmo.Draw.Color = Color.Black;
 		Gizmo.Draw.LineThickness = 2f;
-		Gizmo.Draw.LineBBox(BBox.FromPositionAndSize(faceCenter, boxSize));
+		Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( faceCenter, boxSize ) );
 
 		if ( Gizmo.WasLeftMousePressed )
 		{

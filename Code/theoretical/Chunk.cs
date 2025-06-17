@@ -1,4 +1,5 @@
-public class Chunk {
+public class Chunk
+{
 	public static readonly Vector3Int SIZE = new Vector3Int( 16, 16, 16 );
 
 	public Vector3Int Position;
@@ -16,33 +17,41 @@ public class Chunk {
 	public bool Dirty = true;
 	public BlockSpace world;
 
-	public Chunk( BlockSpace world, Vector3Int position ) {
+	public Chunk( BlockSpace world, Vector3Int position )
+	{
 		Position = position;
 		this.world = world;
 	}
 
-	public override string ToString() {
+	public override string ToString()
+	{
 		return $"Chunk({X}, {Y}, {Z})";
 	}
 
-	public BlockData GetBlock( int x, int y, int z ) {
+	public BlockData GetBlock( int x, int y, int z )
+	{
 		// Ensure the coordinates are within the chunk's bounds
-		if ( x < 0 || x >= SIZE.x || y < 0 || y >= SIZE.y || z < 0 || z >= SIZE.z ) {
+		if ( x < 0 || x >= SIZE.x || y < 0 || y >= SIZE.y || z < 0 || z >= SIZE.z )
+		{
 			throw new System.ArgumentOutOfRangeException( $"Coordinates ({x}, {y}, {z}) are out of bounds for chunk at ({X}, {Y}, {Z})." );
 		}
 		return blocks[x, y, z];
 	}
 
-	public void MarkDirty() {
+	public void MarkDirty()
+	{
 		Dirty = true; // Mark the chunk as dirty to indicate it needs to be updated/rendered.
 	}
 
-	public void SetBlock( int x, int y, int z, BlockData blockData ) {
+	public void SetBlock( int x, int y, int z, BlockData blockData )
+	{
 		// Ensure the coordinates are within the chunk's bounds
-		if ( x < 0 || x >= SIZE.x || y < 0 || y >= SIZE.y || z < 0 || z >= SIZE.z ) {
+		if ( x < 0 || x >= SIZE.x || y < 0 || y >= SIZE.y || z < 0 || z >= SIZE.z )
+		{
 			throw new System.ArgumentOutOfRangeException( $"Coordinates ({x}, {y}, {z}) are out of bounds for chunk at ({X}, {Y}, {Z})." );
 		}
-		if ( blockData.BlockID != 0 ) {
+		if ( blockData.BlockID != 0 )
+		{
 			IsEmpty = false; // If we set a non-air block, the chunk is no longer empty.
 		}
 		blocks[x, y, z] = blockData;
@@ -62,14 +71,15 @@ public class Chunk {
 			world.GetChunkIfExists( Position + new Vector3Int( 0, 0, 1 ) )?.MarkDirty();
 	}
 
-	public void Render( Scene scene ) {
+	public void Render( Scene scene )
+	{
 		// Create a chunk object and then ask it to update.
 		if ( IsEmpty ) return; // Never render empty chunks.
 		var obj = new GameObject( true, $"Chunk ({Position.x}, {Position.y}, {Position.z})" );
 		obj.Parent = scene.Get<WorldThinker>().GameObject;
 		var chunkObj = obj.AddComponent<ChunkObject>();
-		chunkObj.ChunkPosition = Position;
-		obj.WorldPosition = Helpers.VoxelToWorld( Position );
+		chunkObj.ChunkPosition = Position; // Set the chunk position in world coordinates.
+		obj.WorldPosition = Helpers.VoxelToWorld( Position * SIZE );
 		ChunkObject = chunkObj;
 		obj.Network.AssignOwnership( Connection.Host );
 		obj.NetworkSpawn();
