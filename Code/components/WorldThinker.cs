@@ -25,7 +25,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 		foreach ( var child in GameObject.Children.ToList() )
 			child.DestroyImmediate();
 		World.SimulatedChunks.Clear();
-		World.MakeSpawnPlatform();
+		//World.MakeSpawnPlatform();
 
 	}
 

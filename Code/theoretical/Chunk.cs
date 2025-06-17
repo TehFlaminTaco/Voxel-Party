@@ -71,18 +71,18 @@ public class Chunk
 			world.GetChunkIfExists( Position + new Vector3Int( 0, 0, 1 ) )?.MarkDirty();
 	}
 
-	public void Render( Scene scene )
+	public ChunkObject Render( Scene scene, WorldThinker thinker = null )
 	{
 		// Create a chunk object and then ask it to update.
-		if ( IsEmpty ) return; // Never render empty chunks.
+		if ( IsEmpty ) return null; // Never render empty chunks.
 		var obj = new GameObject( true, $"Chunk ({Position.x}, {Position.y}, {Position.z})" );
-		obj.Parent = scene.Get<WorldThinker>().GameObject;
+		obj.Parent = (thinker ?? scene.Get<WorldThinker>()).GameObject;
 		var chunkObj = obj.AddComponent<ChunkObject>();
 		chunkObj.ChunkPosition = Position; // Set the chunk position in world coordinates.
 		obj.WorldPosition = Helpers.VoxelToWorld( Position * SIZE );
 		ChunkObject = chunkObj;
 		obj.Network.AssignOwnership( Connection.Host );
 		obj.NetworkSpawn();
-
+		return chunkObj;
 	}
 }
