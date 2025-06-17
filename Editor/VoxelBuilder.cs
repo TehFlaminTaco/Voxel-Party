@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using Editor.Audio;
 
 [EditorTool]
@@ -80,7 +81,8 @@ public class VoxelBuilder : EditorTool
 		scene.Destroy();
 		return tex;
 	}
-
+	
+	IDisposable _undoScope;
 	public override void OnUpdate()
 	{
 		var trace = World.Active
@@ -105,7 +107,8 @@ public class VoxelBuilder : EditorTool
 			Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( (hitPos + Vector3.One / 2f) * World.BlockScale, boxSize ) );
 			if ( Gizmo.WasLeftMousePressed )
 			{
-				World.Active.SetBlock( hitPos, new BlockData( 0 ) );
+				var undoScope = SceneEditorSession.Active.UndoScope( "Break" ).WithComponentChanges( World.Active.Thinker.GetComponentsInChildren<ChunkObject>() ).Push();
+				using ( undoScope ) World.Active.SetBlock( hitPos, new BlockData( 0 ) );
 			}
 		}
 		else
@@ -134,7 +137,8 @@ public class VoxelBuilder : EditorTool
 
 			if ( Gizmo.WasLeftMousePressed )
 			{
-				World.Active.SetBlock( hitPos + hitDirection.Forward() * 1, new BlockData( SelectedItemID ) );
+				var undoScope = SceneEditorSession.Active.UndoScope( "Place" ).WithComponentChanges( World.Active.Thinker.GetComponentsInChildren<ChunkObject>() ).Push();
+				using ( undoScope ) World.Active.SetBlock( hitPos + hitDirection.Forward() * 1, new BlockData( SelectedItemID ) );
 			}
 		}
 	}

@@ -34,7 +34,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": "textures/generated/imagefile/9718084685e5621.vtex"
+      "compiled": null
     },
     "TopTexture": null,
     "SideTexture": null,
@@ -43,7 +43,7 @@
     "EastTexture": null,
     "WestTexture": null,
     "BottomTexture": null,
-    "TextureIndex": 4,
+    "TextureIndex": 0,
     "TopTextureIndex": null,
     "SideTextureIndex": null,
     "NorthTextureIndex": null,
