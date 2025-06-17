@@ -137,15 +137,11 @@ PS
 	CreateInputTexture2D( Abledo, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
 	Texture2D g_tAbledo < Channel( RGBA, Box( Abledo ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	
-	
-
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-
-		
 		float3 l_0 = i.vTextureCoords.xyz;
 		l_0.xy = clamp(l_0.xy, 0.05, 0.95);
-		int index = int(l_0.z);
+		int index = int(l_0.z+0.1);
 		float2 texSize;
         g_tAbledo.GetDimensions(texSize.x, texSize.y);
 		int tilesWide = int(texSize.x / 16);
@@ -159,7 +155,16 @@ PS
 		if(l_10.r == 1.0 && l_10.g == 0.0 && l_10.b == 1.0)
 			discard;
 		
-		float light = lerp(0.5, 1.0, (dot(i.vNormalOs, normalize(float3(0.1, 0.2, 0.3))) + 1) / 2);
-		return float4( l_10.xyz * light, l_10.a ) * i.vTintColor;
+		//float light = lerp(0.5, 1.0, (dot(i.vNormalOs, normalize(float3(0.1, 0.2, 0.3))) + 1) / 2);
+		Material m = Material::Init();
+		m.Albedo = l_10.xyz;
+		m.Roughness = 1;
+		m.Metalness = 0;
+		m.TintMask = 1;
+		m.Opacity = l_10.a;
+		m.Emission = 0;
+		m.Transmission = 0;
+
+		return ShadingModelStandard::Shade( i, m );
 	}
 }

@@ -63,7 +63,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": null
+      "compiled": "textures/generated/imagefile/953299706a9098f4.vtex"
     },
     "NorthTexture": null,
     "SouthTexture": null,
@@ -95,16 +95,16 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": null
+      "compiled": "textures/generated/imagefile/9b061b6d15c32b16.vtex"
     },
     "TextureIndex": 0,
-    "TopTextureIndex": 1,
-    "SideTextureIndex": null,
+    "TopTextureIndex": 2,
+    "SideTextureIndex": 3,
     "NorthTextureIndex": null,
     "SouthTextureIndex": null,
     "EastTextureIndex": null,
     "WestTextureIndex": null,
-    "BottomTextureIndex": null,
+    "BottomTextureIndex": 1,
     "Drops": [
       {
         "Item": "items/dirt.item",

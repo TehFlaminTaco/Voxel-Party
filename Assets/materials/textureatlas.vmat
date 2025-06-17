@@ -8,4 +8,7 @@ Layer0
 	F_TEXTURE_FILTERING 3 // Point Sample
 
 	Abledo "materials/atlas.png"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
 }
