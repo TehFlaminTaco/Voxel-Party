@@ -1,7 +1,8 @@
 using System;
 using Sandbox;
 
-public sealed class WorldThinker : Component, Component.ExecuteInEditor {
+public sealed class WorldThinker : Component, Component.ExecuteInEditor
+{
 	[Property] public int RenderChunkRadius { get; set; } = 10;
 	[Property] public int RenderForgetRadius { get; set; } = 20; // How far away chunks are unloaded
 	[Property] public Material TextureAtlas { get; set; }
@@ -10,27 +11,50 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor {
 	public World World = new();
 
 	[ConVar] public static int vp_debug_showchunkborders { get; set; } = 0;
-	
-	protected override void OnFixedUpdate() {
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+		foreach ( var child in GameObject.Children.ToList() )
+			child.DestroyImmediate();
+	}
+
+	[Button]
+	public void Regenerate()
+	{
+		foreach ( var child in GameObject.Children.ToList() )
+			child.DestroyImmediate();
+		World.SimulatedChunks.Clear();
+		this.World.MakeSpawnPlatform();
+
+	}
+
+	protected override void OnFixedUpdate()
+	{
+		World.Active = World;
 		if ( IsProxy ) return;
-		
+
 		// Iterate (randomly) through every loaded chunk, check if it's outside of the forget radius from any player, and if so, unload it.
 		List<Vector3Int> forgetList = new();
-		foreach ( var kv in Random.Shared.TakeRandom( World.SimulatedChunks, UnloadBatchSize ) ) {
+		foreach ( var kv in Random.Shared.TakeRandom( World.SimulatedChunks, UnloadBatchSize ) )
+		{
 			// If the chunk manhatten distance is greater than the forget radius, append it to the forget list
 			var chunk = kv.Value;
 			var chunkDistance = Scene.GetAllComponents<PlayerController>()
 				.Select( c => ((c.WorldPosition / World.BlockScale / Chunk.SIZE).Floor() - chunk.Position)
 					.Components().Select( Math.Abs ).Max() ).Min();
-			
-			if ( chunkDistance > RenderForgetRadius ) {
+
+			if ( chunkDistance > RenderForgetRadius )
+			{
 				forgetList.Add( chunk.Position );
 			}
 		}
 		// Now we have a list of chunks to unload, we can unload them.
-		foreach ( var chunkPosition in forgetList ) {
+		foreach ( var chunkPosition in forgetList )
+		{
 			var chunk = World.GetChunk( chunkPosition );
-			if ( chunk.IsRendered ) {
+			if ( chunk.IsRendered )
+			{
 				chunk.ChunkObject.GameObject?.Destroy();
 				chunk.ChunkObject = null;
 			}
@@ -46,16 +70,20 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor {
 
 		var players = Scene.GetAll<PlayerController>();
 		var targetChunks = new HashSet<Vector3Int>();
-		foreach ( var player in players ) {
+		foreach ( var player in players )
+		{
 			var playerPosition = (player.WorldPosition / World.BlockScale).Floor();
 			var playerChunkPosition = new Vector3Int(
 				playerPosition.x.FloorDiv( Chunk.SIZE.x ),
 				playerPosition.y.FloorDiv( Chunk.SIZE.y ),
 				playerPosition.z.FloorDiv( Chunk.SIZE.z )
 			);
-			for ( int x = -RenderChunkRadius; x <= RenderChunkRadius; x++ ) {
-				for ( int y = -RenderChunkRadius; y <= RenderChunkRadius; y++ ) {
-					for ( int z = -RenderChunkRadius; z <= RenderChunkRadius; z++ ) {
+			for ( int x = -RenderChunkRadius; x <= RenderChunkRadius; x++ )
+			{
+				for ( int y = -RenderChunkRadius; y <= RenderChunkRadius; y++ )
+				{
+					for ( int z = -RenderChunkRadius; z <= RenderChunkRadius; z++ )
+					{
 						var chunkPosition = new Vector3Int(
 							playerChunkPosition.x + x,
 							playerChunkPosition.y + y,
@@ -76,8 +104,10 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor {
 		// Load the chunks in batches of 10, or until we reach a certain time limit.
 		float timeLimit = 0.1f; // 100ms per batch
 		float startTime = Time.Now;
-		foreach ( var pos in orderedChunks.Take( BatchSize ) ) {
-			if ( Time.Now - startTime > timeLimit ) {
+		foreach ( var pos in orderedChunks.Take( BatchSize ) )
+		{
+			if ( Time.Now - startTime > timeLimit )
+			{
 				Log.Warning( "Exceeded time limit for loading chunks, stopping batch processing." );
 				break; // Stop loading if we exceed the time limit
 			}
@@ -85,11 +115,12 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor {
 			Log.Info( $"Creating chunk at {pos}. {chunk.Dirty} {chunk.IsRendered}" );
 			World.GetChunk( pos ).Render( Scene );
 		}
-		
+
 	}
 
 	[Rpc.Broadcast]
-	public void BreakBlock( Vector3Int position ) {
+	public void BreakBlock( Vector3Int position )
+	{
 		// Fill the block with SimpleParticles
 		var block = World.GetBlock( position ).GetBlock();
 		foreach ( var stack in block.GetDrops( World, position ) )
@@ -98,7 +129,8 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor {
 					Random.Shared.Float(),
 					Random.Shared.Float()
 				)) * World.BlockScale ); // Spawn the item at the center of the block
-		for ( int i = 0; i < 30; i++ ) {
+		for ( int i = 0; i < 30; i++ )
+		{
 			var particlePos = (position + new Vector3(
 				Random.Shared.Float(),
 				Random.Shared.Float(),

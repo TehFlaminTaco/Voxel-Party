@@ -1,13 +1,15 @@
 using System;
 using Sandbox;
 
-public class World : BlockSpace {
+public class World : BlockSpace
+{
 	public static readonly int BlockScale = 40; // How many units per block.
 	public WorldThinker Thinker => Game.ActiveScene.Get<WorldThinker>();
 
 	public static World Active = null;
 
-	public World() {
+	public World()
+	{
 		Active = this; // Set the active world to this instance.
 		ItemRegistry.UpdateRegistry(); // Ensure the block registry is up to date.
 		MakeSpawnPlatform();
@@ -30,9 +32,5 @@ public class World : BlockSpace {
 				}
 			}
 		}
-	}
-
-	public override BlockData GenerateBlock( Vector3Int position ) {
-		return new BlockData( 0 ); // Assuming 0 is the ID for air.
 	}
 }
