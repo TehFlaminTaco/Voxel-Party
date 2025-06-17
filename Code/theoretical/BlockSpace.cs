@@ -220,4 +220,64 @@ public class BlockSpace
 		);
 		chunk.SetBlock( blockPosition.x, blockPosition.y, blockPosition.z, blockData );
 	}
+
+	public string SerializeRegion( Vector3Int start, Vector3Int end )
+	{
+		int xMin = Math.Min( start.x, end.x );
+		int xMax = Math.Max( start.x, end.x );
+		int yMin = Math.Min( start.y, end.y );
+
+		int yMax = Math.Max( start.y, end.y );
+		int zMin = Math.Min( start.z, end.z );
+		int zMax = Math.Max( start.z, end.z );
+
+		List<byte> data = new();
+		// Add the size of the region to the data.
+		data.AddRange( BitConverter.GetBytes( xMax - xMin + 1 ) );
+		data.AddRange( BitConverter.GetBytes( yMax - yMin + 1 ) );
+		data.AddRange( BitConverter.GetBytes( zMax - zMin + 1 ) );
+		List<byte> blocks = new();
+		for ( int z = zMin; z <= zMax; z++ )
+		{
+			for ( int y = yMin; y <= yMax; y++ )
+			{
+				for ( int x = xMin; x <= xMax; x++ )
+				{
+					var blockData = GetBlock( new Vector3Int( x, y, z ) );
+					blocks.Add( blockData.BlockID );
+					blocks.Add( blockData.BlockDataValue );
+				}
+			}
+		}
+		data.AddRange( blocks.RunLengthEncodeBy( 2 ) );
+		return Convert.ToBase64String( data.ToArray() );
+	}
+
+	public void LoadStructure( Vector3Int location, string structureData )
+	{
+		var bytes = Convert.FromBase64String( structureData );
+		if ( bytes.Length < 12 )
+		{
+			Log.Error( "Invalid structure data." );
+			return;
+		}
+		int xSize = BitConverter.ToInt32( bytes, 0 );
+		int ySize = BitConverter.ToInt32( bytes, 4 );
+		int zSize = BitConverter.ToInt32( bytes, 8 );
+		var blockData = bytes.Skip( 12 ).RunLengthDecodeBy( 2 ).ToList();
+
+		for ( int z = 0; z < zSize; z++ )
+		{
+			for ( int y = 0; y < ySize; y++ )
+			{
+				for ( int x = 0; x < xSize; x++ )
+				{
+					int index = (z * ySize * xSize + y * xSize + x) * 2;
+					byte blockID = blockData[index];
+					byte blockDataValue = blockData[index + 1];
+					SetBlock( location + new Vector3Int( x, y, z ), new BlockData( blockID, blockDataValue ) );
+				}
+			}
+		}
+	}
 }
