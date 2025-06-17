@@ -8,6 +8,22 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	[Property] public Material TextureAtlas { get; set; }
 	[Property] public int BatchSize { get; set; } = 10; // Number of chunks to load in each batch
 	[Property] public int UnloadBatchSize { get; set; } = 10; // Number of chunks to check to unload in each batch
+
+	[Property, Hide]
+	public string SerializedWorld
+	{
+		get
+		{
+			return Convert.ToBase64String( World.Active?.Serialize().ToArray() );
+		}
+		set
+		{
+			if ( string.IsNullOrEmpty( value ) ) return;
+			var data = Convert.FromBase64String( value );
+			World.Active?.Deserialize( data );
+		}
+	}
+
 	public World World = new();
 
 	[ConVar] public static int vp_debug_showchunkborders { get; set; } = 0;
@@ -35,38 +51,33 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 		if ( IsProxy ) return;
 
 		// Iterate (randomly) through every loaded chunk, check if it's outside of the forget radius from any player, and if so, unload it.
-		List<Vector3Int> forgetList = new();
-		foreach ( var kv in Random.Shared.TakeRandom( World.SimulatedChunks, UnloadBatchSize ) )
+		if ( !Game.IsEditor )
 		{
-			// If the chunk manhatten distance is greater than the forget radius, append it to the forget list
-			var chunk = kv.Value;
-			var chunkDistance = 0;
-			if ( Game.IsEditor )
+			List<Vector3Int> forgetList = new();
+			foreach ( var kv in Random.Shared.TakeRandom( World.SimulatedChunks.Where( c => c.Value.IsRendered ), UnloadBatchSize ) )
 			{
-				chunkDistance = ( Game.ActiveScene.Camera.WorldPosition - chunk.Position ).Length.FloorToInt();
+				// If the chunk manhatten distance is greater than the forget radius, append it to the forget list
+				var chunk = kv.Value;
+				var chunkDistance = Scene.GetAllComponents<PlayerController>()
+						.Select( c => ((c.WorldPosition / World.BlockScale / Chunk.SIZE).Floor() - chunk.Position)
+							.Components().Select( Math.Abs ).Max() ).Min();
+				if ( chunkDistance > RenderForgetRadius )
+				{
+					forgetList.Add( chunk.Position );
+				}
 			}
-			else
+			// Now we have a list of chunks to unload, we can unload them.
+			foreach ( var chunkPosition in forgetList )
 			{
-				chunkDistance = Scene.GetAllComponents<PlayerController>()
-					.Select( c => ((c.WorldPosition / World.BlockScale / Chunk.SIZE).Floor() - chunk.Position)
-						.Components().Select( Math.Abs ).Max() ).Min();
+				var chunk = World.GetChunk( chunkPosition );
+				Log.Info( $"Checking chunk at {chunkPosition} for unloading." );
+				if ( chunk.IsRendered )
+				{
+					Log.Info( $"Unloading chunk at {chunkPosition}." );
+					chunk.ChunkObject.GameObject?.Destroy();
+					chunk.ChunkObject = null;
+				}
 			}
-
-			if ( chunkDistance > RenderForgetRadius )
-			{
-				forgetList.Add( chunk.Position );
-			}
-		}
-		// Now we have a list of chunks to unload, we can unload them.
-		foreach ( var chunkPosition in forgetList )
-		{
-			var chunk = World.GetChunk( chunkPosition );
-			if ( chunk.IsRendered )
-			{
-				chunk.ChunkObject.GameObject?.Destroy();
-				chunk.ChunkObject = null;
-			}
-			World.SimulatedChunks.Remove( chunkPosition );
 		}
 
 		// For each player, ensure all the chunks around them are loaded.
@@ -78,36 +89,43 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 
 		var players = Scene.GetAll<PlayerController>();
 		var targetChunks = new HashSet<Vector3Int>();
-		foreach ( var player in players )
+		if ( Game.IsEditor )
 		{
-			var playerPosition = (player.WorldPosition / World.BlockScale).Floor();
-			var playerChunkPosition = new Vector3Int(
-				playerPosition.x.FloorDiv( Chunk.SIZE.x ),
-				playerPosition.y.FloorDiv( Chunk.SIZE.y ),
-				playerPosition.z.FloorDiv( Chunk.SIZE.z )
-			);
-			for ( int x = -RenderChunkRadius; x <= RenderChunkRadius; x++ )
+			targetChunks = World.SimulatedChunks.Select( kv => kv.Key ).ToHashSet();
+		}
+		else
+		{
+			foreach ( var player in players )
 			{
-				for ( int y = -RenderChunkRadius; y <= RenderChunkRadius; y++ )
+				var playerPosition = (player.WorldPosition / World.BlockScale).Floor();
+				var playerChunkPosition = new Vector3Int(
+					playerPosition.x.FloorDiv( Chunk.SIZE.x ),
+					playerPosition.y.FloorDiv( Chunk.SIZE.y ),
+					playerPosition.z.FloorDiv( Chunk.SIZE.z )
+				);
+				for ( int x = -RenderChunkRadius; x <= RenderChunkRadius; x++ )
 				{
-					for ( int z = -RenderChunkRadius; z <= RenderChunkRadius; z++ )
+					for ( int y = -RenderChunkRadius; y <= RenderChunkRadius; y++ )
 					{
-						var chunkPosition = new Vector3Int(
-							playerChunkPosition.x + x,
-							playerChunkPosition.y + y,
-							playerChunkPosition.z + z
-						);
-						targetChunks.Add( chunkPosition );
+						for ( int z = -RenderChunkRadius; z <= RenderChunkRadius; z++ )
+						{
+							var chunkPosition = new Vector3Int(
+								playerChunkPosition.x + x,
+								playerChunkPosition.y + y,
+								playerChunkPosition.z + z
+							);
+							targetChunks.Add( chunkPosition );
+						}
 					}
 				}
 			}
 		}
 
 		// Now we have a set of chunks to load, we can order them by distance to the closest player.
-		var orderedChunks = targetChunks
-			.Where( chunkPosition => !World.GetChunk( chunkPosition ).IsEmpty && !World.GetChunk( chunkPosition ).IsRendered )
-			.OrderBy( chunkPosition => players.Min( player => (player.WorldPosition / World.BlockScale).DistanceSquared( new Vector3( chunkPosition.x * Chunk.SIZE.x, chunkPosition.y * Chunk.SIZE.y, chunkPosition.z * Chunk.SIZE.z ) ) ) )
-			.ToList();
+		var orderedChunks = Game.IsEditor ? targetChunks.Where( chunkPosition => !World.GetChunk( chunkPosition ).IsEmpty && !World.GetChunk( chunkPosition ).IsRendered ).ToList() : targetChunks
+		.Where( chunkPosition => !World.GetChunk( chunkPosition ).IsEmpty && !World.GetChunk( chunkPosition ).IsRendered )
+		.OrderBy( chunkPosition => players.Min( player => (player.WorldPosition / World.BlockScale).DistanceSquared( new Vector3( chunkPosition.x * Chunk.SIZE.x, chunkPosition.y * Chunk.SIZE.y, chunkPosition.z * Chunk.SIZE.z ) ) ) )
+		.ToList();
 
 		// Load the chunks in batches of 10, or until we reach a certain time limit.
 		float timeLimit = 0.1f; // 100ms per batch

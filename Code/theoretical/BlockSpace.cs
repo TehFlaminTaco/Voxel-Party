@@ -296,4 +296,45 @@ public class BlockSpace
 
 		return BlockData.GetAreaInBox( location, new Vector3Int( xSize, ySize, zSize ) );
 	}
+
+	public IEnumerable<byte> Serialize()
+	{
+		var data = new List<byte>();
+		foreach ( var chunk in SimulatedChunks.Values )
+		{
+			data.AddRange( BitConverter.GetBytes( chunk.Position.x ) );
+			data.AddRange( BitConverter.GetBytes( chunk.Position.y ) );
+			data.AddRange( BitConverter.GetBytes( chunk.Position.z ) );
+			var chunkData = chunk.Serialize().ToList();
+			data.AddRange( BitConverter.GetBytes( chunkData.Count ) );
+			data.AddRange( chunkData );
+		}
+		return data;
+	}
+
+	public void Deserialize( IEnumerable<byte> data )
+	{
+		var dataList = data.ToList();
+		int index = 0;
+		while ( index < dataList.Count )
+		{
+			int x = BitConverter.ToInt32( dataList.ToArray(), index );
+			index += 4;
+			int y = BitConverter.ToInt32( dataList.ToArray(), index );
+			index += 4;
+			int z = BitConverter.ToInt32( dataList.ToArray(), index );
+			index += 4;
+			var chunkPosition = new Vector3Int( x, y, z );
+
+			int chunkDataLength = BitConverter.ToInt32( dataList.ToArray(), index );
+			index += 4;
+
+			var chunkData = dataList.Skip( index ).Take( chunkDataLength ).ToList();
+			index += chunkDataLength;
+
+			var chunk = new Chunk( this, chunkPosition );
+			chunk.Deserialize( chunkData );
+			SimulatedChunks[chunkPosition] = chunk;
+		}
+	}
 }
