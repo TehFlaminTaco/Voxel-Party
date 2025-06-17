@@ -8,15 +8,137 @@
     "IsSolidBlock": true,
     "IsSolid": true,
     "Hardness": 1,
-    "TextureIndex": "2,0",
-    "TopTextureIndex": null,
-    "SideTextureIndex": null,
+    "Texture": {
+      "$compiler": "texture",
+      "$source": "imagefile",
+      "data": {
+        "FilePath": "materials/block/grass_block_top.png",
+        "MaxSize": 4096,
+        "ConvertHeightToNormals": false,
+        "NormalScale": 1,
+        "Rotate": 0,
+        "FlipVertical": false,
+        "FlipHorizontal": false,
+        "Padding": {
+          "Size": "0,0",
+          "EdgeSize": "0,0"
+        },
+        "Sharpen": 0,
+        "InvertColor": false,
+        "Blur": 0,
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1,
+        "Hue": 0,
+        "Colorize": false,
+        "TargetColor": "0,1,0,1",
+        "CacheToDisk": true
+      },
+      "compiled": "textures/generated/imagefile/f0af65039987d9c0.vtex"
+    },
+    "TopTexture": {
+      "$compiler": "texture",
+      "$source": "imagefile",
+      "data": {
+        "FilePath": "materials/block/grass_block_top.png",
+        "MaxSize": 4096,
+        "ConvertHeightToNormals": false,
+        "NormalScale": 1,
+        "Rotate": 0,
+        "FlipVertical": false,
+        "FlipHorizontal": false,
+        "Padding": {
+          "Size": "0,0",
+          "EdgeSize": "0,0"
+        },
+        "Sharpen": 0,
+        "InvertColor": false,
+        "Blur": 0,
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1,
+        "Hue": 0,
+        "Colorize": false,
+        "TargetColor": "0,1,0,1",
+        "CacheToDisk": true
+      },
+      "compiled": "textures/generated/imagefile/f0af65039987d9c0.vtex"
+    },
+    "SideTexture": {
+      "$compiler": "texture",
+      "$source": "imagefile",
+      "data": {
+        "FilePath": "materials/block/grass_block_side.png",
+        "MaxSize": 4096,
+        "ConvertHeightToNormals": false,
+        "NormalScale": 1,
+        "Rotate": 0,
+        "FlipVertical": false,
+        "FlipHorizontal": false,
+        "Padding": {
+          "Size": "0,0",
+          "EdgeSize": "0,0"
+        },
+        "Sharpen": 0,
+        "InvertColor": false,
+        "Blur": 0,
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1,
+        "Hue": 0,
+        "Colorize": false,
+        "TargetColor": "0,1,0,1",
+        "CacheToDisk": true
+      },
+      "compiled": "textures/generated/imagefile/953299706a9098f4.vtex"
+    },
+    "NorthTexture": null,
+    "SouthTexture": null,
+    "EastTexture": null,
+    "WestTexture": null,
+    "BottomTexture": {
+      "$compiler": "texture",
+      "$source": "imagefile",
+      "data": {
+        "FilePath": "materials/block/dirt.png",
+        "MaxSize": 4096,
+        "ConvertHeightToNormals": false,
+        "NormalScale": 1,
+        "Rotate": 0,
+        "FlipVertical": false,
+        "FlipHorizontal": false,
+        "Padding": {
+          "Size": "0,0",
+          "EdgeSize": "0,0"
+        },
+        "Sharpen": 0,
+        "InvertColor": false,
+        "Blur": 0,
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1,
+        "Hue": 0,
+        "Colorize": false,
+        "TargetColor": "0,1,0,1",
+        "CacheToDisk": true
+      },
+      "compiled": "textures/generated/imagefile/9b061b6d15c32b16.vtex"
+    },
+    "TextureIndex": 2,
+    "TopTextureIndex": 2,
+    "SideTextureIndex": 3,
     "NorthTextureIndex": null,
     "SouthTextureIndex": null,
     "EastTextureIndex": null,
     "WestTextureIndex": null,
-    "BottomTextureIndex": null,
-    "Drops": []
+    "BottomTextureIndex": 1,
+    "Drops": [
+      {
+        "Item": "items/dirt.item",
+        "Count": 1,
+        "ItemID": 2
+      }
+    ]
   },
   "__references": [],
   "__version": 0

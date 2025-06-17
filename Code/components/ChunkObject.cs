@@ -83,7 +83,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		UpdateMesh();
 	}
 
-	public void AddBlockMesh( Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector2> uvs )
+	public void AddBlockMesh( Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
 	{
 		// For testing, let's start by just creating a full single block for every block
 		var blockData = WorldInstance.GetBlock( blockPos );
@@ -101,7 +101,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		WorldInstance.GetChunk( ChunkPosition ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
 		List<Vector3> Verts = new List<Vector3>();
 		List<Vector3> Normals = new List<Vector3>();
-		List<Vector2> UVs = new List<Vector2>();
+		List<Vector3> UVs = new List<Vector3>();
 
 		var mb = new ModelBuilder();
 		await GameTask.WorkerThread();
@@ -125,12 +125,14 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		}
 		await GameTask.MainThread();
 
+		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
+
 		var mr = GetOrAddComponent<ModelRenderer>();
 		mr.Enabled = Verts.Count > 0; // Only enable if we have vertices to render
 		if ( Verts.Count > 0 )
 		{
 			var mesh = new Mesh();
-			mesh.CreateVertexBuffer( Verts.Count, Vertex.Layout, Verts.Zip( Normals, UVs ).Select( v => new Vertex( v.First, v.Second, Vector3.Zero, v.Third ) ).ToList() );
+			mesh.CreateVertexBuffer( Verts.Count, Vertex.Layout, Verts.Zip( Normals, UVs ).Select( v => new Vertex( v.First, v.Second, Vector3.Zero, new Vector4( v.Third, 2f ) ) ).ToList() );
 			mesh.CreateIndexBuffer( Verts.Count, Enumerable.Range( 0, Verts.Count ).ToArray() );
 			mesh.Material = WorldThinkerInstance.TextureAtlas ?? null;
 

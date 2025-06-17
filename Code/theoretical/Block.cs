@@ -11,18 +11,27 @@ public class Block
 	public bool IsSolid { get; set; } = true; // Whether the block is solid (blocks movement).
 	public int Hardness { get; set; } = 1; // Hardness of the block, used for mining speed calculations.
 
-	public Vector2Int TextureIndex { get; set; } = Vector2Int.Zero; // Default texture index for the block, used for rendering.
-	public Vector2Int? TopTextureIndex { get; set; } = null; // Default texture index for the top face of the block.
-	public Vector2Int? SideTextureIndex { get; set; } = null; // Default texture index for the side faces of the block.
-	public Vector2Int? NorthTextureIndex { get; set; } = null; // Default texture index for the north face of the block.
-	public Vector2Int? SouthTextureIndex { get; set; } = null; // Default texture index for the south face of the block.
-	public Vector2Int? EastTextureIndex { get; set; } = null; // Default texture index for the east face of the block.
-	public Vector2Int? WestTextureIndex { get; set; } = null; // Default texture index for the west face of the block.
-	public Vector2Int? BottomTextureIndex { get; set; } = null; // Default texture index for the bottom face of the block.
+	public Texture Texture { get; set; } = null; // The texture used for rendering the block, can be null if not set.
+	public Texture TopTexture { get; set; } = null; // The texture used for the top face of the block, can be null if not set.
+	public Texture SideTexture { get; set; } = null; // The texture used for the side faces of the block, can be null if not set.
+	public Texture NorthTexture { get; set; } = null; // The texture used for the north face of the block, can be null if not set.
+	public Texture SouthTexture { get; set; } = null; // The texture used for the south face of the block, can be null if not set.
+	public Texture EastTexture { get; set; } = null; // The texture used for the east face of the block, can be null if not set.
+	public Texture WestTexture { get; set; } = null; // The texture used for the west face of the block, can be null if not set.
+	public Texture BottomTexture { get; set; } = null; // The texture used for the bottom face of the block, can be null if not set.
+
+	[Hide] public int TextureIndex { get; set; } = 0; // Default texture index for the block, used for rendering.
+	[Hide] public int? TopTextureIndex { get; set; } = null; // Default texture index for the top face of the block.
+	[Hide] public int? SideTextureIndex { get; set; } = null; // Default texture index for the side faces of the block.
+	[Hide] public int? NorthTextureIndex { get; set; } = null; // Default texture index for the north face of the block.
+	[Hide] public int? SouthTextureIndex { get; set; } = null; // Default texture index for the south face of the block.
+	[Hide] public int? EastTextureIndex { get; set; } = null; // Default texture index for the east face of the block.
+	[Hide] public int? WestTextureIndex { get; set; } = null; // Default texture index for the west face of the block.
+	[Hide] public int? BottomTextureIndex { get; set; } = null; // Default texture index for the bottom face of the block.
 	[InlineEditor]
 	public ItemStack[] Drops { get; set; } = []; // Items that drop when the block is broken, default is empty stack.
 
-	public virtual Vector2Int GetTextureIndex( World world, Vector3Int blockPos, Direction face ) => face switch
+	public virtual int GetTextureIndex( World world, Vector3Int blockPos, Direction face ) => face switch
 	{
 		Direction.North => NorthTextureIndex ?? SideTextureIndex ?? TextureIndex,
 		Direction.South => SouthTextureIndex ?? SideTextureIndex ?? TextureIndex,
@@ -33,7 +42,7 @@ public class Block
 		_ => TextureIndex
 	}; // Returns the texture index for the block face at the given position.
 
-	public virtual void AddBlockMesh( World world, Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector2> uvs )
+	public virtual void AddBlockMesh( World world, Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
 	{
 		if ( !IsSolidBlock )
 			return; // If we are not a solid block, this behaviour should be overridden, otherwise, we don't render anything.
@@ -63,7 +72,7 @@ public class Block
 		return Drops;
 	}
 
-	public virtual void AddFaceMesh( World world, Vector3Int blockPos, Direction face, List<Vector3> verts, List<Vector3> normals, List<Vector2> uvs )
+	public virtual void AddFaceMesh( World world, Vector3Int blockPos, Direction face, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
 	{
 		// This method should be overridden to add the mesh for a specific face of the block.
 		// For example, it could add vertices, normals, and UVs for the specified face.
@@ -89,14 +98,14 @@ public class Block
 		normals.Add( forward );
 		normals.Add( forward );
 		var ourUVs = new List<Vector2> {
-			textureIndex + new Vector2(0.9f, 0.1f), // Top right
-			textureIndex + new Vector2(0.1f, 0.1f), // Top left
-			textureIndex + new Vector2(0.1f, 0.9f), // Bottom left
-			textureIndex + new Vector2(0.9f, 0.1f), // Top right
-			textureIndex + new Vector2(0.1f, 0.9f), // Bottom left
-			textureIndex + new Vector2(0.9f, 0.9f), // Bottom right
+			new Vector2(1f, 0f), // Top right
+			new Vector2(0f, 0f), // Top left
+			new Vector2(0f, 1f), // Bottom left
+			new Vector2(1f, 0f), // Top right
+			new Vector2(0f, 1f), // Bottom left
+			new Vector2(1f, 1f), // Bottom right
 		};
-		uvs.AddRange( ourUVs.Select( v => v / new Vector2( 16, 16 ) ) ); // Assuming a texture atlas of 16x16, scale UVs to [0, 1].
+		uvs.AddRange( ourUVs.Select( v => new Vector3( v, textureIndex ) ) ); // Assuming a texture atlas of 16x16, scale UVs to [0, 1].
 	}
 
 	public virtual bool IsFaceSolid( World world, Vector3Int blockPos, Direction face )
