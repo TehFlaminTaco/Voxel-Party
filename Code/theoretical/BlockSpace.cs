@@ -253,13 +253,13 @@ public class BlockSpace
 		return Convert.ToBase64String( data.ToArray() );
 	}
 
-	public void LoadStructure( Vector3Int location, string structureData )
+	public BlockData[,,] LoadStructure( Vector3Int location, string structureData )
 	{
 		var bytes = Convert.FromBase64String( structureData );
 		if ( bytes.Length < 12 )
 		{
 			Log.Error( "Invalid structure data." );
-			return;
+			return null;
 		}
 		int xSize = BitConverter.ToInt32( bytes, 0 );
 		int ySize = BitConverter.ToInt32( bytes, 4 );
@@ -279,5 +279,7 @@ public class BlockSpace
 				}
 			}
 		}
+
+		return BlockData.GetAreaInBox( location, new Vector3Int(xSize, ySize, zSize ) );
 	}
 }

@@ -129,7 +129,7 @@
       ],
       "Children": [
         {
-          "__guid": "255b1289-163c-4262-bf66-d1ed8ff57c75",
+          "__guid": "d2767def-d4b4-4ba5-9d80-4a84f7ca41f4",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, 0, 0)",
@@ -145,7 +145,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "f965d21c-a5f3-48f9-86f7-4575d89cc6d6",
+              "__guid": "22ebf7a8-328b-4179-97e4-8bf416ecc876",
               "__enabled": true,
               "ChunkPosition": "0,0,0",
               "OnComponentDestroy": null,
@@ -157,7 +157,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "e2b26934-1ba3-45fe-b1ba-fc7f44a12b9c",
+              "__guid": "816f0f30-2b55-4ac1-8d77-4922a208020e",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -181,7 +181,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "ebf2e701-303c-49be-a41d-7d7d698e447f",
+              "__guid": "7632975a-8446-4770-b08e-5d678ab40d49",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -204,7 +204,7 @@
           "Children": []
         },
         {
-          "__guid": "a9962816-8c9b-4498-91da-e91aa8eaa681",
+          "__guid": "67183e8b-2557-4899-a2d5-4b22e3ee77bc",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, 0)",
@@ -220,7 +220,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "b0be015e-0a12-48b8-9d8a-d33fffcb1f18",
+              "__guid": "ad015f38-0e91-4a09-afb7-07ce2de06797",
               "__enabled": true,
               "ChunkPosition": "-1,0,0",
               "OnComponentDestroy": null,
@@ -232,7 +232,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "ae046098-6bc5-4d5b-8a50-2d3690cdb4ed",
+              "__guid": "1c06f0de-cc29-4f7a-9d2f-e05d3693fcca",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -256,7 +256,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "c06ffb91-fe3f-402e-b52d-f4ec1456ea3d",
+              "__guid": "bc5156f4-615c-419f-85d3-f95a1c40da50",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -279,7 +279,7 @@
           "Children": []
         },
         {
-          "__guid": "0b1f3381-1377-4029-bc5d-99eeff812db3",
+          "__guid": "a6ac2f10-de84-4562-9ab4-22c1daf60b07",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, -1, 0)",
@@ -295,7 +295,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "c3201dd1-844f-4b0b-9f4a-eea1d973a754",
+              "__guid": "4d5d928f-b1dc-4dfc-a299-9f3fca6b31b7",
               "__enabled": true,
               "ChunkPosition": "0,-1,0",
               "OnComponentDestroy": null,
@@ -307,7 +307,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "d58b830d-d7c7-437d-ad2d-d585d2a90f58",
+              "__guid": "061f2438-ce50-4ab5-877e-87d38f0fb6b0",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -331,7 +331,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "818376ca-a426-497f-bc86-4739c6b07b83",
+              "__guid": "da063d85-d0d7-4974-8550-09397266a936",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -354,7 +354,7 @@
           "Children": []
         },
         {
-          "__guid": "7d962e04-2c2e-4652-a56f-c8c4d4b6041f",
+          "__guid": "83aa05cf-5b76-4d13-b213-0acef616bc60",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, 0, -1)",
@@ -370,7 +370,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "e1017820-a749-453e-968a-4645f1a4b644",
+              "__guid": "0871fd88-e8bb-4fc2-bb68-e6aa21194e3d",
               "__enabled": true,
               "ChunkPosition": "0,0,-1",
               "OnComponentDestroy": null,
@@ -382,8 +382,8 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "13383896-5866-4a53-b41f-62544db81996",
-              "__enabled": false,
+              "__guid": "f1647e47-58e7-4841-b65f-dddbddc0e15c",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -406,7 +406,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "614c4de9-f75c-41b4-8eb8-8d98753bcde4",
+              "__guid": "522ced8f-783c-4b27-8cb5-7373769b86bb",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -429,7 +429,7 @@
           "Children": []
         },
         {
-          "__guid": "7e6c5b50-81bc-4ee1-a486-5d9732535b87",
+          "__guid": "1204729a-f382-4ce3-85b2-a86d65429f6b",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, 0)",
@@ -445,7 +445,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "25d7a7f2-bc7c-444d-a258-3fee7d7a0b4e",
+              "__guid": "ac308285-905e-4c69-870c-f8e5314a556c",
               "__enabled": true,
               "ChunkPosition": "-1,-1,0",
               "OnComponentDestroy": null,
@@ -457,7 +457,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "b08bdf58-7c4e-451a-8e43-adff7a754297",
+              "__guid": "d468b1f4-1794-416b-b400-c6a5ae06ee1f",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -481,7 +481,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "c7d2ca8f-d440-470c-9e5a-c3eaf3ac3f1a",
+              "__guid": "bfcb225e-1619-4b41-a376-a6f0391b2e8e",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -504,7 +504,7 @@
           "Children": []
         },
         {
-          "__guid": "f26a226a-43c1-47e2-a143-6b9d149c851e",
+          "__guid": "83a3d88f-be6d-42f6-b62c-6f8c24bb5366",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, -1)",
@@ -520,7 +520,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "cf2ad9c7-0c3a-4547-b272-097a469e74e6",
+              "__guid": "654a5abb-5c05-46be-ac32-e3e7c634aed6",
               "__enabled": true,
               "ChunkPosition": "-1,0,-1",
               "OnComponentDestroy": null,
@@ -532,8 +532,8 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "f87e5701-c327-4933-b6b6-059acb808e9b",
-              "__enabled": false,
+              "__guid": "c17b462b-6e51-49e6-ac90-fee139637af5",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -556,7 +556,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "664cac1b-411d-4753-b782-ba0795cc00e5",
+              "__guid": "24c1c970-c3f8-4478-849a-fe4bc432f1f2",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -579,7 +579,7 @@
           "Children": []
         },
         {
-          "__guid": "8e42f585-eb61-4109-aa24-52c0e37f1884",
+          "__guid": "dea1adcc-61dd-469e-b03b-5a841890c653",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, -1, -1)",
@@ -595,7 +595,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "6f086626-61ae-468e-9f0e-a4dbd658a5f9",
+              "__guid": "6c0a35e9-90f9-47f6-ad3c-382578d6ebc3",
               "__enabled": true,
               "ChunkPosition": "0,-1,-1",
               "OnComponentDestroy": null,
@@ -607,8 +607,8 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "1a190539-af7a-4111-b731-bfdccc8c5fe6",
-              "__enabled": false,
+              "__guid": "e5d2fbc4-386a-4244-8632-41db294b90bc",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -631,7 +631,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "88ed0cb9-599c-4c7a-a266-3a4303960fe0",
+              "__guid": "bee43f5c-3580-43b6-95f8-4639daf2d70f",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -654,7 +654,7 @@
           "Children": []
         },
         {
-          "__guid": "2e738830-0d4e-4c81-99f4-abd0f5133f51",
+          "__guid": "be0601a2-e1d8-4c6b-92d5-da7c82423fd5",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, -1)",
@@ -670,7 +670,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "81730acd-8ef1-4c0f-b255-1f0197dee660",
+              "__guid": "19f460de-4132-458f-82f8-fd4264916477",
               "__enabled": true,
               "ChunkPosition": "-1,-1,-1",
               "OnComponentDestroy": null,
@@ -682,8 +682,8 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "b1f9d592-259e-4afe-b134-86a26abb9b6e",
-              "__enabled": false,
+              "__guid": "9982539e-2a4c-4f31-84da-81ac552d5cbf",
+              "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
@@ -706,7 +706,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "b7ee64fe-d69f-4f53-b611-9c089788f531",
+              "__guid": "97cdf406-231f-49e3-ab25-77f4611d795c",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -2620,7 +2620,7 @@
       "__version": 1,
       "Flags": 0,
       "Name": "Struct",
-      "Position": "-20.09434,315.5772,-0.00005110921",
+      "Position": "230.9738,374.6692,-0.00003197612",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
