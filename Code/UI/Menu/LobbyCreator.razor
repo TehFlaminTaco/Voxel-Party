@@ -23,9 +23,9 @@
 			</div>
 			<div class="form-entry">
 				<DropDown @ref="PrivacyOption" class="privacy-select">
-					<option value="0">Private</option>
-					<option value="1">Friends</option>
-					<option value="2">Public</option>
+					<option value="0" title="Private">Private</option>
+					<option value="1" title="Friends">Friends</option>
+					<option value="2" title="Public">Public</option>
 				</DropDown>
 			</div>
 		</div>
@@ -98,7 +98,7 @@
 		{
 			Name = LobbyName,
 			MaxPlayers = MaxPlayers,
-			Privacy = (LobbyPrivacy)PrivacyOption.Selected.Value,
+			Privacy = GetPrivacyLabel( (string)PrivacyOption.Selected.Value ),
 			Hidden = Hidden,
 			DestroyWhenHostLeaves = DestroyWhenHostLeaves,
 			AutoSwitchToBestHost = AutoSwitchToBestHost
@@ -110,5 +110,16 @@
 		
 		Networking.CreateLobby( lobbyConfig );
 		Scene.LoadFromFile( "scenes/speed build.scene" );
+	}
+
+	private LobbyPrivacy GetPrivacyLabel( string privacy )
+	{
+		return privacy switch
+		{
+			"Private" => LobbyPrivacy.Private,
+			"Friends" => LobbyPrivacy.FriendsOnly,
+			"Public" => LobbyPrivacy.Public,
+			_ => LobbyPrivacy.Private
+		};
 	}
 }

@@ -10,7 +10,7 @@
       "Rotation": "-0.0729315,0.4822396,0.1305433,0.8631827",
       "Scale": "1,1,1",
       "Tags": "light_directional,light",
-      "Enabled": false,
+      "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
       "NetworkOrphaned": 0,
@@ -44,7 +44,7 @@
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "skybox",
-      "Enabled": false,
+      "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
       "NetworkOrphaned": 0,
@@ -67,7 +67,7 @@
         {
           "__type": "Sandbox.EnvmapProbe",
           "__guid": "d3606043-ad42-429f-920b-efc6b63d4412",
-          "__enabled": true,
+          "__enabled": false,
           "Bounds": {
             "Mins": "-512,-512,-512",
             "Maxs": "512,512,512"
@@ -76,7 +76,7 @@
           "Feathering": 0.02,
           "FrameInterval": 5,
           "MaxDistance": 512,
-          "MultiBounce": false,
+          "MultiBounce": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -88,7 +88,7 @@
           "Resolution": "Small",
           "Texture": "textures/cubemaps/default2.vtex",
           "TintColor": "1,1,1,1",
-          "UpdateStrategy": "OnEnabled",
+          "UpdateStrategy": "TimeInterval",
           "ZFar": 4096,
           "ZNear": 16
         }
@@ -797,7 +797,7 @@
           "ExposureMethod": "RGB",
           "MaximumExposure": 2,
           "MinimumExposure": 1,
-          "Mode": "HableFilmic",
+          "Mode": "ReinhardJodie",
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,

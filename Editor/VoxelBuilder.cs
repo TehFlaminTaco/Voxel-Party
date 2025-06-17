@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reflection;
 using System.Runtime.Serialization;
+using Editor.Assets;
 using Editor.Audio;
 
 [EditorTool]
@@ -19,8 +21,8 @@ public class VoxelBuilder : EditorTool
 		var window = new WidgetWindow( SceneOverlay );
 		window.Layout = Layout.Grid();
 		window.Layout.Margin = 16;
-
 		window.WindowTitle = "Voxel Pallete";
+		
 		int i = 0;
 		foreach ( var item in ResourceLibrary.GetAll<Item>().OrderBy( c => c.ID ) )
 		{
@@ -49,10 +51,10 @@ public class VoxelBuilder : EditorTool
 			}
 		}
 
-		AddOverlay( window, TextFlag.RightTop, 10 );
+		AddOverlay( window, TextFlag.LeftTop , 10 );
 	}
 
-	private Bitmap RenderItem( Item item )
+	Bitmap RenderItem( Item item )
 	{
 		var tex = new Bitmap( 100, 100 );
 		Scene scene = new Scene();
@@ -75,6 +77,16 @@ public class VoxelBuilder : EditorTool
 			camera.WorldPosition = new Vector3( -50, 0, 10000 );
 			camera.WorldRotation = Rotation.From( 0, 0, 0 );
 			camera.BackgroundColor = Color.Transparent;
+			
+			var right = scene.Camera.WorldRotation.Right;
+
+			var sun = new SceneDirectionalLight( scene.SceneWorld, Rotation.FromPitch( 50 ), Color.White * 2.5f + Color.Cyan * 0.05f );
+			sun.ShadowsEnabled = true;
+			sun.ShadowTextureResolution = 1024;
+
+			new SceneLight( scene.SceneWorld, scene.Camera.WorldPosition + Vector3.Up * 500.0f + right * 100.0f, 1000.0f, new Color( 1.0f, 0.9f, 0.9f ) * 50.0f );
+			new SceneCubemap( scene.SceneWorld, Texture.Load( "textures/cubemaps/default2.vtex" ), BBox.FromPositionAndSize( Vector3.Zero, 1000 ) );
+			
 			camera.RenderToBitmap( tex );
 			so.Delete();
 		}
