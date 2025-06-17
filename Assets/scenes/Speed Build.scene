@@ -96,6 +96,273 @@
       "Children": []
     },
     {
+      "__guid": "e1ceffcb-886a-4c00-bf38-aad3d1005d5f",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "World",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "WorldThinker",
+          "__guid": "7c898bcd-cdc8-46e7-af73-7d1f9280f1ed",
+          "__enabled": true,
+          "BatchSize": 10,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RenderChunkRadius": 10,
+          "RenderForgetRadius": 20,
+          "TextureAtlas": "materials/textureatlas.vmat",
+          "UnloadBatchSize": 10
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "112316b6-5f20-4a75-b375-36beeec45d18",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, 0, 0)",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "76705d58-45ab-4a4c-bd55-7557ce3d48be",
+              "__enabled": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "fab74425-1302-4a6f-8596-38b5524acc1c",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, 0, 0)",
+          "Position": "-640,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "59450827-e039-434d-9c90-e7820a8be9ed",
+              "__enabled": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "16d83d36-82bc-4897-bceb-5b19cf6142c4",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, -1, 0)",
+          "Position": "0,-640,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "d3f3d9eb-d044-44ef-b14c-4170ae956f9e",
+              "__enabled": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "700f0987-24a0-4726-84f8-d581efd18309",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, 0, -1)",
+          "Position": "0,0,-640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "ed724aff-c06f-46e3-8f6a-64fc44ea9345",
+              "__enabled": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "c1caa085-a026-4f16-b912-813f63f23e0d",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, -1, 0)",
+          "Position": "-640,-640,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "14cd27ec-3715-4f64-9e03-92b24291480a",
+              "__enabled": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "765c2ba3-0e7c-4d1c-a6bb-9fcb0af8ca1c",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, 0, -1)",
+          "Position": "-640,0,-640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "3b095b24-591f-41f8-8920-1db6a3895662",
+              "__enabled": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "1d4a10b5-807d-44e5-b933-07a83c120a36",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, -1, -1)",
+          "Position": "0,-640,-640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "d5ae7386-32bb-425c-958f-467476d66be6",
+              "__enabled": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "e239f0a5-f2dc-4fc3-ac96-dfb49dbf9c78",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, -1, -1)",
+          "Position": "-640,-640,-640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "bbc5c772-d618-4f26-8a97-3e71bb2b0f8c",
+              "__enabled": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          ],
+          "Children": []
+        }
+      ]
+    },
+    {
       "__guid": "51167e43-3ddd-4d29-ae6f-cdd766cdb1f7",
       "__version": 1,
       "Flags": 2048,
@@ -352,7 +619,8 @@
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
-          "OnComponentUpdate": null
+          "OnComponentUpdate": null,
+          "ReachDistanceProperty": 3.5
         },
         {
           "__type": "MoveModeFly",
@@ -558,159 +826,6 @@
             "_type": "gameobject",
             "go": "849bc8e6-7016-4b71-8ccf-483ee6abdfa7"
           }
-        }
-      ],
-      "Children": []
-    },
-    {
-      "__guid": "014f39fd-6edc-4b6b-9c49-9919b7dc7246",
-      "__version": 1,
-      "Flags": 0,
-      "Name": "Center Island",
-      "Position": "0,0,0",
-      "Rotation": "0,0,0,1",
-      "Scale": "1,1,1",
-      "Tags": "",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "NetworkOrphaned": 0,
-      "OwnerTransfer": 1,
-      "Components": [
-        {
-          "__type": "Sandbox.MeshComponent",
-          "__guid": "e4578176-c198-4339-b474-4aa61d2dfab1",
-          "__enabled": true,
-          "Collision": "Mesh",
-          "Color": "1,1,1,1",
-          "Friction": null,
-          "HideInGame": false,
-          "IsTrigger": false,
-          "Mesh": {
-            "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
-            "Position": "0,0,0",
-            "Rotation": "0,0,0,1",
-            "Positions": [
-              "-256,-256,0",
-              "256,-256,0",
-              "256,256,0",
-              "-256,256,0",
-              "-256,256,-64",
-              "256,256,-64",
-              "256,-256,-64",
-              "-256,-256,-64"
-            ],
-            "TextureCoord": [
-              "2,2",
-              "-2,0",
-              "2,-2",
-              "-2,0",
-              "-2,-2",
-              "-2,0",
-              "-2,2",
-              "-2,0",
-              "2,-2",
-              "2,0.5",
-              "2,2",
-              "2,0.5",
-              "-2,2",
-              "2,0.5",
-              "-2,-2",
-              "2,0.5",
-              "2,0",
-              "-2,0.5",
-              "-2,0.5",
-              "2,0",
-              "-2,0.5",
-              "2,0",
-              "2,0",
-              "-2,0.5"
-            ],
-            "TextureUAxis": [
-              "1,0,0",
-              "1,0,-0",
-              "0,-1,0",
-              "0,1,0",
-              "-1,0,0",
-              "1,-0,0"
-            ],
-            "TextureVAxis": [
-              "0,-1,0",
-              "0,-1,0",
-              "0,0,-1",
-              "-0,0,-1",
-              "0,0,-1",
-              "-0,0,-1"
-            ],
-            "TextureScale": [
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25"
-            ],
-            "TextureOffset": [
-              "0,0",
-              "0,0",
-              "0,0",
-              "0,0",
-              "0,0",
-              "0,0"
-            ],
-            "MaterialIndex": [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            "EdgeFlags": [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            "Materials": [
-              "materials/dev/reflectivity_30.vmat"
-            ]
-          },
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "OnObjectTriggerEnter": null,
-          "OnObjectTriggerExit": null,
-          "OnTriggerEnter": null,
-          "OnTriggerExit": null,
-          "RenderType": "On",
-          "SmoothingAngle": 40,
-          "Static": true,
-          "Surface": null,
-          "SurfaceVelocity": "0,0,0"
         }
       ],
       "Children": []
@@ -2090,40 +2205,6 @@
           "Static": true,
           "Surface": null,
           "SurfaceVelocity": "0,0,0"
-        }
-      ],
-      "Children": []
-    },
-    {
-      "__guid": "e1ceffcb-886a-4c00-bf38-aad3d1005d5f",
-      "__version": 1,
-      "Flags": 0,
-      "Name": "World",
-      "Position": "0,0,0",
-      "Rotation": "0,0,0,1",
-      "Scale": "1,1,1",
-      "Tags": "",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "NetworkOrphaned": 0,
-      "OwnerTransfer": 1,
-      "Components": [
-        {
-          "__type": "WorldThinker",
-          "__guid": "7c898bcd-cdc8-46e7-af73-7d1f9280f1ed",
-          "__enabled": true,
-          "BatchSize": 10,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "RenderChunkRadius": 10,
-          "RenderForgetRadius": 20,
-          "TextureAtlas": "materials/textureatlas.vmat",
-          "UnloadBatchSize": 10
         }
       ],
       "Children": []

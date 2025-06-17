@@ -187,17 +187,18 @@ public class VoxelPlayer : Component
             if ( Input.Pressed( $"Slot{i + 1}" ) )
                 SelectedSlot = i;
         }
-        if ( Input.Pressed( "NextSlot" ) )
-        {
-            SelectedSlot++;
-            if ( SelectedSlot >= 9 )
-                SelectedSlot = 0;
-        }
-        if ( Input.Pressed( "LastSlot" ) )
-        {
-            SelectedSlot--;
-            if ( SelectedSlot < 0 )
-                SelectedSlot = 8;
-        }
+        //TODO: I use my side mouse button for push to talk and it fucks this up, use scroll wheel
+        // if ( Input.Pressed( "NextSlot" ) )
+        // {
+        //     SelectedSlot++;
+        //     if ( SelectedSlot >= 9 )
+        //         SelectedSlot = 0;
+        // }
+        // if ( Input.Pressed( "LastSlot" ) )
+        // {
+        //     SelectedSlot--;
+        //     if ( SelectedSlot < 0 )
+        //         SelectedSlot = 8;
+        // }
     }
 }

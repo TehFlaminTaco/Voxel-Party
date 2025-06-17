@@ -89,11 +89,11 @@ public static class Helpers {
 	
 	public static Vector3 VoxelToWorld( Vector3 position )
 	{
-		return position * Chunk.SIZE * World.BlockScale;
+		return position * World.BlockScale;
 	}
 	
-	public static Vector3 WorldToVoxel( WorldThinker world, Vector3 position )
+	public static Vector3Int WorldToVoxel( Vector3 position )
 	{
-		return position / World.BlockScale * Chunk.SIZE;
+		return (position / World.BlockScale).Floor() - Vector3Int.Up;
 	}
 }

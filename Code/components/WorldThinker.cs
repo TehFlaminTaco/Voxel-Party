@@ -1,7 +1,7 @@
 using System;
 using Sandbox;
 
-public sealed class WorldThinker : Component {
+public sealed class WorldThinker : Component, Component.ExecuteInEditor {
 	[Property] public int RenderChunkRadius { get; set; } = 10;
 	[Property] public int RenderForgetRadius { get; set; } = 20; // How far away chunks are unloaded
 	[Property] public Material TextureAtlas { get; set; }
@@ -9,7 +9,7 @@ public sealed class WorldThinker : Component {
 	[Property] public int UnloadBatchSize { get; set; } = 10; // Number of chunks to check to unload in each batch
 	public World World = new();
 
-	[ConVar, DefaultValue(0)] public static int vp_debug_showchunkborders { get; set; } = 0;
+	[ConVar] public static int vp_debug_showchunkborders { get; set; } = 0;
 	
 	protected override void OnFixedUpdate() {
 		if ( IsProxy ) return;

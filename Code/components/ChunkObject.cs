@@ -1,6 +1,6 @@
 using Sandbox;
 
-public sealed class ChunkObject : Component {
+public sealed class ChunkObject : Component, Component.ExecuteInEditor {
 	[Sync] public Vector3Int ChunkPosition { get; set; } = Vector3Int.Zero;
 	[Sync]
 	public byte[] ChunkData {
