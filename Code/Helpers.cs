@@ -159,7 +159,7 @@ public static class Helpers
 				i++;
 				while ( count > 0 )
 				{
-					for ( int j = 0; i < stride; j++ )
+					for ( int j = 0; j < stride; j++ )
 					{
 						if ( i >= dataList.Count )
 						{
