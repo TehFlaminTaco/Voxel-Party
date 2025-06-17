@@ -82,7 +82,6 @@ public class VoxelBuilder : EditorTool
 		return tex;
 	}
 	
-	IDisposable _undoScope;
 	public override void OnUpdate()
 	{
 		var trace = World.Active
