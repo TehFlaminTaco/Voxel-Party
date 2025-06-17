@@ -85,4 +85,45 @@ public class Chunk
 		obj.NetworkSpawn();
 		return chunkObj;
 	}
+
+	public IEnumerable<byte> Serialize()
+	{
+		var data = new List<byte>();
+		for ( int z = 0; z < SIZE.z; z++ )
+		{
+			for ( int y = 0; y < SIZE.y; y++ )
+			{
+				for ( int x = 0; x < SIZE.x; x++ )
+				{
+					var blockData = GetBlock( x, y, z );
+					data.Add( blockData.BlockID );
+					data.Add( blockData.BlockDataValue );
+				}
+			}
+		}
+		return data.RunLengthEncodeBy( 2 );
+	}
+
+	public void Deserialize( IEnumerable<byte> data )
+	{
+		var dataList = data.RunLengthDecodeBy( 2 ).ToList();
+		if ( dataList.Count != SIZE.x * SIZE.y * SIZE.z * 2 )
+		{
+			Log.Warning( $"Invalid chunk data length: {dataList.Count}. Expected {SIZE.x * SIZE.y * SIZE.z * 2}." );
+			return;
+		}
+		for ( int z = 0; z < SIZE.z; z++ )
+		{
+			for ( int y = 0; y < SIZE.y; y++ )
+			{
+				for ( int x = 0; x < SIZE.x; x++ )
+				{
+					int index = (z * SIZE.y * SIZE.x + y * SIZE.x + x) * 2;
+					var blockID = dataList[index];
+					var blockDataValue = dataList[index + 1];
+					SetBlock( x, y, z, new BlockData( blockID, blockDataValue ) );
+				}
+			}
+		}
+	}
 }
