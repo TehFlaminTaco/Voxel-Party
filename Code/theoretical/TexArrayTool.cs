@@ -32,8 +32,9 @@ public static class TexArrayTool
             textures.Add( tex );
             return textures.Count - 1; // Return the index of the newly added texture.
         }
-
-        foreach ( var item in ResourceLibrary.GetAll<Item>().Where( c => c.Block != null ) )
+        var items = ResourceLibrary.GetAll<Item>().Where( c => c.Block != null );
+        if ( Game.IsEditor ) items = items.OrderBy( c => c.ID ); // Sort by ID in editor for consistency.
+        foreach ( var item in items )
         {
             // For each block texture, add it to the list and set the index in the atlas.
             // If it already is in the atlas, skip it, but set the index.

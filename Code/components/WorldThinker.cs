@@ -38,10 +38,15 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	[Button]
 	public void Regenerate()
 	{
+		var data = this.SerializedWorld;
 		foreach ( var child in GameObject.Children.ToList() )
 			child.DestroyImmediate();
 		World.SimulatedChunks.Clear();
-		//World.MakeSpawnPlatform();
+		this.SerializedWorld = data; // Re-apply the serialized world to regenerate it.
+		foreach ( var obj in Scene.GetAll<StructureLoader>() )
+		{
+			obj.Regenerate(); // Re-run the OnEnabled logic to ensure the structure is loaded in the editor.
+		}
 
 	}
 

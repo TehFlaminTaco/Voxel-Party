@@ -19,10 +19,25 @@ public partial class VoxelBuilder : EditorTool
 		AllowGameObjectSelection = false;
 
 		var window = new WidgetWindow( SceneOverlay );
-		window.Layout = Layout.Grid();
-		window.Layout.Margin = 16;
+
+		window.Layout = Layout.Column();
+
+		//var toolBin = Layout.Row();
+		//
+		//window.Layout.Add( toolBin );
+		//toolBin.Margin = 16;
+		//var toolBar = new ToolbarGroup( null, "tools", "tools" );
+		//toolBar.AddToggleButton( "Funky", "square", () => false, ( val ) => { } );
+		//toolBar.AddToggleButton( "Funky", "square", () => false, ( val ) => { } );
+		//toolBar.AddToggleButton( "Funky", "square", () => false, ( val ) => { } );
+		//toolBar.AddToggleButton( "Funky", "square", () => false, ( val ) => { } );
+		//toolBin.Add( toolBar );
+
+		var gridLayout = Layout.Grid();
+		window.Layout.Add( gridLayout );
+		gridLayout.Margin = 16;
 		window.WindowTitle = "Voxel Pallete";
-		
+
 		int i = 0;
 		foreach ( var item in ResourceLibrary.GetAll<Item>().OrderBy( c => c.ID ) )
 		{
@@ -47,11 +62,11 @@ public partial class VoxelBuilder : EditorTool
 					icon.Tint = Color.White.WithAlpha( 0.2f );
 				};
 				icon.ToolTip = $"{item.Name} (ID: {item.ID})";
-				(window.Layout as GridLayout).AddCell( i % 4, i++ / 4, icon );
+				gridLayout.AddCell( i % 4, i++ / 4, icon );
 			}
 		}
 
-		AddOverlay( window, TextFlag.LeftTop , 10 );
+		AddOverlay( window, TextFlag.LeftTop, 10 );
 	}
 
 	Bitmap RenderItem( Item item )
@@ -77,7 +92,7 @@ public partial class VoxelBuilder : EditorTool
 			camera.WorldPosition = new Vector3( -50, 0, 10000 );
 			camera.WorldRotation = Rotation.From( 0, 0, 0 );
 			camera.BackgroundColor = Color.Transparent;
-			
+
 			var right = scene.Camera.WorldRotation.Right;
 
 			var sun = new SceneDirectionalLight( scene.SceneWorld, Rotation.FromPitch( 50 ), Color.White * 2.5f + Color.Cyan * 0.05f );
@@ -86,14 +101,14 @@ public partial class VoxelBuilder : EditorTool
 
 			new SceneLight( scene.SceneWorld, scene.Camera.WorldPosition + Vector3.Up * 500.0f + right * 100.0f, 1000.0f, new Color( 1.0f, 0.9f, 0.9f ) * 50.0f );
 			new SceneCubemap( scene.SceneWorld, Texture.Load( "textures/cubemaps/default2.vtex" ), BBox.FromPositionAndSize( Vector3.Zero, 1000 ) );
-			
+
 			camera.RenderToBitmap( tex );
 			so.Delete();
 		}
 		scene.Destroy();
 		return tex;
 	}
-	
+
 	public override void OnUpdate()
 	{
 		var trace = World.Active
