@@ -48,4 +48,18 @@ public struct BlockData
 	{
 		return left.BlockID != right.BlockID || left.BlockDataValue != right.BlockDataValue;
 	}
+
+	public override bool Equals( object obj )
+	{
+		if ( obj is BlockData other )
+		{
+			return this == other;
+		}
+		return false;
+	}
+
+	public override int GetHashCode()
+	{
+		return (BlockID << 8) | BlockDataValue; // Combine BlockID and BlockDataValue into a single hash code
+	}
 }

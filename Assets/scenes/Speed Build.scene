@@ -131,7 +131,7 @@
       ],
       "Children": [
         {
-          "__guid": "407c4adb-afbd-4426-9043-431fe82db358",
+          "__guid": "627e09cf-22f0-4501-a683-2fa61bce36cb",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, 0)",
@@ -147,7 +147,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "9b84b34d-bf4f-473c-b661-7233659b9df7",
+              "__guid": "11f5af7e-15a0-4ec4-92a3-fd9638e26433",
               "__enabled": true,
               "ChunkPosition": "-1,-1,0",
               "OnComponentDestroy": null,
@@ -159,7 +159,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "d754ec84-78f3-41be-bdfa-cee7f089b0d1",
+              "__guid": "4f269137-e99d-4d8a-ae97-08b8bc01e8fb",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -182,8 +182,32 @@
               "Tint": "1,1,1,1"
             },
             {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "3b5824b5-ba4c-47d5-a197-611cf57fdf13",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlastranslucent.vmat",
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "e7b656eb-656f-4673-af7e-6d7b0a855223",
+              "__guid": "550ba8a5-61e7-4871-9cbc-f58b678474d5",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -2109,130 +2133,6 @@
         }
       ],
       "Children": []
-    },
-    {
-      "__guid": "a9d44f9c-e8d1-436a-a04c-b558dfcbd7a2",
-      "__version": 1,
-      "Flags": 0,
-      "Name": "island",
-      "Position": "-29.27979,6.709473,0",
-      "Rotation": "0,0,0,1",
-      "Scale": "1,1,1",
-      "Tags": "",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "NetworkOrphaned": 0,
-      "OwnerTransfer": 1,
-      "Components": [
-        {
-          "__type": "Sandbox.StructureLoader",
-          "__guid": "d3556ed4-59dc-490e-8fce-e581b3ad89f3",
-          "__enabled": true,
-          "LoadedStructure": "structures/island.struct",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null
-        }
-      ],
-      "Children": []
-    },
-    {
-      "__guid": "17432e45-ae4c-4774-b777-f217f550c0eb",
-      "__version": 1,
-      "Flags": 0,
-      "Name": "test",
-      "Position": "-8.86087,-257.501,0",
-      "Rotation": "0,0,0,1",
-      "Scale": "1,1,1",
-      "Tags": "",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "NetworkOrphaned": 0,
-      "OwnerTransfer": 1,
-      "Components": [
-        {
-          "__type": "Sandbox.StructureLoader",
-          "__guid": "38684796-0ab6-46f2-a297-f9701310f745",
-          "__enabled": true,
-          "LoadedStructure": "structures/test.struct",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null
-        }
-      ],
-      "Children": [
-        {
-          "__guid": "890eb4d1-e517-4f72-862f-b6e60136aeca",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (0, 0, 0)",
-          "Position": "-31.13913,-22.49899,-40",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "946b09b3-3d5e-4c54-a9c0-9ee18775a25b",
-              "__enabled": true,
-              "BodyGroups": 18446744073709551615,
-              "CreateAttachments": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "RenderOptions": {
-                "GameLayer": true,
-                "OverlayLayer": false,
-                "BloomLayer": false,
-                "AfterUILayer": false
-              },
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "d3d96541-7450-43ae-806a-95f78b717c3d",
-              "__enabled": true,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "Static": false,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        }
-      ]
     }
   ],
   "SceneProperties": {

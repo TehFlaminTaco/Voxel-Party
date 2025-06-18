@@ -167,7 +167,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			if ( TransparentRenderer == null || !TransparentRenderer.IsValid() )
 				TransparentRenderer = GameObject.AddComponent<ModelRenderer>();
 			var mr = TransparentRenderer;
-			mr.RenderOptions.Overlay = true; // Set the overlay option for transparent rendering
+			mr.MaterialOverride = WorldThinkerInstance.TranslucentTextureAtlas ?? null; // Use the translucent texture atlas
 			mr.Enabled = TransparentVerts.Count > 0; // Only enable if we have vertices to render
 			var transparentMesh = new Mesh();
 			transparentMesh.CreateVertexBuffer( TransparentVerts.Count, Vertex.Layout, TransparentVerts.Zip( TransparentNormals, TransparentUVs ).Select( v => new Vertex( v.First, v.Second, Vector3.Zero, new Vector4( v.Third, 2f ) ) ).ToList() );
@@ -177,6 +177,13 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			transparentModel.AddMesh( transparentMesh );
 			transparentModel.AddTraceMesh( TransparentVerts, Enumerable.Range( 0, TransparentVerts.Count ).ToList() );
 			mr.Model = transparentModel.Create();
+		}
+		else
+		{
+			if ( TransparentRenderer != null && TransparentRenderer.IsValid() )
+			{
+				TransparentRenderer.Destroy();
+			}
 		}
 
 		var collider = GetOrAddComponent<ModelCollider>();
