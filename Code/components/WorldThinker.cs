@@ -56,7 +56,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 		if ( IsProxy ) return;
 
 		// Iterate (randomly) through every loaded chunk, check if it's outside of the forget radius from any player, and if so, unload it.
-		if ( !Game.IsEditor )
+		if ( Game.IsPlaying )
 		{
 			List<Vector3Int> forgetList = new();
 			foreach ( var kv in Random.Shared.TakeRandom( World.SimulatedChunks.Where( c => c.Value.IsRendered ), UnloadBatchSize ) )
@@ -94,7 +94,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 
 		var players = Scene.GetAll<PlayerController>();
 		var targetChunks = new HashSet<Vector3Int>();
-		if ( Game.IsEditor )
+		if ( !Game.IsPlaying )
 		{
 			targetChunks = World.SimulatedChunks.Select( kv => kv.Key ).ToHashSet();
 		}
