@@ -279,6 +279,11 @@ public class BlockSpace
 		int ySize = BitConverter.ToInt32( bytes, 4 );
 		int zSize = BitConverter.ToInt32( bytes, 8 );
 		var blockData = bytes.Skip( 12 ).RunLengthDecodeBy( 2 ).ToList();
+		if ( blockData.Count != xSize * ySize * zSize * 2 )
+		{
+			Log.Error( $"Invalid structure data length: {blockData.Count}. Expected {xSize * ySize * zSize * 2}." );
+			return null;
+		}
 
 		for ( int z = 0; z < zSize; z++ )
 		{
