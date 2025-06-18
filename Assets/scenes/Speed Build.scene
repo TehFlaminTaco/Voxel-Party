@@ -123,8 +123,9 @@
           "OnComponentUpdate": null,
           "RenderChunkRadius": 5,
           "RenderForgetRadius": 8,
-          "SerializedWorld": "//////////8AAAAAUQAAAP8AAFsAAEAIAEwAAEADAEwAAEAIAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAOsAAA==",
+          "SerializedWorld": "//////////8AAAAAXQAAAP8AAFsAAEAIAEwAAEADAEwAAEAIAP8AAGsAAEAGAEwAAEAGAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAKwAAA==",
           "TextureAtlas": "materials/textureatlas.vmat",
+          "TranslucentTextureAtlas": "materials/textureatlastranslucent.vmat",
           "UnloadBatchSize": 10
         }
       ],

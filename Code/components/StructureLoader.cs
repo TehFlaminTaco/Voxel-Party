@@ -36,6 +36,7 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 	public void Regenerate()
 	{
 		var KnownMat = Scene.GetAll<WorldThinker>().FirstOrDefault()?.TextureAtlas;
+		var TranslucentMat = Scene.GetAll<WorldThinker>().FirstOrDefault()?.TranslucentTextureAtlas;
 		foreach ( var child in GameObject.Children.ToList() )
 		{
 			child.Destroy();
@@ -50,6 +51,7 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 		var oldWorld = World.Active;
 		var tempThinker = AddComponent<WorldThinker>();
 		tempThinker.TextureAtlas = KnownMat;
+		tempThinker.TranslucentTextureAtlas = TranslucentMat;
 		try
 		{
 			World.Active = tempThinker.World;

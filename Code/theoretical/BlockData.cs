@@ -38,4 +38,14 @@ public struct BlockData
 	{
 		return ItemRegistry.GetBlock( BlockID );
 	}
+
+	// Equality operator to compare two BlockData instances
+	public static bool operator ==( BlockData left, BlockData right )
+	{
+		return left.BlockID == right.BlockID && left.BlockDataValue == right.BlockDataValue;
+	}
+	public static bool operator !=( BlockData left, BlockData right )
+	{
+		return left.BlockID != right.BlockID || left.BlockDataValue != right.BlockDataValue;
+	}
 }

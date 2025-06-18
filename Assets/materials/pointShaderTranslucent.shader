@@ -34,7 +34,64 @@ COMMON
 
 struct VertexInput
 {
-	#include "common/vertexinput.hlsl"
+	// Common Vertex Shader Attributes
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Geometric
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+float3 vPositionOs : POSITION < Semantic( PosXyz ); >;
+float4 vTexCoord : TEXCOORD0 < Semantic( Uvwx ); >;
+float2 vTexCoord2 : TEXCOORD1 < Semantic( LowPrecisionUv1 ); >;	
+float4 vNormalOs : NORMAL < Semantic( OptionallyCompressedTangentFrame ); >;	
+
+#ifdef VS_INPUT_HAS_TANGENT_BASIS
+float4 vTangentUOs_flTangentVSign : TANGENT	< Semantic( TangentU_SignV ); >;
+#endif
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Skinning
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+#if ( D_SKINNING > 0 )
+	uint4 vBlendIndices : BLENDINDICES 	< Semantic( BlendIndices ); >;
+	float4 vBlendWeight : BLENDWEIGHT 	< Semantic( BlendWeight ); >;
+#endif	
+	
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+// SSS Curvature
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+#if ( S_USE_PER_VERTEX_CURVATURE )
+	float flSSSCurvature : TEXCOORD2 < Semantic( Curvature ); >;
+#endif
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Morph
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+#if ( D_MORPH ) || ( D_CS_VERTEX_ANIMATION )
+	float nVertexIndex : TEXCOORD14 < Semantic( MorphIndex ); >;
+	float nVertexCacheIndex : TEXCOORD15 < Semantic( MorphIndex ); >;
+#endif
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Instancing data
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+uint nInstanceTransformID : TEXCOORD13 < Semantic( InstanceTransformUv ); >;
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Baked lighting
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+#if ( D_BAKED_LIGHTING_FROM_LIGHTMAP )	
+	float2 vLightmapUV : TEXCOORD3 < Semantic( LightmapUV ); > ;
+#endif
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#ifndef COMMON_VS_INPUT_DEFINED
+#define COMMON_VS_INPUT_DEFINED
+#endif
+
+#ifndef SHARED_STANDARD_VS_INPUT_DEFINED
+#define SHARED_STANDARD_VS_INPUT_DEFINED
+#endif
 	float4 vColor : COLOR0 < Semantic( Color ); >;
 };
 
@@ -61,6 +118,7 @@ VS
 		PixelInput i = ProcessVertex( v );
 		i.vPositionOs = v.vPositionOs.xyz;
 		i.vColor = v.vColor;
+		i.vTextureCoords = v.vTexCoord;
 		
 		ExtraShaderData_t extraShaderData = GetExtraPerInstanceShaderData( v );
 		i.vTintColor = extraShaderData.vTint;
@@ -79,32 +137,34 @@ PS
 	CreateInputTexture2D( Abledo, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
 	Texture2D g_tAbledo < Channel( RGBA, Box( Abledo ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	
-	RenderState( BlendEnable, true );
-    RenderState( SrcBlend, DEST_COLOR );
-    RenderState( DstBlend, INV_SRC_ALPHA );
-    RenderState( SrcBlendAlpha, ONE );
-    RenderState( DstBlendAlpha, ONE );
-
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
+		float3 l_0 = i.vTextureCoords.xyz;
+		l_0.xy = clamp(l_0.xy, 0.05, 0.95);
+		int index = int(l_0.z+0.1);
+		float2 texSize;
+        g_tAbledo.GetDimensions(texSize.x, texSize.y);
+		int tilesWide = int(texSize.x / 16);
+		int tileX = index % tilesWide;
+		int tileY = index / tilesWide;
+		l_0.x = (l_0.x + tileX) / tilesWide;
+		l_0.y = (l_0.y + tileY) / tilesWide;
 
-		
-		float2 l_0 = i.vTextureCoords.xy * float2( 1, 1 );
-		float2 l_1 = l_0 * float2( 16, 16 );
-		float2 l_2 = floor( l_1 );
-		float2 l_3 = frac( l_1 );
-		float2 l_4 = l_3 - float2( 0.1, 0.1 );
-		float2 l_5 = l_4 / float2( 0.8, 0.8 );
-		float2 l_6 = min( l_5, 0.95 );
-		float2 l_7 = max( l_6, 0.05 );
-		float2 l_8 = l_2 + l_7;
-		float2 l_9 = l_8 / float2( 16, 16 );
-		float4 l_10 = Tex2DS( g_tAbledo, g_sSampler0, l_9 );
+		float4 l_10 = Tex2DS( g_tAbledo, g_sSampler0, l_0.xy );
 
 		if(l_10.r == 1.0 && l_10.g == 0.0 && l_10.b == 1.0)
 			discard;
 		
+		//float light = lerp(0.5, 1.0, (dot(i.vNormalOs, normalize(float3(0.1, 0.2, 0.3))) + 1) / 2);
+		Material m = Material::Init();
+		m.Albedo = l_10.xyz;
+		m.Roughness = 1;
+		m.Metalness = 0;
+		m.TintMask = 1;
+		m.Opacity = l_10.a;
+		m.Emission = 0;
+		m.Transmission = 0;
 
-		return float4( l_10.xyz, l_10.a ) * i.vTintColor;
+		return ShadingModelStandard::Shade( i, m );
 	}
 }
