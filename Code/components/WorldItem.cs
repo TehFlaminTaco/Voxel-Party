@@ -1,6 +1,6 @@
 using System;
 
-public class WorldItem : Component {
+public class WorldItem : Component, Component.ITriggerListener {
     public SceneCustomObject _so;
 
     public ItemStack stack = ItemStack.Empty;
@@ -119,18 +119,15 @@ public class WorldItem : Component {
         }
 
         // If we're within 3 blocks of the center of a player, hover towards them
-        var closestPlayer = Scene.GetAll<VoxelPlayer>()
-            .Where( p => p.IsProxy == false )
-            .OrderBy( p => (p.GameObject.GetBounds().Center - WorldPosition).LengthSquared )
-            .FirstOrDefault();
-        if ( closestPlayer != null ) {
-            var playerPos = closestPlayer.GameObject.GetBounds().Center;
+        var player = VoxelPlayer.LocalPlayer();
+        if ( player.IsValid() ) {
+            var playerPos = player.GameObject.GetBounds().Center;
             var direction = (playerPos - WorldPosition).Normal;
             var distance = (playerPos - WorldPosition).Length;
 
             if ( distance < 1f * World.BlockScale ) {
                 // Pick us up if we're close enough
-                var inv = closestPlayer.inventory;
+                var inv = player.inventory;
                 if ( ItemStack.IsNullOrEmpty( inv.PutInFirstAvailableSlot( stack ) ) ) {
                     Spent = true;
                     GameObject.Destroy(); // Destroy the item if it was picked up

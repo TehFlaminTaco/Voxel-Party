@@ -6,7 +6,8 @@ public class VoxelPlayer : Component
 
     public Inventory inventory = new Inventory( 9 + (9 * 3) ); // 9 slots for the hotbar, and 27 slots for the inventory (3 rows of 9 slots each)
 
-    [Property] public bool CreativeMode = true;
+    [Property] public bool CreativeMode { get; set; } = false;
+    [Property] public bool GiveBrokenBlocks { get; set; } = false;
 
     [Property, Alias( "Reach Distance" ), Description( "In blocks, not inches" )]
     public float ReachDistanceProperty { get; set; } = 3.5f;
@@ -67,16 +68,22 @@ public class VoxelPlayer : Component
             int progress = Math.Min( (int)(BreakTime * 20 / block.Hardness), 9 ); // TODO: based on BreakTime
             Vector2Int textureIndex = new Vector2Int( 6 + progress, 15 );
             var rect = Rect.FromPoints( textureIndex / 16f + Vector2.One / 160f, textureIndex / 16f + Vector2.One / 16f - Vector2.One / 160f ); // Assuming a texture atlas of 16x16, each tile is 0.0625 in UV space
-            var v1 = new Sandbox.Vertex( p1, rect.BottomLeft, Color.White );
-            var v2 = new Sandbox.Vertex( p2, rect.BottomRight, Color.White );
-            var v3 = new Sandbox.Vertex( p3, rect.TopLeft, Color.White );
-            var v4 = new Sandbox.Vertex( p4, rect.TopRight, Color.White );
+            var v1 = new Vertex( p1, rect.BottomLeft, Color.White );
+            var v2 = new Vertex( p2, rect.BottomRight, Color.White );
+            var v3 = new Vertex( p3, rect.TopLeft, Color.White );
+            var v4 = new Vertex( p4, rect.TopRight, Color.White );
             blockBreakEffect.ColorTint = Color.White.WithAlpha( 1f );
-            Graphics.Draw( new List<Sandbox.Vertex> { v1, v2, v3, v4 }, 4, Material.Load( "materials/textureatlastranslucent.vmat" ), new RenderAttributes(), Graphics.PrimitiveType.TriangleStrip );
+            Graphics.Draw( new List<Vertex> { v1, v2, v3, v4 }, 4, Material.Load( "materials/textureatlastranslucent.vmat" ), new RenderAttributes(), Graphics.PrimitiveType.TriangleStrip );
         };
     }
     public void HandleBreak()
     {
+	    Log.Info(inventory.Items.Count( x => x.Count > 0 ));
+	    if ( GiveBrokenBlocks && BreakingBlock.HasValue )
+	    {
+		    inventory.PutInFirstAvailableSlot( new ItemStack(ItemRegistry.GetItem( BreakingBlock.Value )) );
+	    }
+	    
         if ( CreativeMode )
         {
             BreakingBlock = null;
@@ -87,7 +94,7 @@ public class VoxelPlayer : Component
             if ( !tr.Hit )
                 return;
 
-            world.Thinker.BreakBlock( tr.HitBlockPosition );
+            world.Thinker.BreakBlock( tr.HitBlockPosition, false );
             return;
         }
 
@@ -204,7 +211,6 @@ public class VoxelPlayer : Component
 
     public static VoxelPlayer LocalPlayer()
     {
-	    Log.Info(Game.ActiveScene?.GetAllComponents<VoxelPlayer>().FirstOrDefault());
 	    var player = Game.ActiveScene?.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Connection.Local );
 	    if ( !player.IsValid() )
 	    {

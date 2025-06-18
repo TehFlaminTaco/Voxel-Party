@@ -1,0 +1,118 @@
+{
+  "ID": 8,
+  "Name": "Oak Log",
+  "MaxStackSize": 64,
+  "IsBlock": true,
+  "Block": {
+    "Opaque": true,
+    "IsSolidBlock": true,
+    "IsSolid": true,
+    "Hardness": 1,
+    "Texture": {
+      "$compiler": "texture",
+      "$source": "imagefile",
+      "data": {
+        "FilePath": "materials/block/oak_log.png",
+        "MaxSize": 4096,
+        "ConvertHeightToNormals": false,
+        "NormalScale": 1,
+        "Rotate": 0,
+        "FlipVertical": false,
+        "FlipHorizontal": false,
+        "Padding": {
+          "Size": "0,0",
+          "EdgeSize": "0,0"
+        },
+        "Sharpen": 0,
+        "InvertColor": false,
+        "Blur": 0,
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1,
+        "Hue": 0,
+        "Colorize": false,
+        "TargetColor": "0,1,0,1",
+        "CacheToDisk": true
+      },
+      "compiled": "textures/generated/imagefile/aec2ac16285de4b6.vtex"
+    },
+    "TopTexture": {
+      "$compiler": "texture",
+      "$source": "imagefile",
+      "data": {
+        "FilePath": "materials/block/oak_log_top.png",
+        "MaxSize": 4096,
+        "ConvertHeightToNormals": false,
+        "NormalScale": 1,
+        "Rotate": 0,
+        "FlipVertical": false,
+        "FlipHorizontal": false,
+        "Padding": {
+          "Size": "0,0",
+          "EdgeSize": "0,0"
+        },
+        "Sharpen": 0,
+        "InvertColor": false,
+        "Blur": 0,
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1,
+        "Hue": 0,
+        "Colorize": false,
+        "TargetColor": "0,1,0,1",
+        "CacheToDisk": true
+      },
+      "compiled": "textures/generated/imagefile/f9878ccff12b5cdf.vtex"
+    },
+    "SideTexture": null,
+    "NorthTexture": null,
+    "SouthTexture": null,
+    "EastTexture": null,
+    "WestTexture": null,
+    "BottomTexture": {
+      "$compiler": "texture",
+      "$source": "imagefile",
+      "data": {
+        "FilePath": "materials/block/oak_log_top.png",
+        "MaxSize": 4096,
+        "ConvertHeightToNormals": false,
+        "NormalScale": 1,
+        "Rotate": 0,
+        "FlipVertical": false,
+        "FlipHorizontal": false,
+        "Padding": {
+          "Size": "0,0",
+          "EdgeSize": "0,0"
+        },
+        "Sharpen": 0,
+        "InvertColor": false,
+        "Blur": 0,
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1,
+        "Hue": 0,
+        "Colorize": false,
+        "TargetColor": "0,1,0,1",
+        "CacheToDisk": true
+      },
+      "compiled": "textures/generated/imagefile/f9878ccff12b5cdf.vtex"
+    },
+    "TextureIndex": 7,
+    "TopTextureIndex": 8,
+    "SideTextureIndex": null,
+    "NorthTextureIndex": null,
+    "SouthTextureIndex": null,
+    "EastTextureIndex": null,
+    "WestTextureIndex": null,
+    "BottomTextureIndex": 8,
+    "Drops": [
+      {
+        "Item": "items/oak_log.item",
+        "Count": 1,
+        "ItemID": 8
+      }
+    ]
+  },
+  "__references": [],
+  "__version": 0
+}

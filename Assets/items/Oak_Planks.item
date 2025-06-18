@@ -1,10 +1,10 @@
 {
-  "ID": 6,
-  "Name": "Glass",
+  "ID": 7,
+  "Name": "Oak Planks",
   "MaxStackSize": 64,
   "IsBlock": true,
   "Block": {
-    "Opaque": false,
+    "Opaque": true,
     "IsSolidBlock": true,
     "IsSolid": true,
     "Hardness": 1,
@@ -12,7 +12,7 @@
       "$compiler": "texture",
       "$source": "imagefile",
       "data": {
-        "FilePath": "materials/block/white_stained_glass.png",
+        "FilePath": "materials/block/oak_planks.png",
         "MaxSize": 4096,
         "ConvertHeightToNormals": false,
         "NormalScale": 1,
@@ -34,7 +34,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": "textures/generated/imagefile/3af0da3cd3b04371.vtex"
+      "compiled": "textures/generated/imagefile/208670a600e850a0.vtex"
     },
     "TopTexture": null,
     "SideTexture": null,
@@ -43,7 +43,7 @@
     "EastTexture": null,
     "WestTexture": null,
     "BottomTexture": null,
-    "TextureIndex": 5,
+    "TextureIndex": 6,
     "TopTextureIndex": null,
     "SideTextureIndex": null,
     "NorthTextureIndex": null,
@@ -53,9 +53,9 @@
     "BottomTextureIndex": null,
     "Drops": [
       {
-        "Item": "items/glass.item",
+        "Item": "items/oak_planks.item",
         "Count": 1,
-        "ItemID": 6
+        "ItemID": 7
       }
     ]
   },

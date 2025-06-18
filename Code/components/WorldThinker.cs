@@ -150,16 +150,21 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	}
 
 	[Rpc.Broadcast]
-	public void BreakBlock( Vector3Int position )
+	public void BreakBlock( Vector3Int position, bool dropItems = true )
 	{
 		// Fill the block with SimpleParticles
 		var block = World.GetBlock( position ).GetBlock();
-		foreach ( var stack in block.GetDrops( World, position ) )
-			stack.Clone().Spawn( (position + new Vector3(
+
+		if ( dropItems )
+		{
+			foreach ( var stack in block.GetDrops( World, position ) )
+				stack.Clone().Spawn( (position + new Vector3(
 					Random.Shared.Float(),
 					Random.Shared.Float(),
 					Random.Shared.Float()
 				)) * World.BlockScale ); // Spawn the item at the center of the block
+		}
+		
 		for ( int i = 0; i < 30; i++ )
 		{
 			var particlePos = (position + new Vector3(

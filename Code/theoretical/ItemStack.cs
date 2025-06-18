@@ -9,6 +9,7 @@ public class ItemStack
     public Item Item { get; set; } // The ID of the item in the stack, e.g. 0x01 for Stone.
     public int Count { get; set; } // The number of items in the stack
 
+    [Hide]
     public int ItemID
     {
         get

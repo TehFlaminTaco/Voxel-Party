@@ -15,7 +15,15 @@ public static class ItemRegistry
 
 	public static Item GetItem( string name )
 	{
-		var item = ResourceLibrary.GetAll<Item>().FirstOrDefault( x => x.Name == name );
+		var item = ResourceLibrary.GetAll<Item>().FirstOrDefault( x => x.Name.Equals( name, System.StringComparison.CurrentCultureIgnoreCase ) );
+		if ( item is not null && item.IsValid() )
+			return item;
+		return null;
+	}
+
+	public static Item GetItem( Vector3Int position )
+	{
+		var item = GetItem( World.Active.GetBlock( position ).BlockID );
 		if ( item is not null && item.IsValid() )
 			return item;
 		return null;
@@ -31,7 +39,7 @@ public static class ItemRegistry
 
 	public static Block GetBlock( string name )
 	{
-		var item = ResourceLibrary.GetAll<Item>().FirstOrDefault( x => x.Name == name );
+		var item = ResourceLibrary.GetAll<Item>().FirstOrDefault( x => x.Name.Equals( name, System.StringComparison.CurrentCultureIgnoreCase ) );
 		if ( item != null && item.IsValid() )
 			return item.Block;
 		return null;
