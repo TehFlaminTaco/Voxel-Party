@@ -3,4 +3,17 @@ ItemIcon {
     height: 100%;
     background-size: 100px;
     background-position: center;
+    
+    .item-count {
+        position: absolute;
+        padding-left: 50px;
+        padding-top: 30px;
+        font-size: 40px;
+    }
+    
+    .slot-number {
+        padding-left: 4px;
+        position: absolute;
+        font-size: 60px
+    }
 }

@@ -2,5 +2,6 @@
 @inherits Panel
 
 <root>
-
+	<div class="slot-number">@(Slot + 1 - Inventory.InventorySize)</div>
+	<div class="item-count">@if(@ItemStack.Count > 0){@ItemStack.Count}</div>
 </root>

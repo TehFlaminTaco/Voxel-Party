@@ -6,6 +6,7 @@ public partial class ItemIcon : Panel
     public int Slot { get; set; } = -1;
 
     public Texture RenderTexture;
+    public ItemStack ItemStack;
 
     public override void OnDeleted()
     {
@@ -23,14 +24,14 @@ public partial class ItemIcon : Panel
         using ( scene.Push() )
         {
             var _so = new SceneCustomObject( scene.SceneWorld );
-            _so.Transform = global::Transform.Zero;
+            _so.Transform = Transform.Zero;
             _so.Flags.CastShadows = false;
             _so.Flags.IsOpaque = true;
             _so.Flags.IsTranslucent = false;
 
             _so.RenderOverride = ( obj ) =>
             {
-                item.Render( global::Transform.Zero.WithPosition( new Vector3( 0f, -7f, -4f ) ).WithRotation( Rotation.FromAxis( Vector3.Right, 35f ) * Rotation.FromAxis( Vector3.Up, 45 ) ) );
+                item.Render( Transform.Zero.WithPosition( new Vector3( 0f, -7f, -4f ) ).WithRotation( Rotation.FromAxis( Vector3.Right, 35f ) * Rotation.FromAxis( Vector3.Up, 45 ) ) );
             };
 
             var light = new GameObject().AddComponent<DirectionalLight>();
@@ -53,18 +54,19 @@ public partial class ItemIcon : Panel
     ItemStack lastKnownStack = ItemStack.Empty;
     public override void Tick()
     {
-        var item = Inventory.GetItem( Slot );
-        if ( RenderTexture == null || item.Count != lastKnownStack?.Count || item.ItemID != lastKnownStack?.ItemID )
+	    ItemStack = Inventory.GetItem( Slot );
+        if ( RenderTexture == null || ItemStack.Count != lastKnownStack?.Count || ItemStack.ItemID != lastKnownStack?.ItemID )
         {
-            lastKnownStack = item;
+            lastKnownStack = ItemStack;
             Render();
         }
-        if ( ItemStack.IsNullOrEmpty( item ) )
+        if ( ItemStack.IsNullOrEmpty( ItemStack ) )
         {
             Style.BackgroundImage = null;
             return;
         }
         Style.BackgroundImage = RenderTexture;
-
     }
+
+    protected override int BuildHash() => ItemStack.Count;
 }

@@ -85,6 +85,7 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 
 	protected override void OnEnabled()
 	{
+		Log.Info("hi");
 		Regenerate();
 	}
 

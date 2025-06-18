@@ -39,5 +39,5 @@
 		if ( Input.Pressed("score") ) ShowInventory = !ShowInventory;
 	}
 
-	protected override int BuildHash() => HashCode.Combine($"{VoxelPlayer.SelectedSlot}");
+	protected override int BuildHash() => HashCode.Combine(_inventory.GetHashCode(), VoxelPlayer.SelectedSlot.GetHashCode());
 }
