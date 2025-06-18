@@ -117,19 +117,36 @@ public class Block
 	public virtual bool ShouldFaceBeVisible( World world, Vector3Int blockPos, Direction face )
 	{
 		// If we are not opaque, we always show the face.
-		if ( !Opaque ) return true;
-		// Check if the adjacent block in the direction of the face is solid.
-		var adjacentPos = blockPos + face.Forward();
-		var adjacentBlockData = world.GetBlock( adjacentPos );
-		var adjacentBlock = ItemRegistry.GetBlock( adjacentBlockData.BlockID );
-		if ( adjacentBlock == null )
+		if ( !Opaque )
 		{
-			return true; // If no adjacent block, show the face.
+			var adjacentPos = blockPos + face.Forward();
+			var adjacentBlockData = world.GetBlock( adjacentPos );
+			var adjacentBlock = ItemRegistry.GetBlock( adjacentBlockData.BlockID );
+			if ( adjacentBlock == null )
+			{
+				return true; // If no adjacent block, show the face.
+			}
+			if ( adjacentBlockData == world.GetBlock( blockPos ) )
+			{
+				return false; // If the adjacent block is the same as this block, don't show the face.
+			}
+			return true;
 		}
-		if ( adjacentBlock.IsFaceSolid( world, adjacentPos, face.Flip() ) )
+		else
 		{
-			return false; // If the adjacent block's opposite face is solid, don't show this face.
+			// Check if the adjacent block in the direction of the face is solid.
+			var adjacentPos = blockPos + face.Forward();
+			var adjacentBlockData = world.GetBlock( adjacentPos );
+			var adjacentBlock = ItemRegistry.GetBlock( adjacentBlockData.BlockID );
+			if ( adjacentBlock == null )
+			{
+				return true; // If no adjacent block, show the face.
+			}
+			if ( adjacentBlock.IsFaceSolid( world, adjacentPos, face.Flip() ) )
+			{
+				return false; // If the adjacent block's opposite face is solid, don't show this face.
+			}
+			return true; // Otherwise, show the face.
 		}
-		return true; // Otherwise, show the face.
 	}
 }

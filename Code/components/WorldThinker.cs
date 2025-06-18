@@ -6,6 +6,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	[Property] public int RenderChunkRadius { get; set; } = 10;
 	[Property] public int RenderForgetRadius { get; set; } = 20; // How far away chunks are unloaded
 	[Property] public Material TextureAtlas { get; set; }
+	[Property] public Material TranslucentTextureAtlas { get; set; } // For translucent blocks, like glass or water
 	[Property] public int BatchSize { get; set; } = 10; // Number of chunks to load in each batch
 	[Property] public int UnloadBatchSize { get; set; } = 10; // Number of chunks to check to unload in each batch
 
