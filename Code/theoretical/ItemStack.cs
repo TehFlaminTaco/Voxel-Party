@@ -18,7 +18,6 @@ public class ItemStack
         }
         set
         {
-            Log.Info( value );
             Item = ItemRegistry.GetItem( value ); // Get the item from the registry using the provided ID
         }
     }

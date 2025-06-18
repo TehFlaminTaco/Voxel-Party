@@ -13,27 +13,27 @@ InventoryUI {
   
   .container
   {
-    background-color: rgba(147, 147, 147, 0.2);
-    padding: 10px;
-    width: 42%;
+    background-color: rgba(24, 37, 41, 0.4);
+    padding: 8px 8px 5px;
+    width: 45%;
     height: 10%;
-    margin-bottom: 20px;
-    border: 2px white;
-    border-radius: 30px;
+    margin-bottom: 5px;
+    border: 2px solid rgba(52, 122, 118, 0.4);
+    border-radius: 10px;
     justify-content: space-evenly;
   }
   
   .hotbar-slot
   {
-    background-color: rgba(147, 147, 147, 0.8);
+    background-color: rgba(24, 37, 41, 0.8);
+    border: 1px solid #68b5b5;
     width: auto;
     aspect-ratio: 1;
-    border: 2px white;
-    border-radius: 15px;
+    border-radius: 10px;
 
     &.selected
     {
-      border: 2px black;
+      border: 2px solid white;
     }
   }
 }
