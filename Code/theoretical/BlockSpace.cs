@@ -302,6 +302,8 @@ public class BlockSpace
 		var data = new List<byte>();
 		foreach ( var chunk in SimulatedChunks.Values )
 		{
+			if ( chunk.IsEmpty )
+				continue;
 			data.AddRange( BitConverter.GetBytes( chunk.Position.x ) );
 			data.AddRange( BitConverter.GetBytes( chunk.Position.y ) );
 			data.AddRange( BitConverter.GetBytes( chunk.Position.z ) );
