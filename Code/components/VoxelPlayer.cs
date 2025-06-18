@@ -198,11 +198,11 @@ public class VoxelPlayer : Component
     {
         for ( int i = inventory.InventorySize; i < inventory.TotalSize; i++ )
         {
-            if ( Input.Pressed( $"Slot{i + 1}" ) )
+            if ( Input.Pressed( $"Slot{(i - inventory.InventorySize) + 1}" ) )
                 SelectedSlot = i;
         }
 
-        SelectedSlot += Input.MouseWheel.y.FloorToInt().Clamp( -1, 1 );
-        SelectedSlot = SelectedSlot.Clamp( 0, inventory.HotbarSize - 1 );
+        SelectedSlot += -Input.MouseWheel.y.FloorToInt().Clamp( -1, 1 );
+        SelectedSlot = SelectedSlot.Clamp( inventory.InventorySize, inventory.InventorySize + inventory.HotbarSize - 1 );
     }
 }
