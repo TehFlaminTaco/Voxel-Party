@@ -35,6 +35,8 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 	[Button]
 	public void Regenerate()
 	{
+		if ( !GameObject.Active )
+			return;
 		var KnownMat = Scene.GetAll<WorldThinker>().FirstOrDefault()?.TextureAtlas;
 		var TranslucentMat = Scene.GetAll<WorldThinker>().FirstOrDefault()?.TranslucentTextureAtlas;
 		foreach ( var child in GameObject.Children.ToList() )
@@ -85,7 +87,7 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 
 	protected override void OnEnabled()
 	{
-		Log.Info("hi");
+		Log.Info( "hi" );
 		Regenerate();
 	}
 
