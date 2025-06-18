@@ -108,7 +108,7 @@ public static class Helpers
 		{
 			// Non-repeat spans are in chunks of 0-63, which represent sizes of 1-64.
 			// Which leaves the values of 64 - 255 to represent repeat spans. (255 - 63) + 1 gives 193 unique ways to represent repeat spans. We use 194, as the counts of 0 and 1 are illogical
-			if ( GroupedChunks.Count == 0 || !GroupedChunks.Last().chunk.SequenceEqual( chunk ) || GroupedChunks.Last().count >= 194 )
+			if ( GroupedChunks.Count == 0 || !GroupedChunks.Last().chunk.SequenceEqual( chunk ) || GroupedChunks.Last().count >= 193 )
 			{
 				GroupedChunks.Add( (1, new List<byte>( chunk )) );
 			}
@@ -143,7 +143,7 @@ public static class Helpers
 			}
 
 			// Otherwise, encode the count and the chunk
-			encoded.Add( (byte)(63 + (GroupedChunks[i].count - 2)) ); // Encode the count to fit in the range 64-255 (Where 2 is the smallest possible value)
+			encoded.Add( (byte)(64 + (GroupedChunks[i].count - 2)) ); // Encode the count to fit in the range 64-255 (Where 2 is the smallest possible value)
 			encoded.AddRange( GroupedChunks[i].chunk );
 		}
 
@@ -172,6 +172,7 @@ public static class Helpers
 					{
 						if ( i >= dataList.Count )
 						{
+							Log.Warning( "RunLengthDecodeBy: Attempted to read beyond the end of the data list." );
 							break; // Prevent out of bounds
 						}
 						decoded.Add( dataList[i] );
@@ -182,7 +183,7 @@ public static class Helpers
 			}
 			else
 			{
-				int count = (dataList[i] - 63) + 2; // Decode the count from the range 64-255 (Where 2 is the smallest possible value)
+				int count = (dataList[i] - 64) + 2; // Decode the count from the range 64-255 (Where 2 is the smallest possible value)
 				List<byte> chunk = new List<byte>();
 				i++;
 				for ( int j = 0; j < stride && i < dataList.Count; j++ )

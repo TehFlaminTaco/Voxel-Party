@@ -10,17 +10,16 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	[Property] public int UnloadBatchSize { get; set; } = 10; // Number of chunks to check to unload in each batch
 
 	[Property, Hide]
-	public string SerializedWorld
+	public byte[] SerializedWorld
 	{
 		get
 		{
-			return Convert.ToBase64String( World.Active?.Serialize().ToArray() );
+			return World.Active?.Serialize().ToArray();
 		}
 		set
 		{
-			if ( string.IsNullOrEmpty( value ) ) return;
-			var data = Convert.FromBase64String( value );
-			World.Active?.Deserialize( data );
+			if ( value == null ) return;
+			World.Active?.Deserialize( value );
 		}
 	}
 
@@ -164,7 +163,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 					Random.Shared.Float()
 				)) * World.BlockScale ); // Spawn the item at the center of the block
 		}
-		
+
 		for ( int i = 0; i < 30; i++ )
 		{
 			var particlePos = (position + new Vector3(
