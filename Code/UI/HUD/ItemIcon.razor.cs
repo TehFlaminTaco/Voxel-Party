@@ -30,7 +30,7 @@ public partial class ItemIcon : Panel
 
             _so.RenderOverride = ( obj ) =>
             {
-                item.Render( global::Transform.Zero.WithPosition( new Vector3( 0f, -5f, -2f ) ).WithRotation( Rotation.FromAxis( Vector3.Right, 35f ) * Rotation.FromAxis( Vector3.Up, 45 ) ) );
+                item.Render( global::Transform.Zero.WithPosition( new Vector3( 0f, -7f, -4f ) ).WithRotation( Rotation.FromAxis( Vector3.Right, 35f ) * Rotation.FromAxis( Vector3.Up, 45 ) ) );
             };
 
             var light = new GameObject().AddComponent<DirectionalLight>();
@@ -39,7 +39,7 @@ public partial class ItemIcon : Panel
 
             var camera = new GameObject().AddComponent<CameraComponent>();
             camera.Orthographic = true;
-            camera.OrthographicHeight = 250f;
+            camera.OrthographicHeight = 200f;
             camera.WorldPosition = new Vector3( -50, 0, 0 );
             camera.WorldRotation = Rotation.From( 0, 0, 0 );
             camera.BackgroundColor = Color.Transparent;
