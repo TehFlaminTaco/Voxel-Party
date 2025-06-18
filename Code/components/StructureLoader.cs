@@ -32,8 +32,10 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 		GameObject.Destroy();
 	}
 
-	protected override void OnEnabled()
+	[Button]
+	public void Regenerate()
 	{
+		var KnownMat = Scene.GetAll<WorldThinker>().FirstOrDefault()?.TextureAtlas;
 		foreach ( var child in GameObject.Children.ToList() )
 		{
 			child.Destroy();
@@ -46,7 +48,7 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 
 		var oldWorld = World.Active;
 		var tempThinker = AddComponent<WorldThinker>();
-		tempThinker.TextureAtlas = Material.Load( "materials/textureatlas.vmat" );
+		tempThinker.TextureAtlas = KnownMat;
 		try
 		{
 			World.Active = tempThinker.World;
@@ -79,10 +81,15 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 		if ( Game.IsEditor ) return;
 	}
 
+	protected override void OnEnabled()
+	{
+		Regenerate();
+	}
+
 	protected override void OnValidate()
 	{
 		base.OnValidate();
-		this.OnEnabled(); // Just re-run the OnEnabled logic to ensure the structure is loaded in the editor.
+		Regenerate();
 	}
 
 	protected override void OnDisabled()
