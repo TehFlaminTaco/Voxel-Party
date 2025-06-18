@@ -3,12 +3,15 @@ using System;
 public class Inventory
 {
     public List<ItemStack> Items { get; private set; } = new();
-    public int MaxSize { get; set; }
+    public int InventorySize { get; set; }
+    public int HotbarSize { get; set; }
+    public int TotalSize => HotbarSize + InventorySize;
 
-    public Inventory( int maxSize = 36 )
+    public Inventory( int inventorySize = 27, int hotbarSize = 9 )
     {
-        MaxSize = maxSize;
-        for ( int i = 0; i < MaxSize; i++ )
+        InventorySize = inventorySize;
+        HotbarSize = hotbarSize;
+        for ( int i = 0; i < TotalSize; i++ )
         {
             Items.Add( ItemStack.Empty );
         }
@@ -16,7 +19,7 @@ public class Inventory
 
     public ItemStack GetItem( int slot )
     {
-        if ( slot < 0 || slot >= MaxSize )
+        if ( slot < 0 || slot >= TotalSize )
         {
             throw new ArgumentOutOfRangeException( nameof( slot ), "Slot index is out of range." );
         }
@@ -25,7 +28,7 @@ public class Inventory
 
     public void SetItem( int slot, ItemStack stack )
     {
-        if ( slot < 0 || slot >= MaxSize )
+        if ( slot < 0 || slot >= TotalSize )
         {
             throw new ArgumentOutOfRangeException( nameof( slot ), "Slot index is out of range." );
         }
@@ -38,7 +41,7 @@ public class Inventory
     // If simulate is false, we modify the inventory and may modify the original stack.
     public ItemStack PutInSlot( int slot, ItemStack stack, bool simulate )
     {
-        if ( slot < 0 || slot >= MaxSize )
+        if ( slot < 0 || slot >= TotalSize )
         {
             throw new ArgumentOutOfRangeException( nameof( slot ), "Slot index is out of range." );
         }
@@ -70,21 +73,36 @@ public class Inventory
     }
 
     // Try to insert the item into the first available slot in the inventory.
-    public ItemStack PutInFirstAvailableSlot( ItemStack stack, bool simulate = false )
+    public ItemStack PutInFirstAvailableSlot( ItemStack stack, bool hotbarFirst = true, bool simulate = false )
     {
         if ( ItemStack.IsNullOrEmpty( stack ) )
         {
             return stack; // Nothing to insert
         }
 
-        for ( int i = 0; i < MaxSize; i++ )
+        if ( hotbarFirst )
         {
-            var result = PutInSlot( i, stack, simulate );
-            if ( ItemStack.IsNullOrEmpty( result ) || result == stack )
-            {
-                return result; // Successfully inserted or no change
-            }
-            stack = result; // Update stack to remaining items
+	        for ( int i = InventorySize; i < TotalSize; i++ )
+	        {
+		        var result = PutInSlot( i, stack, simulate );
+		        if ( ItemStack.IsNullOrEmpty( result ) )
+		        {
+			        return result; // Successfully inserted
+		        }
+		        stack = result; // Update stack to remaining items
+	        }
+        }
+        else
+        {
+	        for ( int i = 0; i < TotalSize; i++ )
+	        {
+		        var result = PutInSlot( i, stack, simulate );
+		        if ( ItemStack.IsNullOrEmpty( result ) )
+		        {
+			        return result; // Successfully inserted
+		        }
+		        stack = result; // Update stack to remaining items
+	        }
         }
 
         return stack; // If we reach here, the stack could not be fully inserted
@@ -92,7 +110,7 @@ public class Inventory
 
     public ItemStack TakeItem( int slot, int count )
     {
-        if ( slot < 0 || slot >= MaxSize )
+        if ( slot < 0 || slot >= TotalSize )
         {
             throw new ArgumentOutOfRangeException( nameof( slot ), "Slot index is out of range." );
         }
@@ -120,7 +138,7 @@ public class Inventory
     [ConCmd]
     public static void GiveItem( int itemID, int amount )
     {
-	    var player = VoxelPlayer.LocalPlayer();
+	    var player = VoxelPlayer.LocalPlayer;
         if ( !player.IsValid() )
         {
             Log.Warning( "Player not found" );

@@ -165,32 +165,6 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 				)) * World.BlockScale ); // Spawn the item at the center of the block
 		}
 
-		for ( int i = 0; i < 30; i++ )
-		{
-			var particlePos = (position + new Vector3(
-				Random.Shared.Float(),
-				Random.Shared.Float(),
-				Random.Shared.Float()
-			)) * World.BlockScale;
-			var particle = new GameObject().AddComponent<SimpleParticle>();
-			particle.WorldPosition = particlePos;
-			particle.Material = Material.Load( "materials/textureatlas.vmat" );
-			particle.TextureRect = new Rect( 0, 0, 1, 1 ); // Assuming a single texture for simplicity.
-														   // Velocity is distance to the center of the block, scaled by a random factor.
-			particle.Velocity = (particlePos - (position + Vector3.One * 0.5f) * World.BlockScale) * Random.Shared.Float( 2f, 7f );
-			particle.Acceleration = Vector3.Down * 9.81f * 85f; // Gravity effect.
-			particle.Damping = 0.99f; // Damping to slow down the particles.
-			particle.Lifetime = Random.Shared.Float( 0.5f, 1.5f ); // Random lifetime for the particles.
-			Vector2 texCoord = new Vector2( Random.Shared.Float() * 14 / 16f, Random.Shared.Float() * 14 / 16f );
-			particle.TextureRect = Rect.FromPoints( texCoord, texCoord + new Vector2( 2 / 16f, 2 / 16f ) );
-			particle.TextureID = block.TextureIndex;
-			particle.Scale = new Curve( new List<Curve.Frame>
-			{
-				new Curve.Frame(0f, 10f, -MathF.PI, MathF.PI),
-				new Curve.Frame(1f, 0f, 0f, 0f)
-			} );
-		}
-
 		// Remove the block at the specified position.
 		World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
 	}

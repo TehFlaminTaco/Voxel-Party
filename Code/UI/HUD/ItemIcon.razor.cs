@@ -2,7 +2,7 @@ using Sandbox.UI;
 
 public partial class ItemIcon : Panel
 {
-    public Inventory Inventory => Game.ActiveScene.GetAll<VoxelPlayer>().FirstOrDefault( c => !c.IsProxy ).inventory;
+    public Inventory Inventory => VoxelPlayer.LocalPlayer.inventory;
     public int Slot { get; set; } = -1;
 
     public Texture RenderTexture;
@@ -30,7 +30,6 @@ public partial class ItemIcon : Panel
 
             _so.RenderOverride = ( obj ) =>
             {
-                Log.Info( item );
                 item.Render( global::Transform.Zero.WithPosition( new Vector3( 0f, -5f, -2f ) ).WithRotation( Rotation.FromAxis( Vector3.Right, 35f ) * Rotation.FromAxis( Vector3.Up, 45 ) ) );
             };
 

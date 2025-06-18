@@ -1,4 +1,4 @@
-Hotbar {
+InventoryUI {
   position: absolute;
   color: white;
   font-family: "Courier Prime";
@@ -23,7 +23,7 @@ Hotbar {
     justify-content: space-evenly;
   }
   
-  .item-slot
+  .hotbar-slot
   {
     background-color: rgba(147, 147, 147, 0.8);
     width: auto;

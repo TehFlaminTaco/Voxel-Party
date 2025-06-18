@@ -4,29 +4,50 @@ public class VoxelPlayer : Component
 {
     World world => Scene.GetAll<WorldThinker>().First().World;
 
-    public Inventory inventory = new Inventory( 9 + (9 * 3) ); // 9 slots for the hotbar, and 27 slots for the inventory (3 rows of 9 slots each)
+    public Inventory inventory = new();
+    [Property, ReadOnly, Group("InventoryDebug")] public List<int> InventoryItems => inventory.Items.ConvertAll( item => item.Count );
 
     [Property] public bool CreativeMode { get; set; } = false;
     [Property] public bool GiveBrokenBlocks { get; set; } = false;
+    
+    [Property] public bool HasInventory { get; set; } = true;
+    [Property] public bool HasHotbar { get; set; } = true;
 
     [Property, Alias( "Reach Distance" ), Description( "In blocks, not inches" )]
     public float ReachDistanceProperty { get; set; } = 3.5f;
     public float ReachDistance => ReachDistanceProperty * World.BlockScale;
 
+    public static VoxelPlayer LocalPlayer { get; set; }
+    
+    public int BreakingProgress = 0;
+    public TimeSince BreakTime = 0;
+    public TimeSince TimeSinceLastBreak = 0;
+    public Vector3Int? BreakingBlock;
+    public Vector3Int? LastBreakingBlock;
+    public Direction BreakingFace = Direction.None;
+    public Direction LastBreakingFace = Direction.None;
+    SceneCustomObject blockBreakEffect;
+
     protected override void OnStart()
     {
+	    LocalPlayer = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Connection.Local );
+	    
         SpawnBlockBreakingEffect();
     }
 
-    protected override void OnUpdate()
+    protected override void OnFixedUpdate()
     {
         if ( IsProxy )
             return;
-
-        ShowHoveredFace();
+        
         HandleBreak();
         HandlePlace();
         HandleHotbar();
+    }
+
+    protected override void OnPreRender()
+    {
+	    ShowHoveredFace();
     }
 
     public BlockTraceResult EyeTrace()
@@ -37,11 +58,6 @@ public class VoxelPlayer : Component
             pc.EyePosition + pc.EyeAngles.Forward * ReachDistance
         ).Run();
     }
-
-    public float BreakTime = 0f;
-    public Vector3Int? BreakingBlock = null;
-    public Direction BreakingFace = Direction.None;
-    SceneCustomObject blockBreakEffect;
 
     public static int SelectedSlot = 0;
     public void SpawnBlockBreakingEffect()
@@ -78,63 +94,54 @@ public class VoxelPlayer : Component
     }
     public void HandleBreak()
     {
-	    Log.Info(inventory.Items.Count( x => x.Count > 0 ));
-	    if ( GiveBrokenBlocks && BreakingBlock.HasValue )
+	    var trace = EyeTrace();
+	    if ( CreativeMode && TimeSinceLastBreak.Relative < 0.2f )
 	    {
-		    inventory.PutInFirstAvailableSlot( new ItemStack(ItemRegistry.GetItem( BreakingBlock.Value )) );
+		    return;
 	    }
-	    
-        if ( CreativeMode )
-        {
-            BreakingBlock = null;
-            BreakTime = 0f;
-            if ( !Input.Pressed( "Attack1" ) )
-                return;
-            var tr = EyeTrace();
-            if ( !tr.Hit )
-                return;
+	    if ( !trace.Hit || !Input.Down( "Attack1" ) )
+	    {
+		    BreakingBlock = null;
+		    LastBreakingBlock = null;
+		    BreakingFace = Direction.None;
+		    LastBreakingFace = Direction.None;
+		    BreakTime = 0f;
+		    
+		    return;
+	    }
 
-            world.Thinker.BreakBlock( tr.HitBlockPosition, false );
-            return;
+	    BreakingBlock = trace.HitBlockPosition;
+	    //TODO: fix this shit
+	    // if ( LastBreakingBlock != BreakingBlock || LastBreakingFace != BreakingFace )
+	    // {
+		   //  BreakingBlock = null;
+		   //  BreakingFace = trace.HitFace;
+		   //  BreakTime = 0f;
+		   //  
+		   //  return;
+	    // }
+     
+        if ( !CreativeMode )
+        {
+	        blockBreakEffect.Transform = global::Transform.Zero.WithPosition( WorldPosition );
+	        var block = world.GetBlock( BreakingBlock.Value ).GetBlock();
+	        BreakingProgress = Math.Min( (int)(BreakTime * 20 / block.Hardness), 10 );
+        }
+        
+        if ( (BreakingProgress == 10 || CreativeMode) && BreakingBlock.HasValue )
+        {
+	        if ( !GiveBrokenBlocks ) world.Thinker.BreakBlock( BreakingBlock.Value );
+	        else
+	        {
+		        
+		        var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
+		        world.SetBlock( BreakingBlock.Value, new BlockData( 0 ) );
+	        }
         }
 
-        blockBreakEffect.Transform = global::Transform.Zero.WithPosition( WorldPosition );
-        BreakTime += Time.Delta;
-        if ( !Input.Down( "Attack1" ) )
-        {
-            BreakingBlock = null;
-            BreakTime = 0f;
-            return;
-        }
-
-        var trace = EyeTrace();
-        if ( !trace.Hit )
-        {
-            BreakingBlock = null;
-            BreakTime = 0f;
-            return;
-        }
-
-        if ( trace.HitBlockPosition != BreakingBlock )
-        {
-            BreakingBlock = trace.HitBlockPosition;
-            BreakTime = 0f; // Reset break time if we hit a new block
-            return;
-        }
-
-        if ( trace.HitFace != BreakingFace )
-        {
-            BreakingFace = trace.HitFace;
-            BreakTime = 0f; // Reset break time if we hit a different face
-            return;
-        }
-        var block = world.GetBlock( BreakingBlock.Value ).GetBlock();
-        int progress = Math.Min( (int)(BreakTime * 20 / block.Hardness), 10 );
-        if ( progress == 10 )
-            world.Thinker.BreakBlock( BreakingBlock.Value );
-
-        // Draw the breaking face
-
+        LastBreakingBlock = BreakingBlock;
+        LastBreakingFace = BreakingFace;
+        TimeSinceLastBreak = 0;
     }
 
     public void HandlePlace()
@@ -189,34 +196,13 @@ public class VoxelPlayer : Component
 
     public void HandleHotbar()
     {
-        for ( int i = 0; i < 9; i++ )
+        for ( int i = inventory.InventorySize; i < inventory.TotalSize; i++ )
         {
             if ( Input.Pressed( $"Slot{i + 1}" ) )
                 SelectedSlot = i;
         }
-        //TODO: I use my side mouse button for push to talk and it fucks this up, use scroll wheel
-        // if ( Input.Pressed( "NextSlot" ) )
-        // {
-        //     SelectedSlot++;
-        //     if ( SelectedSlot >= 9 )
-        //         SelectedSlot = 0;
-        // }
-        // if ( Input.Pressed( "LastSlot" ) )
-        // {
-        //     SelectedSlot--;
-        //     if ( SelectedSlot < 0 )
-        //         SelectedSlot = 8;
-        // }
-    }
 
-    public static VoxelPlayer LocalPlayer()
-    {
-	    var player = Game.ActiveScene?.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Connection.Local );
-	    if ( !player.IsValid() )
-	    {
-		    Log.Warning("No local player found");
-		    return null;
-	    }
-	    return Game.ActiveScene?.GetAllComponents<VoxelPlayer>().First( x => x.Network.Owner == Connection.Local );
+        SelectedSlot += Input.MouseWheel.y.FloorToInt().Clamp( -1, 1 );
+        SelectedSlot = SelectedSlot.Clamp( 0, inventory.HotbarSize - 1 );
     }
 }

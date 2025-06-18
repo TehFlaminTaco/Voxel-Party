@@ -119,7 +119,7 @@ public class WorldItem : Component, Component.ITriggerListener {
         }
 
         // If we're within 3 blocks of the center of a player, hover towards them
-        var player = VoxelPlayer.LocalPlayer();
+        var player = VoxelPlayer.LocalPlayer;
         if ( player.IsValid() ) {
             var playerPos = player.GameObject.GetBounds().Center;
             var direction = (playerPos - WorldPosition).Normal;

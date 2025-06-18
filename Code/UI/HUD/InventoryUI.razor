@@ -1,0 +1,43 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+	<div class="container">
+		@if ( Player.HasHotbar )
+		{
+			@for ( var i = _inventory.InventorySize; i < _inventory.TotalSize; i++ )
+			{
+				<div class="hotbar-slot @(VoxelPlayer.SelectedSlot == i ? "selected" : "")">
+					<ItemIcon Slot=@(i)></ItemIcon>
+				</div>
+			}
+		}
+		@if ( Player.HasInventory && ShowInventory )
+		{
+			@for ( var i = 0; i < _inventory.InventorySize; i++ )
+			{
+				<div class="inventory-slot">
+					<ItemIcon Slot=@(i)></ItemIcon>
+				</div>
+			}
+		}
+	</div>
+</root>
+
+@code
+{
+	PlayerController Controller => Player.GetComponent<PlayerController>();
+	VoxelPlayer Player => VoxelPlayer.LocalPlayer;
+	Inventory _inventory => Player.inventory;
+
+	public bool ShowInventory;
+
+	protected override void OnFixedUpdate()
+	{
+		if ( Input.Pressed("score") ) ShowInventory = !ShowInventory;
+	}
+
+	protected override int BuildHash() => HashCode.Combine($"{VoxelPlayer.SelectedSlot}");
+}
