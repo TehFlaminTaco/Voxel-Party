@@ -21,7 +21,7 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 			return;
 		}
 
-		if ( !Game.IsEditor )
+		if ( Game.IsPlaying )
 		{
 			Log.Error( "Stamping structures is only supported in the editor." );
 			return;
@@ -40,9 +40,10 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 		{
 			child.Destroy();
 		}
-		if ( !Game.IsEditor )
+		if ( Game.IsPlaying )
 		{
 			World.Active.LoadStructure( Helpers.WorldToVoxel( WorldPosition ), LoadedStructure.StructureData );
+			GameObject.Destroy();
 			return;
 		}
 
@@ -78,7 +79,6 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 			tempThinker.Destroy(); // Clean up the temporary thinker.
 			World.Active = oldWorld; // Restore the active world after loading.
 		}
-		if ( Game.IsEditor ) return;
 	}
 
 	protected override void OnEnabled()
@@ -95,7 +95,7 @@ public class StructureLoader : Component, Component.ExecuteInEditor
 	protected override void OnDisabled()
 	{
 		base.OnDisabled();
-		if ( !Game.IsEditor ) return;
+		if ( Game.IsPlaying ) return;
 		foreach ( var child in GameObject.Children.ToList() )
 		{
 			child.Destroy();
