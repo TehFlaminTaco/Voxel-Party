@@ -178,6 +178,13 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			transparentModel.AddTraceMesh( TransparentVerts, Enumerable.Range( 0, TransparentVerts.Count ).ToList() );
 			mr.Model = transparentModel.Create();
 		}
+		else
+		{
+			if ( TransparentRenderer != null && TransparentRenderer.IsValid() )
+			{
+				TransparentRenderer.Destroy();
+			}
+		}
 
 		var collider = GetOrAddComponent<ModelCollider>();
 		collider.Model = collisionModel.Create();
