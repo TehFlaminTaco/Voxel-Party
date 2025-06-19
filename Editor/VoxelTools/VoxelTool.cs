@@ -6,7 +6,7 @@ public abstract class VoxelTool
 {
     public abstract string Icon { get; }
     public abstract string Name { get; }
-    public virtual KeyCode? Shortcut => null; // Optional shortcut key for the tool
+    public virtual string Shortcut => null; // Optional shortcut key for the tool
     public int ToolID { get; set; } // Unique ID for the tool, used for selection
 
     public virtual void OnSelected() // Called when the tool is selected
@@ -33,7 +33,6 @@ public abstract class VoxelTool
 
     public virtual void MakeOptions( Layout parent )
     {
-        Log.Info( $"No options defined for tool {Name} ({ToolID})" );
         foreach ( var prop in this.GetType().GetProperties().Where( p => p.GetCustomAttribute<ToolPropertyAttribute>() != null ) )
         {
             var attr = prop.GetCustomAttribute<ToolPropertyAttribute>();
@@ -45,7 +44,6 @@ public abstract class VoxelTool
 
             if ( prop.PropertyType == typeof( bool ) )
             {
-                Log.Info( $"Creating checkbox for property {prop.Name} of type {prop.PropertyType}" );
                 var toggle = new Checkbox( GetCleanName( prop.Name ) );
                 toggle.Watch( () => (bool)prop.GetValue( this ), b => toggle.Value = b );
                 toggle.Value = (bool)prop.GetValue( this );
@@ -109,6 +107,21 @@ public abstract class VoxelTool
                 positions.Select( pos => (pos + Vector3Int.One) * World.BlockScale )
             ).Select( pos => (Vector3)pos )
         );
+    }
+
+    public bool IsKeyDown( string identifier )
+    {
+        return EditorShortcuts.IsDown( identifier );
+    }
+
+    public bool WasKeyPressed( string identifier )
+    {
+        return EditorShortcuts.IsDown( identifier ) && !VoxelBuilder.WasKeyDown.GetValueOrDefault( identifier, false );
+    }
+
+    public bool WasKeyReleased( string identifier )
+    {
+        return !EditorShortcuts.IsDown( identifier ) && VoxelBuilder.WasKeyDown.GetValueOrDefault( identifier, false );
     }
 
 }

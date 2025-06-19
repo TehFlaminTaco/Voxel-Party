@@ -4,7 +4,7 @@ public class PlaceBlockTool : VoxelTool
 {
     public override string Icon => "view_in_ar";
     public override string Name => "Place Block";
-    public override KeyCode? Shortcut => KeyCode.N;
+    public override string Shortcut => "PlaceBlock";
 
     public override void DrawGizmos( Vector3Int blockPosition, Direction faceDirection )
     {

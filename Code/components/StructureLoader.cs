@@ -2,34 +2,39 @@
 
 namespace Sandbox;
 
-public class StructureLoader : Component, Component.ExecuteInEditor
+public partial class StructureLoader : Component, Component.ExecuteInEditor
 {
 	[Property, Alias( "Structure" )] public Structure LoadedStructure { get; set; }
 	public BlockData BlockData { get; set; }
 
+	public Vector3Int StructureSize => LoadedStructure?.StructureData != null
+		? World.Active.GetStructureBounds( LoadedStructure.StructureData )
+		: Vector3Int.Zero;
+
 	[Button]
-	public void StampStructure()
+	public (BlockData[,,] data, Vector3Int pos) StampStructure()
 	{
 		if ( LoadedStructure == null )
 		{
 			Log.Warning( "No structure loaded to stamp." );
-			return;
+			return (null, Vector3Int.Zero);
 		}
 		if ( !LoadedStructure.IsValid() )
 		{
 			Log.Warning( "Loaded structure is not valid." );
-			return;
+			return (null, Vector3Int.Zero);
 		}
 
 		if ( Game.IsPlaying )
 		{
 			Log.Error( "Stamping structures is only supported in the editor." );
-			return;
+			return (null, Vector3Int.Zero);
 		}
-
 		var worldPosition = Helpers.WorldToVoxel( WorldPosition );
+		var oldBlocks = BlockData.GetAreaInBox( worldPosition, World.Active.GetStructureBounds( LoadedStructure.StructureData ) );
 		World.Active.LoadStructure( worldPosition, LoadedStructure.StructureData );
 		GameObject.Destroy();
+		return (oldBlocks, worldPosition);
 	}
 
 	[Button]

@@ -2,7 +2,7 @@ public class DeleteBlockTool : VoxelTool
 {
     public override string Icon => "delete";
     public override string Name => "Delete Block";
-    public override KeyCode? Shortcut => KeyCode.E;
+    public override string Shortcut => "RemoveBlock";
 
     public override void DrawGizmos( Vector3Int blockPosition, Direction faceDirection )
     {
