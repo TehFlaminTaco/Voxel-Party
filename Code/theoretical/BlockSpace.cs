@@ -226,10 +226,10 @@ public class BlockSpace
 		int xMin = Math.Min( start.x, end.x );
 		int xMax = Math.Max( start.x, end.x );
 		int yMin = Math.Min( start.y, end.y );
-
 		int yMax = Math.Max( start.y, end.y );
 		int zMin = Math.Min( start.z, end.z );
 		int zMax = Math.Max( start.z, end.z );
+
 
 		List<byte> data = new();
 		// Add the size of the region to the data.
@@ -265,6 +265,40 @@ public class BlockSpace
 		int ySize = BitConverter.ToInt32( bytes, 4 );
 		int zSize = BitConverter.ToInt32( bytes, 8 );
 		return new Vector3Int( xSize, ySize, zSize );
+	}
+
+	public BlockData[,,] GetStructureData( string structureData )
+	{
+		var bytes = Convert.FromBase64String( structureData );
+		if ( bytes.Length < 12 )
+		{
+			return null;
+		}
+		int xSize = BitConverter.ToInt32( bytes, 0 );
+		int ySize = BitConverter.ToInt32( bytes, 4 );
+		int zSize = BitConverter.ToInt32( bytes, 8 );
+		var blockData = bytes.Skip( 12 ).RunLengthDecodeBy( 2 ).ToList();
+		if ( blockData.Count != xSize * ySize * zSize * 2 )
+		{
+			return null;
+		}
+
+		BlockData[,,] structure = new BlockData[xSize, ySize, zSize];
+
+		for ( int z = 0; z < zSize; z++ )
+		{
+			for ( int y = 0; y < ySize; y++ )
+			{
+				for ( int x = 0; x < xSize; x++ )
+				{
+					int index = (z * ySize * xSize + y * xSize + x) * 2;
+					byte blockID = blockData[index];
+					byte blockDataValue = blockData[index + 1];
+					structure[x, y, z] = new BlockData( blockID, blockDataValue );
+				}
+			}
+		}
+		return structure;
 	}
 
 	public BlockData[,,] LoadStructure( Vector3Int location, string structureData )

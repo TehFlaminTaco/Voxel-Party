@@ -22,13 +22,36 @@ public partial class VoxelBuilder : EditorTool
 	}
 
 	const float MAX_DISTANCE = 8096;
-	static public int SelectedItemID { get; set; } = 0; // Default to Grass block
-	static public int SelectedToolID { get; set; } = 0; // Default to Place Block tool
+	static public int SelectedItemID { get; private set; } = 0; // Default to Grass block
+																// static public int SelectedToolID { get; set; } = 0; // Default to Place Block tool
+	static VoxelTool SelectedTool = null;
 
-	public VoxelTool[] Tools = [
+	public static void SelectItem( int item )
+	{
+		if ( itemButtons.ContainsKey( item ) )
+		{
+			if ( itemButtons.ContainsKey( SelectedItemID ) )
+			{
+				itemButtons[SelectedItemID].Tint = Color.White.WithAlpha( 0f );
+			}
+			SelectedItemID = item;
+			itemButtons[item].Tint = Color.White.WithAlpha( 0.2f );
+		}
+	}
+
+	public static void SelectTool( VoxelTool tool )
+	{
+		SelectedTool?.OnDeselected(); // Deselect the last tool
+		SelectedTool = tool; // Set the new tool as selected
+		SelectedTool.OnSelected(); // Select the new tool
+	}
+
+	public VoxelTool[] VoxelTools = [
 		new PlaceBlockTool(),
 		new DeleteBlockTool(),
-		new SquarePlaceTool()
+		new SquarePlaceTool(),
+		new SelectTool(),
+		new EyeDropper(),
 	];
 
 	private static List<Watcher> watchers = new List<Watcher>(); // I hate that this is object instead of Watcher, but C# hates me too.
@@ -40,7 +63,7 @@ public partial class VoxelBuilder : EditorTool
 		watchers.Add( watcher ); // Cast to object to store in the list.
 	}
 
-	Dictionary<int, ImageButton> itemButtons = new Dictionary<int, ImageButton>();
+	static Dictionary<int, ImageButton> itemButtons = new Dictionary<int, ImageButton>();
 	public static WidgetWindow ToolOptionsWindow;
 	public override void OnEnabled()
 	{
@@ -54,6 +77,11 @@ public partial class VoxelBuilder : EditorTool
 		palleteWindow.Layout.Add( gridLayout );
 		gridLayout.Margin = 16;
 		palleteWindow.WindowTitle = "Voxel Pallete";
+
+		if ( SelectedTool == null || !VoxelTools.Contains( SelectedTool ) )
+		{
+			SelectedTool = VoxelTools[0]; // Default to the first tool if the current one is bad
+		}
 
 		int i = 0;
 		foreach ( var item in ResourceLibrary.GetAll<Item>().OrderBy( c => c.ID ) )
@@ -100,20 +128,18 @@ public partial class VoxelBuilder : EditorTool
 		toolWindow.Layout.Margin = 16;
 
 		var toolBin = new ToolbarGroup( toolWindow, "Tools", null );
-		for ( i = 0; i < Tools.Length; i++ )
+		for ( i = 0; i < VoxelTools.Length; i++ )
 		{
 			int _i = i;
-			var tool = Tools[i];
+			var tool = VoxelTools[i];
 			tool.ToolID = i; // Assign the tool ID
-			toolBin.AddButton( tool.Name, tool.Icon, () =>
+			var name = (tool.Shortcut != null) ? $"{tool.Name} ({EditorShortcuts.GetKeys( tool.Shortcut )})" : tool.Name;
+			toolBin.AddButton( name, tool.Icon, () =>
 			{
-				if ( Tools.Length > SelectedToolID ) // If the old tool exists, deselect it
-				{
-					Tools[SelectedToolID].OnDeselected();
-				}
-				SelectedToolID = _i;
-				Tools[_i].OnSelected(); // Select the new tool
-			}, () => SelectedToolID == _i );
+				SelectedTool?.OnDeselected(); // Deselect the last tool
+				SelectedTool = tool; // Set the new tool as selected
+				SelectedTool.OnSelected(); // Select the new tool
+			}, () => SelectedTool == tool );
 		}
 
 		toolWindow.Layout.Add( toolBin );
@@ -162,7 +188,25 @@ public partial class VoxelBuilder : EditorTool
 		return tex;
 	}
 
-	private static Dictionary<KeyCode, bool> WasKeyDown = new Dictionary<KeyCode, bool>();
+	public static (Vector3Int pos, Direction face) BlockTrace()
+	{
+		var trace = World.Active
+			.Trace( Gizmo.CurrentRay.Position, Gizmo.CurrentRay.Position + Gizmo.CurrentRay.Forward * MAX_DISTANCE )
+			.Run();
+		var hitPos = trace.HitBlockPosition;
+		var hitDirection = trace.HitFace;
+		if ( !trace.Hit )
+		{
+			var planeTrace = new Plane( Vector3.Zero, Vector3.Up ).Trace( Gizmo.CurrentRay, true, MAX_DISTANCE );
+			if ( planeTrace == null ) return (Vector3Int.Zero, Direction.None); // No hit, return default values
+
+			hitPos = Helpers.WorldToVoxel( planeTrace.Value ) - Vector3Int.Up;
+			hitDirection = Direction.Up;
+		}
+		return (hitPos, hitDirection);
+	}
+
+	public static Dictionary<string, bool> WasKeyDown = new Dictionary<string, bool>();
 	private static VoxelTool LastTool = null;
 	private static TimeSince holdStart = 0f;
 	public override void OnUpdate()
@@ -182,24 +226,20 @@ public partial class VoxelBuilder : EditorTool
 			}
 		}
 
-		foreach ( var t in Tools.Where( t => t.Shortcut.HasValue ) )
+		foreach ( var t in VoxelTools.Where( t => t.Shortcut != null ) )
 		{
-			if ( Editor.Application.IsKeyDown( t.Shortcut.Value ) )
+			if ( EditorShortcuts.IsDown( t.Shortcut ) )
 			{
-				if ( !WasKeyDown.GetValueOrDefault( t.Shortcut.Value, false ) )
+				if ( !WasKeyDown.GetValueOrDefault( t.Shortcut, false ) )
 				{
 					holdStart = 0f;
-					if ( Tools.Length > SelectedToolID )
-						LastTool = Tools[SelectedToolID];
+					LastTool = SelectedTool;
 				}
-				if ( SelectedToolID != t.ToolID )
+				if ( SelectedTool != t )
 				{
 					// Deselect the previous tool
-					if ( Tools.Length > SelectedToolID )
-					{
-						Tools[SelectedToolID].OnDeselected();
-					}
-					SelectedToolID = t.ToolID;
+					SelectedTool?.OnDeselected();
+					SelectedTool = t;
 					// Select the new tool
 					t.OnSelected();
 				}
@@ -207,40 +247,24 @@ public partial class VoxelBuilder : EditorTool
 		}
 
 
-		var tool = SelectedToolID < Tools.Length ? Tools[SelectedToolID] : null;
+		var tool = SelectedTool;
 		if ( tool == null )
 			return; // IMPOSSIBLE?
 
-		if ( tool.Shortcut.HasValue && !Editor.Application.IsKeyDown( tool.Shortcut.Value ) )
+
+		if ( tool.Shortcut != null && !EditorShortcuts.IsDown( tool.Shortcut ) )
 		{
 			if ( LastTool != null && holdStart > 0.3f ) // If we're holding it down instead of pressing it, return to the LastTool on release.
 			{
 				tool.OnDeselected();
-				SelectedToolID = LastTool?.ToolID ?? 0; // Fallback to the first tool if LastTool is null
+				SelectedTool = LastTool; // Fallback to the first tool if LastTool is null
 				LastTool.OnSelected();
 				tool = LastTool;
 			}
 			LastTool = null;
 		}
 
-		foreach ( var t in Tools.Where( t => t.Shortcut.HasValue ) )
-		{
-			WasKeyDown[t.Shortcut.Value] = Editor.Application.IsKeyDown( t.Shortcut.Value );
-		}
-
-		var trace = World.Active
-			.Trace( Gizmo.CurrentRay.Position, Gizmo.CurrentRay.Position + Gizmo.CurrentRay.Forward * MAX_DISTANCE )
-			.Run();
-		var hitPos = trace.HitBlockPosition;
-		var hitDirection = trace.HitFace;
-		if ( !trace.Hit )
-		{
-			var planeTrace = new Plane( Vector3.Zero, Vector3.Up ).Trace( Gizmo.CurrentRay, true, MAX_DISTANCE );
-			if ( planeTrace == null ) return;
-
-			hitPos = Helpers.WorldToVoxel( planeTrace.Value );
-			hitDirection = Direction.Up;
-		}
+		(Vector3Int hitPos, Direction hitDirection) = BlockTrace();
 		using ( Gizmo.Scope( "ToolGizmos" ) )
 			tool.DrawGizmos( hitPos, hitDirection );
 		if ( Gizmo.WasLeftMousePressed )
@@ -254,6 +278,11 @@ public partial class VoxelBuilder : EditorTool
 		else if ( Gizmo.WasLeftMouseReleased )
 		{
 			tool.LeftMouseUp( hitPos, hitDirection );
+		}
+
+		foreach ( var shortcut in EditorShortcuts.Entries )
+		{
+			WasKeyDown[shortcut.Identifier] = EditorShortcuts.IsDown( shortcut.Identifier );
 		}
 	}
 }

@@ -1,26 +1,27 @@
 public class SquarePlaceTool : VoxelTool
 {
-    public override string Icon => "crop_free";
+    public override string Icon => "check_box_outline_blank";
 
     public override string Name => "Square Place Tool";
-    public override KeyCode? Shortcut => KeyCode.M;
+    public override string Shortcut => "SquareTool";
 
     private Vector3Int? FirstPosition = null;
     private Direction? BlockAxis = null;
     public bool FlipDraw = false;
 
     [ToolProperty] public bool ReplaceExistingBlocks { get; set; } = true; // Whether to replace existing blocks or not
-    private bool _insetIntoBlock = false;
+    private bool _insetIntoBlock
+    = false;
     [ToolProperty]
     public bool InsetIntoBlock
     {
         get
         {
-            return _insetIntoBlock ^ Editor.Application.IsKeyDown( KeyCode.Control );
+            return _insetIntoBlock ^ EditorShortcuts.IsDown( "CtrlModifier" );
         }
         set
         {
-            _insetIntoBlock = value ^ Editor.Application.IsKeyDown( KeyCode.Control );
+            _insetIntoBlock = value ^ EditorShortcuts.IsDown( "CtrlModifier" );
         }
     }
 
@@ -60,7 +61,7 @@ public class SquarePlaceTool : VoxelTool
         if ( traceAxis.z < 0 ) traceAxis.z = 0;
         var trace = new Plane( (FirstPosition.Value + traceAxis) * World.BlockScale, BlockAxis.Value.Forward() ).Trace( Gizmo.CurrentRay, true );
         if ( !trace.HasValue ) { return FirstPosition.Value; } // Impossible?
-        var hitPos = Helpers.WorldToVoxel( trace.Value ) - traceAxis + Vector3Int.Up;
+        var hitPos = Helpers.WorldToVoxel( trace.Value ) - traceAxis;
         // Garuntee the hitPos is on the same plane as the first position
         switch ( BlockAxis.Value )
         {

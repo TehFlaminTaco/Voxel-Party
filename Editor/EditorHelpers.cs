@@ -20,4 +20,10 @@ public static class EditorHelpers
         watcher.LastHash = watcher.BuildHash( watcher.GetValue() );
         VoxelBuilder.RegisterWatcher( watcher );
     }
+
+    public static void QuickAddUndo( this SceneEditorSession editor, string name, Action undo, Action redo )
+    {
+        editor.AddUndo( name, undo, redo );
+        redo.Invoke(); // Immediately apply the redo action to the scene.
+    }
 }

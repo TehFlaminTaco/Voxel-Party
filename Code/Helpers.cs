@@ -221,6 +221,6 @@ public static class Helpers
 
 	public static Vector3Int WorldToVoxel( Vector3 position )
 	{
-		return (position / World.BlockScale).Floor() - Vector3Int.Up;
+		return (position / World.BlockScale).Floor();
 	}
 }
