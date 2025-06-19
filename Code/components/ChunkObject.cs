@@ -188,6 +188,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 
 		var collider = GetOrAddComponent<ModelCollider>();
 		collider.Model = collisionModel.Create();
+		collider.Static = true; // Set the collider to static since chunks do not move
 		collider.Enabled = true; // Enable the collider for the chunk object
 
 	}

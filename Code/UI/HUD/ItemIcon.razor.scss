@@ -9,11 +9,12 @@ ItemIcon {
         padding-left: 50px;
         padding-top: 30px;
         font-size: 40px;
+        text-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+        
     }
     
     .slot-number {
         padding-left: 4px;
         position: absolute;
-        font-size: 60px
     }
-}
+ }

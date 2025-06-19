@@ -1,7 +1,8 @@
 using Sandbox;
 
 // X+ is North, X- is South, Y+ is Right, Y- is Left, Z+ is Up, Z- is Down
-public enum Direction {
+public enum Direction
+{
 	None,
 	North,
 	South,
@@ -15,7 +16,8 @@ public enum Direction {
 	Right = East // Alias for East
 }
 
-public static class Directions {
+public static class Directions
+{
 	public static List<Direction> All { get; } = new List<Direction> {
 		Direction.North,
 		Direction.South,
@@ -25,8 +27,10 @@ public static class Directions {
 		Direction.Down
 	};
 
-	public static Vector3Int Forward( this Direction direction ) {
-		return direction switch {
+	public static Vector3Int Forward( this Direction direction )
+	{
+		return direction switch
+		{
 			Direction.None => new Vector3Int( 0, 0, 0 ),
 			Direction.North => new Vector3Int( 1, 0, 0 ),
 			Direction.South => new Vector3Int( -1, 0, 0 ),
@@ -39,8 +43,10 @@ public static class Directions {
 	}
 
 	// Up relative to the face. This is z+ for NSEW, and x+ for Up/Down.
-	public static Vector3Int Up( this Direction direction ) {
-		return direction switch {
+	public static Vector3Int Up( this Direction direction )
+	{
+		return direction switch
+		{
 			Direction.None => new Vector3Int( 0, 0, 0 ),
 			Direction.North => new Vector3Int( 0, 0, 1 ),
 			Direction.South => new Vector3Int( 0, 0, 1 ),
@@ -53,8 +59,10 @@ public static class Directions {
 	}
 
 	// Right relative to the face. This is one counter-clockwise turn from Forward for NSEW, Y+ for Up, and Y- for Down.
-	public static Vector3Int Right( this Direction direction ) {
-		return direction switch {
+	public static Vector3Int Right( this Direction direction )
+	{
+		return direction switch
+		{
 			Direction.None => new Vector3Int( 0, 0, 0 ),
 			Direction.North => new Vector3Int( 0, 1, 0 ),
 			Direction.South => new Vector3Int( 0, -1, 0 ),
@@ -66,8 +74,10 @@ public static class Directions {
 		};
 	}
 
-	public static Direction Flip( this Direction direction ) {
-		return direction switch {
+	public static Direction Flip( this Direction direction )
+	{
+		return direction switch
+		{
 			Direction.None => Direction.None,
 			Direction.North => Direction.South,
 			Direction.South => Direction.North,
@@ -77,5 +87,29 @@ public static class Directions {
 			Direction.Down => Direction.Up,
 			_ => throw new System.ArgumentOutOfRangeException( nameof( direction ), direction, null )
 		};
+	}
+
+	public static Direction FromVector( Vector3 vector )
+	{
+		// Get the direction this vector is most like.
+		var absX = System.Math.Abs( vector.x );
+		var absY = System.Math.Abs( vector.y );
+		var absZ = System.Math.Abs( vector.z );
+		if ( absX == 0 && absY == 0 && absZ == 0 )
+		{
+			return Direction.None; // No direction if the vector is zero
+		}
+		if ( absX >= absY && absX >= absZ )
+		{
+			return vector.x > 0 ? Direction.North : Direction.South;
+		}
+		else if ( absY >= absX && absY >= absZ )
+		{
+			return vector.y > 0 ? Direction.East : Direction.West;
+		}
+		else
+		{
+			return vector.z > 0 ? Direction.Up : Direction.Down;
+		}
 	}
 }
