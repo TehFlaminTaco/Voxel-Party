@@ -40,7 +40,7 @@ public partial class ItemIcon : Panel
 
             var camera = new GameObject().AddComponent<CameraComponent>();
             camera.Orthographic = true;
-            camera.OrthographicHeight = 200f;
+            camera.OrthographicHeight = (Screen.Height / 1080f) * 240f;
             camera.WorldPosition = new Vector3( -50, 0, 0 );
             camera.WorldRotation = Rotation.From( 0, 0, 0 );
             camera.BackgroundColor = Color.Transparent;
@@ -54,7 +54,7 @@ public partial class ItemIcon : Panel
     ItemStack lastKnownStack = ItemStack.Empty;
     public override void Tick()
     {
-	    ItemStack = Inventory.GetItem( Slot );
+        ItemStack = Inventory.GetItem( Slot );
         if ( RenderTexture == null || ItemStack.Count != lastKnownStack?.Count || ItemStack.ItemID != lastKnownStack?.ItemID )
         {
             lastKnownStack = ItemStack;

@@ -5,27 +5,27 @@
 @implements Component.INetworkListener
 
 <root>
-	<div class="output">
-		@foreach (var entry in Entries)
-		{
-			<div class="chat_entry">
-				<div class="avatar"></div>
-				<div class="author">@entry.author</div>
-				<div class="message">@entry.message</div>
-			</div>
-		}
-	</div>
+    <div class="output">
+        @foreach (var entry in Entries)
+        {
+            <div class="chat_entry">
+                <div class="avatar"></div>
+                <div class="author">@entry.author</div>
+                <div class="message">@entry.message</div>
+            </div>
+        }
+    </div>
 
-	<div class="input">
-		<TextEntry @ref="InputBox" onsubmit="@ChatFinished"></TextEntry>
-	</div>
+    <div class="input">
+        <TextEntry @ref="InputBox" onsubmit="@ChatFinished"></TextEntry>
+    </div>
 </root>
 
 @code
 {
     TextEntry InputBox;
 
-    public record Entry( ulong steamid, string author, string message, RealTimeSince timeSinceAdded );
+    public record Entry(ulong steamid, string author, string message, RealTimeSince timeSinceAdded);
     List<Entry> Entries = new();
 
     protected override void OnUpdate()
@@ -35,17 +35,17 @@
 
         Panel.AcceptsFocus = false;
 
-        if ( Input.Pressed( "chat" ) )
+        if (Input.Pressed("chat"))
         {
             InputBox.Focus();
         }
-        
-        if ( Entries.RemoveAll( x => x.timeSinceAdded > 20.0f ) > 0 )
+
+        if (Entries.RemoveAll(x => x.timeSinceAdded > 20.0f) > 0)
         {
             StateHasChanged();
         }
 
-        SetClass( "open", InputBox.HasFocus );
+        SetClass("open", InputBox.HasFocus);
     }
 
     void ChatFinished()
@@ -56,13 +56,13 @@
         if (string.IsNullOrWhiteSpace(text))
             return;
 
-        AddText( text );
+        AddText(text);
     }
 
     [Rpc.Broadcast]
-    public void AddText( string message )
+    public void AddText(string message)
     {
-        message = message.Truncate( 300 );
+        message = message.Truncate(300);
 
         if (string.IsNullOrWhiteSpace(message))
             return;
@@ -70,16 +70,16 @@
         var author = Rpc.Caller.DisplayName;
         var steamid = Rpc.Caller.SteamId;
 
-		Log.Info($"{author}: {message}");
+        Log.Info($"{author}: {message}");
 
         Entries.Add(new Entry(steamid, author, message, 0.0f));
-		StateHasChanged();
-	}
+        StateHasChanged();
+    }
 
     [Rpc.Broadcast]
     public void AddSystemText(string message)
     {
-	    if ( !Networking.IsHost ) return;
+        if (!Networking.IsHost) return;
         message = message.Truncate(300);
 
         if (string.IsNullOrWhiteSpace(message))
@@ -89,17 +89,17 @@
         StateHasChanged();
     }
 
-	void INetworkListener.OnConnected( Connection channel )
-	{
-		if ( IsProxy ) return;
+    void INetworkListener.OnConnected(Connection channel)
+    {
+        if (IsProxy) return;
 
-		AddSystemText( $"{channel.DisplayName} has joined the game" );
-	}
+        AddSystemText($"{channel.DisplayName} has joined the game");
+    }
 
-	void INetworkListener.OnDisconnected( Connection channel )
-	{
-		if ( IsProxy ) return;
+    void INetworkListener.OnDisconnected(Connection channel)
+    {
+        if (IsProxy) return;
 
-		AddSystemText( $"{channel.DisplayName} has left the game" );
-	}
+        AddSystemText($"{channel.DisplayName} has left the game");
+    }
 }
