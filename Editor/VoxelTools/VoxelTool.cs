@@ -33,6 +33,7 @@ public abstract class VoxelTool
 
     public virtual void MakeOptions( Layout parent )
     {
+
         foreach ( var prop in this.GetType().GetProperties().Where( p => p.GetCustomAttribute<ToolPropertyAttribute>() != null ) )
         {
             var attr = prop.GetCustomAttribute<ToolPropertyAttribute>();
@@ -57,6 +58,16 @@ public abstract class VoxelTool
             {
                 Log.Warning( $"Property {prop.Name} of type {prop.PropertyType} is not supported for tool options." );
             }
+        }
+
+        foreach ( var button in this.GetType().GetMethods().Where( c => c.GetCustomAttribute<VoxelToolButtonAttribute>() != null ) )
+        {
+            var buttonWidget = new Button( GetCleanName( button.Name ) );
+            buttonWidget.Clicked = () =>
+            {
+                button.Invoke( this, [] ); // Invoke the method with no parameters
+            };
+            parent.Add( buttonWidget );
         }
     }
 

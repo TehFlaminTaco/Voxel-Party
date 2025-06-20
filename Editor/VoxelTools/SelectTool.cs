@@ -1,4 +1,5 @@
 
+using System;
 using Sandbox.theoretical;
 using Sandbox.Utility;
 
@@ -23,7 +24,6 @@ public class SelectTool : VoxelTool
         {
             PasteRegion();
         }
-
         Gizmo.Draw.IgnoreDepth = true;
         if ( FirstPosition.HasValue && SecondPosition.HasValue )
         {
@@ -37,6 +37,8 @@ public class SelectTool : VoxelTool
                 ClearRegion( first, second );
             else if ( WasKeyPressed( "editor.duplicate" ) )
                 DuplicateRegion();
+            else if ( WasKeyPressed( "mesh.vertex-weld-uvs" ) )
+                MoveRegion();
 
             if ( Gizmo.Control.BoundingBox( "SelectBox", selectBox, out BBox oBox ) )
             {
@@ -172,6 +174,16 @@ public class SelectTool : VoxelTool
         VoxelBuilder.SelectTool( new PasteStructureTool( str, this, first ) );
     }
 
+    public void MoveRegion()
+    {
+        NormalizePositions();
+        var first = FirstPosition.Value;
+        var second = SecondPosition.Value;
+        var str = World.Active.SerializeRegion( first, second );
+        ClearRegion( first, second );
+        VoxelBuilder.SelectTool( new PasteStructureTool( str, this, first ) );
+    }
+
     public void ClearRegion( Vector3Int first, Vector3Int second )
     {
         NormalizePositions();
@@ -204,4 +216,108 @@ public class SelectTool : VoxelTool
             }
         } );
     }
+
+    public override void MakeOptions( Layout parent )
+    {
+        var instructions = new Label( $"Select a region by clicking and dragging the mouse.\n\nUse the following keys for actions:\n{EditorShortcuts.GetDisplayKeys( "editor.cut" )}:\tCut\n{EditorShortcuts.GetDisplayKeys( "editor.copy" )}:\tCopy\n{EditorShortcuts.GetDisplayKeys( "editor.paste" )}:\tPaste\n{EditorShortcuts.GetDisplayKeys( "editor.delete" )}:\tClear\n{EditorShortcuts.GetDisplayKeys( "editor.duplicate" )}:\tDuplicate\n{EditorShortcuts.GetDisplayKeys( "mesh.vertex-weld-uvs" )}:\tMove Region\n" );
+        parent.Add( instructions );
+        base.MakeOptions( parent );
+    }
+
+    private void TransformRegion( Func<Vector3Int, Vector3Int, Vector3Int> transformFunc, bool needsBox = false )
+    {
+        if ( !FirstPosition.HasValue || !SecondPosition.HasValue )
+        {
+            Log.Warning( "No selection made to transform." );
+            return;
+        }
+
+        NormalizePositions();
+
+        var first = FirstPosition.Value;
+        var second = SecondPosition.Value;
+
+        if ( needsBox )
+        {
+            var maxAxis = (second - first).Components().Max();
+            SecondPosition = second = first + new Vector3Int( maxAxis, maxAxis, maxAxis );
+        }
+
+        var size = second - first + Vector3Int.One;
+        var blocks = BlockData.GetAreaInBox( first, size );
+        SceneEditorSession.Active.QuickAddUndo( "Transform Region", () =>
+        {
+            for ( int x = 0; x < size.x; x++ )
+            {
+                for ( int y = 0; y < size.y; y++ )
+                {
+                    for ( int z = 0; z < size.z; z++ )
+                    {
+                        var pos = new Vector3Int( first.x + x, first.y + y, first.z + z );
+                        World.Active.SetBlock( pos, blocks[size.x - 1 - x, y, z] );
+                    }
+                }
+            }
+        }, () =>
+        {
+            for ( int x = 0; x < size.x; x++ )
+            {
+                for ( int y = 0; y < size.y; y++ )
+                {
+                    for ( int z = 0; z < size.z; z++ )
+                    {
+                        var pos = new Vector3Int( first.x + x, first.y + y, first.z + z );
+                        var newPos = transformFunc( new Vector3Int( x, y, z ), size );
+                        var newX = newPos.x;
+                        var newY = newPos.y;
+                        var newZ = newPos.z;
+                        World.Active.SetBlock( pos, blocks[newX, newY, newZ] );
+                    }
+                }
+            }
+        } );
+    }
+
+    [VoxelToolButton]
+    public void FlipX()
+    {
+        // Flip the structure along the X axis
+        TransformRegion( ( pos, size ) => new Vector3Int( size.x - 1 - pos.x, pos.y, pos.z ) );
+    }
+    [VoxelToolButton]
+    public void FlipY()
+    {
+        // Flip the structure along the Y axis
+        TransformRegion( ( pos, size ) => new Vector3Int( pos.x, size.y - 1 - pos.y, pos.z ) );
+    }
+
+    [VoxelToolButton]
+    public void FlipZ()
+    {
+        // Flip the structure along the Z axis
+        TransformRegion( ( pos, size ) => new Vector3Int( pos.x, pos.y, size.z - 1 - pos.z ) );
+    }
+
+    [VoxelToolButton]
+    public void RotateX()
+    {
+        // Rotate the structure 90 degrees around the X axis
+        TransformRegion( ( pos, size ) => new Vector3Int( pos.x, size.z - 1 - pos.z, pos.y ), true );
+    }
+
+    [VoxelToolButton]
+    public void RotateY()
+    {
+        // Rotate the structure 90 degrees around the Y axis
+        TransformRegion( ( pos, size ) => new Vector3Int( size.z - 1 - pos.z, pos.y, pos.x ), true );
+    }
+
+    [VoxelToolButton]
+    public void RotateZ()
+    {
+        // Rotate the structure 90 degrees around the Z axis
+        TransformRegion( ( pos, size ) => new Vector3Int( pos.y, size.x - 1 - pos.x, pos.z ), true );
+    }
+
+
 }
