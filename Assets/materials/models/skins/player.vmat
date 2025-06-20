@@ -5,7 +5,7 @@ Layer0
 	shader "materials/pixel.shader"
 
 	Albedo "materials/models/skins/butcher.png"
-	Roughness "materials/default/default_color.tga"
+	Roughness "[1.000000 1.000000 1.000000 1.000000]"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
