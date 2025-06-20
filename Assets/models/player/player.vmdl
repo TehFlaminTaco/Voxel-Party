@@ -83,8 +83,8 @@
 				[
 					{
 						_class = "AnimFile"
-						name = "idle"
-						activity_name = "idle"
+						name = "IdlePose_Default"
+						activity_name = "IdlePose_Default"
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2
@@ -106,7 +106,7 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "walkN"
+						name = "Walk_N"
 						children = 
 						[
 							{
@@ -121,7 +121,7 @@
 								motion_type = "Single"
 							},
 						]
-						activity_name = "walkN"
+						activity_name = "Walk_N"
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2
@@ -143,7 +143,7 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "walkE"
+						name = "Walk_E"
 						children = 
 						[
 							{
@@ -158,7 +158,7 @@
 								motion_type = "Single"
 							},
 						]
-						activity_name = "walkE"
+						activity_name = "Walk_E"
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2
@@ -180,9 +180,24 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "walkS"
+						name = "Walk_S"
 						children = 
 						[
+							{
+								_class = "AnimAlign"
+								align_tx = true
+								align_ty = true
+								align_tz = false
+								align_rx = false
+								align_ry = false
+								align_rz = false
+								align_frame_type = "Number"
+								frame = 0
+								align_to_anim = "idle"
+								align_to_frame_type = "Number"
+								align_to_frame = 0
+								bone = "spine"
+							},
 							{
 								_class = "ExtractMotion"
 								extract_tx = true
@@ -199,7 +214,7 @@
 								start_loop_frame = 0
 							},
 						]
-						activity_name = "walkS"
+						activity_name = "Walk_S"
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2
@@ -221,7 +236,7 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "walkW"
+						name = "Walk_W"
 						children = 
 						[
 							{
@@ -236,7 +251,7 @@
 								motion_type = "Single"
 							},
 						]
-						activity_name = "walkW"
+						activity_name = "Walk_W"
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2

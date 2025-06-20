@@ -26,40 +26,40 @@
 						{
 							_class = "CBlend2DItem"
 							m_tagSpans = [  ]
-							m_sequenceName = "idle"
+							m_sequenceName = "IdlePose_Default"
 							m_blendValue = [ 0.0, 0.0 ]
 						},
 						{
 							_class = "CBlend2DItem"
 							m_tagSpans = [  ]
-							m_sequenceName = "walkE"
+							m_sequenceName = "Walk_E"
 							m_blendValue = [ 0.234208, -0.044042 ]
 						},
 						{
 							_class = "CBlend2DItem"
 							m_tagSpans = [  ]
-							m_sequenceName = "walkN"
+							m_sequenceName = "Walk_N"
 							m_blendValue = [ -0.000012, 80.972 ]
 						},
 						{
 							_class = "CBlend2DItem"
 							m_tagSpans = [  ]
-							m_sequenceName = "walkS"
+							m_sequenceName = "Walk_S"
 							m_blendValue = [ 0.000012, -80.972 ]
 						},
 						{
 							_class = "CBlend2DItem"
 							m_tagSpans = [  ]
-							m_sequenceName = "walkW"
+							m_sequenceName = "Walk_W"
 							m_blendValue = [ -0.234208, 0.044042 ]
 						},
 					]
-					m_blendSourceX = "StrafeSpeed"
+					m_blendSourceX = "Parameter"
 					m_paramX = 
 					{
 						m_id = 996550045
 					}
-					m_blendSourceY = "ForwardSpeed"
+					m_blendSourceY = "Parameter"
 					m_paramY = 
 					{
 						m_id = 1546530455
