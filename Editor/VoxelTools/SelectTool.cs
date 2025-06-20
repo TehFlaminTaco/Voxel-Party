@@ -18,7 +18,7 @@ public class SelectTool : VoxelTool
 
     public override void DrawGizmos( Vector3Int blockPosition, Direction faceDirection )
     {
-
+        SceneEditorSession.Active.Selection.Clear();
 
         if ( WasKeyPressed( "editor.paste" ) )
         {
@@ -317,6 +317,28 @@ public class SelectTool : VoxelTool
     {
         // Rotate the structure 90 degrees around the Z axis
         TransformRegion( ( pos, size ) => new Vector3Int( pos.y, size.x - 1 - pos.x, pos.z ), true );
+    }
+
+    [VoxelToolButton]
+    public void SaveArea()
+    {
+        if ( !FirstPosition.HasValue || !SecondPosition.HasValue )
+        {
+            Log.Warning( "No selection made to save." );
+            return;
+        }
+
+        NormalizePositions();
+
+        var first = FirstPosition.Value;
+        var second = SecondPosition.Value;
+
+        var size = second - first + Vector3Int.One;
+        var blocks = BlockData.GetAreaInBox( first, size );
+        var structureData = World.Active.SerializeRegion( first, second );
+        var structure = new Structure { StructureData = structureData };
+        var path = EditorUtility.SaveFileDialog( "Save Your Structure", ".struct", Editor.FileSystem.Content.GetFullPath( "/structures" ) );
+        System.IO.File.WriteAllText( path, structure.Serialize().ToString() );
     }
 
 

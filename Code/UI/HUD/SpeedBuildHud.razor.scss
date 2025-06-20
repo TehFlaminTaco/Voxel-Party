@@ -1,0 +1,13 @@
+SpeedBuildHud {
+    width: 100%;
+    height: 100%;
+
+    GameTimer {
+        left: 0px;
+        transition: all 40ms cubic-bezier(.47,1.64,.41,.8);
+        &.hidden {
+            left: -200px;
+        }
+
+    }
+}
