@@ -130,11 +130,15 @@ public class VoxelPlayer : Component
         
         if ( (BreakingProgress == 10 || CreativeMode) && BreakingBlock.HasValue )
         {
-	        if ( !GiveBrokenBlocks ) world.Thinker.BreakBlock( BreakingBlock.Value );
+	        if ( !GiveBrokenBlocks )
+	        {
+		        world.SpawnBreakParticles( BreakingBlock.Value );
+		        world.Thinker.BreakBlock( BreakingBlock.Value );
+	        }
 	        else
 	        {
-		        
 		        var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
+		        world.SpawnBreakParticles( BreakingBlock.Value );
 		        world.SetBlock( BreakingBlock.Value, new BlockData( 0 ) );
 	        }
         }

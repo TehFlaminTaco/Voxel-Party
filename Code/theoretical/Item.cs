@@ -7,6 +7,7 @@ public partial class Item : GameResource
 
 	[Property, ToggleGroup( "IsBlock" )]
 	public bool IsBlock { get; set; }
+	
 	[Property, ToggleGroup( "IsBlock" ), InlineEditor]
 	public Block Block { get; set; }
 

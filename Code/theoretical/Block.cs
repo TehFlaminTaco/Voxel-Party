@@ -11,6 +11,8 @@ public class Block
 	public bool IsSolid { get; set; } = true; // Whether the block is solid (blocks movement).
 	public int Hardness { get; set; } = 1; // Hardness of the block, used for mining speed calculations.
 
+	public PrefabFile BreakParticle { get; set; } = ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
+
 	public Texture Texture { get; set; } = null; // The texture used for rendering the block, can be null if not set.
 	public Texture TopTexture { get; set; } = null; // The texture used for the top face of the block, can be null if not set.
 	public Texture SideTexture { get; set; } = null; // The texture used for the side faces of the block, can be null if not set.

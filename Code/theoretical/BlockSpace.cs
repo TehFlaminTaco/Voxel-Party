@@ -221,6 +221,20 @@ public class BlockSpace
 		chunk.SetBlock( blockPosition.x, blockPosition.y, blockPosition.z, blockData );
 	}
 
+	public void SpawnBreakParticles( Vector3Int position )
+	{
+		var item = ItemRegistry.GetItem( position );
+		
+		var particle = item.Block.BreakParticle.IsValid() 
+			? item.Block.BreakParticle 
+			: ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
+		var obj = GameObject.Clone( particle,
+			new CloneConfig(Transform.Zero.WithPosition(Helpers.VoxelToWorld( position ) + World.BlockScale / 2)) );
+
+		obj.Components.Get<SampleTextureEffect>().SampleTexture = item.Block.Texture;
+		obj.NetworkSpawn();
+	}
+
 	public string SerializeRegion( Vector3Int start, Vector3Int end )
 	{
 		int xMin = Math.Min( start.x, end.x );
