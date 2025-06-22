@@ -43,7 +43,7 @@
         "ForceDirection": "0,0,-400",
         "ForceScale": 1,
         "ForceSpace": "World",
-        "Friction": 2,
+        "Friction": 1,
         "Gradient": {
           "Type": "Constant",
           "Evaluation": "Life",
@@ -149,7 +149,7 @@
         "SheetSequence": false,
         "Space": "World",
         "StartDelay": 0,
-        "StartVelocity": 1,
+        "StartVelocity": 50,
         "Stretch": 0,
         "TimeScale": 1,
         "Timing": "GameTime",
@@ -205,7 +205,7 @@
             "BodyGroups": 18446744073709551615
           }
         ],
-        "MaterialOverride": null,
+        "MaterialOverride": "materials/dev/primary_white_vertexcolor.vmat",
         "OnComponentDestroy": null,
         "OnComponentDisabled": null,
         "OnComponentEnabled": null,
@@ -229,35 +229,7 @@
         "OnComponentEnabled": null,
         "OnComponentFixedUpdate": null,
         "OnComponentStart": null,
-        "OnComponentUpdate": null,
-        "SampleTexture": {
-          "$compiler": "texture",
-          "$source": "imagefile",
-          "data": {
-            "FilePath": "materials/block/cobblestone.png",
-            "MaxSize": 4096,
-            "ConvertHeightToNormals": false,
-            "NormalScale": 1,
-            "Rotate": 0,
-            "FlipVertical": false,
-            "FlipHorizontal": false,
-            "Padding": {
-              "Size": "0,0",
-              "EdgeSize": "0,0"
-            },
-            "Sharpen": 0,
-            "InvertColor": false,
-            "Blur": 0,
-            "Brightness": 1,
-            "Contrast": 1,
-            "Saturation": 1,
-            "Hue": 0,
-            "Colorize": false,
-            "TargetColor": "0,1,0,1",
-            "CacheToDisk": true
-          },
-          "compiled": null
-        }
+        "OnComponentUpdate": null
       }
     ],
     "Children": [
@@ -280,7 +252,7 @@
             "__type": "Sandbox.ParticleBoxEmitter",
             "__guid": "5e31c0f8-a9e6-4a38-a8dc-8c6cc6b119bd",
             "__enabled": true,
-            "Burst": 50,
+            "Burst": 256,
             "Delay": 0,
             "DestroyOnEnd": true,
             "Duration": 10,

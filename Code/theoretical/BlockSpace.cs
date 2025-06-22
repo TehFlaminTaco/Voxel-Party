@@ -224,15 +224,42 @@ public class BlockSpace
 	public void SpawnBreakParticles( Vector3Int position )
 	{
 		var item = ItemRegistry.GetItem( position );
-		
-		var particle = item.Block.BreakParticle.IsValid() 
-			? item.Block.BreakParticle 
-			: ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
-		var obj = GameObject.Clone( particle,
-			new CloneConfig(Transform.Zero.WithPosition(Helpers.VoxelToWorld( position ) + World.BlockScale / 2)) );
+		var block = item.Block;
+		for ( int i = 0; i < 128; i++ )
+		{
+			var particlePos = (position + new Vector3(
+				Random.Shared.Float(),
+				Random.Shared.Float(),
+				Random.Shared.Float()
+			)) * World.BlockScale;
+			var particle = new GameObject().AddComponent<SimpleParticle>();
+			particle.GameObject.Flags |= GameObjectFlags.Hidden;
+			particle.WorldPosition = particlePos;
+			particle.Material = Material.Load( "materials/textureatlas.vmat" );
+			particle.TextureRect = new Rect( 0, 0, 1, 1 ); // Assuming a single texture for simplicity.
+														   // Velocity is distance to the center of the block, scaled by a random factor.
+			particle.Velocity = (particlePos - (position + Vector3.One * 0.5f) * World.BlockScale) * new Vector3( 1f, 1f, 2f ) * Random.Shared.Float( 1f, 3f );
+			particle.Acceleration = Vector3.Down * 9.81f * 42f; // Gravity effect.
+			particle.Damping = 0.99f; // Damping to slow down the particles.
+			particle.Lifetime = Random.Shared.Float( 3f, 5f ); // Random lifetime for the particles.
+			Vector2 texCoord = new Vector2( Random.Shared.Float() * 14 / 16f, Random.Shared.Float() * 14 / 16f );
+			particle.TextureRect = Rect.FromPoints( texCoord, texCoord + new Vector2( 2 / 16f, 2 / 16f ) );
+			particle.TextureID = block.TextureIndex;
+			particle.Scale = new Curve( new List<Curve.Frame>
+			{
+				new Curve.Frame(0f, 30f, -MathF.PI, MathF.PI),
+				new Curve.Frame(1f, 0f, 0f, 0f)
+			} );
+		}
 
-		obj.Components.Get<SampleTextureEffect>().SampleTexture = item.Block.Texture;
-		obj.NetworkSpawn();
+		/*var particle = item.Block.BreakParticle.IsValid() 
+				? item.Block.BreakParticle 
+				: ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
+			var obj = GameObject.Clone( particle,
+				new CloneConfig(Transform.Zero.WithPosition(Helpers.VoxelToWorld( position ) + World.BlockScale / 2)) );
+
+			obj.Components.Get<SampleTextureEffect>().SampleTexture = item.Block.Texture;
+			obj.NetworkSpawn();*/
 	}
 
 	public string SerializeRegion( Vector3Int start, Vector3Int end )

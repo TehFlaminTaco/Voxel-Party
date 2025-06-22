@@ -10,4 +10,84 @@ SpeedBuildHud {
         }
 
     }
+
+    align-items: center;
+    justify-content:    space-between;
+    flex-direction: column;
+
+    #message {
+        position: relative;
+        top: 30px;
+        font-size: 60px;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        backdrop-filter: blur(5px);
+        background-color: #00000080;
+
+        color: white;
+        text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+    }
+
+    #readyCheck {
+        position: absolute;
+        top: 60px;
+        right: 32px;
+        font-size: 30px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: white;
+        border-radius: 10px;
+        border: solid 2px black;
+        padding: 10px;
+        transition: top 40ms cubic-bezier(.47,1.64,.41,.8);
+        &.hidden {
+            top: -100px;
+        }
+    }
+
+    #score {
+        position: relative;
+        bottom: 150px;
+        width: 25%;        height: 50px;
+        backdrop-filter: blur(5px);
+        background-color: #00000080;
+        border-radius: 10px;
+        border: solid 2px #ffffff80;
+
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 30px;
+
+        &.hidden {
+            display: none;
+        }
+
+        .goodbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: #00ff0088;
+        }
+        .badbar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-color: #ff000088;
+        }
+    }
+
+    .key {
+        border-right: 2px solid black;
+        padding-right: 8px;
+        margin-right: 8px;
+        
+    }
 }
