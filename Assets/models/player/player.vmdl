@@ -82,745 +82,854 @@
 				children = 
 				[
 					{
-						_class = "AnimFile"
-						name = "IdlePose_Default"
-						activity_name = "IdlePose_Default"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = true
-						disable_compression = false
-						disable_interpolation = false
-						enable_scale = false
-						source_filename = "models/player/idle.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "WalkFast_N"
+						_class = "Folder"
+						name = "Idle"
 						children = 
 						[
 							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = ""
-								motion_type = "Single"
+								_class = "AnimFile"
+								name = "IdlePose_Default"
+								activity_name = "IdlePose_Default"
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = true
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = true
+								disable_compression = false
+								disable_interpolation = false
+								enable_scale = false
+								source_filename = "models/player/idle.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
 							},
 						]
-						activity_name = "WalkFast_N"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = true
-						disable_compression = false
-						disable_interpolation = false
-						enable_scale = false
-						source_filename = "models/player/walkfast_n.fbx"
-						start_frame = -1
-						end_frame = 24
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "WalkFast_E"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = ""
-								motion_type = "Single"
-							},
-						]
-						activity_name = "WalkFast_E"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = true
-						disable_compression = false
-						disable_interpolation = false
-						enable_scale = false
-						source_filename = "models/player/walkfast_e.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 36.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "WalkFast_S"
-						children = 
-						[
-							{
-								_class = "AnimAlign"
-								align_tx = true
-								align_ty = true
-								align_tz = false
-								align_rx = false
-								align_ry = false
-								align_rz = false
-								align_frame_type = "Number"
-								frame = 0
-								align_to_anim = "WalkFast_N"
-								align_to_frame_type = "Number"
-								align_to_frame = 0
-								bone = "root"
-							},
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = ""
-								motion_type = "Single"
-							},
-						]
-						activity_name = "WalkFast_S"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = true
-						disable_compression = false
-						disable_interpolation = false
-						enable_scale = false
-						source_filename = "models/player/walkfast_n.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = true
-					},
-					{
-						_class = "AnimFile"
-						name = "WalkFast_W"
-						children = 
-						[
-							{
-								_class = "AnimAlign"
-								align_tx = true
-								align_ty = true
-								align_tz = false
-								align_rx = false
-								align_ry = false
-								align_rz = false
-								align_frame_type = "Number"
-								frame = 0
-								align_to_anim = "WalkFast_E"
-								align_to_frame_type = "Number"
-								align_to_frame = 0
-								bone = "root"
-							},
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = ""
-								motion_type = "Single"
-							},
-						]
-						activity_name = "WalkFast_W"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = true
-						disable_compression = false
-						disable_interpolation = false
-						enable_scale = false
-						source_filename = "models/player/walkfast_e.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 36.0
-						take = 0
-						reverse = true
-					},
-					{
-						_class = "AnimFile"
-						name = "WalkFast_NE"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = ""
-								motion_type = "Single"
-							},
-						]
-						activity_name = "WalkFast_NE"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						disable_interpolation = false
-						enable_scale = false
-						source_filename = "models/player/WalkFast_NE.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 3
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "WalkFast_SW"
-						children = 
-						[
-							{
-								_class = "AnimAlign"
-								align_tx = true
-								align_ty = true
-								align_tz = false
-								align_rx = false
-								align_ry = false
-								align_rz = false
-								align_frame_type = "Number"
-								frame = 0
-								align_to_anim = "WalkFast_E"
-								align_to_frame_type = "Number"
-								align_to_frame = 0
-								bone = "root"
-							},
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = ""
-								motion_type = "Single"
-							},
-						]
-						activity_name = "WalkFast_SW"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						disable_interpolation = false
-						enable_scale = false
-						source_filename = "models/player/WalkFast_NE.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 3
-						reverse = true
-					},
-					{
-						_class = "AnimFile"
-						name = "WalkFast_NW"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = ""
-								motion_type = "Single"
-							},
-						]
-						activity_name = "WalkFast_NW"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						disable_interpolation = false
-						enable_scale = false
-						source_filename = "models/player/WalkFast_NW.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "WalkFast_SE"
-						children = 
-						[
-							{
-								_class = "AnimAlign"
-								align_tx = true
-								align_ty = true
-								align_tz = false
-								align_rx = false
-								align_ry = false
-								align_rz = false
-								align_frame_type = "Number"
-								frame = 0
-								align_to_anim = "WalkFast_E"
-								align_to_frame_type = "Number"
-								align_to_frame = 0
-								bone = "root"
-							},
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = ""
-								motion_type = "Single"
-							},
-						]
-						activity_name = "WalkFast_SE"
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						disable_interpolation = false
-						enable_scale = false
-						source_filename = "models/player/WalkFast_NW.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = true
 					},
 					{
 						_class = "Folder"
-						name = "Walk_2X"
-						note = "Called \'2X\' but the speed/framerate is adjusted to match 150 u/s, so it\'s not going to be exactly 2X to get there :)"
+						name = "Movement"
 						children = 
 						[
 							{
-								_class = "AnimFile"
-								name = "Walk2X_N"
+								_class = "Folder"
+								name = "Walk"
 								children = 
 								[
 									{
-										_class = "ExtractMotion"
-										extract_tx = true
-										extract_ty = true
-										extract_tz = false
-										extract_rz = false
-										linear = false
-										quadratic = false
-										root_bone_name = ""
-										motion_type = "Single"
+										_class = "AnimFile"
+										name = "WalkFast_N"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = "WalkFast_N"
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = true
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/walkfast_n.fbx"
+										start_frame = -1
+										end_frame = 24
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "WalkFast_E"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = "WalkFast_E"
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = true
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/walkfast_e.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "WalkFast_S"
+										children = 
+										[
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "WalkFast_N"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = "WalkFast_S"
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = true
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/walkfast_n.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = true
+									},
+									{
+										_class = "AnimFile"
+										name = "WalkFast_W"
+										children = 
+										[
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "WalkFast_E"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = "WalkFast_W"
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = true
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/walkfast_e.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = true
+									},
+									{
+										_class = "AnimFile"
+										name = "WalkFast_NE"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = "WalkFast_NE"
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/WalkFast_NE.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 3
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "WalkFast_SW"
+										children = 
+										[
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "WalkFast_E"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = "WalkFast_SW"
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/WalkFast_NE.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 3
+										reverse = true
+									},
+									{
+										_class = "AnimFile"
+										name = "WalkFast_NW"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = "WalkFast_NW"
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/WalkFast_NW.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "WalkFast_SE"
+										children = 
+										[
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "WalkFast_E"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = "WalkFast_SE"
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/WalkFast_NW.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = true
+									},
+									{
+										_class = "Folder"
+										name = "Walk_2X"
+										note = "Called \'2X\' but the speed/framerate is adjusted to match 150 u/s, so it\'s not going to be exactly 2X to get there :)"
+										children = 
+										[
+											{
+												_class = "AnimFile"
+												name = "Walk2X_N"
+												children = 
+												[
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Single"
+													},
+												]
+												activity_name = "Walk2X_N"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = true
+												disable_compression = false
+												disable_interpolation = false
+												enable_scale = false
+												source_filename = "models/player/walkfast_n.fbx"
+												start_frame = -1
+												end_frame = 24
+												framerate = 48.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "Walk2X_E"
+												children = 
+												[
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Single"
+													},
+												]
+												activity_name = "Walk2X_E"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = true
+												disable_compression = false
+												disable_interpolation = false
+												enable_scale = false
+												source_filename = "models/player/walkfast_e.fbx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 72.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "Walk2X_S"
+												children = 
+												[
+													{
+														_class = "AnimAlign"
+														align_tx = true
+														align_ty = true
+														align_tz = false
+														align_rx = false
+														align_ry = false
+														align_rz = false
+														align_frame_type = "Number"
+														frame = 0
+														align_to_anim = "WalkFast_N"
+														align_to_frame_type = "Number"
+														align_to_frame = 0
+														bone = "root"
+													},
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Single"
+													},
+												]
+												activity_name = "Walk2X_S"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = true
+												disable_compression = false
+												disable_interpolation = false
+												enable_scale = false
+												source_filename = "models/player/walkfast_n.fbx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 48.0
+												take = 0
+												reverse = true
+											},
+											{
+												_class = "AnimFile"
+												name = "Walk2X_W"
+												children = 
+												[
+													{
+														_class = "AnimAlign"
+														align_tx = true
+														align_ty = true
+														align_tz = false
+														align_rx = false
+														align_ry = false
+														align_rz = false
+														align_frame_type = "Number"
+														frame = 0
+														align_to_anim = "WalkFast_E"
+														align_to_frame_type = "Number"
+														align_to_frame = 0
+														bone = "root"
+													},
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Single"
+													},
+												]
+												activity_name = "Walk2X_W"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = true
+												disable_compression = false
+												disable_interpolation = false
+												enable_scale = false
+												source_filename = "models/player/walkfast_e.fbx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 72.0
+												take = 0
+												reverse = true
+											},
+											{
+												_class = "AnimFile"
+												name = "Walk2X_NE"
+												children = 
+												[
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Single"
+													},
+												]
+												activity_name = "Walk2X_NE"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = false
+												disable_compression = false
+												disable_interpolation = false
+												enable_scale = false
+												source_filename = "models/player/WalkFast_NE.fbx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 48.0
+												take = 3
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "Walk2X_SW"
+												children = 
+												[
+													{
+														_class = "AnimAlign"
+														align_tx = true
+														align_ty = true
+														align_tz = false
+														align_rx = false
+														align_ry = false
+														align_rz = false
+														align_frame_type = "Number"
+														frame = 0
+														align_to_anim = "WalkFast_E"
+														align_to_frame_type = "Number"
+														align_to_frame = 0
+														bone = "root"
+													},
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Single"
+													},
+												]
+												activity_name = "Walk2X_SW"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = false
+												disable_compression = false
+												disable_interpolation = false
+												enable_scale = false
+												source_filename = "models/player/WalkFast_NE.fbx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 48.0
+												take = 3
+												reverse = true
+											},
+											{
+												_class = "AnimFile"
+												name = "Walk2X_NW"
+												children = 
+												[
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Single"
+													},
+												]
+												activity_name = "Walk2X_NW"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = false
+												disable_compression = false
+												disable_interpolation = false
+												enable_scale = false
+												source_filename = "models/player/WalkFast_NW.fbx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 48.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "Walk2X_SE"
+												children = 
+												[
+													{
+														_class = "AnimAlign"
+														align_tx = true
+														align_ty = true
+														align_tz = false
+														align_rx = false
+														align_ry = false
+														align_rz = false
+														align_frame_type = "Number"
+														frame = 0
+														align_to_anim = "WalkFast_E"
+														align_to_frame_type = "Number"
+														align_to_frame = 0
+														bone = "root"
+													},
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Single"
+													},
+												]
+												activity_name = "Walk2X_SE"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = false
+												disable_compression = false
+												disable_interpolation = false
+												enable_scale = false
+												source_filename = "models/player/WalkFast_NW.fbx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 48.0
+												take = 0
+												reverse = true
+											},
+										]
 									},
 								]
-								activity_name = "Walk2X_N"
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = true
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = true
-								disable_compression = false
-								disable_interpolation = false
-								enable_scale = false
-								source_filename = "models/player/walkfast_n.fbx"
-								start_frame = -1
-								end_frame = 24
-								framerate = 48.0
-								take = 0
-								reverse = false
 							},
 							{
-								_class = "AnimFile"
-								name = "Walk2X_E"
+								_class = "Folder"
+								name = "Run"
 								children = 
 								[
 									{
-										_class = "ExtractMotion"
-										extract_tx = true
-										extract_ty = true
-										extract_tz = false
-										extract_rz = false
-										linear = false
-										quadratic = false
-										root_bone_name = ""
-										motion_type = "Single"
+										_class = "AnimFile"
+										name = "Run_N"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = "Run_N"
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/Run_N.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = 19.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "Folder"
+										name = "Run_2X"
+										children = 
+										[
+											{
+												_class = "AnimFile"
+												name = "Run2X_N"
+												children = 
+												[
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Single"
+													},
+												]
+												activity_name = "Run_N"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = false
+												disable_compression = false
+												disable_interpolation = false
+												enable_scale = false
+												source_filename = "models/player/Run_N.fbx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 38.0
+												take = 0
+												reverse = false
+											},
+										]
 									},
 								]
-								activity_name = "Walk2X_E"
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = true
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = true
-								disable_compression = false
-								disable_interpolation = false
-								enable_scale = false
-								source_filename = "models/player/walkfast_e.fbx"
-								start_frame = -1
-								end_frame = -1
-								framerate = 72.0
-								take = 0
-								reverse = false
-							},
-							{
-								_class = "AnimFile"
-								name = "Walk2X_S"
-								children = 
-								[
-									{
-										_class = "AnimAlign"
-										align_tx = true
-										align_ty = true
-										align_tz = false
-										align_rx = false
-										align_ry = false
-										align_rz = false
-										align_frame_type = "Number"
-										frame = 0
-										align_to_anim = "WalkFast_N"
-										align_to_frame_type = "Number"
-										align_to_frame = 0
-										bone = "root"
-									},
-									{
-										_class = "ExtractMotion"
-										extract_tx = true
-										extract_ty = true
-										extract_tz = false
-										extract_rz = false
-										linear = false
-										quadratic = false
-										root_bone_name = ""
-										motion_type = "Single"
-									},
-								]
-								activity_name = "Walk2X_S"
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = true
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = true
-								disable_compression = false
-								disable_interpolation = false
-								enable_scale = false
-								source_filename = "models/player/walkfast_n.fbx"
-								start_frame = -1
-								end_frame = -1
-								framerate = 48.0
-								take = 0
-								reverse = true
-							},
-							{
-								_class = "AnimFile"
-								name = "Walk2X_W"
-								children = 
-								[
-									{
-										_class = "AnimAlign"
-										align_tx = true
-										align_ty = true
-										align_tz = false
-										align_rx = false
-										align_ry = false
-										align_rz = false
-										align_frame_type = "Number"
-										frame = 0
-										align_to_anim = "WalkFast_E"
-										align_to_frame_type = "Number"
-										align_to_frame = 0
-										bone = "root"
-									},
-									{
-										_class = "ExtractMotion"
-										extract_tx = true
-										extract_ty = true
-										extract_tz = false
-										extract_rz = false
-										linear = false
-										quadratic = false
-										root_bone_name = ""
-										motion_type = "Single"
-									},
-								]
-								activity_name = "Walk2X_W"
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = true
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = true
-								disable_compression = false
-								disable_interpolation = false
-								enable_scale = false
-								source_filename = "models/player/walkfast_e.fbx"
-								start_frame = -1
-								end_frame = -1
-								framerate = 72.0
-								take = 0
-								reverse = true
-							},
-							{
-								_class = "AnimFile"
-								name = "Walk2X_NE"
-								children = 
-								[
-									{
-										_class = "ExtractMotion"
-										extract_tx = true
-										extract_ty = true
-										extract_tz = false
-										extract_rz = false
-										linear = false
-										quadratic = false
-										root_bone_name = ""
-										motion_type = "Single"
-									},
-								]
-								activity_name = "Walk2X_NE"
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = true
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = false
-								disable_compression = false
-								disable_interpolation = false
-								enable_scale = false
-								source_filename = "models/player/WalkFast_NE.fbx"
-								start_frame = -1
-								end_frame = -1
-								framerate = 48.0
-								take = 3
-								reverse = false
-							},
-							{
-								_class = "AnimFile"
-								name = "Walk2X_SW"
-								children = 
-								[
-									{
-										_class = "AnimAlign"
-										align_tx = true
-										align_ty = true
-										align_tz = false
-										align_rx = false
-										align_ry = false
-										align_rz = false
-										align_frame_type = "Number"
-										frame = 0
-										align_to_anim = "WalkFast_E"
-										align_to_frame_type = "Number"
-										align_to_frame = 0
-										bone = "root"
-									},
-									{
-										_class = "ExtractMotion"
-										extract_tx = true
-										extract_ty = true
-										extract_tz = false
-										extract_rz = false
-										linear = false
-										quadratic = false
-										root_bone_name = ""
-										motion_type = "Single"
-									},
-								]
-								activity_name = "Walk2X_SW"
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = true
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = false
-								disable_compression = false
-								disable_interpolation = false
-								enable_scale = false
-								source_filename = "models/player/WalkFast_NE.fbx"
-								start_frame = -1
-								end_frame = -1
-								framerate = 48.0
-								take = 3
-								reverse = true
-							},
-							{
-								_class = "AnimFile"
-								name = "Walk2X_NW"
-								children = 
-								[
-									{
-										_class = "ExtractMotion"
-										extract_tx = true
-										extract_ty = true
-										extract_tz = false
-										extract_rz = false
-										linear = false
-										quadratic = false
-										root_bone_name = ""
-										motion_type = "Single"
-									},
-								]
-								activity_name = "Walk2X_NW"
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = true
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = false
-								disable_compression = false
-								disable_interpolation = false
-								enable_scale = false
-								source_filename = "models/player/WalkFast_NW.fbx"
-								start_frame = -1
-								end_frame = -1
-								framerate = 48.0
-								take = 0
-								reverse = false
-							},
-							{
-								_class = "AnimFile"
-								name = "Walk2X_SE"
-								children = 
-								[
-									{
-										_class = "AnimAlign"
-										align_tx = true
-										align_ty = true
-										align_tz = false
-										align_rx = false
-										align_ry = false
-										align_rz = false
-										align_frame_type = "Number"
-										frame = 0
-										align_to_anim = "WalkFast_E"
-										align_to_frame_type = "Number"
-										align_to_frame = 0
-										bone = "root"
-									},
-									{
-										_class = "ExtractMotion"
-										extract_tx = true
-										extract_ty = true
-										extract_tz = false
-										extract_rz = false
-										linear = false
-										quadratic = false
-										root_bone_name = ""
-										motion_type = "Single"
-									},
-								]
-								activity_name = "Walk2X_SE"
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = true
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = false
-								disable_compression = false
-								disable_interpolation = false
-								enable_scale = false
-								source_filename = "models/player/WalkFast_NW.fbx"
-								start_frame = -1
-								end_frame = -1
-								framerate = 48.0
-								take = 0
-								reverse = true
 							},
 						]
 					},
