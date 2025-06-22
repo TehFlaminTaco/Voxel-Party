@@ -35,6 +35,14 @@ public class Inventory
         Items[slot] = stack ?? ItemStack.Empty; // Set to empty stack if null
     }
 
+    public void Clear()
+    {
+        for ( int i = 0; i < TotalSize; i++ )
+        {
+            Items[i] = ItemStack.Empty; // Clear all slots
+        }
+    }
+
     // Try and insert the item into the inventory at the given slot and return all items we cannot insert.
     // If the slot is full, we return the original stack.
     // If simulate is true, we do not modify the inventory nor the original stack.
@@ -82,27 +90,27 @@ public class Inventory
 
         if ( hotbarFirst )
         {
-	        for ( int i = InventorySize; i < TotalSize; i++ )
-	        {
-		        var result = PutInSlot( i, stack, simulate );
-		        if ( ItemStack.IsNullOrEmpty( result ) )
-		        {
-			        return result; // Successfully inserted
-		        }
-		        stack = result; // Update stack to remaining items
-	        }
+            for ( int i = InventorySize; i < TotalSize; i++ )
+            {
+                var result = PutInSlot( i, stack, simulate );
+                if ( ItemStack.IsNullOrEmpty( result ) )
+                {
+                    return result; // Successfully inserted
+                }
+                stack = result; // Update stack to remaining items
+            }
         }
         else
         {
-	        for ( int i = 0; i < TotalSize; i++ )
-	        {
-		        var result = PutInSlot( i, stack, simulate );
-		        if ( ItemStack.IsNullOrEmpty( result ) )
-		        {
-			        return result; // Successfully inserted
-		        }
-		        stack = result; // Update stack to remaining items
-	        }
+            for ( int i = 0; i < TotalSize; i++ )
+            {
+                var result = PutInSlot( i, stack, simulate );
+                if ( ItemStack.IsNullOrEmpty( result ) )
+                {
+                    return result; // Successfully inserted
+                }
+                stack = result; // Update stack to remaining items
+            }
         }
 
         return stack; // If we reach here, the stack could not be fully inserted
@@ -138,7 +146,7 @@ public class Inventory
     [ConCmd]
     public static void GiveItem( int itemID, int amount )
     {
-	    var player = VoxelPlayer.LocalPlayer;
+        var player = VoxelPlayer.LocalPlayer;
         if ( !player.IsValid() )
         {
             Log.Warning( "Player not found" );

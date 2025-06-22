@@ -1,15 +1,16 @@
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 public class VoxelPlayer : Component
 {
     World world => Scene.GetAll<WorldThinker>().First().World;
 
     public Inventory inventory = new();
-    [Property, ReadOnly, Group("InventoryDebug")] public List<int> InventoryItems => inventory.Items.ConvertAll( item => item.Count );
+    [Property, ReadOnly, Group( "InventoryDebug" )] public List<int> InventoryItems => inventory.Items.ConvertAll( item => item.Count );
 
     [Property] public bool CreativeMode { get; set; } = false;
     [Property] public bool GiveBrokenBlocks { get; set; } = false;
-    
+
     [Property] public bool HasInventory { get; set; } = true;
     [Property] public bool HasHotbar { get; set; } = true;
 
@@ -18,7 +19,7 @@ public class VoxelPlayer : Component
     public float ReachDistance => ReachDistanceProperty * World.BlockScale;
 
     public static VoxelPlayer LocalPlayer { get; set; }
-    
+
     public int BreakingProgress = 0;
     public TimeSince BreakTime = 0;
     public TimeSince TimeSinceLastBreak = 0;
@@ -28,35 +29,116 @@ public class VoxelPlayer : Component
     public Direction LastBreakingFace = Direction.None;
     SceneCustomObject blockBreakEffect;
 
+    // Gamemode stuff
+    [Sync( SyncFlags.FromHost )] public bool HasBuildVolume { get; set; } = false;
+    [Sync( SyncFlags.FromHost )] public Vector3Int BuildAreaMins { get; set; } = Vector3Int.Zero;
+    [Sync( SyncFlags.FromHost )] public Vector3Int BuildAreaMaxs { get; set; } = Vector3Int.Zero;
+    [Sync( SyncFlags.FromHost )] public bool CanBuild { get; set; } = false;
+
+    [Sync( SyncFlags.FromHost )] public int TotalBlockArea { get; set; } = 0; // Total area of the blocks in the build area, used for gamemode scoring
+    [Sync( SyncFlags.FromHost )] public int CorrectBlocksPlaced { get; set; } = 0; // Number of blocks placed correctly by the player, used for gamemode scoring
+    [Sync( SyncFlags.FromHost )] public int IncorrectBlocksPlaced { get; set; } = 0; // Number of blocks placed incorrectly by the player, used for gamemode scoring
+
+    [Sync] public bool IsReady { get; set; } = false; // Whether the player is ready for the gamemode to start
+
     protected override void OnStart()
     {
-	    LocalPlayer = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Connection.Local );
-	    
+        LocalPlayer = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Connection.Local );
+
         SpawnBlockBreakingEffect();
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        if ( Input.Pressed( "use" ) )
+            IsReady = !IsReady;
+
+        if ( HasBuildVolume )
+        {
+            Gizmo.Draw.Color = Color.Black.WithAlpha( 0.5f );
+            Gizmo.Draw.LineThickness = 8f;
+            var bbox = BBox.FromPoints( new[]{
+                BuildAreaMins * World.BlockScale,
+                (BuildAreaMaxs + Vector3.One) * World.BlockScale
+            } );
+            Gizmo.Draw.LineBBox( bbox );
+        }
     }
 
     protected override void OnFixedUpdate()
     {
         if ( IsProxy )
             return;
-        
-        HandleBreak();
-        HandlePlace();
+
+        if ( CanBuild )
+        {
+            HandleBreak();
+            HandlePlace();
+        }
         HandleHotbar();
     }
 
     protected override void OnPreRender()
     {
-	    ShowHoveredFace();
+        ShowHoveredFace();
     }
 
     public BlockTraceResult EyeTrace()
     {
         var pc = GetComponent<PlayerController>();
-        return Scene.GetAll<WorldThinker>().First().World.Trace(
+
+        var trace = Scene.GetAll<WorldThinker>().First().World.Trace(
             pc.EyePosition,
             pc.EyePosition + pc.EyeAngles.Forward * ReachDistance
         ).Run();
+
+        if ( HasBuildVolume )
+        {
+            var ray = new Ray(
+                pc.EyePosition,
+                pc.EyeAngles.Forward
+            );
+
+            var walls = new (float distance, Direction face)[]{
+                (BuildAreaMins.x, Direction.South),
+                (BuildAreaMaxs.x+1f, Direction.North),
+                (BuildAreaMins.y, Direction.East),
+                (BuildAreaMaxs.y+1f, Direction.West),
+                (BuildAreaMins.z, Direction.Down),
+                (BuildAreaMaxs.z+1f, Direction.Up)
+                // This big ugly function turns the plane distance for each bound into a casted point. if it ever does actually hit.
+            }.Where( w => w.face.Forward().Dot( ray.Forward ) > 0 ) // Only consider faces that are facing the ray direction
+                .Select( distanceface => (new Plane( distanceface.face.Forward().Abs(), distanceface.distance * World.BlockScale ).Trace( ray, true, ReachDistance * World.BlockScale ), distanceface.face) )
+                .Where( x => x.Item1.HasValue )
+                .Select( p => (p.Item1.Value, p.Item2, p.Item1.Value.Distance( ray.Position )) )
+                .Where( wall =>
+                {
+                    // Check that this point is within the bounds of the build area
+                    var pos = (wall.Item1 / World.BlockScale).Floor() - wall.Item2.Forward();
+                    return pos.x >= BuildAreaMins.x && pos.x <= BuildAreaMaxs.x &&
+                           pos.y >= BuildAreaMins.y && pos.y <= BuildAreaMaxs.y &&
+                           pos.z >= BuildAreaMins.z && pos.z <= BuildAreaMaxs.z;
+                } );
+            if ( !walls.Any( c => c.Item3 < (trace.Distance * World.BlockScale) && c.Item3 < ReachDistance * World.BlockScale ) )
+                return trace; // If no walls are closer than the trace, return the trace as is.
+            var closestWall = walls.OrderBy( c => c.Item3 ).First();
+            // Mutate the trace to hit the closest wall instead of the block.
+            trace.Hit = true;
+            trace.HitBlockPosition = (closestWall.Item1 / World.BlockScale).Floor() + closestWall.Item2.Forward();
+            if ( closestWall.Item2 is Direction.North or Direction.West or Direction.Up )
+            {
+                trace.HitBlockPosition -= closestWall.Item2.Forward();
+            }
+            trace.HitFace = closestWall.Item2.Flip();
+            trace.Distance = closestWall.Item3;
+            trace.EndPosition = closestWall.Item1;
+
+            return trace;
+        }
+
+        return trace;
     }
 
     public static int SelectedSlot = 0;
@@ -94,53 +176,66 @@ public class VoxelPlayer : Component
     }
     public void HandleBreak()
     {
-	    var trace = EyeTrace();
-	    if ( CreativeMode && TimeSinceLastBreak.Relative < 0.2f )
-	    {
-		    return;
-	    }
-	    if ( !trace.Hit || !Input.Down( "Attack1" ) )
-	    {
-		    BreakingBlock = null;
-		    LastBreakingBlock = null;
-		    BreakingFace = Direction.None;
-		    LastBreakingFace = Direction.None;
-		    BreakTime = 0f;
-		    
-		    return;
-	    }
+        var trace = EyeTrace();
+        if ( CreativeMode && TimeSinceLastBreak.Relative < 0.2f )
+        {
+            return;
+        }
+        if ( !trace.Hit || !Input.Down( "Attack1" ) )
+        {
+            BreakingBlock = null;
+            LastBreakingBlock = null;
+            BreakingFace = Direction.None;
+            LastBreakingFace = Direction.None;
+            BreakTime = 0f;
 
-	    BreakingBlock = trace.HitBlockPosition;
-	    //TODO: fix this shit
-	    // if ( LastBreakingBlock != BreakingBlock || LastBreakingFace != BreakingFace )
-	    // {
-		   //  BreakingBlock = null;
-		   //  BreakingFace = trace.HitFace;
-		   //  BreakTime = 0f;
-		   //  
-		   //  return;
-	    // }
-     
+            return;
+        }
+
+        // If trace.HitBlockPosition is not in the player's build area, do not break blocks
+        var hitPos = trace.HitBlockPosition;
+        if ( HasBuildVolume && (hitPos.x < BuildAreaMins.x || hitPos.y < BuildAreaMins.y || hitPos.z < BuildAreaMins.z || hitPos.x > BuildAreaMaxs.x || hitPos.y > BuildAreaMaxs.y || hitPos.z > BuildAreaMaxs.z) )
+        {
+            BreakingBlock = null;
+            LastBreakingBlock = null;
+            BreakingFace = Direction.None;
+            LastBreakingFace = Direction.None;
+            BreakTime = 0f;
+
+            return;
+        }
+
+        BreakingBlock = trace.HitBlockPosition;
+        //TODO: fix this shit
+        // if ( LastBreakingBlock != BreakingBlock || LastBreakingFace != BreakingFace )
+        // {
+        //  BreakingBlock = null;
+        //  BreakingFace = trace.HitFace;
+        //  BreakTime = 0f;
+        //  
+        //  return;
+        // }
+
         if ( !CreativeMode )
         {
-	        blockBreakEffect.Transform = global::Transform.Zero.WithPosition( WorldPosition );
-	        var block = world.GetBlock( BreakingBlock.Value ).GetBlock();
-	        BreakingProgress = Math.Min( (int)(BreakTime * 20 / block.Hardness), 10 );
+            blockBreakEffect.Transform = global::Transform.Zero.WithPosition( WorldPosition );
+            var block = world.GetBlock( BreakingBlock.Value ).GetBlock();
+            BreakingProgress = Math.Min( (int)(BreakTime * 20 / block.Hardness), 10 );
         }
-        
+
         if ( (BreakingProgress == 10 || CreativeMode) && BreakingBlock.HasValue )
         {
-	        if ( !GiveBrokenBlocks )
-	        {
-		        world.SpawnBreakParticles( BreakingBlock.Value );
-		        world.Thinker.BreakBlock( BreakingBlock.Value );
-	        }
-	        else
-	        {
-		        var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
-		        world.SpawnBreakParticles( BreakingBlock.Value );
-		        world.SetBlock( BreakingBlock.Value, new BlockData( 0 ) );
-	        }
+            if ( !GiveBrokenBlocks )
+            {
+                world.SpawnBreakParticles( BreakingBlock.Value );
+                world.Thinker.BreakBlock( BreakingBlock.Value );
+            }
+            else
+            {
+                var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
+                world.SpawnBreakParticles( BreakingBlock.Value );
+                world.SetBlock( BreakingBlock.Value, new BlockData( 0 ) );
+            }
         }
 
         LastBreakingBlock = BreakingBlock;
@@ -163,6 +258,11 @@ public class VoxelPlayer : Component
             if ( !trace.Hit )
                 return;
             var placePos = trace.HitBlockPosition + trace.HitFace.Forward();
+            // If placePos is not in the player's build area, do not place blocks
+            if ( HasBuildVolume && (placePos.x < BuildAreaMins.x || placePos.y < BuildAreaMins.y || placePos.z < BuildAreaMins.z || placePos.x > BuildAreaMaxs.x || placePos.y > BuildAreaMaxs.y || placePos.z > BuildAreaMaxs.z) )
+            {
+                return;
+            }
             inventory.TakeItem( SelectedSlot, 1 ); // Remove one item from the hotbar slot
             world.SetBlock( placePos, new BlockData( (byte)item.Item.ID, 0 ) );
         }

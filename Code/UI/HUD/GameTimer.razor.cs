@@ -15,8 +15,6 @@ public partial class GameTimer : Panel
     protected override void OnAfterTreeRender( bool firstTime )
     {
         base.OnAfterTreeRender( firstTime );
-        Log.Info( $"Timer initialized with TotalTime: {TotalTime} seconds" );
-        TimerEnd = TotalTime;
     }
 
 
@@ -45,10 +43,10 @@ public partial class GameTimer : Panel
 
         var hand = this.GetChild( 0 );
         var transform = new PanelTransform();
-        float rotation = (TimerEnd / TotalTime) * 360f; // Calculate rotation based on time left
+        float rotation = (MathF.Max( 0f, TimerEnd ) / TotalTime) * 360f; // Calculate rotation based on time left
         transform.AddTranslate( Length.Percent( -50 ), Length.Percent( -5 ) );
         transform.AddRotation( new Vector3( 0f, 0f, rotation + danceRotation ) );
-        transform.AddTranslate( Length.Percent( -0 ), Length.Percent( -50 ) );
+        transform.AddTranslate( Length.Percent( 0 ), Length.Percent( -50 ) );
         transform.AddRotation( new Vector3( 0f, 0f, -danceRotation ) );
         hand.Style.Transform = transform;
 

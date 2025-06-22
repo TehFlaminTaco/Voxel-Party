@@ -1,5 +1,15 @@
 @using Sandbox.UI;
 @inherits PanelComponent
 <root>
-    <GameTimer TotalTime=@(300f) class="hidden" @ref=timer />
+    <GameTimer class="@(HasTimer ? "" : "hidden")" @ref=timer TimerEnd=@(TimerEnd) TotalTime=@(TotalTime) />
+    <div id="message" @ref=message class="@(string.IsNullOrWhiteSpace(Message) ? "hidden" : "")">@(Message)</div>
+    <div id="score" class="@(VoxelPlayer.LocalPlayer.TotalBlockArea == 0 ? "hidden" : "")">
+        <div class="goodbar"></div>
+        <div class="badbar"></div>
+        @((int)(100 * VoxelPlayer.LocalPlayer.CorrectBlocksPlaced / System.Math.Max(1,
+                VoxelPlayer.LocalPlayer.TotalBlockArea)))%
+    </div>
+    <div id="readyCheck" class="@(HasReadyCheck ? "" : "hidden")">
+        <div class="key">E</div>@(VoxelPlayer.LocalPlayer.IsReady ? "Ready" : "Not Ready")
+    </div>
 </root>

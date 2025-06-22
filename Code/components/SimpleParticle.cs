@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 public class SimpleParticle : Component
 {
@@ -9,7 +10,7 @@ public class SimpleParticle : Component
 
     public Vector3 Velocity { get; set; } = Vector3.Zero; // Velocity is the speed and direction of the particle's movement.
     public Vector3 Acceleration { get; set; } = Vector3.Zero; // Acceleration is the change in velocity over time, affecting the particle's movement.
-    public float Damping { get; set; } = 0.98f; // Damping is a factor that reduces the particle's velocity over time, simulating friction or air resistance.
+    public float Damping { get; set; } = 0.90f; // Damping is a factor that reduces the particle's velocity over time, simulating friction or air resistance.
     public float Lifetime { get; set; } = 1f; // Lifetime is the duration for which the particle exists before it is removed in seconds
     public float MaxLifetime { get; set; } = 1f; // MaxLifetime is the maximum duration for which the particle can exist, used to reset or recycle particles.
 
@@ -38,22 +39,48 @@ public class SimpleParticle : Component
         var col = Color.FromBytes( Random.Shared.Int( 0, 255 ), Random.Shared.Int( 0, 255 ), Random.Shared.Int( 0, 255 ) );
         sceneObject.RenderOverride = ( obj ) =>
         {
-            Vector3 Right = Graphics.CameraRotation.Right;
-            Vector3 Up = Graphics.CameraRotation.Up;
-            float scale = Scale.Evaluate( 1 - Lifetime / MaxLifetime ); // Evaluate the scale based on the remaining lifetime.
+            // Draw a tiny cube
+            var size = Scale.Evaluate( 1f - (Lifetime / MaxLifetime) ) * 0.1f; // Use the initial scale to determine the size of the particle.
+            var transform = new Transform( WorldPosition, Rotation.Identity, new Vector3( size, size, size ) );
 
-            var p = Vector3.Zero;
-            var p1 = p - Right * scale / 2f - Up * scale / 2f;
-            var p2 = p + Right * scale / 2f - Up * scale / 2f;
-            var p3 = p1 + Up * scale;
-            var p4 = p2 + Up * scale;
+            List<Vector3> verts = new();
+            List<Vector3> uvs = new();
+            List<Vector3> normals = new();
 
-            var v1 = new Sandbox.Vertex( p1, new Vector4( new Vector3( TextureRect.BottomLeft, TextureID ), 0f ), Color.White );
-            var v2 = new Sandbox.Vertex( p2, new Vector4( new Vector3( TextureRect.BottomRight, TextureID ), 0f ), Color.White );
-            var v3 = new Sandbox.Vertex( p3, new Vector4( new Vector3( TextureRect.TopLeft, TextureID ), 0f ), Color.White );
-            var v4 = new Sandbox.Vertex( p4, new Vector4( new Vector3( TextureRect.TopRight, TextureID ), 0f ), Color.White );
-            Graphics.Draw( new List<Sandbox.Vertex>() { v1, v2, v3, v4 }, 4, Material, new RenderAttributes(), Graphics.PrimitiveType.TriangleStrip );
+            foreach ( var dir in Directions.All ) // Each face
+            {
+                var forward = dir.Forward();
+                var up = dir.Up();
+                var right = dir.Right();
 
+                verts.AddRange( new[]{
+                    forward + up + right,
+                    forward + up - right,
+                    forward - up - right,
+                    forward + up + right,
+                    forward - up - right,
+                    forward - up + right
+                }.Select( v => (v / 2f) * size ) );
+                uvs.AddRange( new[]{
+                    new Vector3( TextureRect.Right, TextureRect.Top, TextureID ), // Top right
+                    new Vector3( TextureRect.Left, TextureRect.Top, TextureID ), // Top left
+                    new Vector3( TextureRect.Left, TextureRect.Bottom, TextureID ), // Bottom left
+                    new Vector3( TextureRect.Right, TextureRect.Top, TextureID ), // Top right
+                    new Vector3( TextureRect.Left, TextureRect.Bottom, TextureID ), // Bottom left
+                    new Vector3( TextureRect.Right, TextureRect.Bottom, TextureID ) // Bottom right
+                } );
+                normals.AddRange( new[]{
+                    (Vector3)dir.Forward(),
+                    (Vector3)dir.Forward(),
+                    (Vector3)dir.Forward(),
+                    (Vector3)dir.Forward(),
+                    (Vector3)dir.Forward(),
+                    (Vector3)dir.Forward()
+                } );
+            }
+
+            var vertex = verts.Zip( uvs, normals ).Select( v => new Vertex( v.First, v.Third, Vector3.Zero, new Vector4( v.Second, 0f ) ) ).ToList();
+            Graphics.Draw( vertex, vertex.Count, Material );
         };
     }
 
@@ -62,6 +89,9 @@ public class SimpleParticle : Component
         base.OnDestroy();
         sceneObject.Delete();
     }
+    private const float MaxPushRadius = 30f;
+    public const float MinPushRadius = 5f;
+    public const float PushForce = 100f; // The force applied to push the particle away from the player.
     protected override void OnUpdate()
     {
         Lifetime -= Time.Delta; // Decrease the lifetime by the time since the last update.
@@ -73,19 +103,42 @@ public class SimpleParticle : Component
         }
 
         Velocity += Acceleration * Time.Delta; // Update the velocity based on acceleration.
+
         Velocity *= Damping; // Apply damping to the velocity.
+
+        // Get each player, and if the distance to the player is < 50 points, push the particle away from the player.
+        foreach ( var player in Scene.GetAllComponents<VoxelPlayer>() )
+        {
+            var delta = WorldPosition - player.GameObject.GetBounds().Center;
+            // Adjust the delta's z position to account for the player's height. This makes the player functionally a tall stick.
+            var oldZ = delta.z;
+            var diff = Math.Sign( delta.z ) * Math.Min( player.GameObject.GetBounds().Size.z * 0.5f, Math.Abs( delta.z ) );
+            delta.z -= diff;
+            var distance = MathF.Max( delta.Length, MinPushRadius );
+            if ( distance < MaxPushRadius )
+            {
+                var direction = delta.Normal;
+                // Push the particle away from the player.
+                var pushAmount = (MaxPushRadius - distance) / Time.Delta; // Calculate how much to push the particle away based on the distance.
+                                                                          // Apply the push to the particle's velocity.
+                Velocity += direction * pushAmount; // Push the particle away with a force proportional to the distance.
+            }
+        }
 
         // Try to move the particle based on its velocity.
         // We do a basic cast
-        var trace = Scene.Trace.Ray( WorldPosition, WorldPosition + Velocity * Time.Delta )
+        var trace = Scene.Trace
+            .Box( new Vector3( Scale.Evaluate( 1f - (Lifetime / MaxLifetime) ), Scale.Evaluate( 1f - (Lifetime / MaxLifetime) ), Scale.Evaluate( 1f - (Lifetime / MaxLifetime) ) ) * 0.2f, WorldPosition, WorldPosition + Velocity * Time.Delta )
+            .WithoutTags( "player" )
             .Run();
         WorldPosition = trace.EndPosition;
         if ( trace.Hit )
         {
             // Cancel out our velocity along the normal of the hit surface.
             var normal = trace.Normal;
-            Velocity -= normal * Vector3.Dot( Velocity, normal );
-            WorldPosition += trace.Normal * 0.01f; // Move the particle slightly away from the surface to avoid sticking.
+            Velocity -= normal * Vector3.Dot( Velocity, normal ) * 1.3f;
+            Velocity *= 0.2f;
+            WorldPosition += trace.Normal * 0.1f; // Move the particle slightly away from the surface to avoid sticking.
         }
 
         sceneObject.Transform = WorldTransform; // Update the scene object's transform to match the particle's world position and rotation.

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Sandbox;
+using Sandbox.UI;
 
 public static class Helpers
 {
@@ -222,5 +223,19 @@ public static class Helpers
 	public static Vector3Int WorldToVoxel( Vector3 position )
 	{
 		return (position / World.BlockScale).Floor();
+	}
+
+	public static Panel FindChild( this Panel parent, string condition )
+	{
+		if ( parent == null )
+		{
+			return null;
+		}
+
+		var predicate = condition.StartsWith( "#" )
+			? (Func<Panel, bool>)(x => x.Id == condition.Substring( 1 ))
+			: (Func<Panel, bool>)(x => x.HasClass( condition ));
+		return parent.Children.FirstOrDefault( predicate ) ??
+			   parent.Children.Select( child => child.FindChild( condition ) ).FirstOrDefault( x => x != null );
 	}
 }
