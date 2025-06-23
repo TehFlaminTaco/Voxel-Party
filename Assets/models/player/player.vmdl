@@ -102,7 +102,7 @@
 								disable_compression = false
 								disable_interpolation = false
 								enable_scale = false
-								source_filename = "models/player/idle.fbx"
+								source_filename = "models/player/idle/idle.fbx"
 								start_frame = -1
 								end_frame = -1
 								framerate = -1.0
@@ -151,7 +151,7 @@
 										disable_compression = false
 										disable_interpolation = false
 										enable_scale = false
-										source_filename = "models/player/walkfast_n.fbx"
+										source_filename = "models/player/movement/walk/walkfast_n.fbx"
 										start_frame = -1
 										end_frame = 24
 										framerate = -1.0
@@ -188,7 +188,7 @@
 										disable_compression = false
 										disable_interpolation = false
 										enable_scale = false
-										source_filename = "models/player/walkfast_e.fbx"
+										source_filename = "models/player/movement/walk/walkfast_e.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -240,7 +240,7 @@
 										disable_compression = false
 										disable_interpolation = false
 										enable_scale = false
-										source_filename = "models/player/walkfast_n.fbx"
+										source_filename = "models/player/movement/walk/walkfast_n.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -292,7 +292,7 @@
 										disable_compression = false
 										disable_interpolation = false
 										enable_scale = false
-										source_filename = "models/player/walkfast_e.fbx"
+										source_filename = "models/player/movement/walk/walkfast_e.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -329,7 +329,7 @@
 										disable_compression = false
 										disable_interpolation = false
 										enable_scale = false
-										source_filename = "models/player/WalkFast_NE.fbx"
+										source_filename = "models/player/movement/walk/walkfast_ne.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -381,7 +381,7 @@
 										disable_compression = false
 										disable_interpolation = false
 										enable_scale = false
-										source_filename = "models/player/WalkFast_NE.fbx"
+										source_filename = "models/player/movement/walk/walkfast_ne.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -418,7 +418,7 @@
 										disable_compression = false
 										disable_interpolation = false
 										enable_scale = false
-										source_filename = "models/player/WalkFast_NW.fbx"
+										source_filename = "models/player/movement/walk/walkfast_nw.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -470,7 +470,7 @@
 										disable_compression = false
 										disable_interpolation = false
 										enable_scale = false
-										source_filename = "models/player/WalkFast_NW.fbx"
+										source_filename = "models/player/movement/walk/walkfast_nw.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -513,7 +513,7 @@
 												disable_compression = false
 												disable_interpolation = false
 												enable_scale = false
-												source_filename = "models/player/walkfast_n.fbx"
+												source_filename = "models/player/movement/walk/walkfast_n.fbx"
 												start_frame = -1
 												end_frame = 24
 												framerate = 48.0
@@ -550,7 +550,7 @@
 												disable_compression = false
 												disable_interpolation = false
 												enable_scale = false
-												source_filename = "models/player/walkfast_e.fbx"
+												source_filename = "models/player/movement/walk/walkfast_e.fbx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 72.0
@@ -602,7 +602,7 @@
 												disable_compression = false
 												disable_interpolation = false
 												enable_scale = false
-												source_filename = "models/player/walkfast_n.fbx"
+												source_filename = "models/player/movement/walk/walkfast_n.fbx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 48.0
@@ -654,7 +654,7 @@
 												disable_compression = false
 												disable_interpolation = false
 												enable_scale = false
-												source_filename = "models/player/walkfast_e.fbx"
+												source_filename = "models/player/movement/walk/walkfast_e.fbx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 72.0
@@ -691,7 +691,7 @@
 												disable_compression = false
 												disable_interpolation = false
 												enable_scale = false
-												source_filename = "models/player/WalkFast_NE.fbx"
+												source_filename = "models/player/movement/walk/walkfast_ne.fbx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 48.0
@@ -743,7 +743,7 @@
 												disable_compression = false
 												disable_interpolation = false
 												enable_scale = false
-												source_filename = "models/player/WalkFast_NE.fbx"
+												source_filename = "models/player/movement/walk/walkfast_ne.fbx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 48.0
@@ -780,7 +780,7 @@
 												disable_compression = false
 												disable_interpolation = false
 												enable_scale = false
-												source_filename = "models/player/WalkFast_NW.fbx"
+												source_filename = "models/player/movement/walk/walkfast_nw.fbx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 48.0
@@ -832,7 +832,7 @@
 												disable_compression = false
 												disable_interpolation = false
 												enable_scale = false
-												source_filename = "models/player/WalkFast_NW.fbx"
+												source_filename = "models/player/movement/walk/walkfast_nw.fbx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 48.0
@@ -878,7 +878,7 @@
 										disable_compression = false
 										disable_interpolation = false
 										enable_scale = false
-										source_filename = "models/player/Run_N.fbx"
+										source_filename = "models/player/movement/run/run_n.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = 19.0
@@ -920,7 +920,7 @@
 												disable_compression = false
 												disable_interpolation = false
 												enable_scale = false
-												source_filename = "models/player/Run_N.fbx"
+												source_filename = "models/player/movement/run/run_n.fbx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 38.0
@@ -928,6 +928,191 @@
 												reverse = false
 											},
 										]
+									},
+								]
+							},
+							{
+								_class = "Folder"
+								name = "Sprint"
+								children = 
+								[
+									{
+										_class = "AnimFile"
+										name = "Sprint_N"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = false
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/Movement/Sprint/Sprint_N.fbx"
+										start_frame = -1
+										end_frame = 12
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "Sprint_E"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = false
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/Movement/Sprint/Sprint_E.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "Sprint_S"
+										children = 
+										[
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "WalkFast_E"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = false
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = true
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/Movement/Sprint/Sprint_N.fbx"
+										start_frame = -1
+										end_frame = 12
+										framerate = -1.0
+										take = 0
+										reverse = true
+									},
+									{
+										_class = "AnimFile"
+										name = "Sprint_W"
+										children = 
+										[
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "WalkFast_E"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = false
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = true
+										disable_compression = false
+										disable_interpolation = false
+										enable_scale = false
+										source_filename = "models/player/Movement/Sprint/Sprint_E.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = true
 									},
 								]
 							},
