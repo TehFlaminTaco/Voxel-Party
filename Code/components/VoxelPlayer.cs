@@ -22,13 +22,14 @@ public class VoxelPlayer : Component
 
     [Property] public bool CreativeMode { get; set; } = false;
     [Property] public bool GiveBrokenBlocks { get; set; } = false;
-
     [Property] public bool HasInventory { get; set; } = true;
     [Property] public bool HasHotbar { get; set; } = true;
 
     [Property, Alias( "Reach Distance" ), Description( "In blocks, not inches" )]
     public float ReachDistanceProperty { get; set; } = 3.5f;
     public float ReachDistance => ReachDistanceProperty * World.BlockScale;
+
+    [RequireComponent] PlayerController Controller { get; set; }
 
     public static VoxelPlayer LocalPlayer { get; set; }
 
@@ -39,6 +40,7 @@ public class VoxelPlayer : Component
     public Vector3Int? LastBreakingBlock;
     public Direction BreakingFace = Direction.None;
     public Direction LastBreakingFace = Direction.None;
+    public bool IsFlying;
     SceneCustomObject blockBreakEffect;
 
     // Gamemode stuff
@@ -60,23 +62,14 @@ public class VoxelPlayer : Component
         SpawnBlockBreakingEffect();
     }
 
+    public TimeSince TimeSinceLastJump { get; set; } = 0;
     protected override void OnUpdate()
     {
-        base.OnUpdate();
-
-        if ( Input.Pressed( "use" ) )
-            IsReady = !IsReady;
-
-        if ( !IsProxy && HasBuildVolume )
-        {
-            Gizmo.Draw.Color = Color.Black.WithAlpha( 0.5f );
-            Gizmo.Draw.LineThickness = 8f;
-            var bbox = BBox.FromPoints( new[]{
-                BuildAreaMins * World.BlockScale,
-                (BuildAreaMaxs + Vector3.One) * World.BlockScale
-            } );
-            Gizmo.Draw.LineBBox( bbox );
-        }
+        if ( Input.Pressed( "use" ) ) IsReady = !IsReady;
+        
+        if ( Input.Pressed( "jump" ) && TimeSinceLastJump.Relative < .25 && !Controller.IsOnGround ) IsFlying = !IsFlying;
+        if ( Input.Pressed( "jump" ) ) TimeSinceLastJump = 0;
+        if ( Controller.IsOnGround ) IsFlying = false;
     }
 
     protected override void OnFixedUpdate()
@@ -94,7 +87,18 @@ public class VoxelPlayer : Component
 
     protected override void OnPreRender()
     {
-        ShowHoveredFace();
+	    ShowHoveredFace();
+	    
+	    if ( !IsProxy && HasBuildVolume )
+	    {
+		    Gizmo.Draw.Color = Color.Green.WithAlpha( 0.5f );
+		    Gizmo.Draw.LineThickness = 8f;
+		    var bbox = BBox.FromPoints( new[]{
+			    BuildAreaMins * World.BlockScale,
+			    (BuildAreaMaxs + Vector3.One) * World.BlockScale
+		    } );
+		    Gizmo.Draw.LineBBox( bbox );
+	    }
     }
 
     public BlockTraceResult EyeTrace()

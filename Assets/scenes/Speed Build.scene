@@ -131,7 +131,7 @@
       ],
       "Children": [
         {
-          "__guid": "2efefe75-0b55-4596-a2a1-dcb37405cbf8",
+          "__guid": "61828142-9094-44f7-9985-c3cde5807a2d",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, -1, 0)",
@@ -147,7 +147,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "0f77118c-29d4-4b65-8d8a-1c34ce5f6886",
+              "__guid": "9d708c79-756c-476c-8722-40d06e6b2dae",
               "__enabled": true,
               "ChunkPosition": "0,-1,0",
               "OnComponentDestroy": null,
@@ -159,7 +159,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "ba4f2924-e2ed-45cc-9559-a86ac1c0687c",
+              "__guid": "3b506799-5560-488a-bfb3-0fada17097bc",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -183,7 +183,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "097e8186-c95a-421a-8b2d-e7e44f6c4f67",
+              "__guid": "2aa68053-89bf-48e8-b2b5-9ec31197aeda",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -206,7 +206,7 @@
           "Children": []
         },
         {
-          "__guid": "ba936f27-0ec9-4981-88fa-dcb306bb5977",
+          "__guid": "c8e2c719-e0e7-4304-841e-e81a18daa155",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, 0, 0)",
@@ -222,7 +222,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "f6dacfd7-1383-4e77-b5fe-d761ef4599fb",
+              "__guid": "75b561a1-e6b4-4d4d-8453-bb15ff7b5168",
               "__enabled": true,
               "ChunkPosition": "0,0,0",
               "OnComponentDestroy": null,
@@ -234,7 +234,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "ca605d58-8d1a-4150-af5f-c0611d690091",
+              "__guid": "25bd9b48-22ce-47ad-b176-2e6572fe753d",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -258,7 +258,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "0b6e2205-7885-4f70-b1e4-e4a476aa7f56",
+              "__guid": "75922203-5490-4c83-90cc-a581668438f7",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -281,7 +281,7 @@
           "Children": []
         },
         {
-          "__guid": "32e8d33d-8a28-4bb9-ab49-2fa90cf26edc",
+          "__guid": "d67394af-9c2d-45d7-9198-43c370621662",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, 0)",
@@ -297,7 +297,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "ef57053b-9d5c-4072-ac3e-f032f88a3b0b",
+              "__guid": "8a656a0b-37ba-4c40-b0f1-5b69bd9f6bfa",
               "__enabled": true,
               "ChunkPosition": "-1,-1,0",
               "OnComponentDestroy": null,
@@ -309,7 +309,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "bb17fe14-d4d7-436b-aff9-0226adc186ee",
+              "__guid": "c1a61a2b-4508-4003-a702-508f8b6342f4",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -333,7 +333,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "46b23809-6ee9-499a-84b3-8328fb22b3d4",
+              "__guid": "2f3981ab-f4eb-42e4-a043-c7d92fa98681",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -356,7 +356,7 @@
           "Children": []
         },
         {
-          "__guid": "0087ad34-8f34-443c-8bf0-3e92436039bf",
+          "__guid": "6a7289f0-985e-4210-9135-d88bf185e8b4",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, 0)",
@@ -372,7 +372,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "f0d452dd-97c0-41bc-a7a3-42c0a5953d0f",
+              "__guid": "011377e9-6f17-45c0-9c5c-194e9be04445",
               "__enabled": true,
               "ChunkPosition": "-1,0,0",
               "OnComponentDestroy": null,
@@ -384,7 +384,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "465ec280-33f5-4668-9532-4bf870cccab3",
+              "__guid": "b0712101-cbe2-46f4-87dd-9cddf6dc1bcb",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -408,7 +408,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "390f6d99-1fe5-494b-b30d-f081bb8cff4a",
+              "__guid": "1bd51768-61ab-459a-a912-b6afb5463c10",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -607,7 +607,7 @@
           "UseFovFromPreferences": true,
           "UseInputControls": true,
           "UseLookControls": true,
-          "WalkSpeed": 100
+          "WalkSpeed": 160
         },
         {
           "__type": "Sandbox.Rigidbody",
@@ -649,6 +649,24 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "Priority": 0,
+          "StepDownHeight": 18,
+          "StepUpHeight": 18
+        },
+        {
+          "__type": "MoveModeFly",
+          "__guid": "c0e6cd45-440e-492e-936e-fcb8b3d33db9",
+          "__enabled": true,
+          "AscendSpeed": 200,
+          "DescendSpeed": 150,
+          "FlyingRunSpeed": 400,
+          "FlyingWalkSpeed": 200,
+          "GroundAngle": 45,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
           "StepDownHeight": 18,
           "StepUpHeight": 18
         },
@@ -732,20 +750,6 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "ReachDistanceProperty": 7
-        },
-        {
-          "__type": "MoveModeFly",
-          "__guid": "c0e6cd45-440e-492e-936e-fcb8b3d33db9",
-          "__enabled": true,
-          "GroundAngle": 45,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "StepDownHeight": 18,
-          "StepUpHeight": 18
         }
       ],
       "Children": [
@@ -1199,7 +1203,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "b5c030ad-e380-4493-a607-3252462f5862",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "7c1dbe17-b056-429c-9736-333a61b3266f",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "e0da9681-8260-4fab-8f46-09fba9cc549b",
-        "aa1ca7e2-dd43-41ac-9f58-d45a0f153244": "bfbd41dc-fd1b-4d42-8bd8-bf11ea141b1d",
+        "4307ee5e-e271-46ac-963c-ac3883d13e85": "380e4fd4-0bb7-4ff6-816c-760f5030471a",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "5841d23b-2284-432f-a7bf-981b71c8ecc6",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "bc0b0213-e9be-4709-8c77-977008c01ced",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "45149c09-3d21-4013-bba2-cc3d759a9369",
@@ -1208,7 +1212,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "84f0537c-5c5a-42e2-9448-6f3d25504205",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "8f2b4608-dff2-480a-8584-739a9aef3f3d",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "2b0aaf8a-b584-43de-8251-52e2f2d04c07",
-        "bd25fc56-dc14-4c56-9c16-9d8319c95c25": "d3a21ab8-0073-4443-aa35-adc2bff1a5a4"
+        "00b4687d-e160-4c19-a1d3-643c019c8026": "3146291e-d776-476e-8a7e-4e3d2ebc51bd"
       }
     },
     {
@@ -1255,7 +1259,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "1fa1e20d-c971-401e-8b89-415571983115",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "b0f2ed15-75a5-4daa-83fe-6c3b712cb6a6",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "00cc6891-1a11-4cae-943c-6acdc4598b93",
-        "aa1ca7e2-dd43-41ac-9f58-d45a0f153244": "5e22b5c0-20df-4c9d-b92e-8d3ec85fca99",
+        "4307ee5e-e271-46ac-963c-ac3883d13e85": "aa9f5a42-1a0a-4203-8d79-c4cbd51d042c",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "b9344353-fd13-4820-a372-d98028ac88be",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "0691e31c-dd40-47a3-8f8b-c380b14040ff",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "3b8158ce-5e9a-4a3c-8369-e49e6f8f175e",
@@ -1264,7 +1268,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "ed0d4b44-e84b-4e77-a2b5-9f9dbf37501e",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "64972339-11a8-410c-8d25-f2b14929523a",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "b26d2405-2057-4a4c-9e2c-ca9fbc5704e5",
-        "bd25fc56-dc14-4c56-9c16-9d8319c95c25": "575598f4-9b75-4634-ab2e-aa6352a0a5fd"
+        "00b4687d-e160-4c19-a1d3-643c019c8026": "25b9bc33-717b-45ab-993a-78cbe2301dac"
       }
     },
     {
@@ -1311,7 +1315,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "9d9377e4-4e83-49e0-8877-3d37f1a1d30f",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "9f5fdfaa-d016-4e61-9900-da3ce3965626",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "100eee8a-cf68-4a99-906e-b325d02ffe83",
-        "aa1ca7e2-dd43-41ac-9f58-d45a0f153244": "4668b6d2-d3eb-407c-9719-e60177316500",
+        "4307ee5e-e271-46ac-963c-ac3883d13e85": "97f117c8-96cd-4a75-9ce9-333024ac70d3",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "3fbff953-779a-4a15-87e9-3af283142f91",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "bf898f4a-d8b6-4a3c-bfc3-1bb78d227ee8",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "6962bb59-95a9-4722-aea5-16fe9d8af2c1",
@@ -1320,7 +1324,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "38d10ac3-9bb8-43c2-998b-9ff401f63239",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "6bba807b-8df7-49ba-a483-f3a41064e61d",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "b64efa6a-0e14-4e5e-beca-7f7dd6b7891d",
-        "bd25fc56-dc14-4c56-9c16-9d8319c95c25": "ee232fbb-9048-44d1-8df5-828944b5c2b3"
+        "00b4687d-e160-4c19-a1d3-643c019c8026": "aef838dc-5dbe-46cf-8d20-94b1419f5a54"
       }
     },
     {
@@ -1367,7 +1371,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "1956923f-b0d5-4ac3-8fe3-a3b6591216a1",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "83b3b816-e9e6-4220-bd16-e5981e265c47",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "405f253b-c49a-4409-b069-f45cd9ab6e40",
-        "aa1ca7e2-dd43-41ac-9f58-d45a0f153244": "cc314729-9f01-4781-ad8a-311c49cbff1a",
+        "4307ee5e-e271-46ac-963c-ac3883d13e85": "54dac1dc-f58c-4628-b18a-ed0e3f574b46",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "7995c29d-214d-4159-8536-b333c3d86f30",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "955b5e9a-2664-48de-a7e7-c32fe31e9072",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "2183f363-8cb8-4426-8e65-1d28f7f87bc4",
@@ -1376,7 +1380,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "a2ddcf5e-673b-4c31-a362-2df7ff003641",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "8b2642a2-5332-4796-8218-16568b02081a",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "23baa55b-8a51-46a3-a318-9b8cb952ef95",
-        "bd25fc56-dc14-4c56-9c16-9d8319c95c25": "e6361139-11df-46b8-8b1a-b5f6e036488f"
+        "00b4687d-e160-4c19-a1d3-643c019c8026": "e8dfd1f2-7d47-4cf1-af90-ea141a329bd6"
       }
     },
     {
@@ -1423,7 +1427,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "6293a155-1d76-474e-a0ff-c40b8d7f90ea",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "9ea730fc-3a2e-45bd-b2e7-0f372c0e45be",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "668285eb-ccfe-4624-9f60-a6cb12ec3daa",
-        "aa1ca7e2-dd43-41ac-9f58-d45a0f153244": "85da4a4b-0090-4585-bb1f-be2bbb535696",
+        "4307ee5e-e271-46ac-963c-ac3883d13e85": "2e225e13-22de-44b4-8770-3580a8871a92",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "01376581-11b6-4d77-a142-1b68114b60b4",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "fe8648a3-166a-4e55-b4be-ed04ea83b7f6",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "a204c3b1-cf9c-4541-8bce-1d9084162c23",
@@ -1432,7 +1436,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "f62c5304-a1ce-452a-9dc0-317bded1f521",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "74372794-2c73-4653-8c25-0b4999e0c0b0",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "af8667a0-d566-49ba-aa9b-380e7698a9d2",
-        "bd25fc56-dc14-4c56-9c16-9d8319c95c25": "8706b626-fa3d-4345-ae86-4f1bb4cdf3bf"
+        "00b4687d-e160-4c19-a1d3-643c019c8026": "da796c75-63e9-4f2e-857f-9118cb8cf58d"
       }
     },
     {
@@ -1479,7 +1483,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "9d71da7b-a8e2-47e2-bdfc-c033eadd592f",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "a8c52fee-25ba-4920-a11b-24df95718622",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "556d2e49-7c76-436a-802a-12a994058f0d",
-        "aa1ca7e2-dd43-41ac-9f58-d45a0f153244": "d5ab1d76-2163-4480-a99b-534a19882494",
+        "4307ee5e-e271-46ac-963c-ac3883d13e85": "2d9b443d-9226-42a1-9228-cc1239f4177b",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "145f110e-8594-46af-9a32-2b9b639fb1c1",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "ed9fbcc6-5064-40bf-9dd2-d9588c5f8983",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "5d0093b1-1213-4b91-9fc2-b507edefa18e",
@@ -1488,7 +1492,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "a5170043-56e9-42da-a57d-8b7b243d150b",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "12c259a5-3ae4-4c01-aa2d-ce5c6ebb8dcf",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "7e1a3098-01a8-4ba3-a08b-10d9f7a2b3bf",
-        "bd25fc56-dc14-4c56-9c16-9d8319c95c25": "ca0dda53-cc8b-4dd3-bf74-523de611354e"
+        "00b4687d-e160-4c19-a1d3-643c019c8026": "123ed68b-7b78-4263-aa2e-329d878893e4"
       }
     },
     {
@@ -1535,7 +1539,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "6aa89ec8-6cbc-4f98-acba-05ded5ae03a7",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "9e1e081c-9080-4bd7-8619-9c82636b8982",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "c2d10def-62ef-49bb-b711-79305f289166",
-        "aa1ca7e2-dd43-41ac-9f58-d45a0f153244": "e9d5ff88-15bd-4533-8bff-d44931ed75f4",
+        "4307ee5e-e271-46ac-963c-ac3883d13e85": "4c1b2b52-41c9-4e40-9c87-905b24b8f7ce",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "afaf8428-0428-440e-a084-a0c8ece7df36",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "2ff80b12-fd2c-4789-b8ea-89f3348364c1",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "e2b8d8a8-431e-4d30-b9f3-171e8702beb6",
@@ -1544,7 +1548,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "d72fbc7d-5c05-4bc1-82ee-9a6a583deb4e",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "0b826dd7-a5df-48fa-9430-280cc5035d62",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "bf586d5e-1a5e-4760-b427-175f57781cce",
-        "bd25fc56-dc14-4c56-9c16-9d8319c95c25": "a5ca4636-0247-47e1-b59c-20c07737fd1f"
+        "00b4687d-e160-4c19-a1d3-643c019c8026": "232894f4-eb11-4c65-9af3-d7140c51e3d6"
       }
     },
     {
@@ -1591,7 +1595,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "28a49dee-a2bf-4c63-acb2-a6b1e869a6e4",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "2adb7821-8485-4f26-9daf-b757d6c2d1b7",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "d272cc43-86c3-445b-81d4-d3ed3e52ad8b",
-        "aa1ca7e2-dd43-41ac-9f58-d45a0f153244": "69c1c0d6-1643-45d3-9ce1-66a6e43cd4b4",
+        "4307ee5e-e271-46ac-963c-ac3883d13e85": "5ca29ea7-856b-4b3e-b390-d5671f68e7b6",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "dcc298b5-407e-4362-8c3a-c8fa18ef2562",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "bef13b19-43f5-485e-a50c-6f3698c581ed",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "51e60a44-b570-47d8-86e7-d4724b9cc944",
@@ -1600,7 +1604,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "1b20cecf-2dd1-4d77-8bbc-ade813360227",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "5471ddc4-21c3-44dc-8235-6193424396f2",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "82fa1d7f-7254-424a-b749-395362fe3e37",
-        "bd25fc56-dc14-4c56-9c16-9d8319c95c25": "77696497-309e-40c1-8e94-a3ecbeb9b96b"
+        "00b4687d-e160-4c19-a1d3-643c019c8026": "df15f4fa-6fb9-4f5c-a81f-40b7457ff211"
       }
     },
     {

@@ -4,23 +4,22 @@ public class MoveModeFly : MoveMode
 {
     public override int Score( PlayerController controller )
     {
-        return (!VoxPly.CreativeMode || Controller.IsOnGround) ? -1 : 10;
+        return !VoxPly.IsFlying ? -1 : 10;
     }
+    
+    [Property, Group("Movement")] public float FlyingWalkSpeed { get; set; } = 200;
+    [Property, Group("Movement")] public float FlyingRunSpeed { get; set; } = 400;
+    [Property, Group("Movement")] public float AscendSpeed { get; set; } = 200;
+    [Property, Group("Movement")] public float DescendSpeed { get; set; } = 150;
 
-    [Property]
-    public float GroundAngle { get; set; } = 45f;
-
-    [Property]
-    public float StepUpHeight { get; set; } = 18f;
-
-    [Property]
-    public float StepDownHeight { get; set; } = 18f;
+    [Property, Group("Angles")] public float GroundAngle { get; set; } = 45f;
+    [Property, Group("Angles")] public float StepUpHeight { get; set; } = 18f;
+    [Property, Group("Angles")] public float StepDownHeight { get; set; } = 18f;
+    
+    [RequireComponent] VoxelPlayer VoxPly { get; set; }
 
     public override bool AllowGrounding => true;
-
     public override bool AllowFalling => true;
-
-    private VoxelPlayer VoxPly => Controller.GetComponent<VoxelPlayer>();
 
 
     public override void AddVelocity()
@@ -76,41 +75,38 @@ public class MoveModeFly : MoveMode
         return true;
     }
 
-    private Vector3.SmoothDamped smoothedMovement;
+    Vector3.SmoothDamped smoothedMovement;
     public override Vector3 UpdateMove( Rotation eyes, Vector3 input )
     {
-        Angles value = eyes.Angles();
-        value.pitch = 0f;
-        eyes = value;
-        var updown =
+        eyes = eyes.Angles().WithPitch( 0 );
+        
+        var upDown =
               (Input.Down( "jump" ) ? Vector3.Up : Vector3.Zero)
             + (Input.Down( "duck" ) ? Vector3.Down : Vector3.Zero);
-        input += updown;
+        input += upDown;
         input = input.ClampLength( 1f );
-        Vector3 vector = eyes * input;
-        bool flag = Input.Down( Controller.AltMoveButton );
+        
+        Vector3 moveDir = eyes * input;
+        bool isRunning = Input.Down( Controller.AltMoveButton );
         if ( Controller.RunByDefault )
         {
-            flag = !flag;
+            isRunning = !isRunning;
         }
 
-        float num = (flag ? Controller.RunSpeed : Controller.WalkSpeed);
-        if ( vector.IsNearlyZero( 0.1f ) )
-        {
-            vector = 0f;
-        }
-        else
-        {
-            smoothedMovement.Current = vector.Normal * smoothedMovement.Current.Length;
-        }
+        float horizontalSpeed = isRunning ? FlyingRunSpeed : FlyingWalkSpeed;
+        
+        if ( moveDir.IsNearlyZero( 0.1f ) ) moveDir = 0f;
+        else smoothedMovement.Current = moveDir.Normal * smoothedMovement.Current.Length;
 
-        smoothedMovement.Target = vector * num;
-        smoothedMovement.SmoothTime = ((smoothedMovement.Target.Length < smoothedMovement.Current.Length) ? Controller.DeaccelerationTime : Controller.AccelerationTime);
+        var target = (moveDir.WithZ( 0 ) * horizontalSpeed) + 
+                     Vector3.Zero.WithZ( moveDir.z > 0 ? moveDir.z * AscendSpeed : moveDir.z * DescendSpeed );
+        smoothedMovement.Target = target;
+        smoothedMovement.SmoothTime = smoothedMovement.Target.Length < smoothedMovement.Current.Length
+	        ? Controller.DeaccelerationTime 
+	        : Controller.AccelerationTime;
+        
         smoothedMovement.Update( Time.Delta );
-        if ( smoothedMovement.Current.IsNearlyZero( 0.01f ) )
-        {
-            smoothedMovement.Current = 0f;
-        }
+        if ( smoothedMovement.Current.IsNearlyZero( 0.01f ) ) smoothedMovement.Current = 0f;
 
         return smoothedMovement.Current;
     }
