@@ -43,6 +43,34 @@ public class Inventory
         }
     }
 
+    public IEnumerable<byte> Serialize()
+    {
+        var serialized = new List<byte>();
+        for ( int slot = 0; slot < TotalSize; slot++ )
+        {
+            var item = GetItem( slot );
+            serialized.AddRange( item.Serialize() );
+        }
+        return serialized;
+    }
+
+    public void Deserialize( IEnumerable<byte> data )
+    {
+        int index = 0;
+        var dataList = data.ToList();
+        for ( int slot = 0; slot < TotalSize; slot++ )
+        {
+            if ( index + 8 > dataList.Count )
+            {
+                Log.Warning( "Inventory.Deserialize: Not enough data to deserialize ItemStack." );
+                break; // Not enough data for the next item
+            }
+            var item = ItemStack.Deserialize( dataList.Skip( index ), out int size );
+            SetItem( slot, item );
+            index += size; // Move to the next item in the data
+        }
+    }
+
     // Try and insert the item into the inventory at the given slot and return all items we cannot insert.
     // If the slot is full, we return the original stack.
     // If simulate is true, we do not modify the inventory nor the original stack.

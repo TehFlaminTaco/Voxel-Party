@@ -5,6 +5,18 @@ public class VoxelPlayer : Component
 {
     World world => Scene.GetAll<WorldThinker>().First().World;
 
+    [Sync( SyncFlags.FromHost )]
+    public byte[] InventoryData
+    {
+        get => inventory.Serialize().ToArray();
+        set
+        {
+            if ( value == null || value.Length == 0 )
+                return; // Do not deserialize if the value is null or empty
+            inventory.Deserialize( value );
+        }
+    }
+
     public Inventory inventory = new();
     [Property, ReadOnly, Group( "InventoryDebug" )] public List<int> InventoryItems => inventory.Items.ConvertAll( item => item.Count );
 
@@ -55,7 +67,7 @@ public class VoxelPlayer : Component
         if ( Input.Pressed( "use" ) )
             IsReady = !IsReady;
 
-        if ( HasBuildVolume )
+        if ( !IsProxy && HasBuildVolume )
         {
             Gizmo.Draw.Color = Color.Black.WithAlpha( 0.5f );
             Gizmo.Draw.LineThickness = 8f;
@@ -234,7 +246,7 @@ public class VoxelPlayer : Component
             {
                 var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
                 world.SpawnBreakParticles( BreakingBlock.Value );
-                world.SetBlock( BreakingBlock.Value, new BlockData( 0 ) );
+                world.Thinker.PlaceBlock( BreakingBlock.Value, new BlockData( 0 ) );
             }
         }
 
@@ -264,7 +276,7 @@ public class VoxelPlayer : Component
                 return;
             }
             inventory.TakeItem( SelectedSlot, 1 ); // Remove one item from the hotbar slot
-            world.SetBlock( placePos, new BlockData( (byte)item.Item.ID, 0 ) );
+            world.Thinker.PlaceBlock( placePos, new BlockData( (byte)item.Item.ID, 0 ) );
         }
     }
 

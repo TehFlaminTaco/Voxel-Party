@@ -78,11 +78,12 @@ public class Chunk
 		var obj = new GameObject( true, $"Chunk ({Position.x}, {Position.y}, {Position.z})" );
 		obj.Parent = (thinker ?? scene.Get<WorldThinker>()).GameObject;
 		var chunkObj = obj.AddComponent<ChunkObject>();
+		chunkObj.WorldThinkerInstanceOverride = thinker; // Set the thinker to use for this chunk.
 		chunkObj.ChunkPosition = Position; // Set the chunk position in world coordinates.
 		obj.WorldPosition = Helpers.VoxelToWorld( Position * SIZE );
 		ChunkObject = chunkObj;
-		obj.Network.AssignOwnership( Connection.Host );
 		obj.NetworkSpawn();
+		obj.Network.AssignOwnership( Connection.Host );
 		return chunkObj;
 	}
 
