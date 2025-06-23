@@ -1,0 +1,62 @@
+{
+  "UI": false,
+  "Volume": "1",
+  "Pitch": "1",
+  "Decibels": 70,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/footsteps/marble/marble_run1.vsnd",
+    "sounds/footsteps/marble/marble_run10.vsnd",
+    "sounds/footsteps/marble/marble_run11.vsnd",
+    "sounds/footsteps/marble/marble_run2.vsnd",
+    "sounds/footsteps/marble/marble_run3.vsnd",
+    "sounds/footsteps/marble/marble_run4.vsnd",
+    "sounds/footsteps/marble/marble_run5.vsnd",
+    "sounds/footsteps/marble/marble_run6.vsnd",
+    "sounds/footsteps/marble/marble_run7.vsnd",
+    "sounds/footsteps/marble/marble_run8.vsnd",
+    "sounds/footsteps/marble/marble_run9.vsnd"
+  ],
+  "Occlusion": true,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "Distance": 6293,
+  "Falloff": [
+    {
+      "x": 0,
+      "y": 1,
+      "in": 0,
+      "out": -1.8,
+      "mode": "Mirrored"
+    },
+    {
+      "x": 0.05,
+      "y": 0.22,
+      "in": 3.5,
+      "out": -3.5,
+      "mode": "Mirrored"
+    },
+    {
+      "x": 0.2,
+      "y": 0.04,
+      "in": 0.16,
+      "out": -0.16,
+      "mode": "Mirrored"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "in": 0,
+      "out": 0,
+      "mode": "Mirrored"
+    }
+  ],
+  "DefaultMixer": {
+    "Name": "unknown",
+    "Id": "00000000-0000-0000-0000-000000000000"
+  },
+  "__references": [],
+  "__version": 1
+}

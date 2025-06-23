@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography.X509Certificates;
 
-public class VoxelPlayer : Component
+public partial class VoxelPlayer : Component
 {
     World world => Scene.GetAll<WorldThinker>().First().World;
 
@@ -40,6 +40,8 @@ public class VoxelPlayer : Component
     public Vector3Int? LastBreakingBlock;
     public Direction BreakingFace = Direction.None;
     public Direction LastBreakingFace = Direction.None;
+    public Item GroundBlockL = null;
+    public Item GroundBlockR = null;
     public bool IsFlying;
     SceneCustomObject blockBreakEffect;
 
@@ -83,6 +85,7 @@ public class VoxelPlayer : Component
             HandlePlace();
         }
         HandleHotbar();
+        DoFootsteps();
     }
 
     protected override void OnPreRender()

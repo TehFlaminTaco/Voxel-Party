@@ -8,6 +8,10 @@
     "IsSolidBlock": true,
     "IsSolid": true,
     "Hardness": 1,
+    "BreakParticle": "prefabs/break particles.prefab",
+    "WalkStepSound": "sounds/footsteps/stone/stone_walk.sound",
+    "RunStepSound": "sounds/footsteps/stone/stone_run.sound",
+    "CrouchStepSound": "sounds/footsteps/stone/stone_wander.sound",
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",
@@ -34,7 +38,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": null
+      "compiled": "textures/generated/imagefile/692d68decff97b80.vtex"
     },
     "TopTexture": {
       "$compiler": "texture",
@@ -62,7 +66,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": null
+      "compiled": "textures/generated/imagefile/4101c976dbdd7f64.vtex"
     },
     "SideTexture": null,
     "NorthTexture": null,
@@ -95,16 +99,16 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": null
+      "compiled": "textures/generated/imagefile/4101c976dbdd7f64.vtex"
     },
     "TextureIndex": 5,
-    "TopTextureIndex": null,
+    "TopTextureIndex": 6,
     "SideTextureIndex": null,
     "NorthTextureIndex": null,
     "SouthTextureIndex": null,
     "EastTextureIndex": null,
     "WestTextureIndex": null,
-    "BottomTextureIndex": null,
+    "BottomTextureIndex": 6,
     "Drops": [
       {
         "Item": "items/glass.item",

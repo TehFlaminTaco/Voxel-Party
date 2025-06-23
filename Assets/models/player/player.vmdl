@@ -135,7 +135,33 @@
 												linear = false
 												quadratic = false
 												root_bone_name = ""
-												motion_type = "Single"
+												motion_type = "Uniform"
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 5
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 19
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 6
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "1"
+													Volume = 1.0
+												}
 											},
 										]
 										activity_name = "WalkFast_N"
@@ -172,7 +198,33 @@
 												linear = false
 												quadratic = false
 												root_bone_name = ""
-												motion_type = "Single"
+												motion_type = "Uniform"
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 6
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 15
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "1"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 7
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "0"
+													Volume = 1.0
+												}
 											},
 										]
 										activity_name = "WalkFast_E"
@@ -201,6 +253,21 @@
 										children = 
 										[
 											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 6
+											},
+											{
 												_class = "AnimAlign"
 												align_tx = true
 												align_ty = true
@@ -216,15 +283,26 @@
 												bone = "root"
 											},
 											{
-												_class = "ExtractMotion"
-												extract_tx = true
-												extract_ty = true
-												extract_tz = false
-												extract_rz = false
-												linear = false
-												quadratic = false
-												root_bone_name = ""
-												motion_type = "Single"
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 19
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "1"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 6
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "0"
+													Volume = 1.0
+												}
 											},
 										]
 										activity_name = "WalkFast_S"
@@ -253,6 +331,21 @@
 										children = 
 										[
 											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 6
+											},
+											{
 												_class = "AnimAlign"
 												align_tx = true
 												align_ty = true
@@ -268,15 +361,26 @@
 												bone = "root"
 											},
 											{
-												_class = "ExtractMotion"
-												extract_tx = true
-												extract_ty = true
-												extract_tz = false
-												extract_rz = false
-												linear = false
-												quadratic = false
-												root_bone_name = ""
-												motion_type = "Single"
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 15
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 7
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "1"
+													Volume = 1.0
+												}
 											},
 										]
 										activity_name = "WalkFast_W"
@@ -313,7 +417,48 @@
 												linear = false
 												quadratic = false
 												root_bone_name = ""
-												motion_type = "Single"
+												motion_type = "Uniform"
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 5
+											},
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "WalkFast_E"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 19
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 6
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "1"
+													Volume = 1.0
+												}
 											},
 										]
 										activity_name = "WalkFast_NE"
@@ -342,6 +487,21 @@
 										children = 
 										[
 											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 5
+											},
+											{
 												_class = "AnimAlign"
 												align_tx = true
 												align_ty = true
@@ -357,15 +517,26 @@
 												bone = "root"
 											},
 											{
-												_class = "ExtractMotion"
-												extract_tx = true
-												extract_ty = true
-												extract_tz = false
-												extract_rz = false
-												linear = false
-												quadratic = false
-												root_bone_name = ""
-												motion_type = "Single"
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 19
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "1"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 6
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "0"
+													Volume = 1.0
+												}
 											},
 										]
 										activity_name = "WalkFast_SW"
@@ -402,7 +573,48 @@
 												linear = false
 												quadratic = false
 												root_bone_name = ""
-												motion_type = "Single"
+												motion_type = "Uniform"
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 5
+											},
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "WalkFast_E"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 19
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 6
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "1"
+													Volume = 1.0
+												}
 											},
 										]
 										activity_name = "WalkFast_NW"
@@ -431,6 +643,21 @@
 										children = 
 										[
 											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 5
+											},
+											{
 												_class = "AnimAlign"
 												align_tx = true
 												align_ty = true
@@ -446,15 +673,26 @@
 												bone = "root"
 											},
 											{
-												_class = "ExtractMotion"
-												extract_tx = true
-												extract_ty = true
-												extract_tz = false
-												extract_rz = false
-												linear = false
-												quadratic = false
-												root_bone_name = ""
-												motion_type = "Single"
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 19
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "1"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 6
+												event_keys = 
+												{
+													Attachment = ""
+													Foot = "0"
+													Volume = 1.0
+												}
 											},
 										]
 										activity_name = "WalkFast_SE"
@@ -497,10 +735,36 @@
 														linear = false
 														quadratic = false
 														root_bone_name = ""
-														motion_type = "Single"
+														motion_type = "Uniform"
+													},
+													{
+														_class = "AnimStartLoop"
+														start_loop_frame = 5
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 19
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "0"
+															Volume = 1.0
+														}
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 6
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "1"
+															Volume = 1.0
+														}
 													},
 												]
-												activity_name = "Walk2X_N"
+												activity_name = "WalkFast_N"
 												activity_weight = 1
 												weight_list_name = ""
 												fade_in_time = 0.2
@@ -534,10 +798,36 @@
 														linear = false
 														quadratic = false
 														root_bone_name = ""
-														motion_type = "Single"
+														motion_type = "Uniform"
+													},
+													{
+														_class = "AnimStartLoop"
+														start_loop_frame = 6
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 15
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "1"
+															Volume = 1.0
+														}
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 7
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "0"
+															Volume = 1.0
+														}
 													},
 												]
-												activity_name = "Walk2X_E"
+												activity_name = "WalkFast_E"
 												activity_weight = 1
 												weight_list_name = ""
 												fade_in_time = 0.2
@@ -553,7 +843,7 @@
 												source_filename = "models/player/movement/walk/walkfast_e.fbx"
 												start_frame = -1
 												end_frame = -1
-												framerate = 72.0
+												framerate = 48.0
 												take = 0
 												reverse = false
 											},
@@ -562,6 +852,21 @@
 												name = "Walk2X_S"
 												children = 
 												[
+													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Uniform"
+													},
+													{
+														_class = "AnimStartLoop"
+														start_loop_frame = 6
+													},
 													{
 														_class = "AnimAlign"
 														align_tx = true
@@ -578,18 +883,29 @@
 														bone = "root"
 													},
 													{
-														_class = "ExtractMotion"
-														extract_tx = true
-														extract_ty = true
-														extract_tz = false
-														extract_rz = false
-														linear = false
-														quadratic = false
-														root_bone_name = ""
-														motion_type = "Single"
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 19
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "1"
+															Volume = 1.0
+														}
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 6
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "0"
+															Volume = 1.0
+														}
 													},
 												]
-												activity_name = "Walk2X_S"
+												activity_name = "WalkFast_S"
 												activity_weight = 1
 												weight_list_name = ""
 												fade_in_time = 0.2
@@ -615,6 +931,21 @@
 												children = 
 												[
 													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Uniform"
+													},
+													{
+														_class = "AnimStartLoop"
+														start_loop_frame = 6
+													},
+													{
 														_class = "AnimAlign"
 														align_tx = true
 														align_ty = true
@@ -630,18 +961,29 @@
 														bone = "root"
 													},
 													{
-														_class = "ExtractMotion"
-														extract_tx = true
-														extract_ty = true
-														extract_tz = false
-														extract_rz = false
-														linear = false
-														quadratic = false
-														root_bone_name = ""
-														motion_type = "Single"
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 15
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "0"
+															Volume = 1.0
+														}
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 7
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "1"
+															Volume = 1.0
+														}
 													},
 												]
-												activity_name = "Walk2X_W"
+												activity_name = "WalkFast_W"
 												activity_weight = 1
 												weight_list_name = ""
 												fade_in_time = 0.2
@@ -657,7 +999,7 @@
 												source_filename = "models/player/movement/walk/walkfast_e.fbx"
 												start_frame = -1
 												end_frame = -1
-												framerate = 72.0
+												framerate = 48.0
 												take = 0
 												reverse = true
 											},
@@ -675,10 +1017,51 @@
 														linear = false
 														quadratic = false
 														root_bone_name = ""
-														motion_type = "Single"
+														motion_type = "Uniform"
+													},
+													{
+														_class = "AnimStartLoop"
+														start_loop_frame = 5
+													},
+													{
+														_class = "AnimAlign"
+														align_tx = true
+														align_ty = true
+														align_tz = false
+														align_rx = false
+														align_ry = false
+														align_rz = false
+														align_frame_type = "Number"
+														frame = 0
+														align_to_anim = "WalkFast_E"
+														align_to_frame_type = "Number"
+														align_to_frame = 0
+														bone = "root"
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 19
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "0"
+															Volume = 1.0
+														}
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 6
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "1"
+															Volume = 1.0
+														}
 													},
 												]
-												activity_name = "Walk2X_NE"
+												activity_name = "WalkFast_NE"
 												activity_weight = 1
 												weight_list_name = ""
 												fade_in_time = 0.2
@@ -704,6 +1087,21 @@
 												children = 
 												[
 													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Uniform"
+													},
+													{
+														_class = "AnimStartLoop"
+														start_loop_frame = 5
+													},
+													{
 														_class = "AnimAlign"
 														align_tx = true
 														align_ty = true
@@ -719,18 +1117,29 @@
 														bone = "root"
 													},
 													{
-														_class = "ExtractMotion"
-														extract_tx = true
-														extract_ty = true
-														extract_tz = false
-														extract_rz = false
-														linear = false
-														quadratic = false
-														root_bone_name = ""
-														motion_type = "Single"
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 19
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "1"
+															Volume = 1.0
+														}
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 6
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "0"
+															Volume = 1.0
+														}
 													},
 												]
-												activity_name = "Walk2X_SW"
+												activity_name = "WalkFast_SW"
 												activity_weight = 1
 												weight_list_name = ""
 												fade_in_time = 0.2
@@ -764,10 +1173,51 @@
 														linear = false
 														quadratic = false
 														root_bone_name = ""
-														motion_type = "Single"
+														motion_type = "Uniform"
+													},
+													{
+														_class = "AnimStartLoop"
+														start_loop_frame = 5
+													},
+													{
+														_class = "AnimAlign"
+														align_tx = true
+														align_ty = true
+														align_tz = false
+														align_rx = false
+														align_ry = false
+														align_rz = false
+														align_frame_type = "Number"
+														frame = 0
+														align_to_anim = "WalkFast_E"
+														align_to_frame_type = "Number"
+														align_to_frame = 0
+														bone = "root"
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 19
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "0"
+															Volume = 1.0
+														}
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 6
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "1"
+															Volume = 1.0
+														}
 													},
 												]
-												activity_name = "Walk2X_NW"
+												activity_name = "WalkFast_NW"
 												activity_weight = 1
 												weight_list_name = ""
 												fade_in_time = 0.2
@@ -793,6 +1243,21 @@
 												children = 
 												[
 													{
+														_class = "ExtractMotion"
+														extract_tx = true
+														extract_ty = true
+														extract_tz = false
+														extract_rz = false
+														linear = false
+														quadratic = false
+														root_bone_name = ""
+														motion_type = "Uniform"
+													},
+													{
+														_class = "AnimStartLoop"
+														start_loop_frame = 5
+													},
+													{
 														_class = "AnimAlign"
 														align_tx = true
 														align_ty = true
@@ -808,18 +1273,29 @@
 														bone = "root"
 													},
 													{
-														_class = "ExtractMotion"
-														extract_tx = true
-														extract_ty = true
-														extract_tz = false
-														extract_rz = false
-														linear = false
-														quadratic = false
-														root_bone_name = ""
-														motion_type = "Single"
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 19
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "1"
+															Volume = 1.0
+														}
+													},
+													{
+														_class = "AnimEvent"
+														event_class = "AE_FOOTSTEP"
+														event_frame = 6
+														event_keys = 
+														{
+															Attachment = ""
+															Foot = "0"
+															Volume = 1.0
+														}
 													},
 												]
-												activity_name = "Walk2X_SE"
+												activity_name = "WalkFast_SE"
 												activity_weight = 1
 												weight_list_name = ""
 												fade_in_time = 0.2
@@ -1134,6 +1610,30 @@
 					},
 				]
 				bone_cull_type = "Aggressive"
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "Foot_L"
+						parent_bone = "calf_L"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "Foot_R"
+						parent_bone = "calf_R"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
 			},
 		]
 		model_archetype = ""

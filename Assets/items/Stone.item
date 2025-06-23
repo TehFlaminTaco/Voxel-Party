@@ -8,6 +8,10 @@
     "IsSolidBlock": true,
     "IsSolid": true,
     "Hardness": 1,
+    "BreakParticle": "prefabs/break particles.prefab",
+    "WalkStepSound": "sounds/footsteps/stone/stone_walk.sound",
+    "RunStepSound": "sounds/footsteps/stone/stone_run.sound",
+    "CrouchStepSound": "sounds/footsteps/stone/stone_wander.sound",
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",
@@ -34,7 +38,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": null
+      "compiled": "textures/generated/imagefile/9718084685e5621.vtex"
     },
     "TopTexture": null,
     "SideTexture": null,

@@ -8,6 +8,10 @@
     "IsSolidBlock": true,
     "IsSolid": true,
     "Hardness": 1,
+    "BreakParticle": "prefabs/break particles.prefab",
+    "WalkStepSound": "sounds/footsteps/marble/marble_walk.sound",
+    "RunStepSound": "sounds/footsteps/marble/marble_run.sound",
+    "CrouchStepSound": "sounds/footsteps/marble/marble_wander.sound",
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",
@@ -34,7 +38,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": null
+      "compiled": "textures/generated/imagefile/5d495f2fabe913a7.vtex"
     },
     "TopTexture": null,
     "SideTexture": null,
@@ -43,7 +47,7 @@
     "EastTexture": null,
     "WestTexture": null,
     "BottomTexture": null,
-    "TextureIndex": 0,
+    "TextureIndex": 13,
     "TopTextureIndex": null,
     "SideTextureIndex": null,
     "NorthTextureIndex": null,

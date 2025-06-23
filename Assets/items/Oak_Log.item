@@ -8,6 +8,10 @@
     "IsSolidBlock": true,
     "IsSolid": true,
     "Hardness": 1,
+    "BreakParticle": "prefabs/break particles.prefab",
+    "WalkStepSound": "sounds/footsteps/stone/stone_walk.sound",
+    "RunStepSound": "sounds/footsteps/stone/stone_run.sound",
+    "CrouchStepSound": "sounds/footsteps/stone/stone_wander.sound",
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",
@@ -97,14 +101,14 @@
       },
       "compiled": "textures/generated/imagefile/f9878ccff12b5cdf.vtex"
     },
-    "TextureIndex": 7,
-    "TopTextureIndex": 8,
+    "TextureIndex": 9,
+    "TopTextureIndex": 10,
     "SideTextureIndex": null,
     "NorthTextureIndex": null,
     "SouthTextureIndex": null,
     "EastTextureIndex": null,
     "WestTextureIndex": null,
-    "BottomTextureIndex": 8,
+    "BottomTextureIndex": 10,
     "Drops": [
       {
         "Item": "items/oak_log.item",

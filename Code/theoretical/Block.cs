@@ -12,6 +12,10 @@ public class Block
 	public int Hardness { get; set; } = 1; // Hardness of the block, used for mining speed calculations.
 
 	public PrefabFile BreakParticle { get; set; } = ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
+	public SoundEvent WalkStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
+	public SoundEvent RunStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_run.sound" );
+	public SoundEvent CrouchStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_wander.sound" );
+	public SoundEvent LandingSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
 
 	public Texture Texture { get; set; } = null; // The texture used for rendering the block, can be null if not set.
 	public Texture TopTexture { get; set; } = null; // The texture used for the top face of the block, can be null if not set.
