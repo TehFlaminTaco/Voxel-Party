@@ -136,6 +136,8 @@ PS
 	SamplerState g_sSampler0 < Filter( POINT ); AddressU( CLAMP ); AddressV( CLAMP ); >;
 	CreateInputTexture2D( Abledo, Srgb, 8, "None", "_color", ",0/,0/0", Default4( 1.00, 1.00, 1.00, 1.00 ) );
 	Texture2D g_tAbledo < Channel( RGBA, Box( Abledo ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
+
+	float g_flspriteSize < Attribute( "spriteSize" ); Default1( 16 ); >;
 	
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
@@ -144,7 +146,7 @@ PS
 		int index = int(l_0.z+0.1);
 		float2 texSize;
         g_tAbledo.GetDimensions(texSize.x, texSize.y);
-		int tilesWide = int(texSize.x / 16);
+		int tilesWide = int(texSize.x / int(g_flspriteSize));
 		int tileX = index % tilesWide;
 		int tileY = index / tilesWide;
 		l_0.x = (l_0.x + tileX) / tilesWide;
@@ -153,6 +155,8 @@ PS
 		float4 l_10 = Tex2DS( g_tAbledo, g_sSampler0, l_0.xy );
 
 		if(l_10.r == 1.0 && l_10.g == 0.0 && l_10.b == 1.0)
+			discard;
+		if(l_10.a < 0.5)
 			discard;
 		
 		//float light = lerp(0.5, 1.0, (dot(i.vNormalOs, normalize(float3(0.1, 0.2, 0.3))) + 1) / 2);

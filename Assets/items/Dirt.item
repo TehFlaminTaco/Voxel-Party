@@ -8,6 +8,9 @@
     "IsSolidBlock": true,
     "IsSolid": true,
     "Hardness": 1,
+    "BlockBoundsMins": "0,0",
+    "BlockBoundsMaxs": "16,16",
+    "BreakParticle": null,
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",
@@ -34,7 +37,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": null
+      "compiled": "textures/generated/imagefile/9b061b6d15c32b16.vtex"
     },
     "TopTexture": null,
     "SideTexture": null,
@@ -70,21 +73,22 @@
       },
       "compiled": "textures/generated/imagefile/9b061b6d15c32b16.vtex"
     },
-    "TextureIndex": 0,
-    "TopTextureIndex": 1,
+    "TextureIndex": 1,
+    "TopTextureIndex": null,
     "SideTextureIndex": null,
     "NorthTextureIndex": null,
     "SouthTextureIndex": null,
     "EastTextureIndex": null,
     "WestTextureIndex": null,
-    "BottomTextureIndex": 2,
+    "BottomTextureIndex": 1,
     "Drops": [
       {
         "Item": "items/dirt.item",
         "Count": 1,
         "ItemID": 2
       }
-    ]
+    ],
+    "BlockObject": null
   },
   "__references": [],
   "__version": 0

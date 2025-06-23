@@ -172,6 +172,7 @@ public class Inventory
     }
 
     [ConCmd]
+    [Rpc.Host]
     public static void GiveItem( int itemID, int amount )
     {
         var player = VoxelPlayer.LocalPlayer;
@@ -181,7 +182,7 @@ public class Inventory
             return;
         }
 
-        var stack = new ItemStack( ItemRegistry.GetItem( itemID ) );
+        var stack = new ItemStack( ItemRegistry.GetItem( itemID ), amount );
         player.inventory.PutInFirstAvailableSlot( stack );
     }
 

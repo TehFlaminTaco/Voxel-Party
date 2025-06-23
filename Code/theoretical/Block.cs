@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Sandbox;
 using Sandbox.UI;
 
@@ -6,10 +7,25 @@ using Sandbox.UI;
  */
 public class Block
 {
+	[Description( "Is this block opaque? Or partially transparent?" )]
 	public bool Opaque { get; set; } = true; // Whether the block is opaque (blocks light).
+	[DisplayName( "Is Full Block" )]
+	[Description( "Is this block considered a full solid block, meaning it occupies the entire space of a block?" )]
 	public bool IsSolidBlock { get; set; } = true; // Is this block considered a full solid block
+	[Description( "Is this block solid, meaning it blocks movement?" )]
 	public bool IsSolid { get; set; } = true; // Whether the block is solid (blocks movement).
 	public int Hardness { get; set; } = 1; // Hardness of the block, used for mining speed calculations.
+
+	[HideIf( nameof( IsSolidBlock ), true )]
+	[Description( "Collision bound mins, as a number of pixels" )]
+	public Vector3Int BlockBoundsMins { get; set; } = new Vector3Int( 0, 0, 0 ); // The minimum bounds of the block in the X and Y directions. (When not IsSolidBlock)
+	[HideIf( nameof( IsSolidBlock ), true )]
+	[Description( "Collision bounds maxs, as a number of pixels" )]
+	public Vector3Int BlockBoundsMaxs { get; set; } = new Vector3Int( 16, 16, 16 ); // The maximum bounds of the block in the X and Y directions. (When not IsSolidBlock)
+
+
+	[Description( "Can another block destructively fill this block's space?" )]
+	public bool Replaceable { get; set; } = false;
 
 	public PrefabFile BreakParticle { get; set; } = ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
 
@@ -32,6 +48,8 @@ public class Block
 	[Hide] public int? BottomTextureIndex { get; set; } = null; // Default texture index for the bottom face of the block.
 	[InlineEditor]
 	public ItemStack[] Drops { get; set; } = []; // Items that drop when the block is broken, default is empty stack.
+
+	public GameObject BlockObject { get; set; } = null; // A GameObject that represents the block in the world, can be null if not set.
 
 	public virtual int GetTextureIndex( World world, Vector3Int blockPos, Direction face ) => face switch
 	{
@@ -60,11 +78,46 @@ public class Block
 
 	public virtual BBox GetCollisionAABB( World world, Vector3Int blockPos )
 	{
-		Vector3 pos = blockPos; // Convert block position to world position.
-		pos = pos.Modulo( Chunk.SIZE ); // Ensure the position is within the chunk bounds.
-		pos += 0.5f; // Offset the position to the center of the block.
-		pos *= World.BlockScale;
-		return BBox.FromPositionAndSize( pos, World.BlockScale / 2f ); // Create a bounding box from the position and size of the block.
+		if ( this.IsSolidBlock )
+		{
+			Vector3 pos = blockPos; // Convert block position to world position.
+			pos = pos.Modulo( Chunk.SIZE ); // Ensure the position is within the chunk bounds.
+			pos += 0.5f; // Offset the position to the center of the block.
+			pos *= World.BlockScale;
+			return BBox.FromPositionAndSize( pos, World.BlockScale / 2f ); // Create a bounding box from the position and size of the block.
+		}
+		else
+		{
+			Vector3 pos = blockPos; // Convert block position to world position.
+			pos = pos.Modulo( Chunk.SIZE ); // Ensure the position is within the chunk bounds.
+			pos *= World.BlockScale;
+			// If not a solid block, use the BlockBoundsMins and BlockBoundsMaxs to create a bounding box.
+			return new BBox(
+				pos + (BlockBoundsMins / 16f * World.BlockScale),
+				pos + (BlockBoundsMaxs / 16f * World.BlockScale)
+			); // Create a bounding box from the block bounds.
+		}
+	}
+
+	public virtual BBox GetCollisionAABBWorld( World world, Vector3Int blockPos )
+	{
+		if ( this.IsSolidBlock )
+		{
+			Vector3 pos = blockPos; // Convert block position to world position.
+			pos += 0.5f; // Offset the position to the center of the block.
+			pos *= World.BlockScale;
+			return BBox.FromPositionAndSize( pos, World.BlockScale ); // Create a bounding box from the position and size of the block.
+		}
+		else
+		{
+			Vector3 pos = blockPos; // Convert block position to world position.
+			pos *= World.BlockScale;
+			// If not a solid block, use the BlockBoundsMins and BlockBoundsMaxs to create a bounding box.
+			return new BBox(
+				pos + (BlockBoundsMins / 16f * World.BlockScale),
+				pos + (BlockBoundsMaxs / 16f * World.BlockScale)
+			); // Create a bounding box from the block bounds.
+		}
 	}
 
 	public virtual ItemStack[] GetDrops( World world, Vector3Int blockPos )

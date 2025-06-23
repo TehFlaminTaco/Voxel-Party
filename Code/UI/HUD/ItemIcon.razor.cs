@@ -19,6 +19,11 @@ public partial class ItemIcon : Panel
         var inv = Inventory;
         var item = inv.GetItem( Slot ).Item;
         if ( item == null ) return;
+        if ( item.Block?.BlockObject != null )
+        {
+            RenderTexture = item.Block.Texture;
+            return;
+        }
         RenderTexture = Texture.CreateRenderTarget( "Item", ImageFormat.RGBA8888, new Vector2( 100, 100 ) );
         Scene scene = new Scene();
         using ( scene.Push() )
