@@ -99,6 +99,9 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 
 	ModelRenderer OpaqueRenderer;
 	ModelRenderer TransparentRenderer;
+
+	public Dictionary<Vector3Int, (GameObject obj, BlockData data)> BlockObjects { get; set; } = new Dictionary<Vector3Int, (GameObject obj, BlockData data)>();
+
 	public void UpdateMesh()
 	{
 		WorldInstance.GetChunk( ChunkPosition ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
@@ -124,9 +127,33 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 				for ( int x = 0; x < Chunk.SIZE.x; x++ )
 				{
 					var blockPos = new Vector3Int( x, y, z );
-					var blockID = WorldInstance.GetBlock( blockPos + (ChunkPosition * Chunk.SIZE) );
-					var block = ItemRegistry.GetBlock( blockID.BlockID );
-					if ( block.Opaque )
+					var blockData = WorldInstance.GetBlock( blockPos + (ChunkPosition * Chunk.SIZE) );
+					var block = ItemRegistry.GetBlock( blockData.BlockID );
+					if ( Networking.IsHost && BlockObjects.ContainsKey( blockPos ) && BlockObjects[blockPos].data != blockData )
+					{
+						// Destroy the BlockObject at this position if it exists and the block data has changed
+						BlockObjects[blockPos].obj.Destroy();
+						BlockObjects.Remove( blockPos );
+					}
+					if ( block.BlockObject != null )
+					{
+						if ( Networking.IsHost )
+						{
+							// Instantiate the block object if it doesn't exist
+							// (If it was wrong, it would have been destroyed above)
+							if ( !BlockObjects.ContainsKey( blockPos ) )
+							{
+								var blockObject = block.BlockObject.Clone( GameObject, blockPos * World.BlockScale, Rotation.Identity, Vector3.One );
+								BlockObjects[blockPos] = (blockObject, blockData);
+								if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
+								{
+									receiver.AcceptBlockData( blockData );
+								}
+								blockObject.NetworkSpawn();
+							}
+						}
+					}
+					else if ( block.Opaque )
 						AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), Verts, Normals, UVs );
 					else
 						AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), TransparentVerts, TransparentNormals, TransparentUVs );

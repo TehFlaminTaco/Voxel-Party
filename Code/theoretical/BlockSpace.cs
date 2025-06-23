@@ -124,8 +124,45 @@ public class BlockTrace
 			// Determine which of our current axis fractions is closest to zero, and use that to determine the face hit.
 			if ( !IgnoreFilter( bPos ) )
 			{
-				hit = true; // We hit a block that is not ignored.
-				break;
+
+				var block = World.GetBlock( bPos ).GetBlock();
+				if ( !block.IsSolidBlock )
+				{
+					var axialMins = bPos + block.BlockBoundsMins / 16f;
+					var axialMaxes = bPos + block.BlockBoundsMaxs / 16f;
+					var box = new BBox(
+						axialMins,
+						axialMaxes
+					);
+					// We introduce a tiny amount of backtracking incase we trace against the wall of the block.
+					if ( box.Trace( new Ray( pos - Dir * 0.01f, Dir ), (MaxDistance - distanceTraveled) + 0.01f, out float dist ) )
+					{
+						dist -= 0.01f;
+						var tracedPos = pos + Dir * dist;
+						// We can determine the face by checking which of the bounds closest matches an axis of tracedPos
+						var tracedFace = new[] {
+							(MathF.Abs(axialMins.x - tracedPos.x), Direction.South), // -x = South
+							(MathF.Abs(axialMaxes.x - tracedPos.x), Direction.North), // +x = North
+							(MathF.Abs(axialMins.y - tracedPos.y), Direction.East), // -y = East
+							(MathF.Abs(axialMaxes.y - tracedPos.y), Direction.West), // +y = West
+							(MathF.Abs(axialMins.z - tracedPos.z), Direction.Down), // -z = Down
+							(MathF.Abs(axialMaxes.z - tracedPos.z), Direction.Up), // +z = Up
+						}.MinBy( x => x.Item1 ).Item2;
+
+						hit = true;
+						pos = tracedPos;
+						hitFace = tracedFace.Flip();
+						distanceTraveled += dist;
+						break;
+					}
+
+				}
+				else
+				{
+					hit = true; // We hit a block that is not ignored.
+					break;
+				}
+
 			}
 		}
 		// if any dir component is negative, we need to adjust the block position to the next block in that direction.

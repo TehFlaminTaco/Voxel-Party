@@ -1,0 +1,66 @@
+{
+  "ID": 13,
+  "Name": "Torch",
+  "MaxStackSize": 64,
+  "IsBlock": true,
+  "Block": {
+    "Opaque": false,
+    "IsSolidBlock": false,
+    "IsSolid": true,
+    "Hardness": 1,
+    "BlockBoundsMins": "6,6,0",
+    "BlockBoundsMaxs": "10,10,9",
+    "Replaceable": false,
+    "BreakParticle": "prefabs/break particles.prefab",
+    "Texture": {
+      "$compiler": "texture",
+      "$source": "imagefile",
+      "data": {
+        "FilePath": "materials/block/torch.png",
+        "MaxSize": 4096,
+        "ConvertHeightToNormals": false,
+        "NormalScale": 1,
+        "Rotate": 0,
+        "FlipVertical": false,
+        "FlipHorizontal": false,
+        "Padding": {
+          "Size": "0,0",
+          "EdgeSize": "0,0"
+        },
+        "Sharpen": 0,
+        "InvertColor": false,
+        "Blur": 0,
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1,
+        "Hue": 0,
+        "Colorize": false,
+        "TargetColor": "0,1,0,1",
+        "CacheToDisk": true
+      },
+      "compiled": null
+    },
+    "TopTexture": null,
+    "SideTexture": null,
+    "NorthTexture": null,
+    "SouthTexture": null,
+    "EastTexture": null,
+    "WestTexture": null,
+    "BottomTexture": null,
+    "TextureIndex": 15,
+    "TopTextureIndex": null,
+    "SideTextureIndex": null,
+    "NorthTextureIndex": null,
+    "SouthTextureIndex": null,
+    "EastTextureIndex": null,
+    "WestTextureIndex": null,
+    "BottomTextureIndex": null,
+    "Drops": [],
+    "BlockObject": {
+      "_type": "gameobject",
+      "prefab": "prefabs/blockobjects/torch.prefab"
+    }
+  },
+  "__references": [],
+  "__version": 0
+}

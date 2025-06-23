@@ -68,7 +68,7 @@ public partial class VoxelPlayer : Component
     protected override void OnUpdate()
     {
         if ( Input.Pressed( "use" ) ) IsReady = !IsReady;
-        
+
         if ( Input.Pressed( "jump" ) && TimeSinceLastJump.Relative < .25 && !Controller.IsOnGround ) IsFlying = !IsFlying;
         if ( Input.Pressed( "jump" ) ) TimeSinceLastJump = 0;
         if ( Controller.IsOnGround ) IsFlying = false;
@@ -90,18 +90,18 @@ public partial class VoxelPlayer : Component
 
     protected override void OnPreRender()
     {
-	    ShowHoveredFace();
-	    
-	    if ( !IsProxy && HasBuildVolume )
-	    {
-		    Gizmo.Draw.Color = Color.Green.WithAlpha( 0.5f );
-		    Gizmo.Draw.LineThickness = 8f;
-		    var bbox = BBox.FromPoints( new[]{
-			    BuildAreaMins * World.BlockScale,
-			    (BuildAreaMaxs + Vector3.One) * World.BlockScale
-		    } );
-		    Gizmo.Draw.LineBBox( bbox );
-	    }
+        ShowHoveredFace();
+
+        if ( !IsProxy && HasBuildVolume )
+        {
+            Gizmo.Draw.Color = Color.Green.WithAlpha( 0.5f );
+            Gizmo.Draw.LineThickness = 8f;
+            var bbox = BBox.FromPoints( new[]{
+                BuildAreaMins * World.BlockScale,
+                (BuildAreaMaxs + Vector3.One) * World.BlockScale
+            } );
+            Gizmo.Draw.LineBBox( bbox );
+        }
     }
 
     public BlockTraceResult EyeTrace()
@@ -277,6 +277,17 @@ public partial class VoxelPlayer : Component
             if ( !trace.Hit )
                 return;
             var placePos = trace.HitBlockPosition + trace.HitFace.Forward();
+            if ( world.GetBlock( trace.HitBlockPosition ).GetBlock().Replaceable ) // Grass and things can have blocks replace them, and should do so if you try and place on top of them.
+            {
+                placePos = trace.HitBlockPosition;
+            }
+
+            if ( !world.GetBlock( placePos ).GetBlock().Replaceable ) // If we can't put a block here, give up.
+                return;
+
+            if ( Scene.Trace.Box( new BBox( Vector3.Zero, Vector3.One * World.BlockScale ), new Ray( placePos * World.BlockScale, Vector3.Up ), 0f ).WithTag( "player" ).Run().StartedSolid )
+                return; // Fail placing where player is.
+
             // If placePos is not in the player's build area, do not place blocks
             if ( HasBuildVolume && (placePos.x < BuildAreaMins.x || placePos.y < BuildAreaMins.y || placePos.z < BuildAreaMins.z || placePos.x > BuildAreaMaxs.x || placePos.y > BuildAreaMaxs.y || placePos.z > BuildAreaMaxs.z) )
             {
@@ -293,28 +304,26 @@ public partial class VoxelPlayer : Component
         if ( !trace.Hit )
             return;
 
+        var blockPosition = trace.HitBlockPosition;
+        var faceDirection = trace.HitFace;
+
         // Draw a box on the face hit
         Gizmo.Draw.Color = Color.Black;
-        var facePos = (trace.HitBlockPosition + 0.5f) * World.BlockScale + trace.HitFace.Forward() * World.BlockScale * 0.51f;
-        Vector3 boxSize = new Vector3( World.BlockScale, World.BlockScale, World.BlockScale );
-        switch ( trace.HitFace )
+        var block = world.GetBlock( blockPosition ).GetBlock();
+        var box = block.GetCollisionAABBWorld( world, blockPosition ).Grow( 0.1f ); // This gets the box in world coordinates relative to the chunk
+                                                                                    // Shrink the box down on one axis depending on faceDirection.
+        switch ( faceDirection )
         {
-            case Direction.North:
-            case Direction.South:
-                boxSize = new Vector3( World.BlockScale * 0f, World.BlockScale, World.BlockScale );
-                break;
-            case Direction.East:
-            case Direction.West:
-                boxSize = new Vector3( World.BlockScale, World.BlockScale * 0f, World.BlockScale );
-                break;
-            case Direction.Up:
-            case Direction.Down:
-                boxSize = new Vector3( World.BlockScale, World.BlockScale, World.BlockScale * 0f );
-                break;
+            case Direction.North: box.Mins.x = box.Maxs.x; break;
+            case Direction.South: box.Maxs.x = box.Mins.x; break;
+            case Direction.East: box.Maxs.y = box.Mins.y; break;
+            case Direction.West: box.Mins.y = box.Maxs.y; break;
+            case Direction.Down: box.Maxs.z = box.Mins.z; break;
+            case Direction.Up: box.Mins.z = box.Maxs.z; break;
         }
         Gizmo.Draw.Color = Color.Black;
         Gizmo.Draw.LineThickness = 2f;
-        Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( facePos, boxSize ) );
+        Gizmo.Draw.LineBBox( box );
     }
 
     public void HandleHotbar()

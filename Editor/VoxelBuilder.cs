@@ -150,6 +150,10 @@ public partial class VoxelBuilder : EditorTool
 
 	Bitmap RenderItem( Item item )
 	{
+		if ( item.Block?.BlockObject != null )
+		{
+			return item.Block.Texture.GetBitmap( 0 );
+		}
 		var tex = new Bitmap( 100, 100 );
 		Scene scene = new Scene();
 		using ( scene.Push() )
