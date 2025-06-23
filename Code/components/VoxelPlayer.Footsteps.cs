@@ -12,15 +12,13 @@ public partial class VoxelPlayer
 	
 	public void DoFootsteps()
 	{
-		var footL = Controller.Renderer.SceneModel.GetAttachment( "Foot_L" );
-		var transformL = footL ?? global::Transform.Zero;
-		GroundBlockL = ItemRegistry.GetItem(new BlockTrace().WithDirection( transformL.Rotation.Left )
-			.WithStart( transformL.Position ).WithDistance( 2 ).Run().HitBlockPosition);
+		var footL = Controller.Renderer.SceneModel.GetBoneWorldTransform( "calf_L" );
+		GroundBlockL = ItemRegistry.GetItem(new BlockTrace().WithDirection( Vector3.Down )
+			.WithStart( footL.Position ).WithDistance( 2 ).WithWorld( world ).Run().HitBlockPosition);
 		
-		var footR = Controller.Renderer.SceneModel.GetAttachment( "Foot_L" );
-		var transformR = footR ?? global::Transform.Zero;
-		GroundBlockR = ItemRegistry.GetItem(new BlockTrace().WithDirection( transformR.Rotation.Left )
-			.WithStart( transformR.Position ).WithDistance( 2 ).Run().HitBlockPosition);
+		var footR = Controller.Renderer.SceneModel.GetBoneWorldTransform( "calf_R" );
+		GroundBlockR = ItemRegistry.GetItem(new BlockTrace().WithDirection( Vector3.Down )
+			.WithStart( footR.Position ).WithDistance( 2 ).WithWorld( world ).Run().HitBlockPosition );
 		
 		if ( EnableFootstepSounds ) Controller.Renderer.SceneModel.OnFootstepEvent += OnFootstepEvent;
 	}

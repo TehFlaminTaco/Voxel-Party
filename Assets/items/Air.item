@@ -8,6 +8,9 @@
     "IsSolidBlock": false,
     "IsSolid": false,
     "Hardness": 1,
+    "BlockBoundsMins": "0,0,0",
+    "BlockBoundsMaxs": "16,16,16",
+    "Replaceable": true,
     "BreakParticle": "prefabs/break particles.prefab",
     "WalkStepSound": null,
     "RunStepSound": null,
@@ -29,7 +32,8 @@
     "EastTextureIndex": null,
     "WestTextureIndex": null,
     "BottomTextureIndex": null,
-    "Drops": []
+    "Drops": [],
+    "BlockObject": null
   },
   "__references": [],
   "__version": 0

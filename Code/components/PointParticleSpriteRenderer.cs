@@ -45,7 +45,6 @@ public class PointParticleSpriteRenderer : ParticleRenderer, Component.ExecuteIn
 
     [Property]
     [Range( 0f, 2f, 0.01f, true, true )]
-    [DefaultValue( 1f )]
     public float Scale { get; set; } = 1f;
 
     //
@@ -98,9 +97,8 @@ public class PointParticleSpriteRenderer : ParticleRenderer, Component.ExecuteIn
     // Summary:
     //     Should th
     [Property]
-    [DefaultValue( BillboardAlignment.LookAtCamera )]
     [Description( "Should th" )]
-    public BillboardAlignment Alignment { get; set; }
+    public BillboardAlignment Alignment { get; set; } = BillboardAlignment.LookAtCamera;
 
     [Property]
     public ParticleSortMode SortMode { get; set; }
