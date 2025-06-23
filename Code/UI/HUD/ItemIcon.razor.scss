@@ -3,6 +3,7 @@ ItemIcon {
     height: 100%;
     background-size: 100px;
     background-position: center;
+    image-rendering: pixelated;
     
     .item-count {
         position: absolute;

@@ -85,24 +85,21 @@ public abstract class VoxelTool
 
     public BBox GetFaceBox( Vector3Int blockPosition, Direction faceDirection )
     {
-        var faceCenter = (blockPosition + 0.5f) * World.BlockScale + faceDirection.Forward() * World.BlockScale * 0.5f;
-        Vector3 boxSize = new Vector3( World.BlockScale, World.BlockScale, World.BlockScale );
+        var world = World.Active;
+        var block = world.GetBlock( blockPosition ).GetBlock();
+        var box = block.GetCollisionAABBWorld( world, blockPosition ).Grow( 0.1f ); // This gets the box in world coordinates relative to the chunk
+                                                                                    // Shrink the box down on one axis depending on faceDirection.
         switch ( faceDirection )
         {
-            case Direction.North:
-            case Direction.South:
-                boxSize.x *= 0.01f;
-                break;
-            case Direction.East:
-            case Direction.West:
-                boxSize.y *= 0.01f;
-                break;
-            case Direction.Up:
-            case Direction.Down:
-                boxSize.z *= 0.01f;
-                break;
+            case Direction.North: box.Mins.x = box.Maxs.x; break;
+            case Direction.South: box.Maxs.x = box.Mins.x; break;
+            case Direction.East: box.Maxs.y = box.Mins.y; break;
+            case Direction.West: box.Mins.y = box.Maxs.y; break;
+            case Direction.Down: box.Maxs.z = box.Mins.z; break;
+            case Direction.Up: box.Mins.z = box.Maxs.z; break;
+
         }
-        return BBox.FromPositionAndSize( faceCenter, boxSize );
+        return box;
     }
 
     public BBox GetBlockBox( Vector3Int blockPosition )
