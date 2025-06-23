@@ -22,6 +22,37 @@ public class ItemStack
         }
     }
 
+    public IEnumerable<byte> Serialize()
+    {
+        var serialized = new List<byte>();
+        serialized.AddRange( BitConverter.GetBytes( ItemID ) ); // Serialize the item ID
+        serialized.AddRange( BitConverter.GetBytes( Count ) ); // Serialize the count
+        return serialized; // Return the serialized data as a byte array
+    }
+
+    public static ItemStack Deserialize( IEnumerable<byte> data, out int size )
+    {
+        var dataList = data.ToList(); // Convert the IEnumerable to a List for easier access
+        if ( dataList.Count < 8 )
+        {
+            Log.Warning( "ItemStack.Deserialize: Not enough data to deserialize ItemStack." );
+            size = 0; // Set size to 0 if there is not enough data
+            return Empty; // Return an empty stack if there is not enough data
+        }
+
+        int itemID = BitConverter.ToInt32( dataList.Take( 4 ).ToArray(), 0 ); // Deserialize the item ID
+        int count = BitConverter.ToInt32( dataList.Skip( 4 ).Take( 4 ).ToArray(), 0 ); // Deserialize the count
+        size = 8; // Set the size to the number of bytes read (4 for item ID + 4 for count)
+        var item = ItemRegistry.GetItem( itemID ); // Get the item from the registry using the deserialized ID
+        if ( item == null )
+        {
+            Log.Warning( $"ItemStack.Deserialize: Item with ID {itemID} not found in registry." );
+            return Empty; // Return an empty stack if the item is not found
+        }
+        // This might change in future if we add more properties to ItemStack, or if ItemStack has variable size data.
+        return new ItemStack( item, count ); // Return a new ItemStack with the deserialized data
+    }
+
     public static bool IsNullOrEmpty( ItemStack stack )
     {
         return stack == null || stack.ItemID == 0 || stack.Count == 0;

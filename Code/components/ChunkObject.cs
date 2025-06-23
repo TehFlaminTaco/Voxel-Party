@@ -3,11 +3,12 @@ using Sandbox;
 public sealed class ChunkObject : Component, Component.ExecuteInEditor
 {
 	[Sync, Property] public Vector3Int ChunkPosition { get; set; } = Vector3Int.Zero;
-	[Sync]
+	[Sync( SyncFlags.FromHost | SyncFlags.Query )]
 	public byte[] ChunkData
 	{
 		get
 		{
+			if ( GameObject == null && this.WorldThinkerInstanceOverride == null ) return new byte[0]; // No data if we're not initialized
 			var chunk = WorldInstance.GetChunk( ChunkPosition );
 			if ( chunk == null )
 			{
@@ -64,7 +65,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			}
 		}
 	}
-	public WorldThinker WorldThinkerInstanceOverride = null;
+	[Sync] public WorldThinker WorldThinkerInstanceOverride { get; set; } = null;
 	public WorldThinker WorldThinkerInstance => WorldThinkerInstanceOverride ?? Scene.Get<WorldThinker>();
 	public World WorldInstance => WorldThinkerInstance?.World;
 
@@ -101,8 +102,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 	public void UpdateMesh()
 	{
 		WorldInstance.GetChunk( ChunkPosition ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
-
-		// Opaque Pass
+															   // Opaque Pass
 		List<Vector3> Verts = new List<Vector3>();
 		List<Vector3> Normals = new List<Vector3>();
 		List<Vector3> UVs = new List<Vector3>();
@@ -110,6 +110,9 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		List<Vector3> TransparentVerts = new List<Vector3>();
 		List<Vector3> TransparentNormals = new List<Vector3>();
 		List<Vector3> TransparentUVs = new List<Vector3>();
+
+		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
+		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TranslucentTextureAtlas );
 
 		var opaqueModel = new ModelBuilder();
 		var transparentModel = new ModelBuilder();
@@ -136,14 +139,14 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			}
 		}
 
-		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
-		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TranslucentTextureAtlas );
-
 
 		if ( Verts.Count > 0 )
 		{
 			if ( OpaqueRenderer == null || !OpaqueRenderer.IsValid() )
+			{
 				OpaqueRenderer = GameObject.AddComponent<ModelRenderer>();
+				OpaqueRenderer.Flags = ComponentFlags.NotNetworked;
+			}
 			var mr = OpaqueRenderer;
 			mr.Enabled = Verts.Count > 0; // Only enable if we have vertices to render
 			var mesh = new Mesh();
@@ -165,7 +168,10 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		if ( TransparentVerts.Count > 0 )
 		{
 			if ( TransparentRenderer == null || !TransparentRenderer.IsValid() )
+			{
 				TransparentRenderer = GameObject.AddComponent<ModelRenderer>();
+				TransparentRenderer.Flags = ComponentFlags.NotNetworked;
+			}
 			var mr = TransparentRenderer;
 			mr.MaterialOverride = WorldThinkerInstance.TranslucentTextureAtlas ?? null; // Use the translucent texture atlas
 			mr.Enabled = TransparentVerts.Count > 0; // Only enable if we have vertices to render

@@ -6,7 +6,7 @@ public partial class ItemIcon : Panel
     public int Slot { get; set; } = -1;
 
     public Texture RenderTexture;
-    public ItemStack ItemStack;
+    public ItemStack ItemStack = ItemStack.Empty;
 
     public override void OnDeleted()
     {

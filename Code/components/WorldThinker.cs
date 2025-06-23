@@ -31,8 +31,11 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	protected override void OnStart()
 	{
 		base.OnStart();
-		foreach ( var child in GameObject.Children.ToList() )
-			child.DestroyImmediate();
+		TexArrayTool.UpdateMaterialTexture( TextureAtlas );
+		TexArrayTool.UpdateMaterialTexture( TranslucentTextureAtlas );
+		if ( Networking.IsHost )
+			foreach ( var child in GameObject.Children.ToList() )
+				child.DestroyImmediate();
 	}
 
 	[Button]
@@ -53,7 +56,8 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	protected override void OnFixedUpdate()
 	{
 		World.Active = World;
-		if ( IsProxy ) return;
+		if ( !Networking.IsHost )
+			return; // Only the host should handle chunk loading and unloading.
 
 		// Iterate (randomly) through every loaded chunk, check if it's outside of the forget radius from any player, and if so, unload it.
 		if ( Game.IsPlaying )
@@ -144,9 +148,17 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 			}
 			var chunk = World.GetChunk( pos );
 			//Log.Info( $"Creating chunk at {pos}. {chunk.Dirty} {chunk.IsRendered}" );
-			World.GetChunk( pos ).Render( Scene );
+			World.GetChunk( pos ).Render( Scene, this );
 		}
 
+	}
+
+
+	// A wrapper for the World.SetBlock method that broadcasts the change to all clients.
+	[Rpc.Broadcast]
+	public void PlaceBlock( Vector3Int position, BlockData blockData )
+	{
+		World.SetBlock( position, blockData );
 	}
 
 	[Rpc.Broadcast]

@@ -50,6 +50,8 @@ public partial class StructureLoader : Component, Component.ExecuteInEditor
 		}
 		if ( Game.IsPlaying )
 		{
+			if ( !Networking.IsHost )
+				return; // Let the host handle this part.
 			World.Active.LoadStructure( Helpers.WorldToVoxel( WorldPosition ), LoadedStructure.StructureData );
 			GameObject.Destroy();
 			return;

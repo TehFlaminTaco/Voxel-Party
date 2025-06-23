@@ -225,7 +225,7 @@ public class BlockSpace
 	{
 		var item = ItemRegistry.GetItem( position );
 		var block = item.Block;
-		for ( int i = 0; i < 128; i++ )
+		for ( int i = 0; i < 32; i++ )
 		{
 			var particlePos = (position + new Vector3(
 				Random.Shared.Float(),
@@ -244,12 +244,13 @@ public class BlockSpace
 			particle.Lifetime = Random.Shared.Float( 3f, 5f ); // Random lifetime for the particles.
 			Vector2 texCoord = new Vector2( Random.Shared.Float() * 14 / 16f, Random.Shared.Float() * 14 / 16f );
 			particle.TextureRect = Rect.FromPoints( texCoord, texCoord + new Vector2( 2 / 16f, 2 / 16f ) );
-			particle.TextureID = block.TextureIndex;
+			particle.ItemID = item.ID;
 			particle.Scale = new Curve( new List<Curve.Frame>
 			{
 				new Curve.Frame(0f, 30f, -MathF.PI, MathF.PI),
 				new Curve.Frame(1f, 0f, 0f, 0f)
 			} );
+			particle.GameObject.NetworkSpawn();
 		}
 
 		/*var particle = item.Block.BreakParticle.IsValid() 
