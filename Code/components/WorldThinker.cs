@@ -156,16 +156,27 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 
 	// A wrapper for the World.SetBlock method that broadcasts the change to all clients.
 	[Rpc.Broadcast]
-	public void PlaceBlock( Vector3Int position, BlockData blockData )
+	public void PlaceBlock( Vector3Int position, BlockData blockData, bool playSound = true )
 	{
+		if ( playSound )
+		{
+			var snd = Sound.Play( blockData.GetBlock().PlaceSound );
+			snd.Position = Helpers.VoxelToWorld( position ) + World.BlockScale / 2;
+		}
 		World.SetBlock( position, blockData );
 	}
 
 	[Rpc.Broadcast]
-	public void BreakBlock( Vector3Int position, bool dropItems = true )
+	public void BreakBlock( Vector3Int position, bool dropItems = true, bool spawnParticles = true, bool playSound = true )
 	{
 		// Fill the block with SimpleParticles
 		var block = World.GetBlock( position ).GetBlock();
+		
+		if ( playSound )
+		{
+			var snd = Sound.Play( block.BreakSound );
+			snd.Position = Helpers.VoxelToWorld( position ) + World.BlockScale / 2;
+		}
 
 		if ( dropItems )
 		{
@@ -176,7 +187,8 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 					Random.Shared.Float()
 				)) * World.BlockScale ); // Spawn the item at the center of the block
 		}
-
+		
+		if ( spawnParticles ) //World.SpawnBreakParticles( position );
 		// Remove the block at the specified position.
 		World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
 	}

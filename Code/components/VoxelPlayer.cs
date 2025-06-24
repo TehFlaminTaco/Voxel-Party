@@ -246,14 +246,12 @@ public partial class VoxelPlayer : Component
         {
             if ( !GiveBrokenBlocks )
             {
-                world.SpawnBreakParticles( BreakingBlock.Value );
                 world.Thinker.BreakBlock( BreakingBlock.Value );
             }
             else
             {
                 var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
-                world.SpawnBreakParticles( BreakingBlock.Value );
-                world.Thinker.PlaceBlock( BreakingBlock.Value, new BlockData( 0 ) );
+                world.Thinker.BreakBlock( BreakingBlock.Value, false );
             }
         }
 

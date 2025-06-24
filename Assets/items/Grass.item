@@ -16,6 +16,9 @@
     "RunStepSound": "sounds/footsteps/grass/grass_run.sound",
     "CrouchStepSound": "sounds/footsteps/grass/grass_wander.sound",
     "LandingSound": "sounds/footsteps/grass/grass_walk.sound",
+    "PlaceSound": "sounds/blocks/grass/grass_place.sound",
+    "BreakingSound": "sounds/blocks/grass/grass_break.sound",
+    "BreakSound": "sounds/blocks/grass/grass_break.sound",
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",

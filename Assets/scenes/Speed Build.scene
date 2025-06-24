@@ -61,7 +61,7 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "SkyIndirectLighting": true,
-          "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
+          "SkyMaterial": "materials/skybox/rustig_koppie_puresky.vmat",
           "Tint": "1,1,1,1"
         },
         {
@@ -131,7 +131,7 @@
       ],
       "Children": [
         {
-          "__guid": "e157fce3-5bb1-41e8-8c88-8d395c2d7a8c",
+          "__guid": "0927da96-1e56-42b8-b31c-40b0ddc52bc5",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, -1, 0)",
@@ -147,7 +147,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "e30e7caf-d1f1-4a28-b632-453ad2b4a6bc",
+              "__guid": "b67aab58-4961-4033-b2ca-3efaaaa4f672",
               "__enabled": true,
               "ChunkPosition": "0,-1,0",
               "OnComponentDestroy": null,
@@ -159,7 +159,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "71f7016f-33e2-467a-82b6-356edf10d6c4",
+              "__guid": "c49aed7a-5cb4-4a1b-b7c1-6dd8087826d1",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -183,7 +183,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "2bf8083c-63a0-4b63-a674-3d4237540c43",
+              "__guid": "968ae136-7b38-4203-aefd-956edd57881e",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -206,7 +206,7 @@
           "Children": []
         },
         {
-          "__guid": "2c8f3149-744d-44e6-8a16-2e4d7dd5aa41",
+          "__guid": "dda2ef0f-d3ac-4887-a916-2127bbe1c851",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, 0, 0)",
@@ -222,7 +222,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "e06d1d18-1f15-4cca-aa6c-c98b76b4eed1",
+              "__guid": "d3e87886-a3aa-4f17-9375-1ac97f8083db",
               "__enabled": true,
               "ChunkPosition": "0,0,0",
               "OnComponentDestroy": null,
@@ -234,7 +234,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "74264d77-4a1c-4e1b-b1e0-45c0fac95b9d",
+              "__guid": "4357f9dc-e0d2-4ff5-a245-eadfe4870b61",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -258,7 +258,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "5500fd59-7bc1-4b71-993e-defb7f0b1da7",
+              "__guid": "8a9d5c4e-4991-4604-93a7-ae84535857dd",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -281,7 +281,7 @@
           "Children": []
         },
         {
-          "__guid": "9b4b0d39-94fb-4ade-873d-7106514f2929",
+          "__guid": "417c96e1-b920-4813-a3e4-9cfac9444f6a",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, 0)",
@@ -297,7 +297,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "0fd869c3-c7bd-4da9-b4a7-8ff800961534",
+              "__guid": "bd50a3f4-f1c4-4a8f-a4d7-1938dd21f7e8",
               "__enabled": true,
               "ChunkPosition": "-1,-1,0",
               "OnComponentDestroy": null,
@@ -309,7 +309,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "381e6f5b-0203-4a8e-a9d3-4d3c7b0dc9aa",
+              "__guid": "c877467a-cc65-421e-aca9-434c99685566",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -333,7 +333,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "24cd3822-75dc-4492-adc9-65899aa70e02",
+              "__guid": "80e43ddd-28c1-4983-bc61-4f39141b964f",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -356,7 +356,7 @@
           "Children": []
         },
         {
-          "__guid": "ae4e0e42-4b6f-465e-8c3f-9f209f56657e",
+          "__guid": "c8e9212b-2aee-420e-82af-20c86a7db7fe",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, 0)",
@@ -372,7 +372,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "065a90b3-9903-482c-8267-ba3ae957feb9",
+              "__guid": "b3b0bbf8-4ff9-49fc-b374-314b9fa9d013",
               "__enabled": true,
               "ChunkPosition": "-1,0,0",
               "OnComponentDestroy": null,
@@ -384,7 +384,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "07ab2cbe-96c5-48f3-b60d-944cb3cacc2c",
+              "__guid": "5e0f4417-1c01-4cbb-ae81-51b285ae94a3",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -408,7 +408,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "06bfdbb8-cb26-4947-95f1-75a6f6e19e07",
+              "__guid": "e137036c-cf89-48d9-b19c-f73f4f55bf10",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -1208,7 +1208,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "b5c030ad-e380-4493-a607-3252462f5862",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "7c1dbe17-b056-429c-9736-333a61b3266f",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "e0da9681-8260-4fab-8f46-09fba9cc549b",
-        "6fb4e9ea-6dd0-44a1-bba8-0a9d93ba26e8": "87ffc3f9-9c72-4ecf-aa5b-48daedc730a6",
+        "e84ce2f7-cc49-4ca5-a73a-993a102ce3f7": "85a6ef20-ac91-401a-bec0-2fe0e808d8da",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "5841d23b-2284-432f-a7bf-981b71c8ecc6",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "bc0b0213-e9be-4709-8c77-977008c01ced",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "45149c09-3d21-4013-bba2-cc3d759a9369",
@@ -1217,7 +1217,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "84f0537c-5c5a-42e2-9448-6f3d25504205",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "8f2b4608-dff2-480a-8584-739a9aef3f3d",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "2b0aaf8a-b584-43de-8251-52e2f2d04c07",
-        "807009e6-e102-4971-a76a-57c997f9a4ec": "6223efb0-3489-4d16-b9f9-71c606e2711a"
+        "312cbfc3-e8ef-4eb8-9406-0ee0a76efbd8": "08094ed7-717f-420c-a909-53f4e464a4cf"
       }
     },
     {
@@ -1264,7 +1264,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "1fa1e20d-c971-401e-8b89-415571983115",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "b0f2ed15-75a5-4daa-83fe-6c3b712cb6a6",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "00cc6891-1a11-4cae-943c-6acdc4598b93",
-        "6fb4e9ea-6dd0-44a1-bba8-0a9d93ba26e8": "f527d1f2-4385-41b8-80b9-b855a44331a4",
+        "e84ce2f7-cc49-4ca5-a73a-993a102ce3f7": "6d356c1b-f715-4f00-a533-89aada0e4c5f",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "b9344353-fd13-4820-a372-d98028ac88be",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "0691e31c-dd40-47a3-8f8b-c380b14040ff",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "3b8158ce-5e9a-4a3c-8369-e49e6f8f175e",
@@ -1273,7 +1273,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "ed0d4b44-e84b-4e77-a2b5-9f9dbf37501e",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "64972339-11a8-410c-8d25-f2b14929523a",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "b26d2405-2057-4a4c-9e2c-ca9fbc5704e5",
-        "807009e6-e102-4971-a76a-57c997f9a4ec": "7cbe363b-8ff5-4280-8460-6d35abda7ec5"
+        "312cbfc3-e8ef-4eb8-9406-0ee0a76efbd8": "6948f842-f085-405e-9627-4ce067bf3830"
       }
     },
     {
@@ -1320,7 +1320,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "9d9377e4-4e83-49e0-8877-3d37f1a1d30f",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "9f5fdfaa-d016-4e61-9900-da3ce3965626",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "100eee8a-cf68-4a99-906e-b325d02ffe83",
-        "6fb4e9ea-6dd0-44a1-bba8-0a9d93ba26e8": "e28a6ffc-05fd-4f19-9366-3f22529697a2",
+        "e84ce2f7-cc49-4ca5-a73a-993a102ce3f7": "5189a8e6-eb3e-4fb9-b1bd-c8bc10b62794",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "3fbff953-779a-4a15-87e9-3af283142f91",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "bf898f4a-d8b6-4a3c-bfc3-1bb78d227ee8",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "6962bb59-95a9-4722-aea5-16fe9d8af2c1",
@@ -1329,7 +1329,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "38d10ac3-9bb8-43c2-998b-9ff401f63239",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "6bba807b-8df7-49ba-a483-f3a41064e61d",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "b64efa6a-0e14-4e5e-beca-7f7dd6b7891d",
-        "807009e6-e102-4971-a76a-57c997f9a4ec": "d3f5adce-32a6-498c-9219-f21b2b8d4c51"
+        "312cbfc3-e8ef-4eb8-9406-0ee0a76efbd8": "da8005f2-2618-4f65-a452-ab8782e76a39"
       }
     },
     {
@@ -1376,7 +1376,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "1956923f-b0d5-4ac3-8fe3-a3b6591216a1",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "83b3b816-e9e6-4220-bd16-e5981e265c47",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "405f253b-c49a-4409-b069-f45cd9ab6e40",
-        "6fb4e9ea-6dd0-44a1-bba8-0a9d93ba26e8": "d68bf9ba-ecc0-42a0-8c3a-4304bcbe8ca6",
+        "e84ce2f7-cc49-4ca5-a73a-993a102ce3f7": "f201a35a-621e-45ab-8a2b-dd09ccbea436",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "7995c29d-214d-4159-8536-b333c3d86f30",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "955b5e9a-2664-48de-a7e7-c32fe31e9072",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "2183f363-8cb8-4426-8e65-1d28f7f87bc4",
@@ -1385,7 +1385,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "a2ddcf5e-673b-4c31-a362-2df7ff003641",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "8b2642a2-5332-4796-8218-16568b02081a",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "23baa55b-8a51-46a3-a318-9b8cb952ef95",
-        "807009e6-e102-4971-a76a-57c997f9a4ec": "0df1d8ff-58f0-41de-bb2a-f118f832cd57"
+        "312cbfc3-e8ef-4eb8-9406-0ee0a76efbd8": "fc27784c-ab42-4d1a-a668-8fede05ed79c"
       }
     },
     {
@@ -1432,7 +1432,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "6293a155-1d76-474e-a0ff-c40b8d7f90ea",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "9ea730fc-3a2e-45bd-b2e7-0f372c0e45be",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "668285eb-ccfe-4624-9f60-a6cb12ec3daa",
-        "6fb4e9ea-6dd0-44a1-bba8-0a9d93ba26e8": "03cb51a9-3b50-4451-a71a-1ce3c427efea",
+        "e84ce2f7-cc49-4ca5-a73a-993a102ce3f7": "c093b02f-34f8-4913-9e98-d5f763dea34c",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "01376581-11b6-4d77-a142-1b68114b60b4",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "fe8648a3-166a-4e55-b4be-ed04ea83b7f6",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "a204c3b1-cf9c-4541-8bce-1d9084162c23",
@@ -1441,7 +1441,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "f62c5304-a1ce-452a-9dc0-317bded1f521",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "74372794-2c73-4653-8c25-0b4999e0c0b0",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "af8667a0-d566-49ba-aa9b-380e7698a9d2",
-        "807009e6-e102-4971-a76a-57c997f9a4ec": "4e78447d-f726-4696-9079-45da16ec3457"
+        "312cbfc3-e8ef-4eb8-9406-0ee0a76efbd8": "9885c4fe-6730-43e9-960c-702bb7007a1c"
       }
     },
     {
@@ -1488,7 +1488,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "9d71da7b-a8e2-47e2-bdfc-c033eadd592f",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "a8c52fee-25ba-4920-a11b-24df95718622",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "556d2e49-7c76-436a-802a-12a994058f0d",
-        "6fb4e9ea-6dd0-44a1-bba8-0a9d93ba26e8": "b307adec-bdf8-437c-b732-e1510db87953",
+        "e84ce2f7-cc49-4ca5-a73a-993a102ce3f7": "3ae1a93b-ad2b-40b0-a51f-c5e4d854d794",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "145f110e-8594-46af-9a32-2b9b639fb1c1",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "ed9fbcc6-5064-40bf-9dd2-d9588c5f8983",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "5d0093b1-1213-4b91-9fc2-b507edefa18e",
@@ -1497,7 +1497,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "a5170043-56e9-42da-a57d-8b7b243d150b",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "12c259a5-3ae4-4c01-aa2d-ce5c6ebb8dcf",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "7e1a3098-01a8-4ba3-a08b-10d9f7a2b3bf",
-        "807009e6-e102-4971-a76a-57c997f9a4ec": "b84d7d98-bfc1-44c6-b74a-1f7077a99235"
+        "312cbfc3-e8ef-4eb8-9406-0ee0a76efbd8": "25a079ca-c18a-455f-8912-38ddc5fd2ee8"
       }
     },
     {
@@ -1544,7 +1544,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "6aa89ec8-6cbc-4f98-acba-05ded5ae03a7",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "9e1e081c-9080-4bd7-8619-9c82636b8982",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "c2d10def-62ef-49bb-b711-79305f289166",
-        "6fb4e9ea-6dd0-44a1-bba8-0a9d93ba26e8": "4ffc1aff-598a-48c5-8dcf-df1c94a99a09",
+        "e84ce2f7-cc49-4ca5-a73a-993a102ce3f7": "06ed512e-ae51-4c0a-b833-b24be43fc3be",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "afaf8428-0428-440e-a084-a0c8ece7df36",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "2ff80b12-fd2c-4789-b8ea-89f3348364c1",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "e2b8d8a8-431e-4d30-b9f3-171e8702beb6",
@@ -1553,7 +1553,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "d72fbc7d-5c05-4bc1-82ee-9a6a583deb4e",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "0b826dd7-a5df-48fa-9430-280cc5035d62",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "bf586d5e-1a5e-4760-b427-175f57781cce",
-        "807009e6-e102-4971-a76a-57c997f9a4ec": "db56d435-e823-44ac-b4dd-f8f9fe22a55e"
+        "312cbfc3-e8ef-4eb8-9406-0ee0a76efbd8": "866ad225-33bb-44fc-90e3-4469fb7e972d"
       }
     },
     {
@@ -1600,7 +1600,7 @@
         "51ca013f-05f2-4dc2-a57c-b8165e48d3ba": "28a49dee-a2bf-4c63-acb2-a6b1e869a6e4",
         "3efe3711-6702-43db-ad22-ebc4047e48de": "2adb7821-8485-4f26-9daf-b757d6c2d1b7",
         "61bedb02-a026-4a44-842a-452e15cc14f8": "d272cc43-86c3-445b-81d4-d3ed3e52ad8b",
-        "6fb4e9ea-6dd0-44a1-bba8-0a9d93ba26e8": "cd8a8b89-f002-46e6-b837-427d83c6269e",
+        "e84ce2f7-cc49-4ca5-a73a-993a102ce3f7": "7ade176b-393a-4489-814d-1bc2d6700b4c",
         "b6cf2de5-ce6b-4b8a-bd49-9eeac6db6f00": "dcc298b5-407e-4362-8c3a-c8fa18ef2562",
         "8724e6ed-2b35-44fc-8d9b-ca512dca8409": "bef13b19-43f5-485e-a50c-6f3698c581ed",
         "0f49d94a-a189-48ee-a6f1-15e64fe3926f": "51e60a44-b570-47d8-86e7-d4724b9cc944",
@@ -1609,7 +1609,7 @@
         "7c6b37ef-c4b1-4ddc-8329-b702b16bc60c": "1b20cecf-2dd1-4d77-8bbc-ade813360227",
         "e8ec6c83-1f13-4b69-802d-c882ae747458": "5471ddc4-21c3-44dc-8235-6193424396f2",
         "a41bed72-ea26-4f67-98a8-04670e9a1b81": "82fa1d7f-7254-424a-b749-395362fe3e37",
-        "807009e6-e102-4971-a76a-57c997f9a4ec": "874222dd-b830-4fd5-940b-eddf8cb18718"
+        "312cbfc3-e8ef-4eb8-9406-0ee0a76efbd8": "e4b0756f-b775-4b1a-8704-511bf6563b42"
       }
     },
     {
@@ -1649,6 +1649,38 @@
         }
       ],
       "Children": []
+    },
+    {
+      "__guid": "2b542ef8-1270-4ea2-aadf-1d8ade2b45d2",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Music",
+      "Position": "71.99606,5.343201,122.9948",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "MusicPlayer",
+          "__guid": "4bfb9ed9-149c-4813-9d33-3f0f47725e6f",
+          "__enabled": true,
+          "MusicFiles": [
+            "sounds/music/new sound event.sound"
+          ],
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
@@ -1674,7 +1706,8 @@
   "Description": null,
   "__references": [
     "facepunch.glass_c#101341",
-    "facepunch.wired_glass_a#101339"
+    "facepunch.wired_glass_a#101339",
+    "polyhaven.rustig_koppie_puresky#30194"
   ],
   "__version": 3
 }

@@ -28,19 +28,24 @@ public class Block
 	public bool Replaceable { get; set; } = false;
 
 	public PrefabFile BreakParticle { get; set; } = ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
-	public SoundEvent WalkStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
-	public SoundEvent RunStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_run.sound" );
-	public SoundEvent CrouchStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_wander.sound" );
-	public SoundEvent LandingSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
+	
+	[Group("Step sounds")] public SoundEvent WalkStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
+	[Group("Step sounds")] public SoundEvent RunStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_run.sound" );
+	[Group("Step sounds")] public SoundEvent CrouchStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_wander.sound" );
+	[Group("Step sounds")] public SoundEvent LandingSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
+	
+	[Group("Block Sounds")] public SoundEvent PlaceSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/blocks/stone/stone_place.sound" );
+	[Group("Block Sounds")] public SoundEvent BreakingSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/blocks/stone/stone_breaking.sound" );
+	[Group("Block Sounds")] public SoundEvent BreakSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/blocks/stone/stone_break.sound" );
 
-	public Texture Texture { get; set; } = null; // The texture used for rendering the block, can be null if not set.
-	public Texture TopTexture { get; set; } = null; // The texture used for the top face of the block, can be null if not set.
-	public Texture SideTexture { get; set; } = null; // The texture used for the side faces of the block, can be null if not set.
-	public Texture NorthTexture { get; set; } = null; // The texture used for the north face of the block, can be null if not set.
-	public Texture SouthTexture { get; set; } = null; // The texture used for the south face of the block, can be null if not set.
-	public Texture EastTexture { get; set; } = null; // The texture used for the east face of the block, can be null if not set.
-	public Texture WestTexture { get; set; } = null; // The texture used for the west face of the block, can be null if not set.
-	public Texture BottomTexture { get; set; } = null; // The texture used for the bottom face of the block, can be null if not set.
+	[Group("Textures")] public Texture Texture { get; set; } = null; // The texture used for rendering the block, can be null if not set.
+	[Group("Textures")] public Texture TopTexture { get; set; } = null; // The texture used for the top face of the block, can be null if not set.
+	[Group("Textures")] public Texture SideTexture { get; set; } = null; // The texture used for the side faces of the block, can be null if not set.
+	[Group("Textures")] public Texture NorthTexture { get; set; } = null; // The texture used for the north face of the block, can be null if not set.
+	[Group("Textures")] public Texture SouthTexture { get; set; } = null; // The texture used for the south face of the block, can be null if not set.
+	[Group("Textures")] public Texture EastTexture { get; set; } = null; // The texture used for the east face of the block, can be null if not set.
+	[Group("Textures")] public Texture WestTexture { get; set; } = null; // The texture used for the west face of the block, can be null if not set.
+	[Group("Textures")] public Texture BottomTexture { get; set; } = null; // The texture used for the bottom face of the block, can be null if not set.
 
 	[Hide] public int TextureIndex { get; set; } = 0; // Default texture index for the block, used for rendering.
 	[Hide] public int? TopTextureIndex { get; set; } = null; // Default texture index for the top face of the block.

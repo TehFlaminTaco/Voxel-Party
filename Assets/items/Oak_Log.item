@@ -8,10 +8,17 @@
     "IsSolidBlock": true,
     "IsSolid": true,
     "Hardness": 1,
+    "BlockBoundsMins": "0,0,0",
+    "BlockBoundsMaxs": "16,16,16",
+    "Replaceable": false,
     "BreakParticle": "prefabs/break particles.prefab",
     "WalkStepSound": "sounds/footsteps/stone/stone_walk.sound",
     "RunStepSound": "sounds/footsteps/stone/stone_run.sound",
     "CrouchStepSound": "sounds/footsteps/stone/stone_wander.sound",
+    "LandingSound": "sounds/footsteps/stone/stone_walk.sound",
+    "PlaceSound": "sounds/blocks/stone/stone_place.sound",
+    "BreakingSound": "sounds/blocks/stone/stone_breaking.sound",
+    "BreakSound": "sounds/blocks/stone/stone_break.sound",
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",
@@ -115,7 +122,8 @@
         "Count": 1,
         "ItemID": 8
       }
-    ]
+    ],
+    "BlockObject": null
   },
   "__references": [],
   "__version": 0

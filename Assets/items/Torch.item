@@ -12,6 +12,13 @@
     "BlockBoundsMaxs": "10,10,9",
     "Replaceable": false,
     "BreakParticle": "prefabs/break particles.prefab",
+    "WalkStepSound": "sounds/footsteps/stone/stone_walk.sound",
+    "RunStepSound": "sounds/footsteps/stone/stone_run.sound",
+    "CrouchStepSound": "sounds/footsteps/stone/stone_wander.sound",
+    "LandingSound": "sounds/footsteps/stone/stone_walk.sound",
+    "PlaceSound": "sounds/blocks/stone/stone_place.sound",
+    "BreakingSound": "sounds/blocks/stone/stone_breaking.sound",
+    "BreakSound": "sounds/blocks/stone/stone_break.sound",
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",
@@ -38,7 +45,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": null
+      "compiled": "textures/generated/imagefile/599109c51332ba9f.vtex"
     },
     "TopTexture": null,
     "SideTexture": null,
