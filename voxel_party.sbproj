@@ -5,7 +5,7 @@
   "Ident": "voxel_party",
   "Schema": 1,
   "IncludeSourceFiles": false,
-  "Resources": "materials/gui/timer.png",
+  "Resources": "materials/gui/*\nfonts/*",
   "PackageReferences": [],
   "EditorReferences": null,
   "Mounts": null,

@@ -1,14 +1,24 @@
-$click-sound: "audio/interact/button.sound";
+$slate-text: white;
+$slate-hover: #727a79;
+$slate-background: #383e43;
+$slate-border: #8e8e8e;
+$slate-border-dark: #505757;
+$slate-shadow: #252525;
+
+$green-text: white;
+$green-hover: #63c363;
+$green-background: #1e652b;
+$green-border: #33ba24;
+$green-border-dark: #179a17;
+$green-shadow: #104e10;
+$click-sound: "sounds/ui/ui_soundpack/click.sound";
 
 LobbyCreator {
-  position: absolute;
-  top: 2.5%;
-  right: 5%;
   width: 50%;
   height: 95%;
   background-color: #182529;
   color: white;
-  font-family: "Courier Prime";
+  font-family: MinecraftCHMC;
   border-left: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 30px;
   opacity: 0;

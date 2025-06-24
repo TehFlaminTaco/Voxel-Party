@@ -4,35 +4,40 @@
 @using Sandbox.Network;
 @inherits PanelComponent
 
-<root class="@(IsVisible ? "" : "hidden")">
-    <div class="menu-background"></div>
-    <div class="menu-container">
-	    <div class="logo-section">
-		    <div class="logo-image"></div>
-	    </div>
-        
-	    <div class="buttons-section">
-		    <div class="menu-item" @onclick=@( () => menuState = State.Create )>
-			    <span>Create Lobby</span>
-			    <div class="hover-line"></div>
-		    </div>
-		    <div class="menu-item" @onclick=@( () => menuState = State.Join )>
-			    <span>Join Lobby</span>
-			    <div class="hover-line"></div>
-		    </div>
-		    @* <div class="menu-item" @onclick=@( () => menuState = State.Settings )> *@
-			   @*  <span>SETTINGS</span> *@
-			   @*  <div class="hover-line"></div> *@
-		    @* </div> *@
+<root>
+	@if ( menuState == State.None ) 
+	{
+	<div class="quit" @onclick=@( () => ExitGame() )>Quit</div>
+	<div class="logo"></div>
+    <div class="buttons">
+		<div class="slice">
+			<div class="play" @onclick=@( () => menuState = State.Play )>
+				<div class="top-bar">
+					<span>Play</span>
+				</div>
+				<img src="materials/gui/title/temp.png" alt="">
+	    	</div>
+			<div class="settings">
+		    	<span>Settings</span>
+	    	</div>
+		</div>
 
-		    <div class="menu-item" @onclick=@( () => ExitGame() )>
-			    <span>Quit</span>
-			    <div class="hover-line"></div>
+	    <div class="slice">
+		    <div class="character">
+				<div class="top-bar">
+					<span>@Connection.Local.DisplayName</span>
+				</div>
+			    <img src="materials/gui/title/temp.png" alt="">
 		    </div>
-	    </div>
-    </div>	
-	<LobbyCreator style="@(menuState == State.Create ? "opacity: 1; pointer-events: all;" : "opacity: 0; pointer-events: none;")" @ref=lobbyCreator></LobbyCreator>
-	<ServerList style="@(menuState == State.Join ? "opacity: 1; pointer-events: all;" : "opacity: 0; pointer-events: none;")" @ref=serverList></ServerList>
+
+		    <div class="news">
+			    <span>News</span>
+		    </div>
+		</div>
+	</div>
+	} else {<div class="quit" @onclick=@( () => menuState = State.None )>Back</div>}
+	@if ( menuState == State.Play ) { <ServerList @ref=serverList></ServerList> }
+	@if ( menuState == State.Create ) { <LobbyCreator @ref=lobbyCreator></LobbyCreator> }
 </root>
 
 @code
@@ -40,6 +45,7 @@
 	public bool IsVisible { get; set; } = true;
 	public LobbyCreator lobbyCreator { get; set; }
 	public ServerList serverList { get; set; }
+	//TODO: Render player avatar to a texture and set character img src to it
 
 	public static State menuState { get; set; } = State.None;
 
@@ -63,8 +69,9 @@
     public enum State
     {
 	    None,
-	    Create,
-	    Join,
-	    Settings
+	    Play,
+		Create,
+	    Settings,
+		News
     }
 }
