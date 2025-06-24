@@ -126,35 +126,33 @@ public class BlockTrace
 			{
 
 				var block = World.GetBlock( bPos ).GetBlock();
-				if ( !block.IsSolidBlock )
+				if ( !block.IsFullBlock )
 				{
-					var axialMins = bPos + block.BlockBoundsMins / 16f;
-					var axialMaxes = bPos + block.BlockBoundsMaxs / 16f;
-					var box = new BBox(
-						axialMins,
-						axialMaxes
-					);
-					// We introduce a tiny amount of backtracking incase we trace against the wall of the block.
-					if ( box.Trace( new Ray( pos - Dir * 0.01f, Dir ), (MaxDistance - distanceTraveled) + 0.01f, out float dist ) )
+					foreach ( var box in block.GetCollisionAABBBlock( World, bPos ) )
 					{
-						dist -= 0.01f;
-						var tracedPos = pos + Dir * dist;
-						// We can determine the face by checking which of the bounds closest matches an axis of tracedPos
-						var tracedFace = new[] {
-							(MathF.Abs(axialMins.x - tracedPos.x), Direction.South), // -x = South
-							(MathF.Abs(axialMaxes.x - tracedPos.x), Direction.North), // +x = North
-							(MathF.Abs(axialMins.y - tracedPos.y), Direction.East), // -y = East
-							(MathF.Abs(axialMaxes.y - tracedPos.y), Direction.West), // +y = West
-							(MathF.Abs(axialMins.z - tracedPos.z), Direction.Down), // -z = Down
-							(MathF.Abs(axialMaxes.z - tracedPos.z), Direction.Up), // +z = Up
-						}.MinBy( x => x.Item1 ).Item2;
+						// We introduce a tiny amount of backtracking incase we trace against the wall of the block.
+						if ( box.Trace( new Ray( pos - Dir * 0.01f, Dir ), (MaxDistance - distanceTraveled) + 0.01f, out float dist ) )
+						{
+							dist -= 0.01f;
+							var tracedPos = pos + Dir * dist;
+							// We can determine the face by checking which of the bounds closest matches an axis of tracedPos
+							var tracedFace = new[] {
+								(MathF.Abs(box.Mins.x - tracedPos.x), Direction.South), // -x = South
+								(MathF.Abs(box.Maxs.x - tracedPos.x), Direction.North), // +x = North
+								(MathF.Abs(box.Mins.y - tracedPos.y), Direction.East), // -y = East
+								(MathF.Abs(box.Maxs.y - tracedPos.y), Direction.West), // +y = West
+								(MathF.Abs(box.Mins.z - tracedPos.z), Direction.Down), // -z = Down
+								(MathF.Abs(box.Maxs.z - tracedPos.z), Direction.Up), // +z = Up
+							}.MinBy( x => x.Item1 ).Item2;
 
-						hit = true;
-						pos = tracedPos;
-						hitFace = tracedFace.Flip();
-						distanceTraveled += dist;
-						break;
+							hit = true;
+							pos = tracedPos;
+							hitFace = tracedFace.Flip();
+							distanceTraveled += dist;
+							break;
+						}
 					}
+					if ( hit ) break;
 
 				}
 				else
@@ -240,6 +238,28 @@ public class BlockSpace
 			((position.z % Chunk.SIZE.z) + Chunk.SIZE.z) % Chunk.SIZE.z
 		);
 		return chunk.GetBlock( blockPosition.x, blockPosition.y, blockPosition.z );
+	}
+
+
+	// Get the BlockObject at a given position
+	public GameObject GetBlockObject( Vector3Int position )
+	{
+		var chunkPosition = new Vector3Int(
+			position.x.FloorDiv( Chunk.SIZE.x ),
+			position.y.FloorDiv( Chunk.SIZE.y ),
+			position.z.FloorDiv( Chunk.SIZE.z )
+		);
+		var chunk = GetChunkIfExists( chunkPosition );
+		if ( chunk == null || chunk.ChunkObject == null || !chunk.ChunkObject.IsValid )
+			return null;
+		var blockPosition = new Vector3Int(
+			((position.x % Chunk.SIZE.x) + Chunk.SIZE.x) % Chunk.SIZE.x,
+			((position.y % Chunk.SIZE.y) + Chunk.SIZE.y) % Chunk.SIZE.y,
+			((position.z % Chunk.SIZE.z) + Chunk.SIZE.z) % Chunk.SIZE.z
+		);
+		if ( !chunk.ChunkObject.BlockObjects.ContainsKey( blockPosition ) )
+			return null;
+		return chunk.ChunkObject.BlockObjects[blockPosition].obj;
 	}
 
 	public void SetBlock( Vector3Int position, BlockData blockData )

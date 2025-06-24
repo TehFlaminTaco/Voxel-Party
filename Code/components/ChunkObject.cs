@@ -147,7 +147,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 								BlockObjects[blockPos] = (blockObject, blockData);
 								if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
 								{
-									receiver.AcceptBlockData( blockData );
+									receiver.AcceptBlockData( this.WorldInstance, blockPos + (ChunkPosition * Chunk.SIZE), blockData );
 								}
 								blockObject.NetworkSpawn();
 							}
@@ -159,8 +159,9 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 						AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), TransparentVerts, TransparentNormals, TransparentUVs );
 					if ( block.IsSolid )
 					{
-						var aabb = block.GetCollisionAABB( WorldInstance, blockPos + (ChunkPosition * Chunk.SIZE) );
-						collisionModel.AddCollisionBox( aabb.Size, aabb.Center );
+						var aabb = block.GetCollisionAABBChunk( WorldInstance, blockPos + (ChunkPosition * Chunk.SIZE) );
+						foreach ( var bbox in aabb )
+							collisionModel.AddCollisionBox( bbox.Extents, bbox.Center );
 					}
 				}
 			}

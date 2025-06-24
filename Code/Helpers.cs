@@ -60,6 +60,29 @@ public static class Helpers
 		return vector.Modulo( Vector3.One );
 	}
 
+	public static Vector3Int Modulo( this Vector3Int vector, Vector3Int mod )
+	{
+		return new Vector3Int(
+			((vector.x % mod.x) + mod.x) % mod.x,
+			((vector.y % mod.y) + mod.y) % mod.y,
+			((vector.z % mod.z) + mod.z) % mod.z
+		);
+	}
+
+	public static Vector3Int Remainder( this Vector3Int vector, Vector3Int mod )
+	{
+		return new Vector3Int(
+			vector.x % mod.x,
+			vector.y % mod.y,
+			vector.z % mod.z
+		);
+	}
+
+	public static BBox Scale( this BBox box, Vector3 amounts )
+	{
+		return new BBox( box.Mins * amounts, box.Maxs * amounts );
+	}
+
 	public static IEnumerable<T> TakeRandom<T>( this Random rng, IEnumerable<T> source, int count )
 	{
 		if ( count > source.Count() )
@@ -223,6 +246,12 @@ public static class Helpers
 	public static Vector3Int WorldToVoxel( Vector3 position )
 	{
 		return (position / World.BlockScale).Floor();
+	}
+
+	public static bool Within( this Vector3Int pos, Vector3Int mins, Vector3Int maxes )
+	{
+		return pos.x >= mins.x && pos.y >= mins.y && pos.z >= mins.z
+			&& pos.x <= maxes.x && pos.y <= maxes.y && pos.z <= maxes.z;
 	}
 
 	public static Panel FindChild( this Panel parent, string condition )

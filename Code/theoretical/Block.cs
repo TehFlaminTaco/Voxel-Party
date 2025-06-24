@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using HalfEdgeMesh;
 using Sandbox;
 using Sandbox.UI;
 
@@ -7,45 +8,86 @@ using Sandbox.UI;
  */
 public class Block
 {
-	[Description( "Is this block opaque? Or partially transparent?" )]
-	public bool Opaque { get; set; } = true; // Whether the block is opaque (blocks light).
-	[DisplayName( "Is Full Block" )]
-	[Description( "Is this block considered a full solid block, meaning it occupies the entire space of a block?" )]
-	public bool IsSolidBlock { get; set; } = true; // Is this block considered a full solid block
+	public enum PlacementOption
+	{
+		StableAnywhere,
+		OnSolid,
+		AgaintsSolid
+	}
+
 	[Description( "Is this block solid, meaning it blocks movement?" )]
 	public bool IsSolid { get; set; } = true; // Whether the block is solid (blocks movement).
 	public int Hardness { get; set; } = 1; // Hardness of the block, used for mining speed calculations.
 
-	[HideIf( nameof( IsSolidBlock ), true )]
+	[DisplayName( "Is Full Block" )]
+	[Description( "Is this block considered a full solid block, meaning it occupies the entire space of a block?" )]
+	public bool IsFullBlock { get; set; } = true; // Is this block considered a full solid block
+	[HideIf( nameof( IsFullBlock ), true )]
 	[Description( "Collision bound mins, as a number of pixels" )]
 	public Vector3Int BlockBoundsMins { get; set; } = new Vector3Int( 0, 0, 0 ); // The minimum bounds of the block in the X and Y directions. (When not IsSolidBlock)
-	[HideIf( nameof( IsSolidBlock ), true )]
+	[HideIf( nameof( IsFullBlock ), true )]
 	[Description( "Collision bounds maxs, as a number of pixels" )]
 	public Vector3Int BlockBoundsMaxs { get; set; } = new Vector3Int( 16, 16, 16 ); // The maximum bounds of the block in the X and Y directions. (When not IsSolidBlock)
 
 
+	[Group( "Placement" )]
 	[Description( "Can another block destructively fill this block's space?" )]
 	public bool Replaceable { get; set; } = false;
 
-	public PrefabFile BreakParticle { get; set; } = ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
-	
-	[Group("Step sounds")] public SoundEvent WalkStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
-	[Group("Step sounds")] public SoundEvent RunStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_run.sound" );
-	[Group("Step sounds")] public SoundEvent CrouchStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_wander.sound" );
-	[Group("Step sounds")] public SoundEvent LandingSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
-	
-	[Group("Block Sounds")] public SoundEvent PlaceSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/blocks/stone/stone_place.sound" );
-	[Group("Block Sounds")] public SoundEvent BreakingSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/blocks/stone/stone_breaking.sound" );
-	[Group("Block Sounds")] public SoundEvent BreakSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/blocks/stone/stone_break.sound" );
+	[Group( "Placement" )]
+	[Description( "Can this block be rotated when being placed?" )]
+	public bool Rotateable { get; set; } = false;
 
-	[Group("Textures")] public Texture Texture { get; set; } = null; // The texture used for rendering the block, can be null if not set.
-	[Group("Textures")] public Texture TopTexture { get; set; } = null; // The texture used for the top face of the block, can be null if not set.
-	[Group("Textures")] public Texture SideTexture { get; set; } = null; // The texture used for the side faces of the block, can be null if not set.
-	[Group("Textures")] public Texture NorthTexture { get; set; } = null; // The texture used for the north face of the block, can be null if not set.
-	[Group("Textures")] public Texture SouthTexture { get; set; } = null; // The texture used for the south face of the block, can be null if not set.
-	[Group("Textures")] public Texture EastTexture { get; set; } = null; // The texture used for the east face of the block, can be null if not set.
-	[Group("Textures")] public Texture WestTexture { get; set; } = null; // The texture used for the west face of the block, can be null if not set.
-	[Group("Textures")] public Texture BottomTexture { get; set; } = null; // The texture used for the bottom face of the block, can be null if not set.
+	[HideIf( nameof( Rotateable ), false )]
+	[Group( "Placement" )]
+	[Description( "If true, the re-arranges its textures such that North is Forward." )]
+	public bool RotateTextures { get; set; } = true;
+	[HideIf( nameof( Rotateable ), false )]
+	[Group( "Placement" )]
+	[Description( "Valid directions this block can face." )]
+	[Property]
+	public DirectionFlags ValidDirections = new DirectionFlags( Directions.All.ToArray() );
+	[HideIf( nameof( Rotateable ), false )]
+	[Group( "Placement" )]
+	[Description( "The default direction for this block to place if it was placed without direction information, or placed at an invalid direction. This may be an otherwise Invalid direction" )]
+	public Direction DefaultDirection = Direction.None;
+	[HideIf( nameof( Rotateable ), false )]
+	[Group( "Placement" )]
+	[Description( "Place depending on the camera direction, rather than the hit blocks facing" )]
+	public bool CameraDirectionPlaced = false;
+	[HideIf( nameof( Rotateable ), false )]
+	[Group( "Placement" )]
+	[Description( "Is our facing the inverse of the normal placed direction?" )]
+	public bool FlipPlacedDirection = false;
+
+	[Group( "Placement" )]
+	[Description( "Where can this be placed / stay stable on. AgainstSolid requires a rotateable block to have it's Opposite block have a solid likewise face, OnSolid requires the block underneath have a solid top face" )]
+	public PlacementOption ValidPlacementOption = PlacementOption.StableAnywhere;
+
+
+	[Group( "Rendering" )]
+	public PrefabFile BreakParticle { get; set; } = ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
+
+	[Group( "Step sounds" )] public SoundEvent WalkStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
+	[Group( "Step sounds" )] public SoundEvent RunStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_run.sound" );
+	[Group( "Step sounds" )] public SoundEvent CrouchStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_wander.sound" );
+	[Group( "Step sounds" )] public SoundEvent LandingSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
+
+	[Group( "Block Sounds" )] public SoundEvent PlaceSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/blocks/stone/stone_place.sound" );
+	[Group( "Block Sounds" )] public SoundEvent BreakingSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/blocks/stone/stone_breaking.sound" );
+	[Group( "Block Sounds" )] public SoundEvent BreakSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/blocks/stone/stone_break.sound" );
+
+	[Group( "Rendering" )]
+	[Description( "Is this block opaque? Or partially transparent?" )]
+	public bool Opaque { get; set; } = true; // Whether the block is opaque (blocks light).
+	[Group( "Textures" )] public Texture Texture { get; set; } = null; // The texture used for rendering the block, can be null if not set.
+	[Group( "Textures" )] public Texture TopTexture { get; set; } = null; // The texture used for the top face of the block, can be null if not set.
+	[Group( "Textures" )] public Texture SideTexture { get; set; } = null; // The texture used for the side faces of the block, can be null if not set.
+	[Group( "Textures" )] public Texture NorthTexture { get; set; } = null; // The texture used for the north face of the block, can be null if not set.
+	[Group( "Textures" )] public Texture SouthTexture { get; set; } = null; // The texture used for the south face of the block, can be null if not set.
+	[Group( "Textures" )] public Texture EastTexture { get; set; } = null; // The texture used for the east face of the block, can be null if not set.
+	[Group( "Textures" )] public Texture WestTexture { get; set; } = null; // The texture used for the west face of the block, can be null if not set.
+	[Group( "Textures" )] public Texture BottomTexture { get; set; } = null; // The texture used for the bottom face of the block, can be null if not set.
 
 	[Hide] public int TextureIndex { get; set; } = 0; // Default texture index for the block, used for rendering.
 	[Hide] public int? TopTextureIndex { get; set; } = null; // Default texture index for the top face of the block.
@@ -60,7 +102,7 @@ public class Block
 
 	public GameObject BlockObject { get; set; } = null; // A GameObject that represents the block in the world, can be null if not set.
 
-	public virtual int GetTextureIndex( World world, Vector3Int blockPos, Direction face ) => face switch
+	public virtual int GetTextureIndex( BlockSpace world, Vector3Int blockPos, Direction face ) => face switch
 	{
 		Direction.North => NorthTextureIndex ?? SideTextureIndex ?? TextureIndex,
 		Direction.South => SouthTextureIndex ?? SideTextureIndex ?? TextureIndex,
@@ -71,9 +113,9 @@ public class Block
 		_ => TextureIndex
 	}; // Returns the texture index for the block face at the given position.
 
-	public virtual void AddBlockMesh( World world, Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
+	public virtual void AddBlockMesh( BlockSpace world, Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
 	{
-		if ( !IsSolidBlock )
+		if ( !IsFullBlock )
 			return; // If we are not a solid block, this behaviour should be overridden, otherwise, we don't render anything.
 					// For each face, call AddFaceMesh with the appropriate parameters.
 		foreach ( var dir in Directions.All )
@@ -85,58 +127,120 @@ public class Block
 		}
 	}
 
-	public virtual BBox GetCollisionAABB( World world, Vector3Int blockPos )
+	public bool IsValidPlacement( BlockSpace world, Vector3Int blockPos, Direction facing )
 	{
-		if ( this.IsSolidBlock )
+		switch ( this.ValidPlacementOption )
 		{
-			Vector3 pos = blockPos; // Convert block position to world position.
-			pos = pos.Modulo( Chunk.SIZE ); // Ensure the position is within the chunk bounds.
-			pos += 0.5f; // Offset the position to the center of the block.
-			pos *= World.BlockScale;
-			return BBox.FromPositionAndSize( pos, World.BlockScale / 2f ); // Create a bounding box from the position and size of the block.
-		}
-		else
-		{
-			Vector3 pos = blockPos; // Convert block position to world position.
-			pos = pos.Modulo( Chunk.SIZE ); // Ensure the position is within the chunk bounds.
-			pos *= World.BlockScale;
-			// If not a solid block, use the BlockBoundsMins and BlockBoundsMaxs to create a bounding box.
-			return new BBox(
-				pos + (BlockBoundsMins / 16f * World.BlockScale),
-				pos + (BlockBoundsMaxs / 16f * World.BlockScale)
-			); // Create a bounding box from the block bounds.
+			case PlacementOption.OnSolid:
+				var underBlock = blockPos + Vector3Int.Down;
+				return world.GetBlock( underBlock ).GetBlock().IsFaceSolid( world, underBlock, Direction.Up );
+			case PlacementOption.AgaintsSolid:
+				var backBlock = blockPos + facing.Flip().Forward();
+				return world.GetBlock( backBlock ).GetBlock().IsFaceSolid( world, backBlock, facing );
+			case PlacementOption.StableAnywhere:
+			default:
+				return true;
 		}
 	}
 
-	public virtual BBox GetCollisionAABBWorld( World world, Vector3Int blockPos )
+	public void OnNeighbourUpdated( BlockSpace world, Vector3Int blockPos, Vector3Int neighbourPos )
 	{
-		if ( this.IsSolidBlock )
+		world.GetChunk( blockPos )?.MarkDirty();
+		if ( !IsValidPlacement( world, blockPos, this.Rotateable ? world.GetBlock( blockPos ).FacingFromData() : Direction.None ) )
 		{
-			Vector3 pos = blockPos; // Convert block position to world position.
-			pos += 0.5f; // Offset the position to the center of the block.
-			pos *= World.BlockScale;
-			return BBox.FromPositionAndSize( pos, World.BlockScale ); // Create a bounding box from the position and size of the block.
-		}
-		else
-		{
-			Vector3 pos = blockPos; // Convert block position to world position.
-			pos *= World.BlockScale;
-			// If not a solid block, use the BlockBoundsMins and BlockBoundsMaxs to create a bounding box.
-			return new BBox(
-				pos + (BlockBoundsMins / 16f * World.BlockScale),
-				pos + (BlockBoundsMaxs / 16f * World.BlockScale)
-			); // Create a bounding box from the block bounds.
+			this.Pop( world, blockPos );
 		}
 	}
 
-	public virtual ItemStack[] GetDrops( World world, Vector3Int blockPos )
+	public Direction BestDirectionFrom( Direction face, Vector3 cameraDirection )
+	{
+		if ( !this.Rotateable )
+			return Direction.None;
+		if ( this.CameraDirectionPlaced )
+			face = Directions.FromVector( cameraDirection );
+		if ( this.FlipPlacedDirection )
+			face = face.Flip();
+		if ( !this.ValidDirections[face] )
+			face = this.DefaultDirection;
+		return face;
+	}
+
+	// Pop off an invalid position
+	public void Pop( BlockSpace world, Vector3Int pos )
+	{
+		// Check all VoxelPlayers if we're in their build volume, and give us to them if we are.
+		foreach ( var ply in Game.ActiveScene.GetAll<VoxelPlayer>() )
+		{
+			if ( ply.GiveBrokenBlocks && ply.HasBuildVolume )
+			{
+				if ( pos.Within( ply.BuildAreaMins, ply.BuildAreaMaxs ) )
+				{
+					ply.inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( pos ) ) );
+					world.SetBlock( pos, new BlockData( 0 ) );
+					return;
+				}
+			}
+		}
+
+		if ( world is World w )
+		{
+			// Pop off as an item.
+			w.Thinker.BreakBlock( pos, true );
+			return;
+		}
+
+		// Just clear us.
+		world.SetBlock( pos, new BlockData( 0, 0 ) );
+
+	}
+
+	public virtual IEnumerable<BBox> GetHitboxes( BlockSpace world, Vector3Int blockPos )
+	{
+		if ( this.IsFullBlock )
+		{
+			return [new BBox( Vector3.Zero, Vector3.One )];
+		}
+		// If we have a blockObject that has an IHitboxProvider
+		if ( world.GetBlockObject( blockPos ) is GameObject blockObject && blockObject.GetComponent<IHitboxProvider>() is IHitboxProvider hitbox )
+		{
+			return hitbox.ProvideHitboxes( world, blockPos );
+		}
+
+		return [new BBox( this.BlockBoundsMins / 16f, this.BlockBoundsMaxs / 16f )];
+	}
+
+	public virtual IEnumerable<BBox> GetCollisionAABBChunk( BlockSpace world, Vector3Int blockPos )
+	{
+		foreach ( var bbox in GetHitboxes( world, blockPos ) )
+		{
+			yield return bbox.Translate( blockPos.Modulo( Chunk.SIZE ) ).Scale( World.BlockScale );
+		}
+	}
+
+	public virtual IEnumerable<BBox> GetCollisionAABBWorld( BlockSpace world, Vector3Int blockPos )
+	{
+		foreach ( var bbox in GetHitboxes( world, blockPos ) )
+		{
+			yield return bbox.Translate( blockPos ).Scale( World.BlockScale );
+		}
+	}
+
+	public virtual IEnumerable<BBox> GetCollisionAABBBlock( BlockSpace world, Vector3Int blockPos )
+	{
+		foreach ( var bbox in GetHitboxes( world, blockPos ) )
+		{
+			yield return bbox.Translate( blockPos );
+		}
+	}
+
+	public virtual ItemStack[] GetDrops( BlockSpace world, Vector3Int blockPos )
 	{
 		// Returns the items that drop when the block is broken.
 		// Default implementation returns the Drops property.
 		return Drops;
 	}
 
-	public virtual void AddFaceMesh( World world, Vector3Int blockPos, Direction face, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
+	public virtual void AddFaceMesh( BlockSpace world, Vector3Int blockPos, Direction face, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
 	{
 		// This method should be overridden to add the mesh for a specific face of the block.
 		// For example, it could add vertices, normals, and UVs for the specified face.
@@ -172,13 +276,18 @@ public class Block
 		uvs.AddRange( ourUVs.Select( v => new Vector3( v, textureIndex ) ) ); // Assuming a texture atlas of 16x16, scale UVs to [0, 1].
 	}
 
-	public virtual bool IsFaceSolid( World world, Vector3Int blockPos, Direction face )
+	public virtual bool IsFaceOpaque( BlockSpace world, Vector3Int blockPos, Direction face )
 	{
 		// Check if the face is solid by checking the block's properties.
-		return IsSolidBlock && Opaque;
+		return IsFullBlock && Opaque;
 	}
 
-	public virtual bool ShouldFaceBeVisible( World world, Vector3Int blockPos, Direction face )
+	public virtual bool IsFaceSolid( BlockSpace world, Vector3Int blockPos, Direction face )
+	{
+		// Check if the face is solid by checking the block's properties.
+		return IsFullBlock && IsSolid;
+	}
+	public virtual bool ShouldFaceBeVisible( BlockSpace world, Vector3Int blockPos, Direction face )
 	{
 		// If we are not opaque, we always show the face.
 		if ( !Opaque )
@@ -206,7 +315,7 @@ public class Block
 			{
 				return true; // If no adjacent block, show the face.
 			}
-			if ( adjacentBlock.IsFaceSolid( world, adjacentPos, face.Flip() ) )
+			if ( adjacentBlock.IsFaceOpaque( world, adjacentPos, face.Flip() ) )
 			{
 				return false; // If the adjacent block's opposite face is solid, don't show this face.
 			}
