@@ -41,8 +41,8 @@ public partial class SpeedBuildHud : PanelComponent
     {
         // Update goodbar and badbar widths based on player stats
         var player = VoxelPlayer.LocalPlayer;
-        var goodBar = this.Panel.Children.First( c => c.Id == "score" ).Children.First( c => c.HasClass( "goodbar" ) );
-        var badBar = this.Panel.Children.First( c => c.Id == "score" ).Children.First( c => c.HasClass( "badbar" ) );
+        var goodBar = Panel.Children.First( c => c.Id == "score" ).Children.First( c => c.HasClass( "goodbar" ) );
+        var badBar = Panel.Children.First( c => c.Id == "score" ).Children.First( c => c.HasClass( "badbar" ) );
 
         if ( player.TotalBlockArea > 0 )
         {
@@ -57,25 +57,5 @@ public partial class SpeedBuildHud : PanelComponent
             goodBar.Style.Width = Length.Percent( 0 );
             badBar.Style.Width = Length.Percent( 0 );
         }
-    }
-
-    protected override void OnUpdate()
-    {
-        DanceReadyCheck();
-    }
-
-    private void DanceReadyCheck()
-    {
-        var player = VoxelPlayer.LocalPlayer;
-        if ( player == null || !player.IsValid() )
-            return;
-
-        var readyCheck = this.Panel.FindChild( "#readyCheck" );
-        if ( readyCheck == null )
-            return;
-        PanelTransform transform = new();
-        transform.AddScale( 1.0f + MathF.Sin( Time.Now * 2f ) * 0.1f ); // Scale oscillation
-        readyCheck.Style.Transform = transform;
-        readyCheck.Style.BackgroundColor = player.IsReady ? Color.Green : Color.White;
     }
 }

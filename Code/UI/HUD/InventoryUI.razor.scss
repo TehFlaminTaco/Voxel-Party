@@ -1,7 +1,23 @@
+$slate-text: white;
+$slate-hover: #727a79;
+$slate-background: #383e43;
+$slate-border: #8e8e8e;
+$slate-border-highlight: #d1d1d1;
+$slate-border-dark: #505757;
+$slate-shadow: #252525;
+
+$green-text: white;
+$green-hover: #63c363;
+$green-background: #1e652b;
+$green-border: #33ba24;
+$green-border-dark: #1b931b;
+$green-shadow: #104e10;
+$click-sound: "sounds/ui/ui_soundpack/click.sound";
+
 InventoryUI {
   position: absolute;
   color: white;
-  font-family: "Courier Prime";
+  font-family: "Perfect DOS VGA 437";
   border-radius: 30px;
   flex-direction: row;
   pointer-events: none;
@@ -17,16 +33,17 @@ InventoryUI {
     padding: 8px 8px 5px;
     width: 45%;
     height: 10%;
-    margin-bottom: 5px;
-    border: 2px solid rgba(52, 122, 118, 0.4);
-    border-radius: 10px;
+    gap: 4px;
+    border: 1px $slate-border;
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
     justify-content: space-evenly;
   }
   
   .hotbar-slot
   {
-    background-color: rgba(24, 37, 41, 0.8);
-    border: 1px solid #68b5b5;
+    background-color: rgba(27, 27, 27, 0.1);
+    border: 2px $slate-border-dark;
     width: auto;
     aspect-ratio: 1;
     border-radius: 10px;

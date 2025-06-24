@@ -5,53 +5,53 @@
 @inherits Panel
 
 <root>
+	<div class="quit" @onclick=@( () => Menu.menuState = Menu.State.Play )>Back</div>
+
 	<div class="panel-header">
 		<h2>CREATE LOBBY</h2>
-		<div class="close-button" @onclick=@( () => Menu.menuState = Menu.State.None )><i>undo</i></div>
+		<div class="close-button" @onclick=@( () => Menu.menuState = Menu.State.None )></div>
 	</div>
-	<div class="form-container">
-		<div class="form-group">
-			<TextEntry @ref="LobbyNameInput" placeholder="@(Connection.Local.DisplayName + "'s Lobby")" />
-		</div>
-		<div class="form-group">
-			<div class="form-entry">
-				<div class="number-input">
-					<button class="number-decrement" @onclick=@(() => AdjustMaxPlayers(-1))>-</button>
-					<span class="number-value">Max Players: @MaxPlayers</span>
-					<button class="number-increment" @onclick=@(() => AdjustMaxPlayers(1))>+</button>
-				</div>
-			</div>
-			<div class="form-entry">
-				<DropDown @ref="PrivacyOption" class="privacy-select">
-					<option value="0" title="Private">Private</option>
-					<option value="1" title="Friends">Friends</option>
-					<option value="2" title="Public">Public</option>
-				</DropDown>
+
+	<TextEntry class="lobby-name" @ref="LobbyNameInput" placeholder="@(Connection.Local.DisplayName + "'s Lobby")" />
+
+	<div class="slice">
+		<div class="option">
+			<div class="option-label">Max Players</div>
+			<div class="number-input">
+				<button class="number-decrement" @onclick=@(() => AdjustMaxPlayers(-1))>-</button>
+				<span class="number-value">@MaxPlayers</span>
+				<button class="number-increment" @onclick=@(() => AdjustMaxPlayers(1))>+</button>
 			</div>
 		</div>
-		<div class="toggle-switch" @onclick=@ToggleHidden>
-			<div class="toggle-label">Hidden from Server List</div>
-			<div class="toggle-button @(Hidden ? "active" : "")">
+		<div class="option">
+			<div class="option-label">Privacy</div>
+			<DropDown class="privacy-select" @ref="PrivacyOption">
+				<option value="0" title="Private">Private</option>
+				<option value="1" title="Friends">Friends</option>
+				<option value="2" title="Public">Public</option>
+			</DropDown>
+		</div>
+		<div class="option">
+			<div class="option-label">Hidden from Server List</div>
+			<div class="toggle-button @(Hidden ? "active" : "")" @onclick=@( () => Hidden = !Hidden )>
 				<div class="toggle-thumb"></div>
 			</div>
 		</div>
-		<div class="toggle-switch" @onclick=@ToggleDestroyWhenHostLeaves>
-			<div class="toggle-label">Destroy When Host Leaves</div>
-			<div class="toggle-button @(DestroyWhenHostLeaves ? "active" : "")">
+		<div class="option">
+			<div class="option-label">Destroy When Host Leaves</div>
+			<div class="toggle-button @(DestroyWhenHostLeaves ? "active" : "")" @onclick=@( () => DestroyWhenHostLeaves = !DestroyWhenHostLeaves )>
 				<div class="toggle-thumb"></div>
 			</div>
 		</div>
-		<div class="toggle-switch" @onclick=@ToggleAutoSwitchHost>
-			<div class="toggle-label">Auto-Switch to Best Host</div>
-			<div class="toggle-button @(AutoSwitchToBestHost ? "active" : "")">
+		<div class="option">
+			<div class="option-label">Auto-Switch to Best Host</div>
+			<div class="toggle-button @(AutoSwitchToBestHost ? "active" : "")" @onclick=@( () => AutoSwitchToBestHost = !AutoSwitchToBestHost )>
 				<div class="toggle-thumb"></div>
 			</div>
-		</div>
-		<div class="form-actions">
-			<button class="action-button cancel" @onclick=@( () => Menu.menuState = Menu.State.None )>CANCEL</button>
-			<button class="action-button create" @onclick=@ApplyLobbyCreation>CREATE</button>
 		</div>
 	</div>
+
+	<button class="create" @onclick=@ApplyLobbyCreation>CREATE</button>
 </root>
 
 @code
@@ -60,9 +60,9 @@
 	DropDown PrivacyOption { get; set; }
 	string LobbyName => LobbyNameInput?.Text.Length > 0 ? LobbyNameInput?.Text : Connection.Local.DisplayName + "'s Lobby";
 	int MaxPlayers { get; set; } = 8;
-	bool Hidden { get; set; } = true;
-	bool DestroyWhenHostLeaves { get; set; } = true;
-	bool AutoSwitchToBestHost { get; set; } = false;
+	bool Hidden { get; set; } = false;
+	bool DestroyWhenHostLeaves { get; set; } = false;
+	bool AutoSwitchToBestHost { get; set; } = true;
 	bool ShowPrivacyDropdown { get; set; }
 	
 	protected override int BuildHash() => HashCode.Combine( IsVisible );
@@ -70,24 +70,6 @@
 	private void AdjustMaxPlayers( int delta )
 	{
 		MaxPlayers = Math.Clamp( MaxPlayers + delta, 1, 8 );
-		StateHasChanged();
-	}
-
-	private void ToggleHidden()
-	{
-		Hidden = !Hidden;
-		StateHasChanged();
-	}
-
-	private void ToggleDestroyWhenHostLeaves()
-	{
-		DestroyWhenHostLeaves = !DestroyWhenHostLeaves;
-		StateHasChanged();
-	}
-
-	private void ToggleAutoSwitchHost()
-	{
-		AutoSwitchToBestHost = !AutoSwitchToBestHost;
 		StateHasChanged();
 	}
 
@@ -103,10 +85,6 @@
 			DestroyWhenHostLeaves = DestroyWhenHostLeaves,
 			AutoSwitchToBestHost = AutoSwitchToBestHost
 		};
-
-		SetProperty( "opacity", "0" );
-		Parent.SetProperty( "IsVisible", "false" );
-		StateHasChanged();
 		
 		Networking.CreateLobby( lobbyConfig );
 		Scene.LoadFromFile( "scenes/speed build.scene" );

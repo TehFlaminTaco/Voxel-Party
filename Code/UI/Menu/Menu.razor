@@ -25,7 +25,7 @@
 	    <div class="slice">
 		    <div class="character">
 				<div class="top-bar">
-					<span>@Connection.Local.DisplayName</span>
+					<span>Character</span>
 				</div>
 			    <img src="materials/gui/title/temp.png" alt="">
 		    </div>
@@ -35,7 +35,7 @@
 		    </div>
 		</div>
 	</div>
-	} else {<div class="quit" @onclick=@( () => menuState = State.None )>Back</div>}
+	}
 	@if ( menuState == State.Play ) { <ServerList @ref=serverList></ServerList> }
 	@if ( menuState == State.Create ) { <LobbyCreator @ref=lobbyCreator></LobbyCreator> }
 </root>

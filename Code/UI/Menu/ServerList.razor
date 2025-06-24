@@ -6,17 +6,22 @@
 @inherits Panel
 
 <root>
+	<div class="quit" @onclick=@( () => Menu.menuState = Menu.State.None )>Back</div>
 	<div class="panel-header">
 		<h2>SERVER LIST</h2>
-	</div>			
+	</div>
+
+	<div class="lobby-filters">
+		<div class="refresh-button @(CanRefresh() ? "" : "disabled")" onclick="@( () => { if (CanRefresh()) _ = FetchLobbies(); } )"><i>refresh</i></div>
+		@if ( !CanRefresh() )
+		{
+		<div class="refresh-countdown">Can refresh in @(GetRemainingSeconds())s...</div>
+		}
+		
+		<div class="create-button" onclick=@( () => Menu.menuState = Menu.State.Create )>Create+</div>
+	</div>	
+
 	<div class="server-list">
-		<div class="lobby-filters">
-			<div class="refresh-button @(CanRefresh() ? "" : "disabled")" onclick="@( () => { if (CanRefresh()) _ = FetchLobbies(); } )"><i>refresh</i></div>
-			@if ( !CanRefresh() )
-			{
-			<div class="refresh-countdown">Can refresh in @(GetRemainingSeconds())s...</div>
-			}
-		</div>
 
 		@foreach ( var i in Lobbies )
 		{

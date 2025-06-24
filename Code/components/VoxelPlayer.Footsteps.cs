@@ -43,7 +43,7 @@ public partial class VoxelPlayer
 		SoundEvent sound;
 		if ( Input.Down(Controller.AltMoveButton) ) 
 			sound = foot == 0 ? GroundBlockL.Block.RunStepSound : GroundBlockR.Block.RunStepSound;
-		else if ( Input.Down("crouch") ) 
+		else if ( Input.Down("duck") ) 
 			sound = foot == 0 ? GroundBlockL.Block.CrouchStepSound : GroundBlockR.Block.CrouchStepSound;
 		else sound = foot == 0 ? GroundBlockL.Block.WalkStepSound : GroundBlockR.Block.WalkStepSound;
 		
