@@ -1,6 +1,6 @@
 {
-  "ID": 15,
-  "Name": "White Wool",
+  "ID": 27,
+  "Name": "Green Wool",
   "MaxStackSize": 64,
   "IsBlock": true,
   "Block": {
@@ -25,7 +25,7 @@
       "$compiler": "texture",
       "$source": "imagefile",
       "data": {
-        "FilePath": "materials/block/white_wool.png",
+        "FilePath": "materials/block/green_wool.png",
         "MaxSize": 4096,
         "ConvertHeightToNormals": false,
         "NormalScale": 1,
@@ -56,7 +56,7 @@
     "EastTexture": null,
     "WestTexture": null,
     "BottomTexture": null,
-    "TextureIndex": 0,
+    "TextureIndex": 22,
     "TopTextureIndex": null,
     "SideTextureIndex": null,
     "NorthTextureIndex": null,

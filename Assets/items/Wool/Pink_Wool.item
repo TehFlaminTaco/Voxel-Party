@@ -1,6 +1,6 @@
 {
-  "ID": 15,
-  "Name": "White Wool",
+  "ID": 23,
+  "Name": "Pink Wool",
   "MaxStackSize": 64,
   "IsBlock": true,
   "Block": {
@@ -25,7 +25,7 @@
       "$compiler": "texture",
       "$source": "imagefile",
       "data": {
-        "FilePath": "materials/block/white_wool.png",
+        "FilePath": "materials/block/pink_wool.png",
         "MaxSize": 4096,
         "ConvertHeightToNormals": false,
         "NormalScale": 1,
