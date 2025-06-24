@@ -22,11 +22,7 @@ public partial class Item : GameResource
 			var usedIDs = allitems.Select( c => c.ID );
 			for ( int i = 0; i < 255; i++ )
 			{
-				if ( usedIDs.Contains( i ) )
-				{
-					Log.Info( $"{i}: {ResourceLibrary.GetAll<Item>().First( k => k.ID == i ).Name}" );
-				}
-				else
+				if ( !usedIDs.Contains( i ) )
 				{
 					ID = i;
 					return true;
