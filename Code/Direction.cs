@@ -101,6 +101,26 @@ public static class Directions
 		};
 	}
 
+	public static Rotation GetRotation( this Direction direction )
+	{
+		return direction switch
+		{
+			Direction.None => Rotation.Identity,
+			Direction.North => Rotation.Identity,
+			Direction.East => Rotation.FromYaw( 90f ),
+			Direction.South => Rotation.FromYaw( 180f ),
+			Direction.West => Rotation.FromYaw( 270f ),
+			Direction.Up => Rotation.FromPitch( 90f ),
+			Direction.Down => Rotation.FromPitch( -90f ),
+			_ => throw new System.ArgumentOutOfRangeException( nameof( direction ), direction, null )
+		};
+	}
+
+	public static Direction RotateBy( this Direction source, Direction rotation )
+	{
+		return Directions.FromVector( source.Forward() * rotation.GetRotation() );
+	}
+
 	public static Direction FromVector( Vector3 vector )
 	{
 		// Get the direction this vector is most like.
@@ -117,7 +137,7 @@ public static class Directions
 		}
 		else if ( absY >= absX && absY >= absZ )
 		{
-			return vector.y > 0 ? Direction.East : Direction.West;
+			return vector.y > 0 ? Direction.West : Direction.East;
 		}
 		else
 		{
