@@ -91,7 +91,7 @@ public partial class VoxelBuilder : EditorTool
 			{
 				var icon = new ImageButton();
 				itemButtons[item.ID] = icon;
-				using ( var tex = Helpers.RenderItem( item ) )
+				using ( var tex = EditorHelpers.RenderItem( item ) )
 				{
 					icon.Texture = tex;
 				}
