@@ -54,21 +54,18 @@ public class Chunk
 		{
 			IsEmpty = false; // If we set a non-air block, the chunk is no longer empty.
 		}
+		if ( blocks[x, y, z] == blockData ) // If we don't actually change, don't update our neighbours at all.
+			return;
 		blocks[x, y, z] = blockData;
 		Dirty = true; // Mark the chunk as dirty to indicate it needs to be updated/rendered.
 					  // If we're on a chunk border (x y or z is 0 or SIZE-1), we might need to update neighboring chunks.
-		if ( x == 0 )
-			world.GetChunkIfExists( Position + new Vector3Int( -1, 0, 0 ) )?.MarkDirty();
-		if ( x == SIZE.x - 1 )
-			world.GetChunkIfExists( Position + new Vector3Int( 1, 0, 0 ) )?.MarkDirty();
-		if ( y == 0 )
-			world.GetChunkIfExists( Position + new Vector3Int( 0, -1, 0 ) )?.MarkDirty();
-		if ( y == SIZE.y - 1 )
-			world.GetChunkIfExists( Position + new Vector3Int( 0, 1, 0 ) )?.MarkDirty();
-		if ( z == 0 )
-			world.GetChunkIfExists( Position + new Vector3Int( 0, 0, -1 ) )?.MarkDirty();
-		if ( z == SIZE.z - 1 )
-			world.GetChunkIfExists( Position + new Vector3Int( 0, 0, 1 ) )?.MarkDirty();
+		world.GetBlock( Position + new Vector3Int( -1, 0, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( -1, 0, 0 ), Position );
+		world.GetBlock( Position + new Vector3Int( 1, 0, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 1, 0, 0 ), Position );
+		world.GetBlock( Position + new Vector3Int( 0, -1, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 0, -1, 0 ), Position );
+		world.GetBlock( Position + new Vector3Int( 0, 1, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 0, 1, 0 ), Position );
+		world.GetBlock( Position + new Vector3Int( 0, 0, -1 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 0, 0, -1 ), Position );
+		world.GetBlock( Position + new Vector3Int( 0, 0, 1 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 0, 0, 1 ), Position );
+
 	}
 
 	public ChunkObject Render( Scene scene, WorldThinker thinker = null )

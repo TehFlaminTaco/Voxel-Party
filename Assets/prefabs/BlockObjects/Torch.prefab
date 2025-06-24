@@ -13,7 +13,19 @@
     "NetworkInterpolation": true,
     "NetworkOrphaned": 0,
     "OwnerTransfer": 1,
-    "Components": [],
+    "Components": [
+      {
+        "__type": "TorchObject",
+        "__guid": "8f167d02-3c14-4df8-9485-45dc17ba680b",
+        "__enabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      }
+    ],
     "Children": [
       {
         "__guid": "6dd468f6-59ac-44a2-b93d-c2c89186451a",

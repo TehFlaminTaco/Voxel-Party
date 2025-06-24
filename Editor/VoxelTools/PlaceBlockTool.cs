@@ -16,7 +16,7 @@ public class PlaceBlockTool : VoxelTool
     public override void LeftMousePressed( Vector3Int blockPosition, Direction faceDirection )
     {
         var lastBlockData = World.Active.GetBlock( blockPosition + faceDirection.Forward() * 1 );
-        var newBlockData = new BlockData( VoxelBuilder.SelectedItemID );
+        var newBlockData = BlockData.WithPlacementBlockData( VoxelBuilder.SelectedItemID, faceDirection, Gizmo.Camera.Rotation.Forward );
         SceneEditorSession.Active.AddUndo( "Place Block", () => World.Active.SetBlock( blockPosition + faceDirection.Forward() * 1, lastBlockData ),
             () => World.Active.SetBlock( blockPosition + faceDirection.Forward() * 1, newBlockData ) );
         World.Active.SetBlock( blockPosition + faceDirection.Forward() * 1, newBlockData );

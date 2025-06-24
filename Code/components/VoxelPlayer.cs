@@ -1,3 +1,4 @@
+
 using System;
 using System.Security.Cryptography.X509Certificates;
 
@@ -292,7 +293,8 @@ public partial class VoxelPlayer : Component
                 return;
             }
             inventory.TakeItem( SelectedSlot, 1 ); // Remove one item from the hotbar slot
-            world.Thinker.PlaceBlock( placePos, new BlockData( (byte)item.Item.ID, 0 ) );
+            var pc = GetComponent<PlayerController>();
+            world.Thinker.PlaceBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, pc.EyeAngles.Forward ) );
         }
     }
 
@@ -308,8 +310,7 @@ public partial class VoxelPlayer : Component
         // Draw a box on the face hit
         Gizmo.Draw.Color = Color.Black;
         var block = world.GetBlock( blockPosition ).GetBlock();
-        var box = block.GetCollisionAABBWorld( world, blockPosition ).Grow( 0.1f ); // This gets the box in world coordinates relative to the chunk
-                                                                                    // Shrink the box down on one axis depending on faceDirection.
+        var box = BBox.FromBoxes( block.GetCollisionAABBWorld( world, blockPosition ) ).Grow( 0.1f );
         switch ( faceDirection )
         {
             case Direction.North: box.Mins.x = box.Maxs.x; break;

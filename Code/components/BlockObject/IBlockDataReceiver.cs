@@ -6,5 +6,5 @@ public interface IBlockDataReceiver
     /// Accepts block data from a block object.
     /// </summary>
     /// <param name="blockData">The block data to accept.</param>
-    void AcceptBlockData( BlockData blockData );
+    void AcceptBlockData( BlockSpace world, Vector3Int pos, BlockData blockData );
 }

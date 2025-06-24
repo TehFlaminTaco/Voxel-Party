@@ -87,8 +87,8 @@ public abstract class VoxelTool
     {
         var world = World.Active;
         var block = world.GetBlock( blockPosition ).GetBlock();
-        var box = block.GetCollisionAABBWorld( world, blockPosition ).Grow( 0.1f ); // This gets the box in world coordinates relative to the chunk
-                                                                                    // Shrink the box down on one axis depending on faceDirection.
+        var box = BBox.FromBoxes( block.GetCollisionAABBWorld( world, blockPosition ) ).Grow( 0.1f ); // This gets the box in world coordinates relative to the chunk
+                                                                                                      // Shrink the box down on one axis depending on faceDirection.
         switch ( faceDirection )
         {
             case Direction.North: box.Mins.x = box.Maxs.x; break;

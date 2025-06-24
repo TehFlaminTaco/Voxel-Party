@@ -5,6 +5,8 @@ public struct BlockData
 	public byte BlockID;
 	public byte BlockDataValue;
 
+	public static BlockData Empty = new BlockData( 0, 0 );
+
 	public BlockData( byte blockID, byte blockDataValue )
 	{
 		BlockID = blockID;
@@ -32,11 +34,26 @@ public struct BlockData
 		return area;
 	}
 
+	public Direction FacingFromData()
+	{
+		return (Direction)this.BlockDataValue;
+	}
+
 	public BlockData( int blockType ) : this( (byte)blockType, 0 ) { }
 
 	public Block GetBlock()
 	{
 		return ItemRegistry.GetBlock( BlockID );
+	}
+
+	public static BlockData WithPlacementBlockData( int blockID, Direction placedFace, Vector3 cameraForward )
+	{
+		var block = ItemRegistry.GetBlock( blockID );
+		if ( block == null )
+			return BlockData.Empty;
+		if ( block.Rotateable )
+			return new BlockData( (byte)blockID, (byte)block.BestDirectionFrom( placedFace, cameraForward ) );
+		return new BlockData( blockID );
 	}
 
 	// Equality operator to compare two BlockData instances

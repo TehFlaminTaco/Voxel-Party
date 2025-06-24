@@ -1,4 +1,5 @@
 using Sandbox;
+using Sandbox.Diagnostics;
 
 // X+ is North, X- is South, Y+ is Right, Y- is Left, Z+ is Up, Z- is Down
 public enum Direction
@@ -74,6 +75,17 @@ public static class Directions
 		};
 	}
 
+	public static float Yaw( this Direction direction )
+	{
+		return direction switch
+		{
+			Direction.South => 180f,
+			Direction.East => 270f,
+			Direction.West => 90f,
+			_ => 0f
+		};
+	}
+
 	public static Direction Flip( this Direction direction )
 	{
 		return direction switch
@@ -110,6 +122,113 @@ public static class Directions
 		else
 		{
 			return vector.z > 0 ? Direction.Up : Direction.Down;
+		}
+	}
+}
+
+// Represents zero or more directions being set or unset.
+public struct DirectionFlags
+{
+	public bool[] Settings = new[]{
+		false, false, false, false, false, false
+	};
+
+	public DirectionFlags( params Direction[] set )
+	{
+		foreach ( var dir in set )
+			this[dir] = true;
+	}
+
+	public IEnumerable<Direction> All
+	{
+		get
+		{
+			var settings = Settings;
+			return Directions.All.Where( j => settings[(int)j - 1] );
+		}
+	}
+
+	public bool North
+	{
+		get
+		{
+			return this.Settings[0];
+		}
+		set
+		{
+			this.Settings[0] = value;
+		}
+	}
+
+	public bool South
+	{
+		get
+		{
+			return this.Settings[1];
+		}
+		set
+		{
+			this.Settings[1] = value;
+		}
+	}
+
+	public bool East
+	{
+		get
+		{
+			return this.Settings[2];
+		}
+		set
+		{
+			this.Settings[2] = value;
+		}
+	}
+
+	public bool West
+	{
+		get
+		{
+			return this.Settings[3];
+		}
+		set
+		{
+			this.Settings[3] = value;
+		}
+	}
+
+	public bool Up
+	{
+		get
+		{
+			return this.Settings[4];
+		}
+		set
+		{
+			this.Settings[4] = value;
+		}
+	}
+
+	public bool Down
+	{
+		get
+		{
+			return this.Settings[5];
+		}
+		set
+		{
+			this.Settings[5] = value;
+		}
+	}
+
+	public bool this[Direction dir]
+	{
+		get
+		{
+			return this.Settings[(int)dir - 1];
+		}
+		set
+		{
+			this.Settings[(int)dir - 1] = value;
 		}
 	}
 }
