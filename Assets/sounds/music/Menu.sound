@@ -1,11 +1,11 @@
 {
-  "UI": false,
+  "UI": true,
   "Volume": "1",
   "Pitch": "1",
   "Decibels": 70,
   "SelectionMode": "Random",
   "Sounds": [
-    "sounds/music/lounge jazz.vsnd"
+    "sounds/music/chill-reggae-loop.vsnd"
   ],
   "Occlusion": true,
   "AirAbsorption": true,
@@ -44,8 +44,8 @@
     }
   ],
   "DefaultMixer": {
-    "Name": "unknown",
-    "Id": "00000000-0000-0000-0000-000000000000"
+    "Name": "music",
+    "Id": "f5162d1c-afc4-4beb-80a1-26e18049bc10"
   },
   "__references": [],
   "__version": 1

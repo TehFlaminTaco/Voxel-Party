@@ -267,4 +267,48 @@ public static class Helpers
 		return parent.Children.FirstOrDefault( predicate ) ??
 			   parent.Children.Select( child => child.FindChild( condition ) ).FirstOrDefault( x => x != null );
 	}
+	
+	public static Bitmap RenderItem( Item item )
+	{
+		if ( item.Block?.BlockObject != null )
+		{
+			return item.Block.Texture.GetBitmap( 0 );
+		}
+		var tex = new Bitmap( 100, 100 );
+		Scene scene = new Scene();
+		using ( scene.Push() )
+		{
+			var so = new SceneCustomObject( scene.SceneWorld );
+			so.Transform = global::Transform.Zero.WithPosition( new Vector3( 0, 0, 10000 ) );
+			so.Flags.CastShadows = false;
+			so.Flags.IsOpaque = true;
+			so.Flags.IsTranslucent = false;
+
+			so.RenderOverride = ( obj ) =>
+			{
+				item.Render( Transform.Zero.WithPosition( new Vector3( 0f, -7f, -4f ) ).WithRotation( Rotation.FromAxis( Vector3.Right, 35f ) * Rotation.FromAxis( Vector3.Up, 45 ) ) );
+			};
+
+			var camera = new GameObject().AddComponent<CameraComponent>();
+			camera.Orthographic = true;
+			camera.OrthographicHeight = 17f;
+			camera.WorldPosition = new Vector3( -50, 0, 10000 );
+			camera.WorldRotation = Rotation.From( 0, 0, 0 );
+			camera.BackgroundColor = Color.Transparent;
+
+			var right = scene.Camera.WorldRotation.Right;
+
+			var sun = new SceneDirectionalLight( scene.SceneWorld, Rotation.FromPitch( 50 ), Color.White * 2.5f + Color.Cyan * 0.05f );
+			sun.ShadowsEnabled = true;
+			sun.ShadowTextureResolution = 1024;
+
+			new SceneLight( scene.SceneWorld, scene.Camera.WorldPosition + Vector3.Up * 500.0f + right * 100.0f, 1000.0f, new Color( 1.0f, 0.9f, 0.9f ) * 50.0f );
+			new SceneCubemap( scene.SceneWorld, Texture.Load( "textures/cubemaps/default2.vtex" ), BBox.FromPositionAndSize( Vector3.Zero, 1000 ) );
+
+			camera.RenderToBitmap( tex );
+			so.Delete();
+		}
+		scene.Destroy();
+		return tex;
+	}
 }
