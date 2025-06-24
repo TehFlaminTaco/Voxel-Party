@@ -1,6 +1,9 @@
 
 using System;
+using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using Sandbox.Utility;
 
 public partial class VoxelPlayer : Component
 {
@@ -62,12 +65,91 @@ public partial class VoxelPlayer : Component
     {
         LocalPlayer = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Connection.Local );
 
+        UpdateSkin();
+
         SpawnBlockBreakingEffect();
     }
 
+    [Property, Sync] public string PlayerSkin { get; set; } = "";
+
+    [Button]
+    public async void UpdateSkin()
+    {
+        if ( string.IsNullOrWhiteSpace( PlayerSkin ) ) return;
+
+        var tex = await Texture.LoadAsync( null, $"https://mineskin.eu/skin/{PlayerSkin.Trim()}", false );
+        // Apply a CRC to the tex's data.
+        var crc = Crc32.FromBytes(
+            tex.GetPixels( 0 ).SelectMany( p => new[] { p.r, p.g, p.b, p.a } )
+        );
+        if ( crc == 3371258681 ) // REFUSE to put on the default skin
+        {
+            return;
+        }
+
+        if ( tex == null )
+        {
+            Log.Warning( "No texture loaded!" );
+            return;
+        }
+
+        if ( tex.IsError )
+        {
+            Log.Warning( "Texture errored when loading!" );
+            return;
+        }
+
+        if ( tex.Size.y == 32 )
+        {
+            if ( tex.Size.x != 64 )
+            {
+                Log.Warning( $"Texture is unexpected size! (Wanted 64x64 or 64x32, got {tex.Size.x}x{tex.Size.y})" );
+                return;
+            }
+            // Copy the data from the oldTex to the newTex
+            int w = 64;
+            int h = 32;
+            byte[] pixels = new byte[w * h * 4];
+            pixels = tex.GetPixels().SelectMany( c => new[] { c.r, c.g, c.b, c.a } ).ToArray();
+            byte[] paddedData = new byte[64 * 64 * 4];
+            pixels.CopyTo( paddedData, 0 );
+
+            // I hate to do this, but I need to slowly copy regions.
+            // There is no fast way to do this
+            void CopyRegion( int srcX, int srcY, int width, int height, int destX, int destY )
+            {
+                for ( int y = 0; y < height; y++ )
+                {
+                    Buffer.BlockCopy( pixels, ((srcY + y) * 64 + srcX) * 4, paddedData, ((destY + y) * 64 + destX) * 4, width * 4 );
+                }
+            }
+            CopyRegion( 0, 16, 16, 16, 16, 48 ); // Copy leg into left left
+            CopyRegion( 40, 16, 16, 16, 32, 48 ); // Copy arm into left arm
+
+            var newTex = Texture.Create( 64, 64, ImageFormat.RGBA8888 )
+                .WithData( paddedData )
+                .Finish();
+            //tex.Dispose();
+            tex = newTex;
+        }
+        if ( tex.Size.x != 64 || tex.Size.y != 64 )
+        {
+            Log.Warning( $"Texture is unexpected size! (Wanted 64x64 or 64x32, got {tex.Size.x}x{tex.Size.y})" );
+            return;
+        }
+
+        var smr = GetComponentInChildren<SkinnedModelRenderer>();
+        smr.MaterialOverride ??= smr.Model.Materials.First();
+        smr.MaterialOverride.Set( "Albedo", tex );
+    }
+
+
+
     public TimeSince TimeSinceLastJump { get; set; } = 0;
+
     protected override void OnUpdate()
     {
+
         if ( Input.Pressed( "use" ) ) IsReady = !IsReady;
 
         if ( Input.Pressed( "jump" ) && TimeSinceLastJump.Relative < .25 && !Controller.IsOnGround ) IsFlying = !IsFlying;

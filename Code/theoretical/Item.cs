@@ -1,15 +1,46 @@
+using System;
+
 [GameResource( "Item Definition", "item", "an item", Category = "Voxel Party", Icon = "archive" )]
 public partial class Item : GameResource
 {
-	public int ID { get; set; }
+	[ReadOnly] public int ID { get; set; } = -1;
 	public string Name { get; set; } // Name of the item, e.g. "Stick".
 	public int MaxStackSize { get; set; } = 64; // Maximum stack size for this item, e.g. 64 for most items.
 
 	[Property, ToggleGroup( "IsBlock" )]
 	public bool IsBlock { get; set; }
-	
+
 	[Property, ToggleGroup( "IsBlock" ), InlineEditor]
 	public Block Block { get; set; }
+
+	public bool TryGiveID()
+	{
+		if ( ID == -1 )
+		{
+			var allitems = ResourceLibrary.GetAll<Item>();
+			Log.Info( $"Generated new item ID: {allitems.Count()}/256 used!" );
+			var usedIDs = allitems.Select( c => c.ID );
+			for ( int i = 0; i < 255; i++ )
+			{
+				if ( usedIDs.Contains( i ) )
+				{
+					Log.Info( $"{i}: {ResourceLibrary.GetAll<Item>().First( k => k.ID == i ).Name}" );
+				}
+				else
+				{
+					ID = i;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	protected override void PostLoad()
+	{
+		base.PostLoad();
+		TryGiveID();
+	}
 
 	public void Render( Transform transform )
 	{
