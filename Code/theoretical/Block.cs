@@ -102,16 +102,24 @@ public class Block
 
 	public GameObject BlockObject { get; set; } = null; // A GameObject that represents the block in the world, can be null if not set.
 
-	public virtual int GetTextureIndex( BlockSpace world, Vector3Int blockPos, Direction face ) => face switch
+	public virtual int GetTextureIndex( BlockSpace world, Vector3Int blockPos, Direction face )
 	{
-		Direction.North => NorthTextureIndex ?? SideTextureIndex ?? TextureIndex,
-		Direction.South => SouthTextureIndex ?? SideTextureIndex ?? TextureIndex,
-		Direction.East => EastTextureIndex ?? SideTextureIndex ?? TextureIndex,
-		Direction.West => WestTextureIndex ?? SideTextureIndex ?? TextureIndex,
-		Direction.Up => TopTextureIndex ?? TextureIndex,
-		Direction.Down => BottomTextureIndex ?? SideTextureIndex ?? TextureIndex,
-		_ => TextureIndex
-	}; // Returns the texture index for the block face at the given position.
+		if ( this.Rotateable && this.RotateTextures )
+		{
+			var facing = world.GetBlock( blockPos ).FacingFromData();
+			face = face.RotateBy( facing );
+		}
+		return face switch
+		{
+			Direction.North => NorthTextureIndex ?? SideTextureIndex ?? TextureIndex,
+			Direction.South => SouthTextureIndex ?? SideTextureIndex ?? TextureIndex,
+			Direction.East => EastTextureIndex ?? SideTextureIndex ?? TextureIndex,
+			Direction.West => WestTextureIndex ?? SideTextureIndex ?? TextureIndex,
+			Direction.Up => TopTextureIndex ?? TextureIndex,
+			Direction.Down => BottomTextureIndex ?? SideTextureIndex ?? TextureIndex,
+			_ => TextureIndex
+		}; // Returns the texture index for the block face at the given position.
+	}
 
 	public virtual void AddBlockMesh( BlockSpace world, Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
 	{
