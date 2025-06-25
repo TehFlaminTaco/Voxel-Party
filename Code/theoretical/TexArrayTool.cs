@@ -2,10 +2,18 @@ using System;
 
 public static class TexArrayTool
 {
+    public static bool Dirty = true;
     public static void UpdateMaterialTexture( Material material )
     {
+        if ( !Dirty && last != null && last.IsValid() )
+        {
+            material.Set( "Abledo", last );
+            return;
+        }
+
         //Log.Info( "Updating material texture with texture atlas." );
         material.Set( "Abledo", BuildTextureArray() );
+        Dirty = false;
     }
 
     private static Texture last;

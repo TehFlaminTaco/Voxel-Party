@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Editor.Assets;
@@ -73,8 +74,17 @@ public partial class VoxelBuilder : EditorTool
 
 		palleteWindow.Layout = Layout.Column();
 
+		var scrollArea = new ScrollArea( palleteWindow );
+		scrollArea.VerticalScrollbarMode = ScrollbarMode.On;
+
+		palleteWindow.Layout.Add( scrollArea );
+
+		var wiget = new Widget();
 		var gridLayout = Layout.Grid();
-		palleteWindow.Layout.Add( gridLayout );
+		wiget.Layout = gridLayout;
+		scrollArea.Canvas = wiget;
+		gridLayout.SizeConstraint = SizeConstraint.SetMinAndMaxSize;
+
 		gridLayout.Margin = 16;
 		palleteWindow.WindowTitle = "Voxel Pallete";
 
@@ -84,7 +94,7 @@ public partial class VoxelBuilder : EditorTool
 		}
 
 		int i = 0;
-		foreach ( var item in ResourceLibrary.GetAll<Item>().OrderBy( c => c.ID ) )
+		foreach ( var item in ResourceLibrary.GetAll<Item>().DistinctBy( c => c.ID ).OrderBy( c => c.ID ) )
 		{
 			if ( item.ID == 0 ) continue; // Skip empty item
 			if ( item.IsBlock )
@@ -95,7 +105,7 @@ public partial class VoxelBuilder : EditorTool
 				{
 					icon.Texture = tex;
 				}
-				icon.FixedSize = new Vector2( 64, 64 );
+				icon.FixedSize = new Vector2( 32, 32 );
 				icon.Tint = SelectedItemID == item.ID ? Color.White.WithAlpha( 0.2f ) : Color.White.WithAlpha( 0f );
 				icon.Clicked = () =>
 				{
@@ -107,7 +117,7 @@ public partial class VoxelBuilder : EditorTool
 					icon.Tint = Color.White.WithAlpha( 0.2f );
 				};
 				icon.ToolTip = $"{item.Name} (ID: {item.ID})";
-				gridLayout.AddCell( i % 4, i++ / 4, icon );
+				gridLayout.AddCell( i % 6, i++ / 6, icon );
 			}
 		}
 

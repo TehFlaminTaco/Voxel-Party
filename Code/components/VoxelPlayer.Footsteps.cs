@@ -6,23 +6,24 @@ public partial class VoxelPlayer
 {
 	[Property] public bool EnableFootstepSounds { get; set; } = true;
 	[Property] public MixerHandle FootstepMixer { get; set; }
-	
+
 	public bool DebugFootsteps;
 	TimeSince _timeSinceStep;
-	
+
 	public void DoFootsteps()
 	{
+		if ( Spectator ) return;
 		var footL = Controller.Renderer.SceneModel.GetBoneWorldTransform( "calf_L" );
-		GroundBlockL = ItemRegistry.GetItem(new BlockTrace().WithDirection( Vector3.Down )
-			.WithStart( footL.Position ).WithDistance( 2 ).WithWorld( world ).Run().HitBlockPosition);
-		
+		GroundBlockL = ItemRegistry.GetItem( new BlockTrace().WithDirection( Vector3.Down )
+			.WithStart( footL.Position ).WithDistance( 2 ).WithWorld( world ).Run().HitBlockPosition );
+
 		var footR = Controller.Renderer.SceneModel.GetBoneWorldTransform( "calf_R" );
-		GroundBlockR = ItemRegistry.GetItem(new BlockTrace().WithDirection( Vector3.Down )
+		GroundBlockR = ItemRegistry.GetItem( new BlockTrace().WithDirection( Vector3.Down )
 			.WithStart( footR.Position ).WithDistance( 2 ).WithWorld( world ).Run().HitBlockPosition );
-		
+
 		if ( EnableFootstepSounds ) Controller.Renderer.SceneModel.OnFootstepEvent += OnFootstepEvent;
 	}
-	
+
 	void OnFootstepEvent( SceneModel.FootstepEvent e )
 	{
 		if ( !Controller.IsOnGround ) return;
@@ -41,12 +42,12 @@ public partial class VoxelPlayer
 		if ( GroundBlockL is null && GroundBlockR is null ) return;
 
 		SoundEvent sound;
-		if ( Input.Down(Controller.AltMoveButton) ) 
+		if ( Input.Down( Controller.AltMoveButton ) )
 			sound = foot == 0 ? GroundBlockL.Block.RunStepSound : GroundBlockR.Block.RunStepSound;
-		else if ( Input.Down("duck") ) 
+		else if ( Input.Down( "duck" ) )
 			sound = foot == 0 ? GroundBlockL.Block.CrouchStepSound : GroundBlockR.Block.CrouchStepSound;
 		else sound = foot == 0 ? GroundBlockL.Block.WalkStepSound : GroundBlockR.Block.WalkStepSound;
-		
+
 		if ( sound is null )
 		{
 			if ( DebugFootsteps )

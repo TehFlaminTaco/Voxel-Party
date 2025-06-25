@@ -7,11 +7,13 @@
     <div id="score" class="@(VoxelPlayer.LocalPlayer.TotalBlockArea == 0 ? "hidden" : "")">
         <div class="goodbar"></div>
         <div class="badbar"></div>
-        @((int)(100 * VoxelPlayer.LocalPlayer.CorrectBlocksPlaced / System.Math.Max(1, VoxelPlayer.LocalPlayer.TotalBlockArea)))%
+        <div class="failPointer @(KillPercentage.HasValue ? "" : "hidden")">💀</div>
+        @((int)(100 * VoxelPlayer.LocalPlayer.CorrectBlocksPlaced / System.Math.Max(1,
+                VoxelPlayer.LocalPlayer.TotalBlockArea)))%
     </div>
 
-    <div class="readyCheck @(HasReadyCheck ? "" : "hidden") @(VoxelPlayer.LocalPlayer.IsReady ? "Ready" : "" )">
-        <Image class="key" Texture=@Input.GetGlyph( "use", InputGlyphSize.Small, true )>
-		@(VoxelPlayer.LocalPlayer.IsReady ? "Ready" : "Not Ready")
+    <div class="readyCheck @(HasReadyCheck ? "" : "hidden") @(VoxelPlayer.LocalPlayer.IsReady ? "Ready" : "")">
+        <Image class="key" Texture=@Input.GetGlyph("use", InputGlyphSize.Small, true)>
+            @(VoxelPlayer.LocalPlayer.IsReady ? "Ready" : "Not Ready")
     </div>
 </root>

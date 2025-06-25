@@ -61,6 +61,33 @@ public partial class VoxelPlayer : Component
 
     [Sync] public bool IsReady { get; set; } = false; // Whether the player is ready for the gamemode to start
 
+    private bool _specator = false;
+    [Sync( SyncFlags.FromHost )]
+    [Property]
+    public bool Spectator
+    {
+        get
+        {
+            return _specator;
+        }
+        set
+        {
+            _specator = value;
+            if ( value )
+            {
+                GameObject.Tags.Add( "spectator" );
+                GetComponent<PlayerController>().BodyCollisionTags ??= new TagSet();
+                GetComponent<PlayerController>().BodyCollisionTags.Add( "spectator" );
+            }
+            else
+            {
+                GameObject.Tags.Remove( "spectator" );
+                GetComponent<PlayerController>().BodyCollisionTags ??= new TagSet();
+                GetComponent<PlayerController>().BodyCollisionTags.Remove( "spectator" );
+            }
+        }
+    }
+
     protected override void OnStart()
     {
         LocalPlayer = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Connection.Local );
@@ -143,18 +170,26 @@ public partial class VoxelPlayer : Component
         smr.MaterialOverride.Set( "Albedo", tex );
     }
 
-
+    public void Explode()
+    {
+        // TODO: Sound, Blood?
+        Spectator = true;
+    }
 
     public TimeSince TimeSinceLastJump { get; set; } = 0;
 
     protected override void OnUpdate()
     {
 
+
+
         if ( Input.Pressed( "use" ) ) IsReady = !IsReady;
 
         if ( Input.Pressed( "jump" ) && TimeSinceLastJump.Relative < .25 && !Controller.IsOnGround ) IsFlying = !IsFlying;
         if ( Input.Pressed( "jump" ) ) TimeSinceLastJump = 0;
         if ( Controller.IsOnGround ) IsFlying = false;
+        if ( Spectator )
+            IsFlying = true;
     }
 
     protected override void OnFixedUpdate()
