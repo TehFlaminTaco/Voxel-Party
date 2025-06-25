@@ -74,7 +74,7 @@
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Sprint_E"
-											m_blendValue = [ -101.792809, -0.000017 ]
+											m_blendValue = [ 200.0, -0.000017 ]
 										},
 										{
 											_class = "CBlend2DItem"
@@ -92,13 +92,13 @@
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Sprint_W"
-											m_blendValue = [ 101.792809, 0.000017 ]
+											m_blendValue = [ -200.0, 0.000017 ]
 										},
 										{
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Walk2X_E"
-											m_blendValue = [ -135.60759, -0.000022 ]
+											m_blendValue = [ 135.610001, -0.000022 ]
 										},
 										{
 											_class = "CBlend2DItem"
@@ -110,13 +110,13 @@
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Walk2X_NE"
-											m_blendValue = [ -176.94313, 176.715622 ]
+											m_blendValue = [ 176.940002, 176.715622 ]
 										},
 										{
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Walk2X_NW"
-											m_blendValue = [ 177.620392, 177.620422 ]
+											m_blendValue = [ -177.619995, 177.620422 ]
 										},
 										{
 											_class = "CBlend2DItem"
@@ -128,25 +128,25 @@
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Walk2X_SE"
-											m_blendValue = [ -177.620392, -177.620422 ]
+											m_blendValue = [ 177.619995, -177.620422 ]
 										},
 										{
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Walk2X_SW"
-											m_blendValue = [ 176.94313, -176.715622 ]
+											m_blendValue = [ -176.940002, -176.715622 ]
 										},
 										{
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Walk2X_W"
-											m_blendValue = [ 135.60759, 0.000022 ]
+											m_blendValue = [ -135.610001, 0.000022 ]
 										},
 										{
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "WalkFast_E"
-											m_blendValue = [ -45.20253, -0.000007 ]
+											m_blendValue = [ 45.200001, -0.000007 ]
 										},
 										{
 											_class = "CBlend2DItem"
@@ -158,13 +158,13 @@
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "WalkFast_NE"
-											m_blendValue = [ -88.471565, 88.357811 ]
+											m_blendValue = [ 88.470001, 88.357811 ]
 										},
 										{
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "WalkFast_NW"
-											m_blendValue = [ 88.810196, 88.810211 ]
+											m_blendValue = [ -88.809998, 88.810211 ]
 										},
 										{
 											_class = "CBlend2DItem"
@@ -176,19 +176,19 @@
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "WalkFast_SE"
-											m_blendValue = [ -88.810196, -88.810211 ]
+											m_blendValue = [ 88.809998, -88.810211 ]
 										},
 										{
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "WalkFast_SW"
-											m_blendValue = [ 88.471565, -88.357811 ]
+											m_blendValue = [ -88.470001, -88.357811 ]
 										},
 										{
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "WalkFast_W"
-											m_blendValue = [ 45.20253, 0.000007 ]
+											m_blendValue = [ -45.200001, 0.000007 ]
 										},
 									]
 									m_blendSourceX = "Parameter"
