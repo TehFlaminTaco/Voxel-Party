@@ -1,0 +1,7 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+
+<root onclick=@(()=>{this.ParentOfType<OptionPanel>().Source.OnOptionClick(this); this.ParentOfType<OptionPanel>().Source.Close();})>
+    @Text
+</root>

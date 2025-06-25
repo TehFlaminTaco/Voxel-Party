@@ -1,0 +1,31 @@
+$slate-text: white;
+$slate-hover: #727a79;
+$slate-background: #383e43;
+$slate-border: #8e8e8e;
+$slate-border-dark: #505757;
+$slate-shadow: #252525;
+
+$green-text: white;
+$green-hover: #63c363;
+$green-background: #1e652b;
+$green-border: #33ba24;
+$green-border-dark: #1b931b;
+$green-shadow: #104e10;
+
+OptionPanel {
+    position: absolute;
+    flex-direction: column;
+    background-color: $slate-background;
+    font-family: "perfect dos vga 437";
+    font-size: 20px;
+    padding: 4px;
+    pointer-events: all;
+    border-top: solid 2px $slate-border;
+    border-left: solid 2px $slate-border;
+    border-right: solid 2px $slate-border-dark;
+    border-bottom: solid 2px $slate-border-dark;
+
+    &:not(.open){
+        display: none;
+    }
+}
