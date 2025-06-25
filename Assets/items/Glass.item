@@ -13,6 +13,7 @@
     "Rotateable": false,
     "RotateTextures": true,
     "BreakParticle": "prefabs/break particles.prefab",
+    "Material": "materials/glass.vmat",
     "WalkStepSound": "sounds/footsteps/glass/glass_step.sound",
     "RunStepSound": "sounds/footsteps/glass/glass_step.sound",
     "CrouchStepSound": "sounds/footsteps/glass/glass_step.sound",
@@ -66,9 +67,9 @@
     "BottomTextureIndex": null,
     "Drops": [
       {
-        "Item": "items/glass.item",
+        "Item": null,
         "Count": 1,
-        "ItemID": 6
+        "ItemID": 0
       }
     ],
     "BlockObject": null

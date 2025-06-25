@@ -6,15 +6,16 @@ namespace Sandbox.theoretical;
 [GameResource( "Structure", "struct", "a structure that can be placed", Category = "Voxel Party", Icon = "archive" )]
 public partial class Structure : GameResource
 {
-	[Property, ToggleGroup( "SpeedBuildStructure" )]
-	public bool SpeedBuildStructure { get; set; } = false;
+	public enum StructureDifficulty
+	{
+		Easy,
+		Standard,
+		Hard
+	}
 
-	[Property, ToggleGroup( "SpeedBuildStructure" )]
-	public int SecondsToBuild { get; set; } = 60;
-
-	[Property, ToggleGroup( "SpeedBuildStructure" )]
-	public int Difficulty { get; set; } = 0;
-	
 	[Hide]
 	public string StructureData { get; set; }
+
+  [Property, ToggleGroup( "SpeedBuildStructure" )]
+	public StructureDifficulty ReplicateDifficulty = StructureDifficulty.Standard;
 }

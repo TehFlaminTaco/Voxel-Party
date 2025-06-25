@@ -68,6 +68,9 @@ public class Block
 	[Group( "Rendering" )]
 	public PrefabFile BreakParticle { get; set; } = ResourceLibrary.Get<PrefabFile>( "prefabs/break particles.prefab" );
 
+	[Group( "Rendering" )]
+	public Material Material { get; set; } = null;
+
 	[Group( "Step sounds" )] public SoundEvent WalkStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_walk.sound" );
 	[Group( "Step sounds" )] public SoundEvent RunStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_run.sound" );
 	[Group( "Step sounds" )] public SoundEvent CrouchStepSound { get; set; } = ResourceLibrary.Get<SoundEvent>( "sounds/footsteps/stone/stone_wander.sound" );
@@ -121,7 +124,7 @@ public class Block
 		}; // Returns the texture index for the block face at the given position.
 	}
 
-	public virtual void AddBlockMesh( BlockSpace world, Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs, List<Vector4> tangents )
+	public virtual void AddBlockMesh( BlockSpace world, Vector3Int blockPos, List<Vertex> verts )
 	{
 		if ( !IsFullBlock )
 			return; // If we are not a solid block, this behaviour should be overridden, otherwise, we don't render anything.
@@ -130,7 +133,7 @@ public class Block
 		{
 			if ( ShouldFaceBeVisible( world, blockPos, dir ) )
 			{
-				AddFaceMesh( world, blockPos, dir, verts, normals, uvs, tangents );
+				AddFaceMesh( world, blockPos, dir, verts );
 			}
 		}
 	}
@@ -248,7 +251,7 @@ public class Block
 		return Drops;
 	}
 
-	public virtual void AddFaceMesh( BlockSpace world, Vector3Int blockPos, Direction face, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs, List<Vector4> tangents )
+	public virtual void AddFaceMesh( BlockSpace world, Vector3Int blockPos, Direction face, List<Vertex> verts )
 	{
 		// This method should be overridden to add the mesh for a specific face of the block.
 		// For example, it could add vertices, normals, and UVs for the specified face.
@@ -257,37 +260,23 @@ public class Block
 		var up = face.Up();
 		var right = face.Right();
 		// Add vertices, normals, and UVs based on the face direction.
-		var ourVerts = new List<Vector3> {
+		var ourVerts = new[]{
 			forward + up + right,
 			forward + up - right,
 			forward - up - right,
 			forward + up + right,
 			forward - up - right,
 			forward - up + right,
-		};
-		// These verts are in the range -1 to 1, so we move them to the range of 0 - 1, add the block position, and scale by the block size.
-		verts.AddRange( ourVerts.Select( v => ((v + Vector3.One) / 2f + ((Vector3)blockPos).Modulo( Chunk.SIZE )) * World.BlockScale ) );
-		normals.Add( forward );
-		normals.Add( forward );
-		normals.Add( forward );
-		normals.Add( forward );
-		normals.Add( forward );
-		normals.Add( forward );
-		tangents.Add( new Vector4( up, -1f ) );
-		tangents.Add( new Vector4( up, -1f ) );
-		tangents.Add( new Vector4( up, -1f ) );
-		tangents.Add( new Vector4( up, -1f ) );
-		tangents.Add( new Vector4( up, -1f ) );
-		tangents.Add( new Vector4( up, -1f ) );
-		var ourUVs = new List<Vector2> {
-			new Vector2(1f, 0f), // Top right
-			new Vector2(0f, 0f), // Top left
-			new Vector2(0f, 1f), // Bottom left
-			new Vector2(1f, 0f), // Top right
-			new Vector2(0f, 1f), // Bottom left
-			new Vector2(1f, 1f), // Bottom right
-		};
-		uvs.AddRange( ourUVs.Select( v => new Vector3( v, textureIndex ) ) ); // Assuming a texture atlas of 16x16, scale UVs to [0, 1].
+		}.Select( v => ((v + Vector3.One) / 2f + ((Vector3)blockPos).Modulo( Chunk.SIZE )) * World.BlockScale );
+		Vector4[] ourUVs = [
+			new Vector4(1f, 0f, textureIndex, 0f), // Top right
+			new Vector4(0f, 0f, textureIndex, 0f), // Top left
+			new Vector4(0f, 1f, textureIndex, 0f), // Bottom left
+			new Vector4(1f, 0f, textureIndex, 0f), // Top right
+			new Vector4(0f, 1f, textureIndex, 0f), // Bottom left
+			new Vector4(1f, 1f, textureIndex, 0f), // Bottom right
+		];
+		verts.AddRange( ourVerts.Zip( ourUVs ).Select( p => new Vertex( p.First, forward, new Vector4( up, -1f ), p.Second ) ) );
 	}
 
 	public virtual bool IsFaceOpaque( BlockSpace world, Vector3Int blockPos, Direction face )

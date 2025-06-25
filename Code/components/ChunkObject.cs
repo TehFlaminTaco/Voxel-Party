@@ -84,7 +84,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		UpdateMesh();
 	}
 
-	public void AddBlockMesh( Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs, List<Vector4> tangents )
+	public void AddBlockMesh( Vector3Int blockPos, List<Vertex> verts )
 	{
 		// For testing, let's start by just creating a full single block for every block
 		var blockData = WorldInstance.GetBlock( blockPos );
@@ -94,11 +94,10 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			Log.Warning( $"Block with ID {blockData.BlockID} not found at position {blockPos}." );
 			return;
 		}
-		block.AddBlockMesh( WorldInstance, blockPos, verts, normals, uvs, tangents );
+		block.AddBlockMesh( WorldInstance, blockPos, verts );
 	}
 
-	ModelRenderer OpaqueRenderer;
-	ModelRenderer TransparentRenderer;
+	Dictionary<Material, ModelRenderer> Renderers = new();
 
 	public Dictionary<Vector3Int, (GameObject obj, BlockData data)> BlockObjects { get; set; } = new Dictionary<Vector3Int, (GameObject obj, BlockData data)>();
 
@@ -112,21 +111,11 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 
 			WorldInstance.GetChunk( ChunkPosition ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
 																   // Opaque Pass
-			List<Vector3> Verts = new List<Vector3>();
-			List<Vector3> Normals = new List<Vector3>();
-			List<Vector3> UVs = new List<Vector3>();
-			List<Vector4> Tangents = new List<Vector4>();
-
-			List<Vector3> TransparentVerts = new List<Vector3>();
-			List<Vector3> TransparentNormals = new List<Vector3>();
-			List<Vector3> TransparentUVs = new List<Vector3>();
-			List<Vector4> TransparentTangents = new List<Vector4>();
+			Dictionary<Material, List<Vertex>> Vertexes = new();
 
 			TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
 			TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TranslucentTextureAtlas );
 
-			var opaqueModel = new ModelBuilder();
-			var transparentModel = new ModelBuilder();
 			var collisionModel = new ModelBuilder();
 			for ( int z = 0; z < Chunk.SIZE.z; z++ )
 			{
@@ -161,10 +150,11 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 								}
 							}
 						}
-						else if ( block.Opaque )
-							AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), Verts, Normals, UVs, Tangents );
 						else
-							AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), TransparentVerts, TransparentNormals, TransparentUVs, TransparentTangents );
+						{
+							var mat = block.Material ?? (block.Opaque ? WorldThinkerInstance.TextureAtlas : WorldThinkerInstance.TranslucentTextureAtlas);
+							AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), Vertexes.GetOrCreate( mat ) );
+						}
 						if ( block.IsSolid )
 						{
 							var aabb = block.GetCollisionAABBChunk( WorldInstance, blockPos + (ChunkPosition * Chunk.SIZE) );
@@ -176,7 +166,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			}
 
 
-			if ( Verts.Count > 0 )
+			/*if ( Verts.Count > 0 )
 			{
 				if ( OpaqueRenderer == null || !OpaqueRenderer.IsValid() )
 				{
@@ -229,14 +219,6 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 				mr.Enabled = TransparentVerts.Count > 0; // Only enable if we have vertices to render
 				var transparentMesh = new Mesh();
 				Vertex[] vertexes = new Vertex[TransparentVerts.Count];
-				if ( TransparentNormals.Count != TransparentVerts.Count || TransparentUVs.Count != TransparentVerts.Count || TransparentTangents.Count != TransparentVerts.Count )
-				{
-					Log.Error( "SOMETHING BAD HAPPENED!" );
-					Log.Error( $"Verts: {TransparentVerts.Count}" );
-					Log.Error( $"UVs: {TransparentUVs.Count}" );
-					Log.Error( $"Normals: {TransparentNormals.Count}" );
-					Log.Error( $"Tangents: {TransparentTangents.Count}" );
-				}
 				for ( int i = 0; i < TransparentVerts.Count; i++ )
 				{
 					var pos = TransparentVerts[i];
@@ -264,7 +246,40 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 				{
 					TransparentRenderer.Destroy();
 				}
+			}*/
+			var toRemove = Renderers.Where( k => !Vertexes.ContainsKey( k.Key ) || Vertexes[k.Key].Count == 0 ); // Remove all renderers where we don't have verts for.
+			foreach ( var r in toRemove )
+			{
+				r.Value.Destroy();
+				Renderers.Remove( r.Key );
 			}
+
+			foreach ( var kv in Vertexes.Where( c => c.Value.Count > 0 ) )
+			{
+				var mat = kv.Key;
+				var verts = kv.Value;
+
+				if ( !Renderers.ContainsKey( mat ) )
+				{
+					var renderer = AddComponent<ModelRenderer>();
+					renderer.Flags = ComponentFlags.NotNetworked;
+					renderer.MaterialOverride = mat;
+					Renderers[mat] = renderer;
+				}
+				var indicies = Enumerable.Range( 0, verts.Count ).ToArray();
+
+				var mesh = new Mesh();
+				mesh.CreateVertexBuffer( verts.Count, Vertex.Layout, verts );
+				mesh.CreateIndexBuffer( verts.Count, indicies );
+				mesh.Material = mat;
+
+				var model = new ModelBuilder();
+				model.AddMesh( mesh );
+				model.AddTraceMesh( verts.Select( c => c.Position ).ToList(), indicies.ToList() );
+
+				Renderers[mat].Model = model.Create();
+			}
+
 
 			var collider = GetOrAddComponent<ModelCollider>();
 			collider.Model = collisionModel.Create();

@@ -56,35 +56,20 @@ public partial class Item : GameResource
 		}
 
 		// Draw at -10, -10, -10 to 10 10 10
-		var verts = new List<Vector3>();
-		var normals = new List<Vector3>();
-		var uvs = new List<Vector3>();
-		var tangents = new List<Vector4>();
+		var verts = new List<Vertex>();
 		// Add vertices for a cube
 		foreach ( var dir in Directions.All )
 		{
-			block.AddFaceMesh( World.Active, Vector3Int.Zero, dir, verts, normals, uvs, tangents );
+			block.AddFaceMesh( World.Active, Vector3Int.Zero, dir, verts );
 		}
 		for ( int i = 0; i < verts.Count; i++ )
 		{
-			verts[i] *= 0.25f;
+			var v = verts[i];
+			v.Position *= 0.25f;
+			v.Position = transform.PointToWorld( v.Position );
+			verts[i] = v;
 		}
 
-		Vertex[] vertexes = new Vertex[verts.Count];
-		for ( int i = 0; i < verts.Count; i++ )
-		{
-			var pos = verts[i];
-			var normal = normals[i];
-			var uv = uvs[i];
-			var tangent = tangents[i];
-			vertexes[i] = new(
-				transform.PointToWorld( pos ),
-				normal,
-				tangent,
-				new Vector4( uv, 0f )
-			);
-		}
-
-		Graphics.Draw( vertexes, vertexes.Length, Material.Load( "materials/textureatlas.vmat" ) );
+		Graphics.Draw( verts, verts.Count, Material.Load( "materials/textureatlas.vmat" ) );
 	}
 }

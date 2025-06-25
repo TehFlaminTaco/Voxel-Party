@@ -238,6 +238,11 @@ public static class Helpers
 		yield return vector.z;
 	}
 
+	public static T IndexOrLast<T>( this T[] arr, int index )
+	{
+		return arr[Math.Min( index, arr.Length - 1 )];
+	}
+
 	public static Vector3 VoxelToWorld( Vector3 position )
 	{
 		return position * World.BlockScale;
