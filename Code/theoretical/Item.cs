@@ -36,6 +36,7 @@ public partial class Item : GameResource
 	{
 		base.PostReload();
 		TexArrayTool.Dirty = true;
+		ItemRegistry.UpdateRegistry();
 	}
 
 	protected override void PostLoad()

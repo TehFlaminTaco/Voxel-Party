@@ -73,17 +73,23 @@ public partial class VoxelPlayer : Component
         set
         {
             _specator = value;
+            var pc = GetComponent<PlayerController>();
+            if ( pc == null )
+            {
+                if ( value ) throw new Exception( "PlayerControler doesn't exist but we tried to set Spectator!" );
+                return;
+            }
             if ( value )
             {
                 GameObject.Tags.Add( "spectator" );
-                GetComponent<PlayerController>().BodyCollisionTags ??= new TagSet();
-                GetComponent<PlayerController>().BodyCollisionTags.Add( "spectator" );
+                pc.BodyCollisionTags ??= new TagSet();
+                pc.BodyCollisionTags.Add( "spectator" );
             }
             else
             {
                 GameObject.Tags.Remove( "spectator" );
-                GetComponent<PlayerController>().BodyCollisionTags ??= new TagSet();
-                GetComponent<PlayerController>().BodyCollisionTags.Remove( "spectator" );
+                pc.BodyCollisionTags ??= new TagSet();
+                pc.BodyCollisionTags.Remove( "spectator" );
             }
         }
     }
@@ -417,6 +423,7 @@ public partial class VoxelPlayer : Component
 
     public void ShowHoveredFace()
     {
+        if ( IsProxy ) return;
         var trace = EyeTrace();
         if ( !trace.Hit )
             return;
@@ -452,5 +459,25 @@ public partial class VoxelPlayer : Component
 
         SelectedSlot += -Input.MouseWheel.y.FloorToInt().Clamp( -1, 1 );
         SelectedSlot = SelectedSlot.Clamp( inventory.InventorySize, inventory.InventorySize + inventory.HotbarSize - 1 );
+    }
+
+    [Rpc.Owner]
+    public void MoveTo( Transform transform )
+    {
+        WorldPosition = transform.Position;
+        WorldRotation = transform.Rotation;
+        GameObject.Children.First().WorldRotation = transform.Rotation;
+        GetComponent<PlayerController>().EyeAngles = transform.Rotation.Angles();
+        Transform.ClearInterpolation();
+        IsFlying = false;
+    }
+    // Request to lock this player, disabling movement and camera.
+    [Rpc.Owner]
+    public void Lock()
+    {
+        Enabled = false;
+
+        var pc = GetComponent<PlayerController>();
+        pc.UseCameraControls = false;
     }
 }

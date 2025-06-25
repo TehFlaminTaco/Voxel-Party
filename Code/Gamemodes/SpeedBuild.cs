@@ -323,10 +323,7 @@ public sealed class SpeedBuild : Component
 				foreach ( var ply in Scene.GetAll<VoxelPlayer>() )
 				{
 					ply.Spectator = true;
-					ply.Enabled = false;
-
-					var pc = ply.GetComponent<PlayerController>();
-					pc.UseCameraControls = false;
+					ply.Lock();
 				}
 				var cam = Scene.Camera;
 				cam.WorldPosition = podiumObject.WorldPosition;
@@ -338,41 +335,35 @@ public sealed class SpeedBuild : Component
 				if ( allPlayers.Length > 2 )
 				{
 					SpeedBuildHud.Instance.Message = "Third Place";
-					await Task.DelayRealtimeSeconds( 2f );
+					await Task.DelayRealtimeSeconds( 3f );
 					var bronze = GameObject.Children.Find( j => j.Name == "Bronze" );
 					SpeedBuildHud.Instance.Message = allPlayers[2].Network.Owner.DisplayName;
 					allPlayers[2].Spectator = false;
 					allPlayers[2].IsFlying = false;
-					allPlayers[2].WorldPosition = bronze.WorldPosition;
-					allPlayers[2].GetComponent<PlayerController>().EyeAngles = bronze.WorldRotation.Angles();
-					allPlayers[2].GameObject.Children.First().WorldRotation = allPlayers[2].WorldRotation = bronze.WorldRotation;
-					await Task.DelayRealtimeSeconds( 3f );
+					allPlayers[2].MoveTo( bronze.WorldTransform );
+					await Task.DelayRealtimeSeconds( 5f );
 				}
 				if ( allPlayers.Length > 1 )
 				{
 					SpeedBuildHud.Instance.Message = "Second Place";
-					await Task.DelayRealtimeSeconds( 2f );
+					await Task.DelayRealtimeSeconds( 3f );
 					var silver = GameObject.Children.Find( j => j.Name == "Silver" );
 					SpeedBuildHud.Instance.Message = allPlayers[1].Network.Owner.DisplayName;
 					allPlayers[1].Spectator = false;
 					allPlayers[1].IsFlying = false;
-					allPlayers[1].WorldPosition = silver.WorldPosition;
-					allPlayers[1].GetComponent<PlayerController>().EyeAngles = silver.WorldRotation.Angles();
-					allPlayers[1].GameObject.Children.First().WorldRotation = allPlayers[1].WorldRotation = silver.WorldRotation;
-					await Task.DelayRealtimeSeconds( 3f );
+					allPlayers[1].MoveTo( silver.WorldTransform );
+					await Task.DelayRealtimeSeconds( 5f );
 				}
 				SpeedBuildHud.Instance.Message = "The winner is...";
-				await Task.DelayRealtimeSeconds( 2f );
+				await Task.DelayRealtimeSeconds( 3f );
 				var gold = GameObject.Children.Find( j => j.Name == "Gold" );
 				SpeedBuildHud.Instance.Message = allPlayers[0].Network.Owner.DisplayName;
 				if ( allPlayers.Length == 1 )
 					SpeedBuildHud.Instance.Message = allPlayers[0].Network.Owner.DisplayName + " (By default)";
 				allPlayers[0].Spectator = false;
 				allPlayers[0].IsFlying = false;
-				allPlayers[0].WorldPosition = gold.WorldPosition;
-				allPlayers[0].GetComponent<PlayerController>().EyeAngles = gold.WorldRotation.Angles();
-				allPlayers[0].GameObject.Children.First().WorldRotation = allPlayers[0].WorldRotation = gold.WorldRotation;
-				await Task.DelayRealtimeSeconds( 3f );
+				allPlayers[0].MoveTo( gold.WorldTransform );
+				await Task.DelayRealtimeSeconds( 5f );
 				SpeedBuildHud.Instance.Message = "Restarting!";
 				// Restart the lobby
 				Scene.LoadFromFile( "scenes/speed build.scene" );

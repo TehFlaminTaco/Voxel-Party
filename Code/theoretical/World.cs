@@ -11,8 +11,6 @@ public class World : BlockSpace
 	public World()
 	{
 		Active = this; // Set the active world to this instance.
-		ItemRegistry.UpdateRegistry(); // Ensure the block registry is up to date.
-									   //MakeSpawnPlatform();
 	}
 
 	public void MakeSpawnPlatform()
