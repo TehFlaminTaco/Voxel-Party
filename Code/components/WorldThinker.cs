@@ -10,6 +10,8 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	[Property] public int BatchSize { get; set; } = 10; // Number of chunks to load in each batch
 	[Property] public int UnloadBatchSize { get; set; } = 10; // Number of chunks to check to unload in each batch
 
+	[Property] public bool LoadAroundPlayer { get; set; } = true;
+
 	[Property, Hide]
 	public byte[] SerializedWorld
 	{
@@ -60,7 +62,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 			return; // Only the host should handle chunk loading and unloading.
 
 		// Iterate (randomly) through every loaded chunk, check if it's outside of the forget radius from any player, and if so, unload it.
-		if ( Game.IsPlaying )
+		if ( Game.IsPlaying && LoadAroundPlayer )
 		{
 			List<Vector3Int> forgetList = new();
 			foreach ( var kv in Random.Shared.TakeRandom( World.SimulatedChunks.Where( c => c.Value.IsRendered ), UnloadBatchSize ) )
@@ -98,7 +100,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 
 		var players = Scene.GetAll<PlayerController>();
 		var targetChunks = new HashSet<Vector3Int>();
-		if ( !Game.IsPlaying )
+		if ( !LoadAroundPlayer || !Game.IsPlaying )
 		{
 			targetChunks = World.SimulatedChunks.Select( kv => kv.Key ).ToHashSet();
 		}
@@ -171,7 +173,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	{
 		// Fill the block with SimpleParticles
 		var block = World.GetBlock( position ).GetBlock();
-		
+
 		if ( playSound )
 		{
 			var snd = Sound.Play( block.BreakSound );
@@ -187,10 +189,10 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 					Random.Shared.Float()
 				)) * World.BlockScale ); // Spawn the item at the center of the block
 		}
-		
+
 		if ( spawnParticles ) //World.SpawnBreakParticles( position );
-		// Remove the block at the specified position.
-		World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
+							  // Remove the block at the specified position.
+			World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
 	}
 
 	protected override void OnPreRender()
