@@ -121,7 +121,7 @@ public class Block
 		}; // Returns the texture index for the block face at the given position.
 	}
 
-	public virtual void AddBlockMesh( BlockSpace world, Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
+	public virtual void AddBlockMesh( BlockSpace world, Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs, List<Vector4> tangents )
 	{
 		if ( !IsFullBlock )
 			return; // If we are not a solid block, this behaviour should be overridden, otherwise, we don't render anything.
@@ -130,7 +130,7 @@ public class Block
 		{
 			if ( ShouldFaceBeVisible( world, blockPos, dir ) )
 			{
-				AddFaceMesh( world, blockPos, dir, verts, normals, uvs );
+				AddFaceMesh( world, blockPos, dir, verts, normals, uvs, tangents );
 			}
 		}
 	}
@@ -248,7 +248,7 @@ public class Block
 		return Drops;
 	}
 
-	public virtual void AddFaceMesh( BlockSpace world, Vector3Int blockPos, Direction face, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
+	public virtual void AddFaceMesh( BlockSpace world, Vector3Int blockPos, Direction face, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs, List<Vector4> tangents )
 	{
 		// This method should be overridden to add the mesh for a specific face of the block.
 		// For example, it could add vertices, normals, and UVs for the specified face.
@@ -273,6 +273,12 @@ public class Block
 		normals.Add( forward );
 		normals.Add( forward );
 		normals.Add( forward );
+		tangents.Add( new Vector4( up, -1f ) );
+		tangents.Add( new Vector4( up, -1f ) );
+		tangents.Add( new Vector4( up, -1f ) );
+		tangents.Add( new Vector4( up, -1f ) );
+		tangents.Add( new Vector4( up, -1f ) );
+		tangents.Add( new Vector4( up, -1f ) );
 		var ourUVs = new List<Vector2> {
 			new Vector2(1f, 0f), // Top right
 			new Vector2(0f, 0f), // Top left

@@ -52,18 +52,32 @@ public partial class Item : GameResource
 		var verts = new List<Vector3>();
 		var normals = new List<Vector3>();
 		var uvs = new List<Vector3>();
+		var tangents = new List<Vector4>();
 		// Add vertices for a cube
 		foreach ( var dir in Directions.All )
 		{
-			block.AddFaceMesh( World.Active, Vector3Int.Zero, dir, verts, normals, uvs );
+			block.AddFaceMesh( World.Active, Vector3Int.Zero, dir, verts, normals, uvs, tangents );
 		}
 		for ( int i = 0; i < verts.Count; i++ )
 		{
 			verts[i] *= 0.25f;
 		}
-		var vertexes = verts.Zip( normals, uvs )
-			.Select( v => new Vertex( transform.PointToWorld( v.First ), v.Second, Vector3.Zero, new Vector4( v.Third, 0f ) ) )
-			.ToList();
-		Graphics.Draw( vertexes, vertexes.Count, Material.Load( "materials/textureatlas.vmat" ) );
+
+		Vertex[] vertexes = new Vertex[verts.Count];
+		for ( int i = 0; i < verts.Count; i++ )
+		{
+			var pos = verts[i];
+			var normal = normals[i];
+			var uv = uvs[i];
+			var tangent = tangents[i];
+			vertexes[i] = new(
+				transform.PointToWorld( pos ),
+				normal,
+				tangent,
+				new Vector4( uv, 0f )
+			);
+		}
+
+		Graphics.Draw( vertexes, vertexes.Length, Material.Load( "materials/textureatlas.vmat" ) );
 	}
 }
