@@ -12,7 +12,7 @@ public abstract class VoxelTool
     public virtual void OnSelected() // Called when the tool is selected
     {
         VoxelBuilder.ToolOptionsWindow?.Layout.Clear( true );
-        this.MakeOptions( VoxelBuilder.ToolOptionsWindow?.Layout );
+        MakeOptions( VoxelBuilder.ToolOptionsWindow?.Layout );
     }
     public virtual void OnDeselected() { } // Called when the tool is deselected
 

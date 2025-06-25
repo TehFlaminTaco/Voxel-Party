@@ -10,7 +10,7 @@
     "BlockBoundsMins": "0,0,0",
     "BlockBoundsMaxs": "16,16,16",
     "Replaceable": false,
-    "Rotateable": true,
+    "Rotateable": false,
     "RotateTextures": true,
     "BreakParticle": "prefabs/break particles.prefab",
     "WalkStepSound": "sounds/footsteps/wood/wood_walk.sound",
@@ -120,9 +120,9 @@
     "BottomTextureIndex": 10,
     "Drops": [
       {
-        "Item": "items/wood/oak/oak_log.item",
+        "Item": null,
         "Count": 1,
-        "ItemID": 8
+        "ItemID": 0
       }
     ],
     "BlockObject": null

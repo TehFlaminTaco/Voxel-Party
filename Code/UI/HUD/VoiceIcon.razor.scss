@@ -1,0 +1,44 @@
+$slate-text: white;
+$slate-hover: #727a79;
+$slate-background: #383e43;
+$slate-border: #8e8e8e;
+$slate-border-dark: #505757;
+$slate-shadow: #252525;
+
+$green-text: white;
+$green-hover: #63c363;
+$green-background: #1e652b;
+$green-border: #33ba24;
+$green-border-dark: #1b931b;
+$green-shadow: #104e10;
+
+VoiceIcon
+{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	margin: 20px;
+	justify-content: center;
+	align-items: center;
+	font-family: "perfect dos vga 437";
+
+	.mic {
+		transition: opacity 0.1s ease;
+		width: 60px;
+		aspect-ratio: 1;
+		font-size: 40px;
+		padding-left: 8px;
+		justify-content: center;
+		align-items: center;
+		background-color: $green-hover;
+		border-right: 4px $green-border;
+		border-top: 4px $green-border;
+		border-bottom: 4px $green-border-dark;
+		border-left: 4px $green-border-dark;
+		opacity: 0;
+		
+		&.down {
+			opacity: 1;
+		}
+	}
+}

@@ -1,0 +1,13 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+	<i class="mic @(Input.Down( "voice" ) ? "down" : "")">mic</i>
+</root>
+
+@code
+{
+	protected override int BuildHash() => System.HashCode.Combine( Input.Down( "voice" ).GetHashCode() );
+}

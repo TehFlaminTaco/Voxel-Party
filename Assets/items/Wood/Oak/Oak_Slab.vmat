@@ -1,0 +1,14 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "materials/pointshader.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 3 // Point Sample
+
+	Abledo "materials/block/oak_planks.png"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+}

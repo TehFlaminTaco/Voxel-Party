@@ -11,11 +11,13 @@ public sealed class SpeedBuild : Component
 
 	public NetList<VoxelPlayer> Players { get; set; } = new();
 
-	[Property] List<Structure> TargetObjects { get; set; } = new();
+	List<Structure> TargetObjects { get; set; } = new();
 
 	protected override void OnStart()
 	{
 		GameModeLogic();
+
+		TargetObjects = ResourceLibrary.GetAll<Structure>( "structures/speedbuild/", false ).ToList();
 	}
 
 	[Rpc.Broadcast]
