@@ -1,0 +1,43 @@
+$slate-text: white;
+$slate-hover: #727a79;
+$slate-background: #383e43;
+$slate-border: #8e8e8e;
+$slate-border-highlight: #d1d1d1;
+$slate-border-dark: #505757;
+$slate-shadow: #252525;
+
+$green-text: white;
+$green-hover: #63c363;
+$green-background: #1e652b;
+$green-border: #33ba24;
+$green-border-dark: #1b931b;
+$green-shadow: #104e10;
+$click-sound: "sounds/ui/ui_soundpack/click.sound";
+
+Character {
+  width: 50%;
+  height: 100%;
+  font-family: "perfect dos vga 437";
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+  pointer-events: all;
+  color: $slate-text;
+  
+  .panel-header {
+    align-items: center;
+    justify-content: center;
+    background-color: $slate-background;
+    box-shadow: 0px 10px 0px 0px $slate-shadow;
+    padding: 20px;
+    width: 50%;
+
+    h2 {
+      font-size: 36px;
+      letter-spacing: 2px;
+      margin: 0;
+      text-transform: uppercase;
+    }
+  }
+}

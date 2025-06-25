@@ -177,6 +177,7 @@
           "__guid": "17e76c5e-f5cd-4679-98de-b29608278cdd",
           "__enabled": true,
           "BatchSize": 10,
+          "LoadAroundPlayer": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -193,7 +194,7 @@
       ],
       "Children": [
         {
-          "__guid": "9d2a6b6f-928a-4d59-bf0b-a15bc72cb46e",
+          "__guid": "4e9c327b-dc17-47f4-aa6b-315cde0255a5",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, 0)",
@@ -209,7 +210,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "904f259a-1105-449b-b70d-74b673859289",
+              "__guid": "def7003d-b048-4ef9-a886-7643037484c5",
               "__enabled": true,
               "ChunkPosition": "-1,-1,0",
               "OnComponentDestroy": null,
@@ -221,7 +222,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "58f899fe-5a8c-48ac-a890-d0b15713365a",
+              "__guid": "fe1dbdec-b489-4c5b-ac03-393c2657e989",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -245,7 +246,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "41a4f0cc-b14c-4537-b046-3b3339452bc0",
+              "__guid": "a05aaf94-fa1b-4894-9dda-7b21a6e79ed0",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -267,7 +268,7 @@
           ],
           "Children": [
             {
-              "__guid": "c36beefd-1c6e-46d9-ae52-015dcaa4ec14",
+              "__guid": "55d27d11-3772-4724-abe4-ebaa82286e15",
               "__version": 1,
               "__Prefab": "prefabs/blockobjects/torch.prefab",
               "__PrefabInstancePatch": {
@@ -302,22 +303,22 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "eac1c917-0ae2-43bc-b477-8c58f16f5f15": "c36beefd-1c6e-46d9-ae52-015dcaa4ec14",
-                "8f167d02-3c14-4df8-9485-45dc17ba680b": "075ae5a8-5cae-4c9c-9c8b-2bd0ee99da97",
-                "6dd468f6-59ac-44a2-b93d-c2c89186451a": "1f575bd6-275f-4e3a-88a9-e54ea042d1a1",
-                "1d23df2b-ed44-42a4-af97-df64d11b5842": "83f8683e-165b-45c4-84d6-d713404fce81",
-                "4039f075-e9d5-41f7-9068-6df06380eb26": "dbdb12a1-6330-4232-8230-feb510f22f42",
-                "6bf7ceaa-dad3-4f6e-bc8c-8acf63f069bb": "d6f4e125-4204-4b43-8603-66480010e2d9",
-                "85b15597-3f51-45cd-ac5e-a1f02bc32e62": "74713d71-749b-475a-a9ec-8e4cfb6b74c6",
-                "b93898d9-6dd2-4ea9-9e77-cb53155c2002": "f2effea8-ab6b-44ad-b55b-4067df09b6d9",
-                "80f82b36-ee9c-4937-b527-68c2b616ba97": "c536d366-d95d-439a-9ed5-3fda379f61fa",
-                "d016755f-0592-40b6-bc3b-22898a10153b": "ecb51cd0-f1da-4ad3-a4e8-96c24d420cf6"
+                "eac1c917-0ae2-43bc-b477-8c58f16f5f15": "55d27d11-3772-4724-abe4-ebaa82286e15",
+                "8f167d02-3c14-4df8-9485-45dc17ba680b": "e0921871-d5b3-4482-9c08-5b26ff223a73",
+                "6dd468f6-59ac-44a2-b93d-c2c89186451a": "7deaf4ee-c0f9-48e0-a013-3f5abef1e657",
+                "1d23df2b-ed44-42a4-af97-df64d11b5842": "1dfe8cca-2a8f-43d3-8c92-9d7ddb77541a",
+                "4039f075-e9d5-41f7-9068-6df06380eb26": "5bb3b9ae-6033-442e-b985-db15f6a2238a",
+                "6bf7ceaa-dad3-4f6e-bc8c-8acf63f069bb": "e114d8ca-7574-4bdd-a18d-f56e60d6e7f4",
+                "85b15597-3f51-45cd-ac5e-a1f02bc32e62": "06b1b8c3-5c72-46e8-9895-7d0631c53419",
+                "b93898d9-6dd2-4ea9-9e77-cb53155c2002": "f64c9439-578a-4490-93ca-f8a423c9a085",
+                "80f82b36-ee9c-4937-b527-68c2b616ba97": "b9cfbe77-d40a-4e2b-9ce6-6bbccc7b6661",
+                "d016755f-0592-40b6-bc3b-22898a10153b": "45dc4cac-9eb5-437d-8f32-d9e9ac859f5c"
               }
             }
           ]
         },
         {
-          "__guid": "f4f970c5-56b7-44e9-b5f5-a9aefece29d5",
+          "__guid": "1f7995af-168c-4d67-aab6-c6f580e06189",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, 0)",
@@ -333,7 +334,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "c7204d7c-425b-40b6-b4ec-ac68f12838f8",
+              "__guid": "039754c5-8c30-4fa8-b836-c6ac56f26a33",
               "__enabled": true,
               "ChunkPosition": "-1,0,0",
               "OnComponentDestroy": null,
@@ -345,7 +346,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "1a87f66b-e639-47cf-b511-ca26a3eafbcb",
+              "__guid": "85812fd5-567c-4639-88d9-9f81b83db9da",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -369,7 +370,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "1750f49d-bb96-4ea8-9820-e7aba9d747a1",
+              "__guid": "a2b2bb9b-3012-4e12-8772-4392c34293dd",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -392,7 +393,7 @@
           "Children": []
         },
         {
-          "__guid": "ce5dfc6f-ef03-4549-99cb-2576641a24e7",
+          "__guid": "0b88a94e-ebe5-4bd3-863e-5ac6c52dbeba",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, -1)",
@@ -408,7 +409,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "48e45fff-075b-40c8-8793-94733cad20a4",
+              "__guid": "95816868-dc7d-48cd-a34d-6cee35849228",
               "__enabled": true,
               "ChunkPosition": "-1,-1,-1",
               "OnComponentDestroy": null,
@@ -420,7 +421,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "43b08517-acba-44d9-95b5-69d8459b01eb",
+              "__guid": "a6487d14-af1f-4e52-ad98-13e0aa43b00d",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -444,7 +445,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "8569f763-1c53-4039-abcd-a0f7ce5d3da3",
+              "__guid": "9a107fa7-fcaf-45d4-8d5f-ed8fcee3164c",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -467,7 +468,7 @@
           "Children": []
         },
         {
-          "__guid": "7fe90d7d-03f3-4972-95a9-ae81591c83fa",
+          "__guid": "99453659-5609-485e-aa3f-5b5a55d61b78",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, -1)",
@@ -483,7 +484,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "2609e046-50c9-4e4c-988a-88be675e5033",
+              "__guid": "d3942e40-8163-4ae4-9b4a-9a5e15c8dd9e",
               "__enabled": true,
               "ChunkPosition": "-1,0,-1",
               "OnComponentDestroy": null,
@@ -495,7 +496,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "e27e9e2c-accd-4018-9c39-e21258cda796",
+              "__guid": "5145081e-ad56-49ca-bfb9-35286c4edfde",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -519,7 +520,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "a95536bb-fe75-4bb4-abeb-22d50b1fd545",
+              "__guid": "0c2581fc-e3b8-4117-88ca-6322872288e7",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -548,7 +549,7 @@
       "__version": 1,
       "Flags": 0,
       "Name": "player",
-      "Position": "0,-128,0.4965944",
+      "Position": "74.96896,-47.64212,24.68213",
       "Rotation": "0,0,-0.9913746,-0.1310584",
       "Scale": "1,1,1",
       "Tags": "",

@@ -1,0 +1,61 @@
+$slate-text: white;
+$slate-hover: #727a79;
+$slate-background: #383e43;
+$slate-border: #8e8e8e;
+$slate-border-highlight: #d1d1d1;
+$slate-border-dark: #505757;
+$slate-shadow: #252525;
+
+$blue-text: white;
+$blue-hover: #37c2d3;
+$blue-background: #15505a;
+$blue-border: #3fcdba;
+$blue-border-dark: #19877a;
+$blue-shadow: #0f2e42;
+
+$green-text: white;
+$green-hover: #63c363;
+$green-background: #1e652b;
+$green-border: #33ba24;
+$green-border-dark: #1b931b;
+$green-shadow: #104e10;
+$click-sound: "sounds/ui/ui_soundpack/click.sound";
+
+News {
+  width: 50%;
+  height: 100%;
+  font-family: "perfect dos vga 437";
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+  pointer-events: all;
+  color: $slate-text;
+
+  .panel-header {
+    align-items: center;
+    justify-content: center;
+    background-color: $slate-background;
+    box-shadow: 0 10px 0 0 $slate-shadow;
+    padding: 20px;
+    width: 50%;
+
+    h2 {
+      font-size: 36px;
+      letter-spacing: 2px;
+      margin: 0;
+      text-transform: uppercase;
+    }
+  }
+  
+  WebPanel {
+    width: 100%;
+    height: 80%;
+
+    background-color: $blue-background;
+    border-left: 8px $blue-border;
+    border-top: 8px $blue-border;
+    border-right: 8px  $blue-border-dark;
+    border-bottom: 8px  $blue-border-dark;
+    box-shadow: 0px 15px 0px 0px $blue-shadow;
+  }
+}

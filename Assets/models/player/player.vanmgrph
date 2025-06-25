@@ -98,7 +98,7 @@
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Walk2X_E"
-											m_blendValue = [ 135.610001, -0.000022 ]
+											m_blendValue = [ 176.0, -0.000022 ]
 										},
 										{
 											_class = "CBlend2DItem"
@@ -140,7 +140,7 @@
 											_class = "CBlend2DItem"
 											m_tagSpans = [  ]
 											m_sequenceName = "Walk2X_W"
-											m_blendValue = [ -135.610001, 0.000022 ]
+											m_blendValue = [ -176.0, 0.000022 ]
 										},
 										{
 											_class = "CBlend2DItem"
