@@ -33,6 +33,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	protected override void OnStart()
 	{
 		base.OnStart();
+		ItemRegistry.UpdateRegistry();
 		TexArrayTool.UpdateMaterialTexture( TextureAtlas );
 		TexArrayTool.UpdateMaterialTexture( TranslucentTextureAtlas );
 		if ( Networking.IsHost )
