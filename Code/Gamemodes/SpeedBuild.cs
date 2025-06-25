@@ -11,13 +11,15 @@ public sealed class SpeedBuild : Component
 
 	public NetList<VoxelPlayer> Players { get; set; } = new();
 
-	List<Structure> TargetObjects { get; set; } = new();
+	public List<Structure> TargetStructures { get; set; } = new();
+	
+	Structure _currentStructure;
 
 	protected override void OnStart()
 	{
 		GameModeLogic();
 
-		TargetObjects = ResourceLibrary.GetAll<Structure>( "structures/speedbuild/", false ).ToList();
+		TargetStructures = ResourceLibrary.GetAll<Structure>( "structures/speedbuild/", false ).ToList();
 	}
 
 	[Rpc.Broadcast]
@@ -27,8 +29,8 @@ public sealed class SpeedBuild : Component
 		player.GetComponent<PlayerController>().EyeAngles = rotation;
 	}
 
-	[Property]
-	public int[] MemorizeTimeSecondsByRound { get; set; } = new[]{
+	[Property, Description("In seconds, in order of rounds. Rounds past the last entry use the same number.")]
+	public int[] MemorizeTime { get; set; } = new[]{
 		45, // Nice and easy
 		30, // A bit more stressful
 		15,
@@ -37,25 +39,25 @@ public sealed class SpeedBuild : Component
 		10,
 		10
 	};
-	[Property]
-	public int[] BuildTimeSecondsByRound { get; set; } = new[]{
-		120, // Nice and easy
-		60, // A bit more stressful
-		60,
-		60,
-		50,
-		40,
-		30 // 30 seconds is NOT enough time for any structure.
+	[Property, Description("In seconds, in order of rounds. Rounds past the last entry use the same number.")]
+	public int[] BuildTimeOffset { get; set; } = new[]{
+		30, // Nice and easy
+		15, // A bit more stressful
+		5,
+		0,
+		-5,
+		-5,
+		-10,
+		-15
 	};
 
-	[Property]
-	public int[] TargetBuildPercentageByRound { get; set; } = new[]{
+	[Property, Description("In seconds, in order of rounds. Rounds past the last entry use the same number.")]
+	public int[] TargetAccuracy { get; set; } = new[]{
 		40,
 		50,
 		60,
 		70,
 		80,
-		90,
 		90
 	};
 
@@ -70,7 +72,7 @@ public sealed class SpeedBuild : Component
 		Structure.StructureDifficulty.Hard,
 	};
 
-	private async void GameModeLogic()
+	async void GameModeLogic()
 	{
 		if ( !Networking.IsHost )
 			return;
@@ -94,7 +96,7 @@ public sealed class SpeedBuild : Component
 			{
 				SpeedBuildHud.Instance.HasTimer = true;
 			}
-
+			
 			// If half the online players are ready, set the timer to 30 seconds
 			if ( Scene.GetAll<VoxelPlayer>().Count( p => p.IsReady ) >= Scene.GetAll<VoxelPlayer>().Count() / 2 )
 			{
@@ -147,8 +149,8 @@ public sealed class SpeedBuild : Component
 				structureList = TargetObjects;
 			}
 
-			var targetStructure = Random.Shared.FromList( structureList );
-			if ( targetStructure == null )
+			var _currentStructure = Random.Shared.FromList( structureList );
+			if ( _currentStructure == null )
 			{
 				Log.Error( "No target structure set for SpeedBuild." );
 				return;
@@ -170,7 +172,7 @@ public sealed class SpeedBuild : Component
 				// Spawn a copy of the target structure on the player's island
 				var obj = new GameObject();
 				var structure = obj.AddComponent<StructureLoader>( false );
-				structure.LoadedStructure = targetStructure;
+				structure.LoadedStructure = _currentStructure;
 
 				var targetPosition = Islands[index].Children.FirstOrDefault( c => c.Name == "StructureAnchor" ).WorldPosition;
 
@@ -187,22 +189,21 @@ public sealed class SpeedBuild : Component
 				index++;
 			}
 
-			SpeedBuildHud.Instance.TimerEnd = MemorizeTimeSecondsByRound.IndexOrLast( RoundNumber ); // Set the timer for 60 seconds
-			SpeedBuildHud.Instance.TotalTime = MemorizeTimeSecondsByRound.IndexOrLast( RoundNumber ); // Set the total time for the game mode	
+			SpeedBuildHud.Instance.TimerEnd = MemorizeTime.IndexOrLast( RoundNumber ); // Set the timer for 60 seconds
+			SpeedBuildHud.Instance.TotalTime = MemorizeTime.IndexOrLast( RoundNumber ); // Set the total time for the game mode	
 			SpeedBuildHud.Instance.HasTimer = true; // Show the timer UI
 
 			SpeedBuildHud.Instance.Message = "Memorize the structure!";
 
-			await Task.DelayRealtimeSeconds( MemorizeTimeSecondsByRound.IndexOrLast( RoundNumber ) ); // Wait for players to memorize the structure
+			await Task.DelayRealtimeSeconds( MemorizeTime.IndexOrLast( RoundNumber ) ); // Wait for players to memorize the structure
 
 			SpeedBuildHud.Instance.Message = "Time's up! Starting the build phase...";
 			SpeedBuildHud.Instance.HasTimer = false; // Hide the timer UI
 
 			foreach ( var player in Players )
 			{
-				// Clear the blocks in the player's build area
-				var world = Scene.GetAll<WorldThinker>().FirstOrDefault()?.World;
-				if ( world != null )
+				// Clear the blocks in the player's build area;
+				if ( World.Active != null )
 				{
 					for ( int z = player.BuildAreaMins.z; z <= player.BuildAreaMaxs.z; z++ )
 					{
@@ -210,14 +211,14 @@ public sealed class SpeedBuild : Component
 						{
 							for ( int x = player.BuildAreaMins.x; x <= player.BuildAreaMaxs.x; x++ )
 							{
-								world.SetBlock( new Vector3Int( x, y, z ), new BlockData( 0 ) );
+								World.Active.SetBlock( new Vector3Int( x, y, z ), new BlockData( 0 ) );
 							}
 						}
 					}
 				}
 			}
 
-			await Task.DelayRealtimeSeconds( 2 ); // Wait for the build phase
+			//await Task.DelayRealtimeSeconds( 2 ); // Wait for the build phase
 
 			foreach ( var player in Players )
 			{
@@ -237,18 +238,18 @@ public sealed class SpeedBuild : Component
 			}
 
 			SpeedBuildHud.Instance.Message = "Build!";
-			SpeedBuildHud.Instance.TimerEnd = BuildTimeSecondsByRound.IndexOrLast( RoundNumber ); // Set the timer for 5 minutes
-			SpeedBuildHud.Instance.TotalTime = BuildTimeSecondsByRound.IndexOrLast( RoundNumber ); // Set the total time for the game mode
+			SpeedBuildHud.Instance.TimerEnd = _currentStructure.SecondsToBuild + BuildTimeOffset.IndexOrLast( RoundNumber ); // Set the timer for 5 minutes
+			SpeedBuildHud.Instance.TotalTime = _currentStructure.SecondsToBuild + BuildTimeOffset.IndexOrLast( RoundNumber ); // Set the total time for the game mode
 			SpeedBuildHud.Instance.HasTimer = true; // Show the timer UI
 
-			await Task.DelayRealtimeSeconds( BuildTimeSecondsByRound.IndexOrLast( RoundNumber ) ); // Wait for the build phase to end
+			await Task.DelayRealtimeSeconds( _currentStructure.SecondsToBuild + BuildTimeOffset.IndexOrLast( RoundNumber ) ); // Wait for the build phase to end
 
 			SpeedBuildHud.Instance.Message = "Time's up! Judging the builds...";
 			SpeedBuildHud.Instance.HasTimer = false; // Hide the timer UI
 
 			if ( Players.Count > 3 )
 			{
-				SpeedBuildHud.Instance.KillPercentage = TargetBuildPercentageByRound.IndexOrLast( RoundNumber );
+				SpeedBuildHud.Instance.KillPercentage = TargetAccuracy.IndexOrLast( RoundNumber );
 			}
 			else
 			{
@@ -323,10 +324,10 @@ public sealed class SpeedBuild : Component
 			{
 				SpeedBuildHud.Instance.Message = "Executing the failures!";
 				await Task.DelayRealtimeSeconds( 1 );
-				var losers = Players.Where( k => ScoreByPlayer[k] < TargetBuildPercentageByRound.IndexOrLast( RoundNumber ) ).OrderByDescending( k => ScoreByPlayer[k] ).ToList();
+				var losers = Players.Where( k => ScoreByPlayer[k] < TargetAccuracy.IndexOrLast( RoundNumber ) ).OrderByDescending( k => ScoreByPlayer[k] ).ToList();
 				foreach ( var player in losers )
 				{
-					if ( ScoreByPlayer[player] < TargetBuildPercentageByRound.IndexOrLast( RoundNumber ) )
+					if ( ScoreByPlayer[player] < TargetAccuracy.IndexOrLast( RoundNumber ) )
 					{
 						player.Explode();
 						await Task.DelayRealtime( 500 );

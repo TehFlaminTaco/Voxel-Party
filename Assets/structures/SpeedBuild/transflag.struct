@@ -1,4 +1,7 @@
 {
+  "SpeedBuildStructure": true,
+  "SecondsToBuild": 25,
+  "Difficulty": 0,
   "StructureData": "AQAAAAgAAAAFAAAARhQARhcARgsARhcARhQA",
   "__references": [],
   "__version": 0
