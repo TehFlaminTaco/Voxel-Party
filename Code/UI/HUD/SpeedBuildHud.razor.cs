@@ -25,6 +25,9 @@ public partial class SpeedBuildHud : PanelComponent
 
     [Sync( SyncFlags.FromHost )] public string Message { get; set; } = "Memorize the structure!";
 
+    [Sync( SyncFlags.FromHost )]
+    public int? KillPercentage { get; set; } = null;
+
     protected override int BuildHash() => HashCode.Combine(
         HashCode.Combine(
             Message.GetHashCode(),
@@ -43,6 +46,10 @@ public partial class SpeedBuildHud : PanelComponent
         var player = VoxelPlayer.LocalPlayer;
         var goodBar = Panel.Children.First( c => c.Id == "score" ).Children.First( c => c.HasClass( "goodbar" ) );
         var badBar = Panel.Children.First( c => c.Id == "score" ).Children.First( c => c.HasClass( "badbar" ) );
+        var killBar = Panel.FindChild( "failPointer" );
+
+        if ( KillPercentage.HasValue )
+            killBar.Style.Width = Length.Fraction( KillPercentage.Value / 100f );
 
         if ( player.TotalBlockArea > 0 )
         {

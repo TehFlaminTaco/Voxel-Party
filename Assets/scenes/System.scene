@@ -63,7 +63,7 @@
           "Orthographic": false,
           "OrthographicHeight": 1204,
           "Priority": 1,
-          "RenderExcludeTags": "",
+          "RenderExcludeTags": "spectator",
           "RenderTags": "",
           "TargetEye": "None",
           "Viewport": "0,0,1,1",

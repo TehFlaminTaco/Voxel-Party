@@ -32,6 +32,12 @@ public partial class Item : GameResource
 		return false;
 	}
 
+	protected override void PostReload()
+	{
+		base.PostReload();
+		TexArrayTool.Dirty = true;
+	}
+
 	protected override void PostLoad()
 	{
 		base.PostLoad();

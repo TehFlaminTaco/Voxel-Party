@@ -68,7 +68,6 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 	[Sync] public WorldThinker WorldThinkerInstanceOverride { get; set; } = null;
 	public WorldThinker WorldThinkerInstance => WorldThinkerInstanceOverride ?? Scene.Get<WorldThinker>();
 	public World WorldInstance => WorldThinkerInstance?.World;
-
 	protected override void OnUpdate()
 	{
 		WorldInstance.GetChunk( ChunkPosition ).ChunkObject = this; // Important in case we're loaded by a remote host.
