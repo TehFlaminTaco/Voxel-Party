@@ -91,6 +91,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		var block = ItemRegistry.GetBlock( blockData.BlockID );
 		if ( block == null )
 		{
+			ItemRegistry.UpdateRegistry();
 			Log.Warning( $"Block with ID {blockData.BlockID} not found at position {blockPos}." );
 			return;
 		}
