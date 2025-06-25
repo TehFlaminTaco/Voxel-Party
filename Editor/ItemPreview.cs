@@ -76,6 +76,11 @@ public class ItemPreview : AssetPreview
 			so.RenderOverride = RenderObject;
 
 			PrimarySceneObject = so;
+
+			SceneSize = new Vector3( 10 );
+			SceneCenter = new Vector3( 5 );
+
+			FrameScene();
 		}
 
 	}
