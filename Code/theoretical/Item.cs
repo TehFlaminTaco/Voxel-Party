@@ -13,6 +13,16 @@ public partial class Item : GameResource
 	[Property, ToggleGroup( "IsBlock" ), InlineEditor]
 	public Block Block { get; set; }
 
+	[Button]
+	public void FixIDConflict()
+	{
+		if ( ResourceLibrary.GetAll<Item>().Count( c => c.ID == ID ) <= 1 )
+		{
+			Log.Warning( "No need to regenerate Item ID. Already unique!" );
+			return;
+		}
+		ID = -1;
+	}
 	public bool TryGiveID()
 	{
 		if ( ID == -1 )
@@ -51,6 +61,7 @@ public partial class Item : GameResource
 		var block = ItemRegistry.GetBlock( ID );
 		if ( block == null )
 		{
+			ItemRegistry.UpdateRegistry();
 			Log.Error( $"Block with ID {ID} not found." );
 			return;
 		}
