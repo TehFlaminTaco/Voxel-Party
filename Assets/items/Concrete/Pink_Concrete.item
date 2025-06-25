@@ -1,6 +1,6 @@
 {
-  "ID": 23,
-  "Name": "Pink Wool",
+  "ID": 39,
+  "Name": "Pink Concrete",
   "MaxStackSize": 64,
   "IsBlock": true,
   "Block": {
@@ -13,19 +13,19 @@
     "Rotateable": false,
     "RotateTextures": true,
     "BreakParticle": "prefabs/break particles.prefab",
-    "WalkStepSound": "sounds/footsteps/rug/rug_walk.sound",
-    "RunStepSound": "sounds/footsteps/rug/rug_walk.sound",
-    "CrouchStepSound": "sounds/footsteps/rug/rug_walk.sound",
-    "LandingSound": "sounds/footsteps/rug/rug_walk.sound",
-    "PlaceSound": "sounds/footsteps/rug/rug_walk.sound",
-    "BreakingSound": "sounds/footsteps/rug/rug_walk.sound",
-    "BreakSound": "sounds/footsteps/rug/rug_walk.sound",
+    "WalkStepSound": "sounds/footsteps/stone/stone_walk.sound",
+    "RunStepSound": "sounds/footsteps/stone/stone_run.sound",
+    "CrouchStepSound": "sounds/footsteps/stone/stone_wander.sound",
+    "LandingSound": "sounds/footsteps/stone/stone_walk.sound",
+    "PlaceSound": "sounds/blocks/stone/stone_place.sound",
+    "BreakingSound": "sounds/blocks/stone/stone_breaking.sound",
+    "BreakSound": "sounds/blocks/stone/stone_break.sound",
     "Opaque": true,
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",
       "data": {
-        "FilePath": "materials/block/pink_wool.png",
+        "FilePath": "materials/block/pink_concrete.png",
         "MaxSize": 4096,
         "ConvertHeightToNormals": false,
         "NormalScale": 1,
@@ -47,7 +47,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": "textures/generated/imagefile/1f8fb2f576c9fe46.vtex"
+      "compiled": "textures/generated/imagefile/f1d5c55b8f866fb2.vtex"
     },
     "TopTexture": null,
     "SideTexture": null,
@@ -56,7 +56,7 @@
     "EastTexture": null,
     "WestTexture": null,
     "BottomTexture": null,
-    "TextureIndex": 29,
+    "TextureIndex": 0,
     "TopTextureIndex": null,
     "SideTextureIndex": null,
     "NorthTextureIndex": null,

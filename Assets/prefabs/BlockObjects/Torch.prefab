@@ -73,7 +73,7 @@
             "__version": 1,
             "Flags": 0,
             "Name": "Point Light",
-            "Position": "0.2711039,0.08273315,22.38988",
+            "Position": "-0.4935122,0.08273315,27.98483",
             "Rotation": "0,-0.7119406,0,0.7022396",
             "Scale": "1,1,1",
             "Tags": "light_point,light,light_spot",
@@ -84,13 +84,10 @@
             "OwnerTransfer": 1,
             "Components": [
               {
-                "__type": "Sandbox.SpotLight",
+                "__type": "Sandbox.PointLight",
                 "__guid": "6bf7ceaa-dad3-4f6e-bc8c-8acf63f069bb",
                 "__enabled": true,
                 "Attenuation": 1,
-                "ConeInner": 40,
-                "ConeOuter": 75,
-                "Cookie": null,
                 "FogMode": "Enabled",
                 "FogStrength": 1,
                 "LightColor": "1,0.75186,0.54884,1",

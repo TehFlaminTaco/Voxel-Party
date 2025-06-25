@@ -1,22 +1,28 @@
 {
   "UI": false,
-  "Volume": "2",
+  "Volume": "1",
   "Pitch": "1",
   "Decibels": 70,
   "SelectionMode": "Random",
   "Sounds": [
-    "sounds/footsteps/grass/grass_run4.vsnd",
-    "sounds/footsteps/grass/grass_run4.vsnd",
-    "sounds/footsteps/grass/grass_run3.vsnd",
-    "sounds/footsteps/grass/grass_run2.vsnd",
-    "sounds/footsteps/grass/grass_run1.vsnd"
+    "sounds/footsteps/wood/wood_walk10.vsnd",
+    "sounds/footsteps/wood/wood_walk1.vsnd",
+    "sounds/footsteps/wood/wood_walk11.vsnd",
+    "sounds/footsteps/wood/wood_walk2.vsnd",
+    "sounds/footsteps/wood/wood_walk3.vsnd",
+    "sounds/footsteps/wood/wood_walk4.vsnd",
+    "sounds/footsteps/wood/wood_walk5.vsnd",
+    "sounds/footsteps/wood/wood_walk6.vsnd",
+    "sounds/footsteps/wood/wood_walk7.vsnd",
+    "sounds/footsteps/wood/wood_walk8.vsnd",
+    "sounds/footsteps/wood/wood_walk9.vsnd"
   ],
   "Occlusion": true,
   "AirAbsorption": true,
   "Transmission": true,
   "OcclusionRadius": 64,
   "DistanceAttenuation": true,
-  "Distance": 6000,
+  "Distance": 15000,
   "Falloff": [
     {
       "x": 0,

@@ -4,21 +4,23 @@
   "MaxStackSize": 64,
   "IsBlock": true,
   "Block": {
-    "Opaque": true,
-    "IsSolidBlock": true,
     "IsSolid": true,
     "Hardness": 1,
+    "IsFullBlock": true,
     "BlockBoundsMins": "0,0,0",
     "BlockBoundsMaxs": "16,16,16",
     "Replaceable": false,
+    "Rotateable": false,
+    "RotateTextures": true,
     "BreakParticle": "prefabs/break particles.prefab",
-    "WalkStepSound": "sounds/footsteps/stone/stone_walk.sound",
-    "RunStepSound": "sounds/footsteps/stone/stone_run.sound",
-    "CrouchStepSound": "sounds/footsteps/stone/stone_wander.sound",
-    "LandingSound": "sounds/footsteps/stone/stone_walk.sound",
-    "PlaceSound": "sounds/blocks/stone/stone_place.sound",
-    "BreakingSound": "sounds/blocks/stone/stone_breaking.sound",
-    "BreakSound": "sounds/blocks/stone/stone_break.sound",
+    "WalkStepSound": "sounds/footsteps/wood/wood_walk.sound",
+    "RunStepSound": "sounds/footsteps/wood/wood_walk.sound",
+    "CrouchStepSound": "sounds/footsteps/wood/wood_walk.sound",
+    "LandingSound": "sounds/footsteps/wood/wood_walk.sound",
+    "PlaceSound": "sounds/footsteps/wood/wood_walk.sound",
+    "BreakingSound": "sounds/footsteps/wood/wood_walk.sound",
+    "BreakSound": "sounds/footsteps/wood/wood_walk.sound",
+    "Opaque": true,
     "Texture": {
       "$compiler": "texture",
       "$source": "imagefile",
@@ -64,7 +66,7 @@
     "BottomTextureIndex": null,
     "Drops": [
       {
-        "Item": "items/oak_planks.item",
+        "Item": "items/wood/oak/oak_planks.item",
         "Count": 1,
         "ItemID": 7
       }
