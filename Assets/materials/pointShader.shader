@@ -168,6 +168,11 @@ PS
 		m.Opacity = l_10.a;
 		m.Emission = 0;
 		m.Transmission = 0;
+		m.WorldTangentU = i.vTangentUWs;
+		m.WorldTangentV = i.vTangentVWs;
+		m.TextureCoords = i.vTextureCoords.xy;
+		m.AmbientOcclusion = 1;
+		m.Normal = TransformNormal( m.Normal, i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
 
 		return ShadingModelStandard::Shade( i, m );
 	}

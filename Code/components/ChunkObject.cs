@@ -84,7 +84,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		UpdateMesh();
 	}
 
-	public void AddBlockMesh( Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs )
+	public void AddBlockMesh( Vector3Int blockPos, List<Vector3> verts, List<Vector3> normals, List<Vector3> uvs, List<Vector4> tangents )
 	{
 		// For testing, let's start by just creating a full single block for every block
 		var blockData = WorldInstance.GetBlock( blockPos );
@@ -94,7 +94,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			Log.Warning( $"Block with ID {blockData.BlockID} not found at position {blockPos}." );
 			return;
 		}
-		block.AddBlockMesh( WorldInstance, blockPos, verts, normals, uvs );
+		block.AddBlockMesh( WorldInstance, blockPos, verts, normals, uvs, tangents );
 	}
 
 	ModelRenderer OpaqueRenderer;
@@ -109,10 +109,12 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		List<Vector3> Verts = new List<Vector3>();
 		List<Vector3> Normals = new List<Vector3>();
 		List<Vector3> UVs = new List<Vector3>();
+		List<Vector4> Tangents = new List<Vector4>();
 
 		List<Vector3> TransparentVerts = new List<Vector3>();
 		List<Vector3> TransparentNormals = new List<Vector3>();
 		List<Vector3> TransparentUVs = new List<Vector3>();
+		List<Vector4> TransparentTangents = new List<Vector4>();
 
 		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
 		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TranslucentTextureAtlas );
@@ -154,9 +156,9 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 						}
 					}
 					else if ( block.Opaque )
-						AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), Verts, Normals, UVs );
+						AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), Verts, Normals, UVs, Tangents );
 					else
-						AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), TransparentVerts, TransparentNormals, TransparentUVs );
+						AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), TransparentVerts, TransparentNormals, TransparentUVs, TransparentTangents );
 					if ( block.IsSolid )
 					{
 						var aabb = block.GetCollisionAABBChunk( WorldInstance, blockPos + (ChunkPosition * Chunk.SIZE) );
@@ -178,7 +180,23 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			var mr = OpaqueRenderer;
 			mr.Enabled = Verts.Count > 0; // Only enable if we have vertices to render
 			var mesh = new Mesh();
-			mesh.CreateVertexBuffer( Verts.Count, Vertex.Layout, Verts.Zip( Normals, UVs ).Select( v => new Vertex( v.First, v.Second, Vector3.Zero, new Vector4( v.Third, 2f ) ) ).ToList() );
+
+			Vertex[] vertexes = new Vertex[Verts.Count];
+			for ( int i = 0; i < Verts.Count; i++ )
+			{
+				var pos = Verts[i];
+				var normal = Normals[i];
+				var uv = UVs[i];
+				var tangent = Tangents[i];
+				vertexes[i] = new(
+					pos,
+					normal,
+					tangent,
+					new Vector4( uv, 0f )
+				);
+			}
+
+			mesh.CreateVertexBuffer( Verts.Count, Vertex.Layout, vertexes.ToList() );
 			mesh.CreateIndexBuffer( Verts.Count, Enumerable.Range( 0, Verts.Count ).ToArray() );
 			mesh.Material = WorldThinkerInstance.TextureAtlas ?? null;
 
@@ -204,7 +222,21 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			mr.MaterialOverride = WorldThinkerInstance.TranslucentTextureAtlas ?? null; // Use the translucent texture atlas
 			mr.Enabled = TransparentVerts.Count > 0; // Only enable if we have vertices to render
 			var transparentMesh = new Mesh();
-			transparentMesh.CreateVertexBuffer( TransparentVerts.Count, Vertex.Layout, TransparentVerts.Zip( TransparentNormals, TransparentUVs ).Select( v => new Vertex( v.First, v.Second, Vector3.Zero, new Vector4( v.Third, 2f ) ) ).ToList() );
+			List<Vertex> vertexes = new List<Vertex>( Verts.Count );
+			for ( int i = 0; i < Verts.Count; i++ )
+			{
+				var pos = TransparentVerts[i];
+				var normal = TransparentNormals[i];
+				var uv = TransparentUVs[i];
+				var tangent = TransparentTangents[i];
+				vertexes[i] = new(
+					pos,
+					normal,
+					tangent,
+					new Vector4( uv, 0f )
+				);
+			}
+			transparentMesh.CreateVertexBuffer( TransparentVerts.Count, Vertex.Layout, vertexes );
 			transparentMesh.CreateIndexBuffer( TransparentVerts.Count, Enumerable.Range( 0, TransparentVerts.Count ).ToArray() );
 			transparentMesh.Material = WorldThinkerInstance.TranslucentTextureAtlas ?? null;
 
