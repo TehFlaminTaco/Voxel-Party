@@ -12,7 +12,7 @@ public sealed class SpeedBuild : Component
 	public NetList<VoxelPlayer> Players { get; set; } = new();
 
 	public List<Structure> TargetStructures { get; set; } = new();
-	
+
 	Structure _currentStructure;
 
 	protected override void OnStart()
@@ -29,7 +29,7 @@ public sealed class SpeedBuild : Component
 		player.GetComponent<PlayerController>().EyeAngles = rotation;
 	}
 
-	[Property, Description("In seconds, in order of rounds. Rounds past the last entry use the same number.")]
+	[Property, Description( "In seconds, in order of rounds. Rounds past the last entry use the same number." )]
 	public int[] MemorizeTime { get; set; } = new[]{
 		45, // Nice and easy
 		30, // A bit more stressful
@@ -39,7 +39,7 @@ public sealed class SpeedBuild : Component
 		10,
 		10
 	};
-	[Property, Description("In seconds, in order of rounds. Rounds past the last entry use the same number.")]
+	[Property, Description( "In seconds, in order of rounds. Rounds past the last entry use the same number." )]
 	public int[] BuildTimeOffset { get; set; } = new[]{
 		30, // Nice and easy
 		15, // A bit more stressful
@@ -51,7 +51,7 @@ public sealed class SpeedBuild : Component
 		-15
 	};
 
-	[Property, Description("In seconds, in order of rounds. Rounds past the last entry use the same number.")]
+	[Property, Description( "In seconds, in order of rounds. Rounds past the last entry use the same number." )]
 	public int[] TargetAccuracy { get; set; } = new[]{
 		40,
 		50,
@@ -62,7 +62,7 @@ public sealed class SpeedBuild : Component
 	};
 
 	[Property]
-	public Structure.StructureDifficulty[] DifficultyByRound { get; set; } = new[] {
+	public Structure.StructureDifficulty[] Difficulty { get; set; } = new[] {
 		Structure.StructureDifficulty.Easy,
 		Structure.StructureDifficulty.Easy,
 		Structure.StructureDifficulty.Standard,
@@ -96,7 +96,7 @@ public sealed class SpeedBuild : Component
 			{
 				SpeedBuildHud.Instance.HasTimer = true;
 			}
-			
+
 			// If half the online players are ready, set the timer to 30 seconds
 			if ( Scene.GetAll<VoxelPlayer>().Count( p => p.IsReady ) >= Scene.GetAll<VoxelPlayer>().Count() / 2 )
 			{
@@ -142,11 +142,11 @@ public sealed class SpeedBuild : Component
 		while ( gameRunning )
 		{
 
-			var structureList = TargetObjects.Where( c => c.ReplicateDifficulty == DifficultyByRound.IndexOrLast( RoundNumber ) ).ToList();
+			var structureList = TargetStructures.Where( c => c.ReplicateDifficulty == Difficulty.IndexOrLast( RoundNumber ) ).ToList();
 			if ( structureList.Count == 0 )
 			{
-				Log.Warning( $"We don't have any structures for difficulty {DifficultyByRound.IndexOrLast( RoundNumber )}? Why!?" );
-				structureList = TargetObjects;
+				Log.Warning( $"We don't have any structures for difficulty {Difficulty.IndexOrLast( RoundNumber )}? Why!?" );
+				structureList = TargetStructures;
 			}
 
 			var _currentStructure = Random.Shared.FromList( structureList );

@@ -16,6 +16,12 @@ public partial class Structure : GameResource
 	[Hide]
 	public string StructureData { get; set; }
 
-  [Property, ToggleGroup( "SpeedBuildStructure" )]
+	[Property, ToggleGroup( "SpeedBuildStructure" )]
+	public bool SpeedBuildStructure { get; set; } = false;
+
+	[Property, ToggleGroup( "SpeedBuildStructure" )]
+	public int SecondsToBuild { get; set; } = 60;
+
+	[Property, ToggleGroup( "SpeedBuildStructure" )]
 	public StructureDifficulty ReplicateDifficulty = StructureDifficulty.Standard;
 }
