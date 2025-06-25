@@ -96,7 +96,7 @@
           "OnComponentUpdate": null,
           "RenderChunkRadius": 5,
           "RenderForgetRadius": 8,
-          "SerializedWorld": "//////////8AAAAA/gAAALUAAEcEAEUAAAgEAAsADAALAAwACwAMAAsADABFAAAIBAAMAAsADAALAAwACwAMAAsARQAACAQACwAMAAsADAALAAwACwAMAEUAAAgEAAwACwAMAAsADAALAAwACwBFAAAIBAALAAwACwAMAAsADAALAAwARQAACAQADAALAAwACwAMAAsADAALAEUAAAgEAAsADAALAAwACwAMAAsADABFAAAIBAAMAAsADAALAAwACwAMAAsA/wAAewAAAAUA/wAAfAAAAAUA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAAbgAAAAAAAP////8AAAAABQEAAK4AAEcEAEUAAAgLAAwACwAMAAsADAALAAwABABFAAAIDAALAAwACwAMAAsADAALAAQARQAACAsADAALAAwACwAMAAsADAAEAEUAAAgMAAsADAALAAwACwAMAAsABABFAAAICwAMAAsADAALAAwACwAMAAQARQAACAwACwAMAAsADAALAAwACwAEAEUAAAgLAAwACwAMAAsADAALAAwABABFAAAIDAALAAwACwAMAAsADAALAAQA/wAAdAAAAgsAAAACAP8AAHoAAAALAP8AAHwAAAALAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP4AAP////8AAAAAAAAAAPUAAABFAAAIBAALAAwACwAMAAsADAALAAwARQAACAQADAALAAwACwAMAAsADAALAEUAAAgEAAsADAALAAwACwAMAAsADABFAAAIBAAMAAsADAALAAwACwAMAAsARQAACAQACwAMAAsADAALAAwACwAMAEUAAAgEAAwACwAMAAsADAALAAwACwBFAAAIBAALAAwACwAMAAsADAALAAwARQAACAQADAALAAwACwAMAAsADAALAEUAAEcEAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAJoAAAAAAAAAAAAAAAAAAPIAAAAICwAMAAsADAALAAwACwAMAAQARQAACAwACwAMAAsADAALAAwACwAEAEUAAAgLAAwACwAMAAsADAALAAwABABFAAAIDAALAAwACwAMAAsADAALAAQARQAACAsADAALAAwACwAMAAsADAAEAEUAAAgMAAsADAALAAwACwAMAAsABABFAAAICwAMAAsADAALAAwACwAMAAQARQAACAwACwAMAAsADAALAAwACwAEAEUAAEcEAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAKEAAP//////////AgAAAE0BAAD/AAD/AAD/AAD/AAD/AAD/AABRAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgDXAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgD/AAD/AAD/AAD/AAD/AAD/AAC4AAAAAAAAAAAAAAIAAABNAQAA/wAA/wAA/wAA/wAA/wAAeQAARQYARwAARQYARwAARQYARwAARQYARwAARQYARwAARQYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA1wAARQYARwAARQYARwAARQYARwAARQYARwAARQYARwAARQYARwAARQYA/wAA/wAA/wAA/wAA/wAA/wAA/wAAkAAAAAAAAP////8CAAAATQEAAP8AAP8AAP8AAP8AAP8AAP8AAEgAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAP8AAP8AAP8AAP8AAP8AAP8AAMEAAP////8AAAAAAgAAAE0BAAD/AAD/AAD/AAD/AAD/AACCAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgD/AAD/AAD/AAD/AAD/AAD/AAD/AACHAAD6////BgAAAAAAAABFAAAAugAAAAYA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAArQAA",
+          "SerializedWorld": "//////////8AAAAA/gAAALUAAEcEAEUAAAgEAAsADAALAAwACwAMAAsADABFAAAIBAAMAAsADAALAAwACwAMAAsARQAACAQACwAMAAsADAALAAwACwAMAEUAAAgEAAwACwAMAAsADAALAAwACwBFAAAIBAALAAwACwAMAAsADAALAAwARQAACAQADAALAAwACwAMAAsADAALAEUAAAgEAAsADAALAAwACwAMAAsADABFAAAIBAAMAAsADAALAAwACwAMAAsA/wAAewAAAC0A/wAAfAAAAC0A/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAAbgAAAAAAAP////8AAAAABQEAAK4AAEcEAEUAAAgLAAwACwAMAAsADAALAAwABABFAAAIDAALAAwACwAMAAsADAALAAQARQAACAsADAALAAwACwAMAAsADAAEAEUAAAgMAAsADAALAAwACwAMAAsABABFAAAICwAMAAsADAALAAwACwAMAAQARQAACAwACwAMAAsADAALAAwACwAEAEUAAAgLAAwACwAMAAsADAALAAwABABFAAAIDAALAAwACwAMAAsADAALAAQA/wAAdAAAAiwAAAAuAP8AAHoAAAAsAP8AAHwAAAAsAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP4AAP////8AAAAAAAAAAPUAAABFAAAIBAALAAwACwAMAAsADAALAAwARQAACAQADAALAAwACwAMAAsADAALAEUAAAgEAAsADAALAAwACwAMAAsADABFAAAIBAAMAAsADAALAAwACwAMAAsARQAACAQACwAMAAsADAALAAwACwAMAEUAAAgEAAwACwAMAAsADAALAAwACwBFAAAIBAALAAwACwAMAAsADAALAAwARQAACAQADAALAAwACwAMAAsADAALAEUAAEcEAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAJoAAAAAAAAAAAAAAAAAAPIAAAAICwAMAAsADAALAAwACwAMAAQARQAACAwACwAMAAsADAALAAwACwAEAEUAAAgLAAwACwAMAAsADAALAAwABABFAAAIDAALAAwACwAMAAsADAALAAQARQAACAsADAALAAwACwAMAAsADAAEAEUAAAgMAAsADAALAAwACwAMAAsABABFAAAICwAMAAsADAALAAwACwAMAAQARQAACAwACwAMAAsADAALAAwACwAEAEUAAEcEAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAKEAAP//////////AgAAAE0BAAD/AAD/AAD/AAD/AAD/AAD/AABRAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgDXAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgD/AAD/AAD/AAD/AAD/AAD/AAC4AAAAAAAAAAAAAAIAAABNAQAA/wAA/wAA/wAA/wAA/wAAeQAARQYARwAARQYARwAARQYARwAARQYARwAARQYARwAARQYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARQYA1wAARQYARwAARQYARwAARQYARwAARQYARwAARQYARwAARQYARwAARQYA/wAA/wAA/wAA/wAA/wAA/wAA/wAAkAAAAAAAAP////8CAAAATQEAAP8AAP8AAP8AAP8AAP8AAP8AAEgAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAEcAAEUGAP8AAP8AAP8AAP8AAP8AAP8AAMEAAP////8AAAAAAgAAAE0BAAD/AAD/AAD/AAD/AAD/AACCAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAABFBgDXAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgBHAABFBgD/AAD/AAD/AAD/AAD/AAD/AAD/AACHAAD6////BgAAAAAAAABFAAAAugAAAAYA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAArQAA",
           "TextureAtlas": "materials/textureatlas.vmat",
           "TranslucentTextureAtlas": "materials/textureatlastranslucent.vmat",
           "UnloadBatchSize": 10
@@ -104,7 +104,7 @@
       ],
       "Children": [
         {
-          "__guid": "bfe133c7-bdc7-4476-a159-595fddd34c67",
+          "__guid": "f87efd5b-58ee-4cd9-85cf-a4a8e51ba309",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, 0)",
@@ -120,7 +120,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "dc8f54cb-8bf5-4763-b0fe-e1d43c04422d",
+              "__guid": "28b610c0-1780-4027-b0fc-5e8acbf48add",
               "__enabled": true,
               "ChunkPosition": "-1,-1,0",
               "MeshUpdate": {},
@@ -134,7 +134,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "e9608c4a-d299-4a75-9397-b5da2e1d9cf3",
+              "__guid": "04bc8f74-34ff-466c-84a5-68eb84a262a9",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -158,7 +158,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "650f6147-08b0-4400-ac1f-681ba7dc1a72",
+              "__guid": "997751fd-59dd-4e1c-b11e-e02d1976332b",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -181,7 +181,7 @@
           "Children": []
         },
         {
-          "__guid": "cfd88f82-7e60-4abc-9338-a37c3782c0cb",
+          "__guid": "6dc8f140-19a2-4f07-92e0-b7c277f26a41",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, -1, 0)",
@@ -197,7 +197,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "ebbdab7f-c3e0-485a-94ce-51f297cb9791",
+              "__guid": "b46d13a3-fd06-4f93-9a5a-a065b3146bb8",
               "__enabled": true,
               "ChunkPosition": "0,-1,0",
               "MeshUpdate": {},
@@ -211,7 +211,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "9020eb97-0d47-4303-811f-65b85467738a",
+              "__guid": "6d4600ed-2e71-4221-bfb6-d4ef5459ce4b",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -235,7 +235,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "a4be3348-54fb-4dc5-82a3-257c02c64062",
+              "__guid": "adf95e3d-d400-4c3a-90a8-7ff2756857b8",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -258,7 +258,7 @@
           "Children": []
         },
         {
-          "__guid": "4b85d28d-6faa-4ab4-becc-4d27d61ad458",
+          "__guid": "4b58a4e1-a7d2-4e50-ac73-dbeccdbedd29",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, 0)",
@@ -274,7 +274,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "368a5462-097d-45cc-9622-2a0923a6e196",
+              "__guid": "48642d17-d572-4ff5-999a-00a56ffb93c9",
               "__enabled": true,
               "ChunkPosition": "-1,0,0",
               "MeshUpdate": {},
@@ -288,7 +288,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "e0c7217b-dc64-498f-b643-4268ad8b89e8",
+              "__guid": "33a8b548-81dc-4e26-8bc7-df0cc4a1c11a",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -312,7 +312,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "0de55ece-ccab-44d3-b4cf-a9ecc81dba8a",
+              "__guid": "259bc725-2b20-4b66-9454-0b355a8b3591",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -335,7 +335,7 @@
           "Children": []
         },
         {
-          "__guid": "07c84c7d-0c50-46d4-bc15-d2adedc5ad79",
+          "__guid": "c228df89-c401-4bf6-b8dc-8a9aee81af7f",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, 0, 0)",
@@ -351,7 +351,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "c5b75fd4-29c3-4da3-99e9-49fd565e0d68",
+              "__guid": "ee67a225-4af9-4f36-b06c-7ef17cc5be7a",
               "__enabled": true,
               "ChunkPosition": "0,0,0",
               "MeshUpdate": {},
@@ -365,7 +365,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "7bc3efb9-833e-4218-af44-8bb710aad242",
+              "__guid": "9e615f27-6592-419a-ac5b-17c0e1bf3896",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -389,7 +389,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "e7ad0bac-5f09-42cf-a3e7-6a399f6facfb",
+              "__guid": "caaaf35b-47bf-4367-b780-5e96946e0a25",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -412,7 +412,7 @@
           "Children": []
         },
         {
-          "__guid": "8b9ef6ac-66d9-4222-a9a7-ecb203869ccb",
+          "__guid": "c99c56fe-8fbb-4f3b-8c8b-57faade9e56d",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, 2)",
@@ -428,7 +428,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "bebafac2-371c-48cc-aa17-19de3fbb79ed",
+              "__guid": "8f3b6dfd-f683-477a-be37-6046855b5777",
               "__enabled": true,
               "ChunkPosition": "-1,-1,2",
               "MeshUpdate": {},
@@ -442,7 +442,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "6e218b2b-2a40-4efb-9d68-d555decec234",
+              "__guid": "47ed4365-2cd7-4ab5-8119-1f86cc8dcaf0",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -466,7 +466,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "1f2ba3d6-2658-4d88-b1e9-e6fce403d0af",
+              "__guid": "730b83fb-e8c8-4505-9f2a-6b4ede37a7f6",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -489,7 +489,7 @@
           "Children": []
         },
         {
-          "__guid": "31b213a1-0109-4ef0-9964-8e35fcff609c",
+          "__guid": "adff2751-7897-44cc-b8cd-4c6b172f1224",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, 0, 2)",
@@ -505,7 +505,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "ef0e8f89-24f6-45b8-abe5-2df39b3f9c0b",
+              "__guid": "3a02ed0d-7cb2-483d-90b5-6938283ccaf4",
               "__enabled": true,
               "ChunkPosition": "0,0,2",
               "MeshUpdate": {},
@@ -519,7 +519,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "229dde63-96b3-4fdb-a9d4-fa8b19164e65",
+              "__guid": "a0c30c56-c512-4c06-8af9-aa55a69b747d",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -543,7 +543,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "0094c31c-458b-4c44-907d-121f776e1777",
+              "__guid": "970e4dc0-6041-4d32-83ae-f98d8c2a4522",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -566,7 +566,7 @@
           "Children": []
         },
         {
-          "__guid": "8c766371-15bc-4706-abfa-1cde3df2080e",
+          "__guid": "28573191-6238-4b69-b287-21dcaf022e3b",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, -1, 2)",
@@ -582,7 +582,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "eb502b52-6bb5-4eec-918c-3ecc46a20227",
+              "__guid": "7992ae45-8475-4354-8d1e-85452d578254",
               "__enabled": true,
               "ChunkPosition": "0,-1,2",
               "MeshUpdate": {},
@@ -596,7 +596,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "1104b735-d001-40ec-b6e5-1466783f4fbe",
+              "__guid": "e700cfce-5af4-4d65-b1a3-5946a76f29ff",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -620,7 +620,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "dc28022c-5797-4929-bb66-d3cb2c235d15",
+              "__guid": "94632cd2-62d4-4c1a-bae5-9a221462fabe",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -643,7 +643,7 @@
           "Children": []
         },
         {
-          "__guid": "6e97c799-6aa6-4f35-bb56-e9f341d48003",
+          "__guid": "139edf4b-9ab6-4366-9912-39bad2b8989b",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, 2)",
@@ -659,7 +659,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "aab7895a-dfb5-44e1-9575-5069d6009c60",
+              "__guid": "8bfaceb0-4a3e-46b8-a107-86bbe19e9ae6",
               "__enabled": true,
               "ChunkPosition": "-1,0,2",
               "MeshUpdate": {},
@@ -673,7 +673,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "33894647-86e2-4ae5-8c9e-6deaaa61d30a",
+              "__guid": "78a8a148-dcd7-46ac-b067-0288cd22422a",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -697,7 +697,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "c13fb940-f283-4a52-8c12-6ad85d49665c",
+              "__guid": "b142b702-67e0-4773-883f-d07bfe5d43c7",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
@@ -720,7 +720,7 @@
           "Children": []
         },
         {
-          "__guid": "6a5f09ee-8d68-4617-be76-e86e7bf7a128",
+          "__guid": "ac576766-4ca4-4f6c-8b9d-1a1185ed86c3",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-6, 6, 0)",
@@ -736,7 +736,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "3d52379f-f2a2-43f0-b740-c738136b6c97",
+              "__guid": "7a855cd2-e6c7-4fc2-a737-bdb61a7f4f84",
               "__enabled": true,
               "ChunkPosition": "-6,6,0",
               "MeshUpdate": {},
@@ -750,7 +750,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "475e4b79-b235-438a-a2bc-dfd470ceae7b",
+              "__guid": "dec1f385-497c-46b9-9ce6-880c5350432e",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -774,7 +774,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "96b77f91-1ff2-4254-9cec-e5a8b5a9f6b0",
+              "__guid": "d632faec-129c-4785-91e9-d4de8180027c",
               "__enabled": true,
               "Friction": null,
               "IsTrigger": false,
