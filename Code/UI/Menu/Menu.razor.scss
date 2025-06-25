@@ -121,7 +121,6 @@ Menu
     box-shadow: 0px 10px 0px 0px $slate-shadow;
     
     &:hover {
-        background-color: $slate-hover;
         cursor: pointer;
     }
 
@@ -133,9 +132,9 @@ Menu
 .play, .character {
     width: 300px;
     height: 400px;
-    padding-top: 5px;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     
     img {
         position: relative;
@@ -160,7 +159,25 @@ Menu
 
 .character {
     font-size: 40px;
-    background-color: rgba(47, 58, 57, 0.5);
+    background-color: rgba($slate-background, 0.84);
+    
+    .top-bar {
+        background-color: $slate-background;
+        border-left: 2px $slate-border;
+        border-top: 2px $slate-border;
+        border-right: 2px  $slate-border-dark;
+        border-bottom: 4px  $slate-border-dark;
+    }
+
+    &:hover {
+        background-color: $slate-hover;
+    }
+}
+
+.settings {
+    &:hover {
+        background-color: $slate-hover;
+    }
 }
 
 .hidden {

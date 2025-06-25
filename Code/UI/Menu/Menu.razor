@@ -15,22 +15,20 @@
 				<div class="top-bar">
 					<span>Play</span>
 				</div>
-				<img src="materials/gui/title/temp.png" alt="">
 	    	</div>
-			<div class="settings">
+			<div class="settings" @onclick=@( () => menuState = State.Settings )>
 		    	<span>Settings</span>
 	    	</div>
 		</div>
 
 	    <div class="slice">
-		    <div class="character">
+		    <div class="character" @onclick=@( () => menuState = State.Character )>
 				<div class="top-bar">
 					<span>Character</span>
 				</div>
-			    <img src="materials/gui/title/temp.png" alt="">
 		    </div>
 
-		    <div class="news">
+		    <div class="news" @onclick=@( () => menuState = State.News )>
 			    <span>News</span>
 		    </div>
 		</div>
@@ -38,6 +36,9 @@
 	}
 	@if ( menuState == State.Play ) { <ServerList @ref=serverList></ServerList> }
 	@if ( menuState == State.Create ) { <LobbyCreator @ref=lobbyCreator></LobbyCreator> }
+	@if ( menuState == State.Character ) { <Character @ref=lobbyCreator></Character> }
+	@if ( menuState == State.Settings ) { <Settings @ref=lobbyCreator></Settings> }
+	@if ( menuState == State.News ) { <News @ref=lobbyCreator></News> }
 </root>
 
 @code
@@ -71,6 +72,7 @@
 	    None,
 	    Play,
 		Create,
+		Character,
 	    Settings,
 		News
     }

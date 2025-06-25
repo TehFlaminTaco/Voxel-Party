@@ -9,7 +9,6 @@
 
 	<div class="panel-header">
 		<h2>CREATE LOBBY</h2>
-		<div class="close-button" @onclick=@( () => Menu.menuState = Menu.State.None )></div>
 	</div>
 
 	<TextEntry class="lobby-name" @ref="LobbyNameInput" placeholder="@(Connection.Local.DisplayName + "'s Lobby")" />
