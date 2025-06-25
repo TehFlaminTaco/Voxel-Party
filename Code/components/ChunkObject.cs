@@ -222,8 +222,16 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			mr.MaterialOverride = WorldThinkerInstance.TranslucentTextureAtlas ?? null; // Use the translucent texture atlas
 			mr.Enabled = TransparentVerts.Count > 0; // Only enable if we have vertices to render
 			var transparentMesh = new Mesh();
-			List<Vertex> vertexes = new List<Vertex>( Verts.Count );
-			for ( int i = 0; i < Verts.Count; i++ )
+			Vertex[] vertexes = new Vertex[TransparentVerts.Count];
+			if ( TransparentNormals.Count != TransparentVerts.Count || TransparentUVs.Count != TransparentVerts.Count || TransparentTangents.Count != TransparentVerts.Count )
+			{
+				Log.Error( "SOMETHING BAD HAPPENED!" );
+				Log.Error( $"Verts: {TransparentVerts.Count}" );
+				Log.Error( $"UVs: {TransparentUVs.Count}" );
+				Log.Error( $"Normals: {TransparentNormals.Count}" );
+				Log.Error( $"Tangents: {TransparentTangents.Count}" );
+			}
+			for ( int i = 0; i < TransparentVerts.Count; i++ )
 			{
 				var pos = TransparentVerts[i];
 				var normal = TransparentNormals[i];
@@ -236,7 +244,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 					new Vector4( uv, 0f )
 				);
 			}
-			transparentMesh.CreateVertexBuffer( TransparentVerts.Count, Vertex.Layout, vertexes );
+			transparentMesh.CreateVertexBuffer( TransparentVerts.Count, Vertex.Layout, vertexes.ToList() );
 			transparentMesh.CreateIndexBuffer( TransparentVerts.Count, Enumerable.Range( 0, TransparentVerts.Count ).ToArray() );
 			transparentMesh.Material = WorldThinkerInstance.TranslucentTextureAtlas ?? null;
 

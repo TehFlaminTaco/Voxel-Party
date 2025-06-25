@@ -41,7 +41,7 @@ public partial class ItemIcon : Panel
 
             var light = new GameObject().AddComponent<DirectionalLight>();
             light.LightColor = Color.White * 2f;
-            light.WorldRotation = Rotation.From( 45, 45, 0 );
+            light.WorldRotation = Rotation.From( 45, -45, 0 );
 
             var camera = new GameObject().AddComponent<CameraComponent>();
             camera.Orthographic = true;

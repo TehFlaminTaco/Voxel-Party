@@ -1,0 +1,22 @@
+$slate-text: white;
+$slate-hover: #727a79;
+$slate-background: #383e43;
+$slate-border: #8e8e8e;
+$slate-border-dark: #505757;
+$slate-shadow: #252525;
+
+$green-text: white;
+$green-hover: #63c363;
+$green-background: #1e652b;
+$green-border: #33ba24;
+$green-border-dark: #1b931b;
+$green-shadow: #104e10;
+
+Option {
+    background-color: $slate-background;
+    color: $slate-text;
+
+    &:hover {
+        background-color: $green-border;
+    }
+}

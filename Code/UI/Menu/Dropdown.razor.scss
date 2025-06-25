@@ -1,0 +1,32 @@
+Dropdown {
+    width: 100%;
+    position: relative;
+    color:white;
+    padding: 8px;
+    
+
+    &.disabled .dropdownInnerBorder {
+        background-color: rgb(192, 192, 192);
+        color: rgb(128, 128, 128);
+        pointer-events: none;
+    }
+
+    .dropdownOptions {
+        display: none;
+    }
+
+    background-color: white;
+    flex-direction: row;
+
+    .dropdownSelected {
+        flex-grow: 1;
+    }
+
+    .dropdownArrow {
+        justify-content: center;
+        align-items: center;
+        width: 16px;
+        height: 16px;
+        color: white;
+    }
+}

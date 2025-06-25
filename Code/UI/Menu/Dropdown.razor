@@ -1,0 +1,16 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System.Linq;
+@inherits Panel
+
+<root onclick=@(this.Open) onblur=@(this.HandleBlur)>
+	<div class="dropdownSelected">
+		@Text
+	</div>
+	<div class="dropdownArrow">
+		▾
+	</div>
+	<div class="dropdownOptions">
+		@Options
+	</div>
+</root>

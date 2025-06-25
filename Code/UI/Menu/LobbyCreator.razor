@@ -25,11 +25,13 @@
 		</div>
 		<div class="option">
 			<div class="option-label">Privacy</div>
-			<DropDown class="privacy-select" @ref="PrivacyOption">
-				<option value="0" title="Private">Private</option>
-				<option value="1" title="Friends">Friends</option>
-				<option value="2" title="Public">Public</option>
-			</DropDown>
+			<Dropdown class="privacy-select" @ref="PrivacyOption" Text="Public">
+				<Options>
+					<Option Text="Private" />
+					<Option Text="Friends" />
+					<Option Text="Public" />
+				</Options>
+			</Dropdown>
 		</div>
 		<div class="option">
 			<div class="option-label">Hidden from Server List</div>
@@ -57,7 +59,7 @@
 @code
 {
 	TextEntry LobbyNameInput { get; set; }
-	DropDown PrivacyOption { get; set; }
+	Dropdown PrivacyOption { get; set; }
 	string LobbyName => LobbyNameInput?.Text.Length > 0 ? LobbyNameInput?.Text : Connection.Local.DisplayName + "'s Lobby";
 	int MaxPlayers { get; set; } = 8;
 	bool Hidden { get; set; } = false;
@@ -75,12 +77,12 @@
 
 	private void ApplyLobbyCreation()
 	{
-		Log.Info( $"Creating lobby: {LobbyName}, Max Players: {MaxPlayers}, Privacy: {PrivacyOption.Selected.Value}, Hidden: {Hidden}, DestroyWhenHostLeaves: {DestroyWhenHostLeaves}, AutoSwitchToBestHost: {AutoSwitchToBestHost}" );
+		Log.Info( $"Creating lobby: {LobbyName}, Max Players: {MaxPlayers}, Privacy: {PrivacyOption.Text}, Hidden: {Hidden}, DestroyWhenHostLeaves: {DestroyWhenHostLeaves}, AutoSwitchToBestHost: {AutoSwitchToBestHost}" );
 		var lobbyConfig = new LobbyConfig
 		{
 			Name = LobbyName,
 			MaxPlayers = MaxPlayers,
-			Privacy = GetPrivacyLabel( (string)PrivacyOption.Selected.Value ),
+			Privacy = GetPrivacyLabel( (string)PrivacyOption.Text ),
 			Hidden = Hidden,
 			DestroyWhenHostLeaves = DestroyWhenHostLeaves,
 			AutoSwitchToBestHost = AutoSwitchToBestHost

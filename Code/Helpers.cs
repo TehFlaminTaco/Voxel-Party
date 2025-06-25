@@ -267,4 +267,24 @@ public static class Helpers
 		return parent.Children.FirstOrDefault( predicate ) ??
 			   parent.Children.Select( child => child.FindChild( condition ) ).FirstOrDefault( x => x != null );
 	}
+
+	public static T ParentOfType<T>( this Panel p ) where T : Panel
+	{
+		var parent = p.Parent;
+		while ( parent is Panel and not T )
+		{
+			parent = parent.Parent;
+		}
+		return parent as T;
+	}
+
+	public static Panel RootPanel( this Panel p )
+	{
+		var parent = p;
+		while ( parent is not null and not Sandbox.UI.RootPanel )
+		{
+			parent = parent.Parent;
+		}
+		return parent;
+	}
 }
