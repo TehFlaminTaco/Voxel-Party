@@ -16,7 +16,7 @@
 					<span>Play</span>
 				</div>
 	    	</div>
-			<div class="settings" @onclick=@( () => menuState = State.Settings )>
+			<div class="settings" @onclick=@( () => Game.Overlay.ShowSettingsModal() )>  @*@( () => menuState = State.Settings )>*@
 		    	<span>Settings</span>
 	    	</div>
 		</div>
