@@ -327,7 +327,7 @@ public partial class VoxelPlayer : Component
     {
         var trace = Scene.GetAll<WorldThinker>().First().World.Trace(
             eyePos,
-            eyeForward * ReachDistance
+            eyePos + eyeForward * ReachDistance
         ).Run();
 
         if ( HasBuildVolume )

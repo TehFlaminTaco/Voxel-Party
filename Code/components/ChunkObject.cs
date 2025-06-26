@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Sandbox;
 
 public sealed class ChunkObject : Component, Component.ExecuteInEditor
@@ -74,14 +75,14 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		WorldInstance.GetChunk( ChunkPosition ).ChunkObject = this; // Important in case we're loaded by a remote host.
 		if ( TortureTest || WorldInstance.GetChunk( ChunkPosition ).Dirty )
 		{
-			UpdateMesh(); // If the chunk is dirty, update the mesh.
+			_ = UpdateMesh(); // If the chunk is dirty, update the mesh.
 		}
 	}
 
 
 	protected override void OnStart()
 	{
-		UpdateMesh();
+		_ = UpdateMesh();
 	}
 
 	public void AddBlockMesh( World world, Vector3Int blockPos, List<Vertex> verts )
@@ -99,105 +100,128 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 	}
 
 	Dictionary<Material, ModelRenderer> Renderers = new();
+	Dictionary<Material, Mesh> Meshes = new();
+	Model Collider;
 
 	public Dictionary<Vector3Int, (GameObject obj, BlockData data)> BlockObjects { get; set; } = new Dictionary<Vector3Int, (GameObject obj, BlockData data)>();
-	public void UpdateMesh()
+	bool locked = false;
+	public async Task UpdateMesh()
 	{
-
-		var world = WorldInstance;
-		var chunkPos = ChunkPosition;
-		world.GetChunk( chunkPos ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
-												  // Opaque Pass
-		Dictionary<Material, List<Vertex>> Vertexes = new();
-
-		_ = TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
-		_ = TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TranslucentTextureAtlas );
-		var collisionModel = new ModelBuilder();
-		for ( int z = 0; z < Chunk.SIZE.z; z++ )
+		if ( locked ) return;
+		try
 		{
-			for ( int y = 0; y < Chunk.SIZE.y; y++ )
+			var world = WorldInstance;
+			var thinker = WorldThinkerInstance;
+			var chunkPos = ChunkPosition;
+			world.GetChunk( chunkPos ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
+													  // Opaque Pass
+			Dictionary<Material, List<Vertex>> Vertexes = new();
+
+			_ = TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
+			_ = TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TranslucentTextureAtlas );
+			await GameTask.WorkerThread();
+			var collisionModel = new ModelBuilder();
+			List<Vector3Int> DestroyBlockObjects = new();
+			List<Vector3Int> CreateBlockObjects = new();
+			for ( int z = 0; z < Chunk.SIZE.z; z++ )
 			{
-				for ( int x = 0; x < Chunk.SIZE.x; x++ )
+				for ( int y = 0; y < Chunk.SIZE.y; y++ )
 				{
-					var blockPos = new Vector3Int( x, y, z );
-					var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
-					var block = ItemRegistry.GetBlock( blockData.BlockID );
-					if ( Networking.IsHost && BlockObjects.ContainsKey( blockPos ) && BlockObjects[blockPos].data != blockData )
+					for ( int x = 0; x < Chunk.SIZE.x; x++ )
 					{
-						// Destroy the BlockObject at this position if it exists and the block data has changed
-						BlockObjects[blockPos].obj.Destroy();
-						BlockObjects.Remove( blockPos );
-					}
-					if ( block.BlockObject != null )
-					{
-						if ( Networking.IsHost )
+						var blockPos = new Vector3Int( x, y, z );
+						var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
+						var block = ItemRegistry.GetBlock( blockData.BlockID );
+						if ( Networking.IsHost && BlockObjects.ContainsKey( blockPos ) && BlockObjects[blockPos].data != blockData )
 						{
-							// Instantiate the block object if it doesn't exist
-							// (If it was wrong, it would have been destroyed above)
-							if ( !BlockObjects.ContainsKey( blockPos ) )
-							{
-								var blockObject = block.BlockObject.Clone( GameObject, blockPos * World.BlockScale, Rotation.Identity, Vector3.One );
-								BlockObjects[blockPos] = (blockObject, blockData);
-								if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
-								{
-									receiver.AcceptBlockData( world, blockPos + (chunkPos * Chunk.SIZE), blockData );
-								}
-								blockObject.NetworkSpawn();
-							}
+							DestroyBlockObjects.Add( blockPos );
 						}
-					}
-					else
-					{
-						var mat = block.Material ?? (block.Opaque ? WorldThinkerInstance.TextureAtlas : WorldThinkerInstance.TranslucentTextureAtlas);
-						AddBlockMesh( world, blockPos + (chunkPos * Chunk.SIZE), Vertexes.GetOrCreate( mat ) );
-					}
-					if ( block.IsSolid )
-					{
-						var aabb = block.GetCollisionAABBChunk( world, blockPos + (chunkPos * Chunk.SIZE) );
-						foreach ( var bbox in aabb )
-							collisionModel.AddCollisionBox( bbox.Extents, bbox.Center );
+						if ( block.BlockObject != null )
+						{
+							if ( Networking.IsHost )
+								CreateBlockObjects.Add( blockPos );
+						}
+						else
+						{
+							var mat = block.Material ?? (block.Opaque ? thinker.TextureAtlas : thinker.TranslucentTextureAtlas);
+							AddBlockMesh( world, blockPos + (chunkPos * Chunk.SIZE), Vertexes.GetOrCreate( mat ) );
+						}
+						if ( block.IsSolid )
+						{
+							var aabb = block.GetCollisionAABBChunk( world, blockPos + (chunkPos * Chunk.SIZE) );
+							foreach ( var bbox in aabb )
+								collisionModel.AddCollisionBox( bbox.Extents, bbox.Center );
+						}
 					}
 				}
 			}
-		}
 
-		var toRemove = Renderers.Where( k => !Vertexes.ContainsKey( k.Key ) || Vertexes[k.Key].Count == 0 ); // Remove all renderers where we don't have verts for.
-		foreach ( var r in toRemove )
-		{
-			r.Value.Destroy();
-			Renderers.Remove( r.Key );
-		}
-
-		foreach ( var kv in Vertexes.Where( c => c.Value.Count > 0 ) )
-		{
-			var mat = kv.Key;
-			var verts = kv.Value;
-
-			if ( !Renderers.ContainsKey( mat ) )
+			await GameTask.MainThread();
+			using ( Scene.Push() )
 			{
-				var renderer = AddComponent<ModelRenderer>();
-				renderer.Flags = ComponentFlags.NotNetworked;
-				renderer.MaterialOverride = mat;
-				Renderers[mat] = renderer;
+				foreach ( var blockPos in DestroyBlockObjects )
+				{
+					BlockObjects[blockPos].obj.Destroy();
+					BlockObjects.Remove( blockPos );
+				}
+				foreach ( var blockPos in CreateBlockObjects )
+				{
+					if ( !BlockObjects.ContainsKey( blockPos ) )
+					{
+
+						var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
+						var block = ItemRegistry.GetBlock( blockData.BlockID );
+						var blockObject = block.BlockObject.Clone( GameObject, blockPos * World.BlockScale, Rotation.Identity, Vector3.One );
+						BlockObjects[blockPos] = (blockObject, blockData);
+						if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
+						{
+							receiver.AcceptBlockData( world, blockPos + (chunkPos * Chunk.SIZE), blockData );
+						}
+						blockObject.NetworkSpawn();
+					}
+				}
+
+				var toRemove = Renderers.Where( k => !Vertexes.ContainsKey( k.Key ) || Vertexes[k.Key].Count == 0 ); // Remove all renderers where we don't have verts for.
+				foreach ( var r in toRemove )
+				{
+					r.Value.Destroy();
+					Renderers.Remove( r.Key );
+				}
+
+				foreach ( var kv in Vertexes.Where( c => c.Value.Count > 0 ) )
+				{
+					var mat = kv.Key;
+					var verts = kv.Value;
+
+					if ( !Renderers.ContainsKey( mat ) )
+					{
+						var renderer = AddComponent<ModelRenderer>();
+						renderer.Flags = ComponentFlags.NotNetworked;
+						renderer.MaterialOverride = mat;
+						Renderers[mat] = renderer;
+					}
+					var indicies = Enumerable.Range( 0, verts.Count ).ToArray();
+
+					var mesh = new Mesh();
+					mesh.CreateVertexBuffer( verts.Count, Vertex.Layout, verts );
+					mesh.CreateIndexBuffer( verts.Count, indicies );
+					mesh.Material = mat;
+
+					var model = new ModelBuilder();
+					model.AddMesh( mesh );
+					model.AddTraceMesh( verts.Select( c => c.Position ).ToList(), indicies.ToList() );
+
+					Renderers[mat].Model = model.Create();
+				}
+				var collider = GetOrAddComponent<ModelCollider>();
+				collider.Model = collisionModel.Create();
+				collider.Static = true; // Set the collider to static since chunks do not move
+				collider.Enabled = true; // Enable the collider for the chunk object
 			}
-			var indicies = Enumerable.Range( 0, verts.Count ).ToArray();
-
-			var mesh = new Mesh();
-			mesh.CreateVertexBuffer( verts.Count, Vertex.Layout, verts );
-			mesh.CreateIndexBuffer( verts.Count, indicies );
-			mesh.Material = mat;
-
-			var model = new ModelBuilder();
-			model.AddMesh( mesh );
-			model.AddTraceMesh( verts.Select( c => c.Position ).ToList(), indicies.ToList() );
-
-			Renderers[mat].Model = model.Create();
 		}
-
-
-		var collider = GetOrAddComponent<ModelCollider>();
-		collider.Model = collisionModel.Create();
-		collider.Static = true; // Set the collider to static since chunks do not move
-		collider.Enabled = true; // Enable the collider for the chunk object
+		finally
+		{
+			locked = false;
+		}
 	}
 }

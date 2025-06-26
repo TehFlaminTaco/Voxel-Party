@@ -72,16 +72,19 @@ public class Chunk
 	{
 		// Create a chunk object and then ask it to update.
 		if ( IsEmpty ) return null; // Never render empty chunks.
-		var obj = new GameObject( true, $"Chunk ({Position.x}, {Position.y}, {Position.z})" );
-		obj.Parent = (thinker ?? scene.Get<WorldThinker>()).GameObject;
-		var chunkObj = obj.AddComponent<ChunkObject>();
-		chunkObj.WorldThinkerInstanceOverride = thinker; // Set the thinker to use for this chunk.
-		chunkObj.ChunkPosition = Position; // Set the chunk position in world coordinates.
-		obj.WorldPosition = Helpers.VoxelToWorld( Position * SIZE );
-		ChunkObject = chunkObj;
-		obj.NetworkSpawn();
-		obj.Network.AssignOwnership( Connection.Host );
-		return chunkObj;
+		using ( scene.Push() )
+		{
+			var obj = new GameObject( true, $"Chunk ({Position.x}, {Position.y}, {Position.z})" );
+			obj.Parent = (thinker ?? scene.Get<WorldThinker>()).GameObject;
+			var chunkObj = obj.AddComponent<ChunkObject>();
+			chunkObj.WorldThinkerInstanceOverride = thinker; // Set the thinker to use for this chunk.
+			chunkObj.ChunkPosition = Position; // Set the chunk position in world coordinates.
+			obj.WorldPosition = Helpers.VoxelToWorld( Position * SIZE );
+			ChunkObject = chunkObj;
+			obj.NetworkSpawn();
+			obj.Network.AssignOwnership( Connection.Host );
+			return chunkObj;
+		}
 	}
 
 	public IEnumerable<byte> Serialize()

@@ -1,4 +1,5 @@
-﻿using Sandbox.theoretical;
+﻿using System.Threading.Tasks;
+using Sandbox.theoretical;
 
 namespace Sandbox;
 
@@ -38,7 +39,7 @@ public partial class StructureLoader : Component, Component.ExecuteInEditor
 	}
 
 	[Button]
-	public void Regenerate()
+	public async Task Regenerate()
 	{
 		if ( !GameObject.Active )
 			return;
@@ -79,7 +80,7 @@ public partial class StructureLoader : Component, Component.ExecuteInEditor
 						var chunkObj = chunk.Render( Scene, tempThinker );
 						if ( chunkObj == null ) continue; // Skip if chunk is empty
 						chunkObj.WorldThinkerInstanceOverride = tempThinker;
-						chunkObj.UpdateMesh();
+						await chunkObj.UpdateMesh();
 						chunkObj.Destroy();
 					}
 				}
