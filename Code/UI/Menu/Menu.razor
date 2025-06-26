@@ -36,9 +36,9 @@
 	}
 	@if ( menuState == State.Play ) { <ServerList @ref=serverList></ServerList> }
 	@if ( menuState == State.Create ) { <LobbyCreator @ref=lobbyCreator></LobbyCreator> }
-	@if ( menuState == State.Character ) { <Character @ref=lobbyCreator></Character> }
-	@if ( menuState == State.Settings ) { <Settings @ref=lobbyCreator></Settings> }
-	@if ( menuState == State.News ) { <News @ref=lobbyCreator></News> }
+	@if ( menuState == State.Character ) { <CharacterCreator></CharacterCreator> }
+	@if ( menuState == State.Settings ) { <Settings></Settings> }
+	@if ( menuState == State.News ) { <News></News> }
 </root>
 
 @code

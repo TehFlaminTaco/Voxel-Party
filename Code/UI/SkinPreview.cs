@@ -24,8 +24,7 @@ public class SkinPreview : Panel
             Camera = new GameObject().AddComponent<CameraComponent>();
             Camera.BackgroundColor = Color.Transparent;
             Renderer = new GameObject().AddComponent<SkinnedModelRenderer>();
-            Renderer.Model = Model.Load( "models/player.vmdl_c" );
-
+            Renderer.Model = Model.Load( "models/player/player.vmdl" );
 
             Light = new GameObject().AddComponent<PointLight>();
             Light.WorldPosition = Vector3.Forward * 300f;
@@ -37,9 +36,7 @@ public class SkinPreview : Panel
 
     public override void Tick()
     {
-        base.Tick();
-
-        var size = base.Box.Rect.Size;
+        var size = Box.Rect.Size;
         if ( size.IsNearZeroLength )
             return;
         if ( RenderTarget == null || !RenderTarget.IsValid || RenderTarget.Size != size )
