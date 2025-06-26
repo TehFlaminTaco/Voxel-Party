@@ -259,24 +259,15 @@ public class Block
 		var forward = face.Forward();
 		var up = face.Up();
 		var right = face.Right();
+		var tangent = new Vector4( up, -1f );
 		// Add vertices, normals, and UVs based on the face direction.
-		var ourVerts = new[]{
-			forward + up + right,
-			forward + up - right,
-			forward - up - right,
-			forward + up + right,
-			forward - up - right,
-			forward - up + right,
-		}.Select( v => ((v + Vector3.One) / 2f + ((Vector3)blockPos).Modulo( Chunk.SIZE )) * World.BlockScale );
-		Vector4[] ourUVs = [
-			new Vector4(1f, 0f, textureIndex, 0f), // Top right
-			new Vector4(0f, 0f, textureIndex, 0f), // Top left
-			new Vector4(0f, 1f, textureIndex, 0f), // Bottom left
-			new Vector4(1f, 0f, textureIndex, 0f), // Top right
-			new Vector4(0f, 1f, textureIndex, 0f), // Bottom left
-			new Vector4(1f, 1f, textureIndex, 0f), // Bottom right
-		];
-		verts.AddRange( ourVerts.Zip( ourUVs ).Select( p => new Vertex( p.First, forward, new Vector4( up, -1f ), p.Second ) ) );
+		var chunkPos = ((Vector3)blockPos).Modulo( Chunk.SIZE );
+		verts.Add( new Vertex( ((forward + up + right + Vector3.One) / 2f + chunkPos) * World.BlockScale, forward, tangent, new Vector4( 1f, 0f, textureIndex, 0f ) ) );
+		verts.Add( new Vertex( ((forward + up - right + Vector3.One) / 2f + chunkPos) * World.BlockScale, forward, tangent, new Vector4( 0f, 0f, textureIndex, 0f ) ) );
+		verts.Add( new Vertex( ((forward - up - right + Vector3.One) / 2f + chunkPos) * World.BlockScale, forward, tangent, new Vector4( 0f, 1f, textureIndex, 0f ) ) );
+		verts.Add( new Vertex( ((forward + up + right + Vector3.One) / 2f + chunkPos) * World.BlockScale, forward, tangent, new Vector4( 1f, 0f, textureIndex, 0f ) ) );
+		verts.Add( new Vertex( ((forward - up - right + Vector3.One) / 2f + chunkPos) * World.BlockScale, forward, tangent, new Vector4( 0f, 1f, textureIndex, 0f ) ) );
+		verts.Add( new Vertex( ((forward - up + right + Vector3.One) / 2f + chunkPos) * World.BlockScale, forward, tangent, new Vector4( 1f, 1f, textureIndex, 0f ) ) );
 	}
 
 	public virtual bool IsFaceOpaque( BlockSpace world, Vector3Int blockPos, Direction face )
