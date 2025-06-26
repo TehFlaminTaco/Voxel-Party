@@ -2136,6 +2136,271 @@
 						weight = 1.0
 						ignore_rotation = false
 					},
+					{
+						_class = "Attachment"
+						name = "eyes"
+						parent_bone = "head"
+						relative_origin = [ 0.0, 112.146217, 97.032303 ]
+						relative_angles = [ -90.0, 0.0, -90.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "Folder"
+						name = "LookAtChains"
+						children = 
+						[
+							{
+								_class = "LookAtChain"
+								name = "AimChain"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "spine_2"
+											weight = 1.0
+										},
+										{
+											name = "spine_1"
+											weight = 0.7
+										},
+										{
+											name = "spine_0"
+											weight = 0.45
+										},
+										{
+											name = "pelvis"
+											weight = 0.2
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "AimChain_Halved"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "spine_2"
+											weight = 0.5
+										},
+										{
+											name = "spine_1"
+											weight = 0.36
+										},
+										{
+											name = "spine_0"
+											weight = 0.24
+										},
+										{
+											name = "pelvis"
+											weight = 0.12
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "AimChain_Quarter"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "spine_2"
+											weight = 0.2
+										},
+										{
+											name = "spine_1"
+											weight = 0.16
+										},
+										{
+											name = "spine_0"
+											weight = 0.12
+										},
+										{
+											name = "pelvis"
+											weight = 0.08
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "AimChain_NoPelvis"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "spine_2"
+											weight = 1.0
+										},
+										{
+											name = "spine_1"
+											weight = 0.6
+										},
+										{
+											name = "spine_0"
+											weight = 0.3
+										},
+										{
+											name = "pelvis"
+											weight = 0.0
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "AimChain_NoPelvis_25percent"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "spine_2"
+											weight = 0.25
+										},
+										{
+											name = "spine_1"
+											weight = 0.15
+										},
+										{
+											name = "spine_0"
+											weight = 0.1
+										},
+										{
+											name = "pelvis"
+											weight = 0.0
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "LookChain"
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "head"
+											weight = 1.0
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "LookChain_Halved"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "head"
+											weight = 0.3
+										},
+										{
+											name = "neck_0"
+											weight = 0.15
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "LookChain_LessNeck"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "head"
+											weight = 0.6
+										},
+										{
+											name = "neck_0"
+											weight = 0.15
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "RightHandAim"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "hand_R"
+											weight = 1.0
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "EyeRLookChain"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "eye_R"
+											weight = 1.0
+										},
+									]
+								}
+							},
+							{
+								_class = "LookAtChain"
+								name = "EyeLLookChain"
+								disabled = true
+								lookat_chain = 
+								{
+									name = ""
+									bones = 
+									[
+										{
+											name = "eye_L"
+											weight = 1.0
+										},
+									]
+								}
+							},
+						]
+					},
 				]
 			},
 		]
