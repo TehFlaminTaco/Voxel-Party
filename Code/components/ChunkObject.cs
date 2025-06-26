@@ -146,7 +146,8 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 						else
 						{
 							var mat = block.Material ?? (block.Opaque ? thinker.TextureAtlas : thinker.TranslucentTextureAtlas);
-							AddBlockMesh( world, blockPos + (chunkPos * Chunk.SIZE), Vertexes.GetOrCreate( mat ) );
+							if ( mat != null )
+								AddBlockMesh( world, blockPos + (chunkPos * Chunk.SIZE), Vertexes.GetOrCreate( mat ) );
 						}
 						if ( block.IsSolid )
 						{

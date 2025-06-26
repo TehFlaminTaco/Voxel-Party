@@ -467,14 +467,20 @@ public partial class VoxelPlayer : Component
             }
             else
             {
-                var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
-                world.Thinker.BreakBlock( BreakingBlock.Value, false );
+                BreakAndGive( BreakingBlock.Value );
             }
         }
 
         LastBreakingBlock = BreakingBlock;
         LastBreakingFace = BreakingFace;
         TimeSinceLastBreak = 0;
+    }
+
+    [Rpc.Host]
+    public void BreakAndGive( Vector3Int Position )
+    {
+        var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
+        world.Thinker.BreakBlock( Position, false );
     }
 
     public void HandlePlace()
@@ -526,7 +532,7 @@ public partial class VoxelPlayer : Component
         if ( !simulated )
             inventory.TakeItem( selectedSlot, 1 ); // Remove one item from the hotbar slot
         var pc = GetComponent<PlayerController>();
-        world.SetBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, Scene.Camera.WorldRotation.Forward ) );
+        world.Thinker.PlaceBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, Scene.Camera.WorldRotation.Forward ) );
     }
 
     public void ShowHoveredFace()
