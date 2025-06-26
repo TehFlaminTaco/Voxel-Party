@@ -149,7 +149,7 @@ public sealed class SpeedBuild : Component
 				structureList = TargetStructures;
 			}
 
-			var _currentStructure = Random.Shared.FromList( structureList );
+			_currentStructure = Random.Shared.FromList( structureList );
 			if ( _currentStructure == null )
 			{
 				Log.Error( "No target structure set for SpeedBuild." );
@@ -167,10 +167,10 @@ public sealed class SpeedBuild : Component
 				}
 
 				Islands[index].Enabled = true;
-				SetPlayerTransform( player, Islands[index].GetComponentInChildren<SpawnPoint>().WorldPosition, 
+				SetPlayerTransform( player, Islands[index].GetComponentInChildren<SpawnPoint>().WorldPosition,
 					Rotation.LookAt( Vector3.Zero ).Angles().WithRoll( 0 ) );
 				player.IsFlying = true;
-				
+
 				await Task.DelayRealtimeSeconds( 2 );
 
 				// Spawn a copy of the target structure on the player's island
@@ -349,11 +349,8 @@ public sealed class SpeedBuild : Component
 				{
 					ply.Spectator = true;
 					ply.Lock();
+					ply.MoveCameraTo( podiumObject.WorldTransform, true );
 				}
-				var cam = Scene.Camera;
-				cam.WorldPosition = podiumObject.WorldPosition;
-				cam.WorldRotation = podiumObject.WorldRotation;
-				cam.RenderExcludeTags.Remove( "viewer" );
 
 				var allPlayers = Players.OrderByDescending( k => ScoreByPlayer[k] ).Concat( HistoricalPlayers.Reverse<VoxelPlayer>() ).ToArray();
 				await Task.DelayRealtimeSeconds( 1 );

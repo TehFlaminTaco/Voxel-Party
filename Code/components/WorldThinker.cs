@@ -34,8 +34,8 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	{
 		base.OnStart();
 		ItemRegistry.UpdateRegistry();
-		TexArrayTool.UpdateMaterialTexture( TextureAtlas );
-		TexArrayTool.UpdateMaterialTexture( TranslucentTextureAtlas );
+		_ = TexArrayTool.UpdateMaterialTexture( TextureAtlas );
+		_ = TexArrayTool.UpdateMaterialTexture( TranslucentTextureAtlas );
 		if ( Networking.IsHost )
 			foreach ( var child in GameObject.Children.ToList() )
 				child.DestroyImmediate();
