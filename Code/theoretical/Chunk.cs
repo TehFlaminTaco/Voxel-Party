@@ -122,9 +122,12 @@ public class Chunk
 					int index = (z * SIZE.y * SIZE.x + y * SIZE.x + x) * 2;
 					var blockID = dataList[index];
 					var blockDataValue = dataList[index + 1];
-					SetBlock( x, y, z, new BlockData( blockID, blockDataValue ) );
+					blocks[x, y, z] = new BlockData( blockID, blockDataValue );
+					if ( blockID != 0 )
+						IsEmpty = false;
 				}
 			}
 		}
+		Dirty = true;
 	}
 }

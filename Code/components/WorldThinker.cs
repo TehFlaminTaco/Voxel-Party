@@ -1,5 +1,7 @@
 using System;
+using System.Threading.Tasks;
 using Sandbox;
+using Sandbox.Mounting;
 
 public sealed class WorldThinker : Component, Component.ExecuteInEditor
 {
@@ -33,12 +35,30 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	protected override void OnStart()
 	{
 		base.OnStart();
-		ItemRegistry.UpdateRegistry();
+		if ( !ItemRegistry.FinishedLoading )
+			OnLoad().Wait(); // Ensure it's loaded as well.
 		_ = TexArrayTool.UpdateMaterialTexture( TextureAtlas );
 		_ = TexArrayTool.UpdateMaterialTexture( TranslucentTextureAtlas );
 		if ( Networking.IsHost )
 			foreach ( var child in GameObject.Children.ToList() )
 				child.DestroyImmediate();
+	}
+
+	protected override Task OnLoad()
+	{
+		Log.Info( "ENSURING ALL ITEMS ARE LOADED!" );
+		// Ensure all `.item` files in the `items` folder are loaded.
+		var itemRoot = "items/";
+		foreach ( var assetPath in FileSystem.Mounted.FindFile( itemRoot, "*.item_c", true ) )
+		{
+			if ( !ResourceLibrary.TryGet<Item>( itemRoot + assetPath, out var item ) )
+			{
+				Log.Error( $"Failed to load {assetPath}!" );
+			}
+		}
+		ItemRegistry.UpdateRegistry();
+		ItemRegistry.FinishedLoading = true;
+		return GameTask.CompletedTask;
 	}
 
 	[Button]
@@ -51,7 +71,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 		this.SerializedWorld = data; // Re-apply the serialized world to regenerate it.
 		foreach ( var obj in Scene.GetAll<StructureLoader>() )
 		{
-			obj.Regenerate(); // Re-run the OnEnabled logic to ensure the structure is loaded in the editor.
+			_ = obj.Regenerate(); // Re-run the OnEnabled logic to ensure the structure is loaded in the editor.
 		}
 
 	}
@@ -61,6 +81,8 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 		World.Active = World;
 		if ( !Networking.IsHost )
 			return; // Only the host should handle chunk loading and unloading.
+		if ( !ItemRegistry.FinishedLoading )
+			return; // Make sure the itemRegistry finished loading first.
 
 		// Iterate (randomly) through every loaded chunk, check if it's outside of the forget radius from any player, and if so, unload it.
 		if ( Game.IsPlaying && LoadAroundPlayer )
@@ -135,9 +157,14 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 
 		// Now we have a set of chunks to load, we can order them by distance to the closest player.
 		var orderedChunks = Game.IsEditor ? targetChunks.Where( chunkPosition => !World.GetChunk( chunkPosition ).IsEmpty && !World.GetChunk( chunkPosition ).IsRendered ).ToList() : targetChunks
-		.Where( chunkPosition => !World.GetChunk( chunkPosition ).IsEmpty && !World.GetChunk( chunkPosition ).IsRendered )
-		.OrderBy( chunkPosition => players.Min( player => (player.WorldPosition / World.BlockScale).DistanceSquared( new Vector3( chunkPosition.x * Chunk.SIZE.x, chunkPosition.y * Chunk.SIZE.y, chunkPosition.z * Chunk.SIZE.z ) ) ) )
-		.ToList();
+		.Where( chunkPosition => !World.GetChunk( chunkPosition ).IsEmpty && !World.GetChunk( chunkPosition ).IsRendered );
+		if ( LoadAroundPlayer )
+		{
+			orderedChunks = orderedChunks
+				.OrderBy( chunkPosition => players.Min( player => (player.WorldPosition / World.BlockScale).DistanceSquared( new Vector3( chunkPosition.x * Chunk.SIZE.x, chunkPosition.y * Chunk.SIZE.y, chunkPosition.z * Chunk.SIZE.z ) ) ) )
+				.ToList();
+
+		}
 
 		// Load the chunks in batches of 10, or until we reach a certain time limit.
 		float timeLimit = 0.1f; // 100ms per batch

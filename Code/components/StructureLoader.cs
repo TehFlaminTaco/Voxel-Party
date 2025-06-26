@@ -38,11 +38,18 @@ public partial class StructureLoader : Component, Component.ExecuteInEditor
 		return (oldBlocks, worldPosition);
 	}
 
+	bool Retry = false;
+
 	[Button]
 	public async Task Regenerate()
 	{
 		if ( !GameObject.Active )
 			return;
+		if ( !ItemRegistry.FinishedLoading )
+		{
+			Retry = true;
+			return;
+		}
 		var KnownMat = Scene.GetAll<WorldThinker>().FirstOrDefault()?.TextureAtlas;
 		var TranslucentMat = Scene.GetAll<WorldThinker>().FirstOrDefault()?.TranslucentTextureAtlas;
 		foreach ( var child in GameObject.Children.ToList() )
@@ -116,6 +123,11 @@ public partial class StructureLoader : Component, Component.ExecuteInEditor
 
 	protected override void OnUpdate()
 	{
+		if ( Retry )
+		{
+			Retry = false;
+			_ = Regenerate();
+		}
 		base.OnUpdate();
 		var blockPosition = Helpers.WorldToVoxel( WorldPosition ) * World.BlockScale;
 		// Move all chunks to the world position of this component

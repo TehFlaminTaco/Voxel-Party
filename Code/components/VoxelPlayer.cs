@@ -507,7 +507,7 @@ public partial class VoxelPlayer : Component
         if ( !trace.Hit )
             return;
         var placePos = trace.HitBlockPosition + trace.HitFace.Forward();
-        if ( world.GetBlock( trace.HitBlockPosition ).GetBlock().Replaceable ) // Grass and things can have blocks replace them, and should do so if you try and place on top of them.
+        if ( world.GetBlock( trace.HitBlockPosition ).GetBlock().Replaceable && world.GetBlock( trace.HitBlockPosition ).BlockID != 0 ) // Grass and things can have blocks replace them, and should do so if you try and place on top of them.
         {
             placePos = trace.HitBlockPosition;
         }
