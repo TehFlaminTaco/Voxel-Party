@@ -110,8 +110,8 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 												  // Opaque Pass
 		Dictionary<Material, List<Vertex>> Vertexes = new();
 
-		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
-		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TranslucentTextureAtlas );
+		_ = TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
+		_ = TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TranslucentTextureAtlas );
 		var collisionModel = new ModelBuilder();
 		for ( int z = 0; z < Chunk.SIZE.z; z++ )
 		{

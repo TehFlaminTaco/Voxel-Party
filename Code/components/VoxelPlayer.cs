@@ -2,7 +2,9 @@
 using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using Sandbox.Utility;
 
 public partial class VoxelPlayer : Component
@@ -104,6 +106,92 @@ public partial class VoxelPlayer : Component
     }
 
     [Property, Sync] public string PlayerSkin { get; set; } = "";
+
+    public static async Task<Texture> GetTextureFromSkin( string skinName )
+    {
+        skinName = new Regex( @"\W" ).Replace( skinName.ToLower(), "" );
+        if ( string.IsNullOrWhiteSpace( skinName ) )
+            return null;
+        if ( !FileSystem.Data.DirectoryExists( "skins" ) )
+        {
+            FileSystem.Data.CreateDirectory( "skins" );
+        }
+        // Check the Data folder for a PNG
+        var filename = $"skins/{skinName}.png";
+        if ( FileSystem.Data.FileExists( filename ) )
+        {
+            return Texture.Load( FileSystem.Data, filename );
+        }
+
+        var tex = await Texture.LoadAsync( null, $"https://mineskin.eu/skin/{skinName.Trim()}", false );
+        // Apply a CRC to the tex's data.
+        var crc = Crc32.FromBytes(
+            tex.GetPixels( 0 ).SelectMany( p => new[] { p.r, p.g, p.b, p.a } )
+        );
+        if ( crc == 3371258681 ) // REFUSE to put on the default skin
+        {
+            return null;
+        }
+
+        if ( tex == null )
+        {
+            Log.Warning( "No texture loaded!" );
+            return null;
+        }
+
+        if ( tex.IsError )
+        {
+            Log.Warning( "Texture errored when loading!" );
+            return null;
+        }
+
+        if ( tex.Size.y == 32 )
+        {
+            if ( tex.Size.x != 64 )
+            {
+                Log.Warning( $"Texture is unexpected size! (Wanted 64x64 or 64x32, got {tex.Size.x}x{tex.Size.y})" );
+                return null;
+            }
+            // Copy the data from the oldTex to the newTex
+            int w = 64;
+            int h = 32;
+            byte[] pixels = new byte[w * h * 4];
+            pixels = tex.GetPixels().SelectMany( c => new[] { c.r, c.g, c.b, c.a } ).ToArray();
+            byte[] paddedData = new byte[64 * 64 * 4];
+            pixels.CopyTo( paddedData, 0 );
+
+            // I hate to do this, but I need to slowly copy regions.
+            // There is no fast way to do this
+            void CopyRegion( int srcX, int srcY, int width, int height, int destX, int destY )
+            {
+                for ( int y = 0; y < height; y++ )
+                {
+                    Buffer.BlockCopy( pixels, ((srcY + y) * 64 + srcX) * 4, paddedData, ((destY + y) * 64 + destX) * 4, width * 4 );
+                }
+            }
+            CopyRegion( 0, 16, 16, 16, 16, 48 ); // Copy leg into left left
+            CopyRegion( 40, 16, 16, 16, 32, 48 ); // Copy arm into left arm
+
+            var newTex = Texture.Create( 64, 64, ImageFormat.RGBA8888 )
+                .WithData( paddedData )
+                .Finish();
+            //tex.Dispose();
+            tex = newTex;
+        }
+        if ( tex.Size.x != 64 || tex.Size.y != 64 )
+        {
+            Log.Warning( $"Texture is unexpected size! (Wanted 64x64 or 64x32, got {tex.Size.x}x{tex.Size.y})" );
+            return null;
+        }
+
+        // Save the tex as a png.
+
+        var f = FileSystem.Data.OpenWrite( filename );
+        f.Write( tex.GetBitmap( 0 ).ToPng() );
+        f.Close();
+
+        return tex;
+    }
 
     [Button]
     public async void UpdateSkin()
@@ -231,17 +319,21 @@ public partial class VoxelPlayer : Component
     public BlockTraceResult EyeTrace()
     {
         var pc = GetComponent<PlayerController>();
+        return EyeTrace( pc.EyePosition, pc.EyeAngles.Forward );
+    }
 
+    public BlockTraceResult EyeTrace( Vector3 eyePos, Vector3 eyeForward )
+    {
         var trace = Scene.GetAll<WorldThinker>().First().World.Trace(
-            pc.EyePosition,
-            pc.EyePosition + pc.EyeAngles.Forward * ReachDistance
+            eyePos,
+            eyeForward * ReachDistance
         ).Run();
 
         if ( HasBuildVolume )
         {
             var ray = new Ray(
-                pc.EyePosition,
-                pc.EyeAngles.Forward
+                eyePos,
+                eyeForward
             );
 
             var walls = new (float distance, Direction face)[]{
@@ -388,37 +480,53 @@ public partial class VoxelPlayer : Component
     {
         if ( Input.Pressed( "Attack2" ) )
         {
-            var item = inventory.GetItem( SelectedSlot );
-            if ( ItemStack.IsNullOrEmpty( item ) )
-                return;
-            if ( item.Item.Block == null )
-            {
-                return; // TODO: Other item use actions, other placement styles?
-            }
-            var trace = EyeTrace();
-            if ( !trace.Hit )
-                return;
-            var placePos = trace.HitBlockPosition + trace.HitFace.Forward();
-            if ( world.GetBlock( trace.HitBlockPosition ).GetBlock().Replaceable ) // Grass and things can have blocks replace them, and should do so if you try and place on top of them.
-            {
-                placePos = trace.HitBlockPosition;
-            }
-
-            if ( !world.GetBlock( placePos ).GetBlock().Replaceable ) // If we can't put a block here, give up.
-                return;
-
-            if ( Scene.Trace.Box( new BBox( Vector3.Zero, Vector3.One * World.BlockScale ), new Ray( placePos * World.BlockScale, Vector3.Up ), 0f ).WithTag( "player" ).Run().StartedSolid )
-                return; // Fail placing where player is.
-
-            // If placePos is not in the player's build area, do not place blocks
-            if ( HasBuildVolume && (placePos.x < BuildAreaMins.x || placePos.y < BuildAreaMins.y || placePos.z < BuildAreaMins.z || placePos.x > BuildAreaMaxs.x || placePos.y > BuildAreaMaxs.y || placePos.z > BuildAreaMaxs.z) )
-            {
-                return;
-            }
-            inventory.TakeItem( SelectedSlot, 1 ); // Remove one item from the hotbar slot
             var pc = GetComponent<PlayerController>();
-            world.Thinker.PlaceBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, pc.EyeAngles.Forward ) );
+            TryPlace( pc.EyePosition, pc.EyeAngles.Forward, SelectedSlot, !Networking.IsHost );
+            if ( !Networking.IsHost )
+                PlaceSync( pc.EyePosition, pc.EyeAngles.Forward, SelectedSlot );
         }
+    }
+
+
+    [Rpc.Host]
+    public void PlaceSync( Vector3 eyePos, Vector3 eyeForward, int selectedSlot )
+    {
+        TryPlace( eyePos, eyeForward, selectedSlot );
+    }
+
+    public void TryPlace( Vector3 eyePos, Vector3 eyeForward, int selectedSlot, bool simulated = false )
+    {
+        var item = inventory.GetItem( selectedSlot );
+        if ( ItemStack.IsNullOrEmpty( item ) )
+            return;
+        if ( item.Item.Block == null )
+        {
+            return; // TODO: Other item use actions, other placement styles?
+        }
+        var trace = EyeTrace( eyePos, eyeForward );
+        if ( !trace.Hit )
+            return;
+        var placePos = trace.HitBlockPosition + trace.HitFace.Forward();
+        if ( world.GetBlock( trace.HitBlockPosition ).GetBlock().Replaceable ) // Grass and things can have blocks replace them, and should do so if you try and place on top of them.
+        {
+            placePos = trace.HitBlockPosition;
+        }
+
+        if ( !world.GetBlock( placePos ).GetBlock().Replaceable ) // If we can't put a block here, give up.
+            return;
+
+        if ( Scene.Trace.Box( new BBox( Vector3.Zero, Vector3.One * World.BlockScale ), new Ray( placePos * World.BlockScale, Vector3.Up ), 0f ).WithTag( "player" ).Run().StartedSolid )
+            return; // Fail placing where player is.
+
+        // If placePos is not in the player's build area, do not place blocks
+        if ( HasBuildVolume && (placePos.x < BuildAreaMins.x || placePos.y < BuildAreaMins.y || placePos.z < BuildAreaMins.z || placePos.x > BuildAreaMaxs.x || placePos.y > BuildAreaMaxs.y || placePos.z > BuildAreaMaxs.z) )
+        {
+            return;
+        }
+        if ( !simulated )
+            inventory.TakeItem( selectedSlot, 1 ); // Remove one item from the hotbar slot
+        var pc = GetComponent<PlayerController>();
+        world.SetBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, pc.EyeAngles.Forward ) );
     }
 
     public void ShowHoveredFace()
@@ -470,6 +578,14 @@ public partial class VoxelPlayer : Component
         GetComponent<PlayerController>().EyeAngles = transform.Rotation.Angles();
         Transform.ClearInterpolation();
         IsFlying = false;
+    }
+    [Rpc.Owner]
+    public void MoveCameraTo( Transform transform, bool showViewer )
+    {
+        Scene.Camera.WorldPosition = transform.Position;
+        Scene.Camera.WorldRotation = transform.Rotation;
+        if ( showViewer )
+            Scene.Camera.RenderExcludeTags.Remove( "viewer" );
     }
     // Request to lock this player, disabling movement and camera.
     [Rpc.Owner]

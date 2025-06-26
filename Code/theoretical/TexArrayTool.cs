@@ -1,9 +1,10 @@
 using System;
+using System.Threading.Tasks;
 
 public static class TexArrayTool
 {
     public static bool Dirty = true;
-    public static void UpdateMaterialTexture( Material material )
+    public static async Task UpdateMaterialTexture( Material material )
     {
         if ( !Dirty && last != null && last.IsValid() )
         {
@@ -12,13 +13,13 @@ public static class TexArrayTool
         }
 
         //Log.Info( "Updating material texture with texture atlas." );
-        material.Set( "Abledo", BuildTextureArray() );
+        material.Set( "Abledo", await BuildTextureArray() );
         Dirty = false;
     }
 
     private static Texture last;
 
-    public static Texture BuildTextureArray()
+    public static async Task<Texture> BuildTextureArray()
     {
         if ( last != null )
         {
@@ -27,10 +28,22 @@ public static class TexArrayTool
         }
         List<Texture> textures = new List<Texture>();
 
-        int? TryAdd( Texture tex )
+        async Task<int?> TryAdd( Texture tex, string sourceID )
         {
             if ( tex == null )
             {
+                return null;
+            }
+            if ( tex.IsError )
+            {
+                Log.Warning( $"Bad Texture attempted to load for block {sourceID}: {tex.ResourceName}" );
+                return null;
+            }
+            while ( !tex.IsLoaded )
+                await GameTask.Delay( 1 );
+            if ( tex.IsError )
+            {
+                Log.Warning( $"Bad Texture attempted to load for block {sourceID}: {tex.ResourceName}" );
                 return null;
             }
             if ( textures.Contains( tex ) )
@@ -46,14 +59,14 @@ public static class TexArrayTool
         {
             // For each block texture, add it to the list and set the index in the atlas.
             // If it already is in the atlas, skip it, but set the index.
-            item.Block.TextureIndex = TryAdd( item.Block.Texture ) ?? 0;
-            item.Block.TopTextureIndex = TryAdd( item.Block.TopTexture );
-            item.Block.SideTextureIndex = TryAdd( item.Block.SideTexture );
-            item.Block.NorthTextureIndex = TryAdd( item.Block.NorthTexture );
-            item.Block.SouthTextureIndex = TryAdd( item.Block.SouthTexture );
-            item.Block.EastTextureIndex = TryAdd( item.Block.EastTexture );
-            item.Block.WestTextureIndex = TryAdd( item.Block.WestTexture );
-            item.Block.BottomTextureIndex = TryAdd( item.Block.BottomTexture );
+            item.Block.TextureIndex = await TryAdd( item.Block.Texture, item.Name ) ?? 0;
+            item.Block.TopTextureIndex = await TryAdd( item.Block.TopTexture, item.Name );
+            item.Block.SideTextureIndex = await TryAdd( item.Block.SideTexture, item.Name );
+            item.Block.NorthTextureIndex = await TryAdd( item.Block.NorthTexture, item.Name );
+            item.Block.SouthTextureIndex = await TryAdd( item.Block.SouthTexture, item.Name );
+            item.Block.EastTextureIndex = await TryAdd( item.Block.EastTexture, item.Name );
+            item.Block.WestTextureIndex = await TryAdd( item.Block.WestTexture, item.Name );
+            item.Block.BottomTextureIndex = await TryAdd( item.Block.BottomTexture, item.Name );
         }
 
         int tilesWide = 1;
