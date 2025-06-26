@@ -157,7 +157,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 
 		// Now we have a set of chunks to load, we can order them by distance to the closest player.
 		var orderedChunks = Game.IsEditor ? targetChunks.Where( chunkPosition => !World.GetChunk( chunkPosition ).IsEmpty && !World.GetChunk( chunkPosition ).IsRendered ).ToList() : targetChunks
-		.Where( chunkPosition => !World.GetChunk( chunkPosition ).IsEmpty && !World.GetChunk( chunkPosition ).IsRendered );
+							.Where( chunkPosition => !World.GetChunk( chunkPosition ).IsEmpty && !World.GetChunk( chunkPosition ).IsRendered );
 		if ( LoadAroundPlayer )
 		{
 			orderedChunks = orderedChunks
@@ -196,7 +196,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 		World.SetBlock( position, blockData );
 	}
 
-	[Rpc.Broadcast]
+	[Rpc.Host]
 	public void BreakBlock( Vector3Int position, bool dropItems = true, bool spawnParticles = true, bool playSound = true )
 	{
 		// Fill the block with SimpleParticles
