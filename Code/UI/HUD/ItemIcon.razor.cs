@@ -58,7 +58,7 @@ public partial class ItemIcon : Panel
             }
 
             camera.RenderToTexture( RenderTexture );
-            _so.Delete();
+            _so?.Delete();
         }
         scene.Destroy();
     }
