@@ -427,7 +427,8 @@ public class BlockSpace
 					int index = (z * ySize * xSize + y * xSize + x) * 2;
 					byte blockID = blockData[index];
 					byte blockDataValue = blockData[index + 1];
-					SetBlock( location + new Vector3Int( x, y, z ), new BlockData( blockID, blockDataValue ) );
+					if ( !ItemRegistry.GetBlock( blockData[index] ).StructureSoft )
+						SetBlock( location + new Vector3Int( x, y, z ), new BlockData( blockID, blockDataValue ) );
 				}
 			}
 		}

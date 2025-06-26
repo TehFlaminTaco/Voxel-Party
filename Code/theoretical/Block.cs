@@ -19,6 +19,9 @@ public class Block
 	public bool IsSolid { get; set; } = true; // Whether the block is solid (blocks movement).
 	public int Hardness { get; set; } = 1; // Hardness of the block, used for mining speed calculations.
 
+	[Description( "If true, don't replace other blocks with this when placing a structure" )]
+	public bool StructureSoft { get; set; } = false;
+
 	[DisplayName( "Is Full Block" )]
 	[Description( "Is this block considered a full solid block, meaning it occupies the entire space of a block?" )]
 	public bool IsFullBlock { get; set; } = true; // Is this block considered a full solid block
@@ -28,7 +31,6 @@ public class Block
 	[HideIf( nameof( IsFullBlock ), true )]
 	[Description( "Collision bounds maxs, as a number of pixels" )]
 	public Vector3Int BlockBoundsMaxs { get; set; } = new Vector3Int( 16, 16, 16 ); // The maximum bounds of the block in the X and Y directions. (When not IsSolidBlock)
-
 
 	[Group( "Placement" )]
 	[Description( "Can another block destructively fill this block's space?" )]
