@@ -480,7 +480,7 @@ public partial class VoxelPlayer : Component
     public void BreakAndGive( Vector3Int Position )
     {
         var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
-        world.Thinker.BreakBlock( Position );
+        world.Thinker.BreakBlock( Position, false );
     }
 
     public void HandlePlace()
