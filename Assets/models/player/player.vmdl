@@ -2140,7 +2140,7 @@
 						_class = "Attachment"
 						name = "eyes"
 						parent_bone = "head"
-						relative_origin = [ 0.0, 112.146217, 97.032303 ]
+						relative_origin = [ 0.0, 134.145996, 104.031998 ]
 						relative_angles = [ -90.0, 0.0, -90.0 ]
 						weight = 1.0
 						ignore_rotation = false
@@ -2307,6 +2307,10 @@
 										{
 											name = "head"
 											weight = 1.0
+										},
+										{
+											name = "spine"
+											weight = 0.25
 										},
 									]
 								}
