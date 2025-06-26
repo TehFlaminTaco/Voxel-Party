@@ -16,15 +16,15 @@ public partial class CharacterCreator : Panel
         public Texture Texture;
     }
 
-    public CharacterCreator()
+    public static void Initialize()
     {
-        var path = "materials/models/skins/";
-        foreach ( var i in FileSystem.Mounted.FindFile( path, "*.png", true ) )
-        {
-            if ( Skins.Any( c => c.BaseSkinName == i ) )
-                continue;
-            Skins.Add( new Skin { BaseSkinName = i, Texture = Texture.Load( $"{path}{i}" ) } );
-        }
+	    var path = "materials/models/skins/";
+	    foreach ( var i in FileSystem.Mounted.FindFile( path, "*.png", true ) )
+	    {
+		    if ( Skins.Any( c => c.BaseSkinName == i ) )
+			    continue;
+		    Skins.Add( new Skin { BaseSkinName = i, Texture = Texture.Load( $"{path}{i}" ) } );
+	    }
     }
 
     public override void Tick()
