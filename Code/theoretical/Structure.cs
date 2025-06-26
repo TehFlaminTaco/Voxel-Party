@@ -23,5 +23,5 @@ public partial class Structure : GameResource
 	public int SecondsToBuild { get; set; } = 60;
 
 	[Property, ToggleGroup( "SpeedBuildStructure" )]
-	public StructureDifficulty ReplicateDifficulty = StructureDifficulty.Standard;
+	public StructureDifficulty ReplicateDifficulty { get; set; } = StructureDifficulty.Standard;
 }

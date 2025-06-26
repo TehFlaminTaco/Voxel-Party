@@ -156,6 +156,15 @@ Menu
 
 .play {
     font-size: 60px;
+    
+    .play-icon {
+        height: 70%;
+        aspect-ratio: 1;
+        margin: 20px;
+        background-image: url("materials/gui/title/play.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }
 
 .character {
@@ -172,6 +181,12 @@ Menu
 
     &:hover {
         background-color: $slate-hover;
+    }
+    
+    .character-preview {
+        width: 50%;
+        margin-bottom: 10px;
+        aspect-ratio: .5;
     }
 }
 

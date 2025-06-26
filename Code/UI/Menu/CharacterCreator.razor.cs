@@ -5,8 +5,8 @@ using Sandbox.UI;
 
 public partial class CharacterCreator : Panel
 {
-    public List<Skin> Skins { get; set; } = new();
-    public int Selected { get; set; }
+    public static List<Skin> Skins { get; set; } = new();
+    public static int Selected { get; set; }
     public TextEntry Name { get; set; }
 
     public class Skin

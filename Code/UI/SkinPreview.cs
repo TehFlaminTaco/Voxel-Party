@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Sandbox.Citizen;
 using Sandbox.UI;
 
 public class SkinPreview : Panel
@@ -8,7 +9,7 @@ public class SkinPreview : Panel
     public Scene PreviewScene;
     public CameraComponent Camera;
     public SkinnedModelRenderer Renderer;
-    public PointLight Light;
+    public AmbientLight Light;
 
     public Texture SkinTexture = null;
     public string SkinName = null;
@@ -26,11 +27,10 @@ public class SkinPreview : Panel
             Renderer = new GameObject().AddComponent<SkinnedModelRenderer>();
             Renderer.Model = Model.Load( "models/player/player.vmdl" );
             Renderer.UseAnimGraph = true;
+            Renderer.AddComponent<CitizenAnimationHelper>().Target = Renderer;
 
-            Light = new GameObject().AddComponent<PointLight>();
-            Light.WorldPosition = Vector3.Forward * 300f;
-            Light.Radius = 600f;
-            Light.LightColor = Color.White * 2f;
+            Light = new GameObject().AddComponent<AmbientLight>();
+            Light.Color = Color.Gray;
 
             new SceneAnimationSystem( PreviewScene );
         }

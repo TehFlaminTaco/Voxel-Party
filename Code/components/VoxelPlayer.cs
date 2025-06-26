@@ -320,7 +320,7 @@ public partial class VoxelPlayer : Component
     public BlockTraceResult EyeTrace()
     {
         var pc = GetComponent<PlayerController>();
-        return EyeTrace( pc.EyePosition, pc.EyeAngles.Forward );
+        return EyeTrace( Scene.Camera.WorldPosition, Scene.Camera.WorldRotation.Forward );
     }
 
     public BlockTraceResult EyeTrace( Vector3 eyePos, Vector3 eyeForward )
@@ -481,10 +481,9 @@ public partial class VoxelPlayer : Component
     {
         if ( Input.Pressed( "Attack2" ) )
         {
-            var pc = GetComponent<PlayerController>();
-            TryPlace( pc.EyePosition, pc.EyeAngles.Forward, SelectedSlot, !Networking.IsHost );
+            TryPlace( Scene.Camera.WorldPosition, Scene.Camera.WorldRotation.Forward, SelectedSlot, !Networking.IsHost );
             if ( !Networking.IsHost )
-                PlaceSync( pc.EyePosition, pc.EyeAngles.Forward, SelectedSlot );
+                PlaceSync( Scene.Camera.WorldPosition, Scene.Camera.WorldRotation.Forward, SelectedSlot );
         }
     }
 
@@ -527,7 +526,7 @@ public partial class VoxelPlayer : Component
         if ( !simulated )
             inventory.TakeItem( selectedSlot, 1 ); // Remove one item from the hotbar slot
         var pc = GetComponent<PlayerController>();
-        world.SetBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, pc.EyeAngles.Forward ) );
+        world.SetBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, Scene.Camera.WorldRotation.Forward ) );
     }
 
     public void ShowHoveredFace()

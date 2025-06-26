@@ -15,6 +15,7 @@
 				<div class="top-bar">
 					<span>Play</span>
 				</div>
+				<div class="play-icon"></div>
 	    	</div>
 			<div class="settings" @onclick=@( () => Game.Overlay.ShowSettingsModal() )>  @*@( () => menuState = State.Settings )>*@
 		    	<span>Settings</span>
@@ -26,6 +27,7 @@
 				<div class="top-bar">
 					<span>Character</span>
 				</div>
+				<SkinPreview class="character-preview" SkinTexture=@CharacterCreator.Skins[CharacterCreator.Selected].Texture/>
 		    </div>
 
 		    <div class="news" @onclick=@( () => menuState = State.News )>
