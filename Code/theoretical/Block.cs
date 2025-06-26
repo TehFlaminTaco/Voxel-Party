@@ -46,7 +46,22 @@ public class Block
 	[Group( "Placement" )]
 	[Description( "Valid directions this block can face." )]
 	[Property]
-	public DirectionFlags ValidDirections { get; set; } = new DirectionFlags( Directions.All.ToArray() );
+	public DirectionFlags ValidDirections = new DirectionFlags( Directions.All.ToArray() );
+	[Hide]
+	public Direction[] _validDirections
+	{
+		get
+		{
+			return ValidDirections.All.ToArray();
+		}
+		set
+		{
+			foreach ( Direction dir in Directions.All )
+			{
+				ValidDirections[dir] = value.Contains( dir );
+			}
+		}
+	}
 	[HideIf( nameof( Rotateable ), false )]
 	[Group( "Placement" )]
 	[Description( "The default direction for this block to place if it was placed without direction information, or placed at an invalid direction. This may be an otherwise Invalid direction" )]
