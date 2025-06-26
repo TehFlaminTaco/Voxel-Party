@@ -176,11 +176,19 @@ public partial class VoxelBuilder : EditorTool
 		return (hitPos, hitDirection);
 	}
 
+	public override void OnDisabled()
+	{
+		base.OnDisabled();
+		Camera?.Attributes.Set( "MAXDISTANCE", 100f );
+	}
+
 	public static Dictionary<string, bool> WasKeyDown = new Dictionary<string, bool>();
 	private static VoxelTool LastTool = null;
 	private static TimeSince holdStart = 0f;
 	public override void OnUpdate()
 	{
+
+		Camera?.Attributes.Set( "MAXDISTANCE", 10000f );
 		watchers.RemoveAll( w => w == null || w.Target == null || !w.Target.IsValid() );
 		foreach ( var watcher in watchers )
 		{
