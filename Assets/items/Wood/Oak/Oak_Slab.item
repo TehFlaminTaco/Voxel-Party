@@ -12,18 +12,10 @@
     "Replaceable": false,
     "Rotateable": true,
     "RotateTextures": false,
-    "ValidDirections": {
-      "All": [
-        "Up",
-        "Down"
-      ],
-      "North": false,
-      "South": false,
-      "East": false,
-      "West": false,
-      "Up": true,
-      "Down": true
-    },
+    "_validDirections": [
+      "Up",
+      "Down"
+    ],
     "DefaultDirection": "Up",
     "CameraDirectionPlaced": false,
     "FlipPlacedDirection": true,
