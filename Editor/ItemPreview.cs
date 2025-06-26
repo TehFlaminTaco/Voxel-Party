@@ -57,7 +57,7 @@ public class ItemPreview : AssetPreview
 			Camera.ZFar = 15000.0f;
 			Camera.World.AmbientLightColor = Color.White * 0.05f;
 			SceneSize = new Vector3( 40 );
-			SceneCenter = new Vector3( 20 );
+			SceneCenter = new Vector3( -20, 20, 20 );
 
 			light = new SceneLight( World, Camera.Position + Vector3.Up * 500.0f + Vector3.Backward * 100.0f, 500f, new Color( 1.0f, 0.9f, 0.9f ) * 50.0f );
 

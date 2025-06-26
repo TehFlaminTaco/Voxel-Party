@@ -12,7 +12,24 @@
     "Replaceable": false,
     "Rotateable": true,
     "RotateTextures": false,
+    "ValidDirections": {
+      "All": [
+        "Up",
+        "Down"
+      ],
+      "North": false,
+      "South": false,
+      "East": false,
+      "West": false,
+      "Up": true,
+      "Down": true
+    },
+    "DefaultDirection": "Up",
+    "CameraDirectionPlaced": false,
+    "FlipPlacedDirection": true,
+    "ValidPlacementOption": "StableAnywhere",
     "BreakParticle": "prefabs/break particles.prefab",
+    "Material": null,
     "WalkStepSound": "sounds/footsteps/wood/wood_walk.sound",
     "RunStepSound": "sounds/footsteps/wood/wood_walk.sound",
     "CrouchStepSound": "sounds/footsteps/wood/wood_walk.sound",
