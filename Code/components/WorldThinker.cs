@@ -218,9 +218,9 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 				)) * World.BlockScale ); // Spawn the item at the center of the block
 		}
 
-		if ( spawnParticles ) //World.SpawnBreakParticles( position );
-							  // Remove the block at the specified position.
-			World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
+		if ( spawnParticles ) World.SpawnBreakParticles( position );
+		// Remove the block at the specified position.
+		World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
 	}
 
 	protected override void OnPreRender()
