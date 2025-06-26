@@ -128,7 +128,8 @@ public partial class VoxelPlayer : Component
         var crc = Crc32.FromBytes(
             tex.GetPixels( 0 ).SelectMany( p => new[] { p.r, p.g, p.b, p.a } )
         );
-        if ( crc == 3371258681 ) // REFUSE to put on the default skin
+        Log.Info( crc );
+        if ( crc == 3371258681 || crc == 1327572573 || crc == 120576859 ) // REFUSE to put on the default skin
         {
             return null;
         }

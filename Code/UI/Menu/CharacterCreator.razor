@@ -3,6 +3,7 @@
 @using Sandbox;
 @using Sandbox.UI;
 @using Sandbox.Network;
+@using System.Linq;
 @inherits Panel
 
 <root>
@@ -15,19 +16,21 @@
 	<div class="carousel">
 		<div class="arrow" @onclick=@( () => Selected-- )>◀</div>
 		<div class="skins">
-			@for ( var i = 0; i < Skins.Count; i++ )
+			@foreach(var kv in Skins.WithIndex().OrderBy(kv=>-Math.Abs(kv.index - Selected)))
 			{
-				var skin = new Skin{ Username = Skins[i].Username, Texture = Skins[i].Texture };
+				var i = kv.index;
+				var skin = kv.value;
 				if ( !skin.Texture.IsValid() && skin.Username.Length == 0 ) { continue; }
 
-				var scale = Math.Max(0.1, Math.Pow(0.8, Math.Abs(i - Selected)));
-				var translateX = -50 + (i - Selected) * 50;
-				var translateY = -50;
+				var delta = i - Selected;
+				var scale = Math.Max(0.1, Math.Pow(0.8, Math.Abs(delta)));
+				var pos = 50 + 20 * (Math.Sign(delta) * (Math.Pow(Math.Abs(delta), 0.3f)));
 
-				<SkinPreview class="preview @( i == Selected ? "selected" : "")" SkinName=@skin.Username SkinTexture=@skin.Texture 
+
+				<SkinPreview class="preview @( i == Selected ? "selected" : "")" SkinTexture=@skin.Texture 
 				             style=@(i == Selected ? 
-					                   $"transform: translate({translateX}%, {translateY}%) scale(1)"
-					                   : $"transform: translate({translateX}%, {translateY}%) scale({scale}); opacity: {scale * 1.5}" 
+					                   $"transform: translate(-50%, -50%) scale(1); left: {(int)(pos)}%"
+					                   : $"transform: translate(-50%, -50%) scale({scale}); opacity: {scale * 1.5}; left: {(int)(pos)}%" 
 				                   )/>
 			}
 		</div>
@@ -38,40 +41,5 @@
 		<TextEntry class="username-input" @ref="Name" placeholder="@(Connection.Local.DisplayName)"/>
 		<div class="add-button" @onclick=@( () => AddSkin(Name.Text) )>Add</div>
 	</div>
+	<div class="errorMessage">@LastBadReason</div>
 </root>
-
-@code
-{
-	public List<Skin> Skins { get; set; } = new();
-	public int Selected { get; set; }
-	public TextEntry Name { get; set; }
-	
-	public struct Skin
-	{
-		public string Username;
-		public Texture Texture;
-	}
-
-	public CharacterCreator()
-	{
-		var path = "materials/models/skins/";
-		foreach (var i in FileSystem.Mounted.FindFile( path, "*.png", true )
-			         .Select( x => Texture.Load(FileSystem.Mounted, path + x ) ) )
-		{
-			if ( Skins.FirstOrDefault( x => x.Texture == i ).Texture.IsValid() ) continue;
-			Skins.Add(new Skin{Texture = i});
-		}
-	}
-
-	public override void Tick()
-	{
-		Selected = Selected.Clamp( 0, Skins.Count - 1 );
-	}
-
-	public void AddSkin( string name )
-	{
-		Skins.Add(new Skin{Username = name});
-	}
-
-	protected override int BuildHash() => HashCode.Combine( Skins.GetHashCode(), Selected );
-}

@@ -224,6 +224,13 @@ public static class Helpers
 		return decoded;
 	}
 
+	public static IEnumerable<(int index, T value)> WithIndex<T>( this IEnumerable<T> values )
+	{
+		int i = 0;
+		foreach ( var k in values )
+			yield return (i++, k);
+	}
+
 	public static IEnumerable<float> Components( this Vector3 vector )
 	{
 		yield return vector.x;
