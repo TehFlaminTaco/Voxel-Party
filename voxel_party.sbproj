@@ -5,7 +5,7 @@
   "Ident": "voxel_party",
   "Schema": 1,
   "IncludeSourceFiles": false,
-  "Resources": "materials/gui/*\nfonts/*",
+  "Resources": "materials/gui/*\nfonts/*\nmaterials/models/skins/*",
   "PackageReferences": [],
   "EditorReferences": null,
   "Mounts": null,
