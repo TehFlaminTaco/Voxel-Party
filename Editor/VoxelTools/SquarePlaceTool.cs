@@ -149,7 +149,7 @@ public class SquarePlaceTool : VoxelTool
         var maxZ = System.Math.Max( FirstPosition.Value.z, SecondPosition.z );
 
         var oldBlockData = BlockData.GetAreaInBox( new Vector3Int( minX, minY, minZ ), new Vector3Int( maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1 ) );
-        var blockData = new BlockData( VoxelBuilder.SelectedItemID );
+        var blockData = BlockData.WithPlacementBlockData( VoxelBuilder.SelectedItemID, BlockAxis.Value, Gizmo.Camera.Rotation.Forward );
 
         SceneEditorSession.Active.AddUndo( "Place Rectangle", () =>
         {
