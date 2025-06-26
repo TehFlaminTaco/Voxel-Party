@@ -8,7 +8,7 @@ public class TorchObject : Component, Component.ExecuteInEditor, IHitboxProvider
     {
         var facing = data.FacingFromData();
         var offsetPosition = new Vector3( 0.5f, 0.5f, 0f );
-        if ( facing != Direction.Up )
+        if ( facing != Direction.Up && facing != Direction.None )
         {
             offsetPosition = new Vector3( 0.5f, 0.5f, 0.25f ) - facing.Forward() * 6f / 16f;
         }
@@ -23,7 +23,7 @@ public class TorchObject : Component, Component.ExecuteInEditor, IHitboxProvider
         base.OnUpdate();
         var facing = data.FacingFromData();
         var mesh = GameObject.Children.First();
-        if ( facing != Direction.Up )
+        if ( facing != Direction.Up && facing != Direction.None )
         {
             // Move the candle to the blockface we're anti-facing
             Vector3 mbp = new Vector3( 0.5f, 0.5f, 0.25f );

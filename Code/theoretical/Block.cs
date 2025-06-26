@@ -46,23 +46,24 @@ public class Block
 	[Group( "Placement" )]
 	[Description( "Valid directions this block can face." )]
 	[Property]
-	public DirectionFlags ValidDirections = new DirectionFlags( Directions.All.ToArray() );
+	public DirectionFlags ValidDirections { get; set; } = new DirectionFlags( Directions.All.ToArray() );
 	[HideIf( nameof( Rotateable ), false )]
 	[Group( "Placement" )]
 	[Description( "The default direction for this block to place if it was placed without direction information, or placed at an invalid direction. This may be an otherwise Invalid direction" )]
-	public Direction DefaultDirection = Direction.None;
+	[Property]
+	public Direction DefaultDirection { get; set; } = Direction.None;
 	[HideIf( nameof( Rotateable ), false )]
 	[Group( "Placement" )]
 	[Description( "Place depending on the camera direction, rather than the hit blocks facing" )]
-	public bool CameraDirectionPlaced = false;
+	public bool CameraDirectionPlaced { get; set; } = false;
 	[HideIf( nameof( Rotateable ), false )]
 	[Group( "Placement" )]
 	[Description( "Is our facing the inverse of the normal placed direction?" )]
-	public bool FlipPlacedDirection = false;
+	public bool FlipPlacedDirection { get; set; } = false;
 
 	[Group( "Placement" )]
 	[Description( "Where can this be placed / stay stable on. AgainstSolid requires a rotateable block to have it's Opposite block have a solid likewise face, OnSolid requires the block underneath have a solid top face" )]
-	public PlacementOption ValidPlacementOption = PlacementOption.StableAnywhere;
+	public PlacementOption ValidPlacementOption { get; set; } = PlacementOption.StableAnywhere;
 
 
 	[Group( "Rendering" )]

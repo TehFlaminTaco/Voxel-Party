@@ -3,7 +3,7 @@
     "__guid": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed",
     "__version": 1,
     "Flags": 0,
-    "Name": "oak_slab (5)",
+    "Name": "oak_slab",
     "Position": "0,0,0",
     "Rotation": "0,0,0,1",
     "Scale": "1,1,1",
@@ -13,7 +13,19 @@
     "NetworkInterpolation": true,
     "NetworkOrphaned": 0,
     "OwnerTransfer": 1,
-    "Components": [],
+    "Components": [
+      {
+        "__type": "SlabObject",
+        "__guid": "64644fe7-ab08-42b4-a0c3-140f22fb35b8",
+        "__enabled": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      }
+    ],
     "Children": [
       {
         "__guid": "9268070c-e24d-4e11-8620-5b5d99313351",
@@ -41,7 +53,7 @@
             "IsTrigger": false,
             "Mesh": {
               "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
-              "Position": "1300,-620,10",
+              "Position": "20,20,10",
               "Rotation": "0,0,-0.7071067,0.7071068",
               "Positions": [
                 "-20,-20,10",
@@ -80,18 +92,18 @@
                 "0,1"
               ],
               "TextureUAxis": [
-                "0,-1,0",
-                "0,-1,0",
+                "0.0000001907349,-1,0",
+                "0.0000001907349,-1,0",
                 "0,0,1",
                 "0,0,-1",
-                "0,1,0",
-                "0,-1,0"
+                "-0.0000001907349,1,0",
+                "0.0000001907349,-1,0"
               ],
               "TextureVAxis": [
-                "-1,0,0",
-                "-1,0,-0",
-                "-1,0,0",
-                "-1,0,0",
+                "-1,-0.0000001907349,0",
+                "-1,-0.0000001907349,-0",
+                "-1,-0.0000001907349,0",
+                "-1,-0.0000001907349,0",
                 "0,0,-1",
                 "0,0,-1"
               ],
@@ -104,12 +116,12 @@
                 "0.07812501,0.07812501"
               ],
               "TextureOffset": [
-                "0.0004882812,511.999",
-                "0.0004882812,511.998",
-                "256,511.7981",
-                "256,511.798",
-                "511.9995,0",
-                "0.0004882812,0"
+                "511.9999,0.00004882811",
+                "511.9999,0",
+                "256,511.8",
+                "256,511.8",
+                "0.00004882813,0",
+                "511.9999,0"
               ],
               "MaterialIndex": [
                 1,
@@ -169,7 +181,26 @@
         ],
         "Children": []
       }
-    ]
+    ],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    },
+    "__variables": []
   },
   "ResourceVersion": 2,
   "ShowInMenu": false,
