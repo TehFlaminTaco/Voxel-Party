@@ -26,7 +26,7 @@
       "$compiler": "texture",
       "$source": "imagefile",
       "data": {
-        "FilePath": "materials/block/white_stained_glass.png",
+        "FilePath": "materials/block/glass.png",
         "MaxSize": 4096,
         "ConvertHeightToNormals": false,
         "NormalScale": 1,
@@ -48,7 +48,7 @@
         "TargetColor": "0,1,0,1",
         "CacheToDisk": true
       },
-      "compiled": "textures/generated/imagefile/3af0da3cd3b04371.vtex"
+      "compiled": null
     },
     "TopTexture": null,
     "SideTexture": null,
@@ -67,7 +67,7 @@
     "BottomTextureIndex": null,
     "Drops": [
       {
-        "Item": null,
+        "Item": "items/air.item",
         "Count": 1,
         "ItemID": 0
       }

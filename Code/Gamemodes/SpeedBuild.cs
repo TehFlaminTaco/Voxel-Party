@@ -167,7 +167,11 @@ public sealed class SpeedBuild : Component
 				}
 
 				Islands[index].Enabled = true;
-				SetPlayerTransform( player, Islands[index].WorldPosition + Vector3.Up * 40f, Rotation.LookAt( Vector3.Zero ).Angles().WithRoll( 0 ) );
+				SetPlayerTransform( player, Islands[index].GetComponentInChildren<SpawnPoint>().WorldPosition, 
+					Rotation.LookAt( Vector3.Zero ).Angles().WithRoll( 0 ) );
+				player.IsFlying = true;
+				
+				await Task.DelayRealtimeSeconds( 2 );
 
 				// Spawn a copy of the target structure on the player's island
 				var obj = new GameObject();
