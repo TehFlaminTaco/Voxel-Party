@@ -24,8 +24,7 @@
 
 				var delta = i - Selected;
 				var scale = Math.Max(0.1, Math.Pow(0.8, Math.Abs(delta)));
-				var pos = 50 + 20 * (Math.Sign(delta) * (Math.Pow(Math.Abs(delta), 0.3f)));
-
+				var pos = 50 + 15 * (Math.Sign(delta) * (Math.Pow(Math.Abs(delta), 1.01f)));
 
 				<SkinPreview class="preview @( i == Selected ? "selected" : "")" SkinTexture=@skin.Texture 
 				             style=@(i == Selected ? 
@@ -38,8 +37,8 @@
 	</div>
 	
 	<div class="options">
-		<TextEntry class="username-input" @ref="Name" placeholder="@(Connection.Local.DisplayName)"/>
-		<div class="add-button" @onclick=@( () => AddSkin(Name.Text) )>Add</div>
+		<TextEntry class="username-input" @ref="Name" placeholder="@(Connection.Local.DisplayName)" onsubmit=@( () => AddSkin( Name.HasContent ? Name.Text : Name.Placeholder ) )/>
+		<div class="add-button" @onclick=@( () => AddSkin( Name.HasContent ? Name.Text : Name.Placeholder ) )>Add</div>
 	</div>
 	<div class="errorMessage">@LastBadReason</div>
 </root>

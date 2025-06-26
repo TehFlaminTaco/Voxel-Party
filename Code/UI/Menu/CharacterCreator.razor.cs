@@ -48,7 +48,6 @@ public partial class CharacterCreator : Panel
 
     public async Task AddSkin( string name )
     {
-        Name.Disabled = true;
         name = new Regex( @"\W" ).Replace( name.ToLower(), "" );
         if ( Skins.Any( c => c.Username == name ) )
         {
@@ -69,9 +68,7 @@ public partial class CharacterCreator : Panel
             return;
         }
 
-
         Skins.Add( new Skin { Username = name, Texture = tex } );
-        Name.Disabled = false;
     }
 
     protected override int BuildHash() => HashCode.Combine( Skins.GetHashCode(), Selected );
