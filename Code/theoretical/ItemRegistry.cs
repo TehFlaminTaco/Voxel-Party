@@ -1,6 +1,8 @@
 public static class ItemRegistry
 {
 
+	public static bool FinishedLoading = false;
+
 	public static Dictionary<int, Item> CachedRegistry = new();
 	public static void UpdateRegistry()
 	{

@@ -72,6 +72,8 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 	[Property] public bool TortureTest = false;
 	protected override void OnUpdate()
 	{
+		if ( !ItemRegistry.FinishedLoading )
+			return;
 		WorldInstance.GetChunk( ChunkPosition ).ChunkObject = this; // Important in case we're loaded by a remote host.
 		if ( TortureTest || WorldInstance.GetChunk( ChunkPosition ).Dirty )
 		{
@@ -157,67 +159,64 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			}
 
 			await GameTask.MainThread();
-			using ( Scene.Push() )
+			foreach ( var blockPos in DestroyBlockObjects )
 			{
-				foreach ( var blockPos in DestroyBlockObjects )
-				{
-					BlockObjects[blockPos].obj.Destroy();
-					BlockObjects.Remove( blockPos );
-				}
-				foreach ( var blockPos in CreateBlockObjects )
-				{
-					if ( !BlockObjects.ContainsKey( blockPos ) )
-					{
-
-						var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
-						var block = ItemRegistry.GetBlock( blockData.BlockID );
-						var blockObject = block.BlockObject.Clone( GameObject, blockPos * World.BlockScale, Rotation.Identity, Vector3.One );
-						BlockObjects[blockPos] = (blockObject, blockData);
-						if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
-						{
-							receiver.AcceptBlockData( world, blockPos + (chunkPos * Chunk.SIZE), blockData );
-						}
-						blockObject.NetworkSpawn();
-					}
-				}
-
-				var toRemove = Renderers.Where( k => !Vertexes.ContainsKey( k.Key ) || Vertexes[k.Key].Count == 0 ); // Remove all renderers where we don't have verts for.
-				foreach ( var r in toRemove )
-				{
-					r.Value.Destroy();
-					Renderers.Remove( r.Key );
-				}
-
-				foreach ( var kv in Vertexes.Where( c => c.Value.Count > 0 ) )
-				{
-					var mat = kv.Key;
-					var verts = kv.Value;
-
-					if ( !Renderers.ContainsKey( mat ) )
-					{
-						var renderer = AddComponent<ModelRenderer>();
-						renderer.Flags = ComponentFlags.NotNetworked;
-						renderer.MaterialOverride = mat;
-						Renderers[mat] = renderer;
-					}
-					var indicies = Enumerable.Range( 0, verts.Count ).ToArray();
-
-					var mesh = new Mesh();
-					mesh.CreateVertexBuffer( verts.Count, Vertex.Layout, verts );
-					mesh.CreateIndexBuffer( verts.Count, indicies );
-					mesh.Material = mat;
-
-					var model = new ModelBuilder();
-					model.AddMesh( mesh );
-					model.AddTraceMesh( verts.Select( c => c.Position ).ToList(), indicies.ToList() );
-
-					Renderers[mat].Model = model.Create();
-				}
-				var collider = GetOrAddComponent<ModelCollider>();
-				collider.Model = collisionModel.Create();
-				collider.Static = true; // Set the collider to static since chunks do not move
-				collider.Enabled = true; // Enable the collider for the chunk object
+				BlockObjects[blockPos].obj.Destroy();
+				BlockObjects.Remove( blockPos );
 			}
+			foreach ( var blockPos in CreateBlockObjects )
+			{
+				if ( !BlockObjects.ContainsKey( blockPos ) )
+				{
+
+					var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
+					var block = ItemRegistry.GetBlock( blockData.BlockID );
+					var blockObject = block.BlockObject.Clone( GameObject, blockPos * World.BlockScale, Rotation.Identity, Vector3.One );
+					BlockObjects[blockPos] = (blockObject, blockData);
+					if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
+					{
+						receiver.AcceptBlockData( world, blockPos + (chunkPos * Chunk.SIZE), blockData );
+					}
+					blockObject.NetworkSpawn();
+				}
+			}
+
+			var toRemove = Renderers.Where( k => !Vertexes.ContainsKey( k.Key ) || Vertexes[k.Key].Count == 0 ); // Remove all renderers where we don't have verts for.
+			foreach ( var r in toRemove )
+			{
+				r.Value.Destroy();
+				Renderers.Remove( r.Key );
+			}
+
+			foreach ( var kv in Vertexes.Where( c => c.Value.Count > 0 ) )
+			{
+				var mat = kv.Key;
+				var verts = kv.Value;
+
+				if ( !Renderers.ContainsKey( mat ) )
+				{
+					var renderer = AddComponent<ModelRenderer>();
+					renderer.Flags = ComponentFlags.NotNetworked;
+					renderer.MaterialOverride = mat;
+					Renderers[mat] = renderer;
+				}
+				var indicies = Enumerable.Range( 0, verts.Count ).ToArray();
+
+				var mesh = new Mesh();
+				mesh.CreateVertexBuffer( verts.Count, Vertex.Layout, verts );
+				mesh.CreateIndexBuffer( verts.Count, indicies );
+				mesh.Material = mat;
+
+				var model = new ModelBuilder();
+				model.AddMesh( mesh );
+				model.AddTraceMesh( verts.Select( c => c.Position ).ToList(), indicies.ToList() );
+
+				Renderers[mat].Model = model.Create();
+			}
+			var collider = GetOrAddComponent<ModelCollider>();
+			collider.Model = collisionModel.Create();
+			collider.Static = true; // Set the collider to static since chunks do not move
+			collider.Enabled = true; // Enable the collider for the chunk object
 		}
 		finally
 		{
