@@ -227,9 +227,9 @@ public class BlockSpace
 	public BlockData GetBlock( Vector3Int position )
 	{
 		var chunkPosition = new Vector3Int(
-			position.x.FloorDiv( Chunk.SIZE.x ),
-			position.y.FloorDiv( Chunk.SIZE.y ),
-			position.z.FloorDiv( Chunk.SIZE.z )
+			(position.x + 15 * (position.x >> 31)) / 16,
+			(position.y + 15 * (position.y >> 31)) / 16,
+			(position.z + 15 * (position.z >> 31)) / 16
 		);
 		var chunk = GetChunk( chunkPosition );
 		var blockPosition = new Vector3Int(
@@ -245,9 +245,9 @@ public class BlockSpace
 	public GameObject GetBlockObject( Vector3Int position )
 	{
 		var chunkPosition = new Vector3Int(
-			position.x.FloorDiv( Chunk.SIZE.x ),
-			position.y.FloorDiv( Chunk.SIZE.y ),
-			position.z.FloorDiv( Chunk.SIZE.z )
+			(position.x + 15 * (position.x >> 31)) / 16,
+			(position.y + 15 * (position.y >> 31)) / 16,
+			(position.z + 15 * (position.z >> 31)) / 16
 		);
 		var chunk = GetChunkIfExists( chunkPosition );
 		if ( chunk == null || chunk.ChunkObject == null || !chunk.ChunkObject.IsValid )
@@ -265,9 +265,9 @@ public class BlockSpace
 	public void SetBlock( Vector3Int position, BlockData blockData )
 	{
 		var chunkPosition = new Vector3Int(
-			position.x.FloorDiv( Chunk.SIZE.x ),
-			position.y.FloorDiv( Chunk.SIZE.y ),
-			position.z.FloorDiv( Chunk.SIZE.z )
+			(position.x + 15 * (position.x >> 31)) / 16,
+			(position.y + 15 * (position.y >> 31)) / 16,
+			(position.z + 15 * (position.z >> 31)) / 16
 		);
 		var chunk = GetChunk( chunkPosition );
 		var blockPosition = new Vector3Int(

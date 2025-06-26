@@ -84,10 +84,10 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		UpdateMesh();
 	}
 
-	public void AddBlockMesh( Vector3Int blockPos, List<Vertex> verts )
+	public void AddBlockMesh( World world, Vector3Int blockPos, List<Vertex> verts )
 	{
 		// For testing, let's start by just creating a full single block for every block
-		var blockData = WorldInstance.GetBlock( blockPos );
+		var blockData = world.GetBlock( blockPos );
 		var block = ItemRegistry.GetBlock( blockData.BlockID );
 		if ( block == null )
 		{
@@ -95,7 +95,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			Log.Warning( $"Block with ID {blockData.BlockID} not found at position {blockPos}." );
 			return;
 		}
-		block.AddBlockMesh( WorldInstance, blockPos, verts );
+		block.AddBlockMesh( world, blockPos, verts );
 	}
 
 	Dictionary<Material, ModelRenderer> Renderers = new();
@@ -104,8 +104,10 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 	public void UpdateMesh()
 	{
 
-		WorldInstance.GetChunk( ChunkPosition ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
-															   // Opaque Pass
+		var world = WorldInstance;
+		var chunkPos = ChunkPosition;
+		world.GetChunk( chunkPos ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
+												  // Opaque Pass
 		Dictionary<Material, List<Vertex>> Vertexes = new();
 
 		TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
@@ -118,7 +120,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 				for ( int x = 0; x < Chunk.SIZE.x; x++ )
 				{
 					var blockPos = new Vector3Int( x, y, z );
-					var blockData = WorldInstance.GetBlock( blockPos + (ChunkPosition * Chunk.SIZE) );
+					var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
 					var block = ItemRegistry.GetBlock( blockData.BlockID );
 					if ( Networking.IsHost && BlockObjects.ContainsKey( blockPos ) && BlockObjects[blockPos].data != blockData )
 					{
@@ -138,7 +140,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 								BlockObjects[blockPos] = (blockObject, blockData);
 								if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
 								{
-									receiver.AcceptBlockData( this.WorldInstance, blockPos + (ChunkPosition * Chunk.SIZE), blockData );
+									receiver.AcceptBlockData( world, blockPos + (chunkPos * Chunk.SIZE), blockData );
 								}
 								blockObject.NetworkSpawn();
 							}
@@ -147,11 +149,11 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 					else
 					{
 						var mat = block.Material ?? (block.Opaque ? WorldThinkerInstance.TextureAtlas : WorldThinkerInstance.TranslucentTextureAtlas);
-						AddBlockMesh( blockPos + (ChunkPosition * Chunk.SIZE), Vertexes.GetOrCreate( mat ) );
+						AddBlockMesh( world, blockPos + (chunkPos * Chunk.SIZE), Vertexes.GetOrCreate( mat ) );
 					}
 					if ( block.IsSolid )
 					{
-						var aabb = block.GetCollisionAABBChunk( WorldInstance, blockPos + (ChunkPosition * Chunk.SIZE) );
+						var aabb = block.GetCollisionAABBChunk( world, blockPos + (chunkPos * Chunk.SIZE) );
 						foreach ( var bbox in aabb )
 							collisionModel.AddCollisionBox( bbox.Extents, bbox.Center );
 					}
