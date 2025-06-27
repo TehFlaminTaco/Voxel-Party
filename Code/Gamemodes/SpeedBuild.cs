@@ -11,15 +11,13 @@ public sealed class SpeedBuild : Component
 
 	public NetList<VoxelPlayer> Players { get; set; } = new();
 
-	public List<Structure> TargetStructures { get; set; } = new();
+	public List<Structure> TargetStructures => ResourceLibrary.GetAll<Structure>( "structures/speedbuild/", false ).ToList();
 
 	Structure _currentStructure;
 
 	protected override void OnStart()
 	{
 		GameModeLogic();
-
-		TargetStructures = ResourceLibrary.GetAll<Structure>( "structures/speedbuild/", false ).ToList();
 	}
 
 	[Rpc.Broadcast]
@@ -135,6 +133,10 @@ public sealed class SpeedBuild : Component
 
 		bool gameRunning = true;
 		int RoundNumber = 0;
+		if ( Players.Count < 3 ) // If we're only playing one round, up the difficulty a little.
+		{
+			RoundNumber = 2;
+		}
 		while ( gameRunning )
 		{
 
@@ -144,8 +146,17 @@ public sealed class SpeedBuild : Component
 				Log.Warning( $"We don't have any structures for difficulty {Difficulty.IndexOrLast( RoundNumber )}? Why!?" );
 				structureList = TargetStructures;
 			}
+			else if ( Players.Count < 3 ) // If we're in final death, use any structure.
+			{
+				structureList = TargetStructures;
+			}
 
-			_currentStructure = Random.Shared.FromList( structureList );
+			foreach ( var s in structureList )
+			{
+				Log.Info( $"OPTION: {s.ResourceName}" );
+			}
+
+			_currentStructure = structureList[Random.Shared.Int( 0, structureList.Count - 1 )];
 			if ( _currentStructure == null )
 			{
 				Log.Error( "No target structure set for SpeedBuild." );
@@ -165,10 +176,15 @@ public sealed class SpeedBuild : Component
 				Islands[index].Enabled = true;
 				SetPlayerTransform( player, Islands[index].GetComponentInChildren<SpawnPoint>().WorldPosition,
 					Rotation.LookAt( Vector3.Zero ).Angles().WithRoll( 0 ) );
-				player.IsFlying = true;
+				player.MakeFlying();
 
-				await Task.DelayRealtimeSeconds( 2 );
+			}
 
+
+			await Task.DelayRealtimeSeconds( 1f );
+
+			foreach ( var player in Players )
+			{
 				// Spawn a copy of the target structure on the player's island
 				var obj = new GameObject();
 				var structure = obj.AddComponent<StructureLoader>( false );
@@ -381,7 +397,7 @@ public sealed class SpeedBuild : Component
 				allPlayers[0].Spectator = false;
 				allPlayers[0].IsFlying = false;
 				allPlayers[0].MoveTo( gold.WorldTransform );
-				await Task.DelayRealtimeSeconds( 5f );
+				await Task.DelayRealtimeSeconds( 30f ); // Take 30 seconds to celebrate!
 				SpeedBuildHud.Instance.Message = "Restarting!";
 				// Restart the lobby
 				Scene.LoadFromFile( "scenes/speed build.scene" );
