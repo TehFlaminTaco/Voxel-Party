@@ -8,7 +8,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 
 	[Sync, Property] public Vector3Int ChunkPosition { get; set; } = Vector3Int.Zero;
 	[Sync( SyncFlags.FromHost )]
-	public NetList<byte> ChunkData { get; set; } = new();
+	public byte[] ChunkData { get; set; } = Array.Empty<byte>();
 	[Sync] public WorldThinker WorldThinkerInstanceOverride { get; set; } = null;
 	public WorldThinker WorldThinkerInstance => WorldThinkerInstanceOverride ?? Scene.Get<WorldThinker>();
 	public World WorldInstance => WorldThinkerInstance?.World;
@@ -30,7 +30,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			}
 		}
 
-		if ( Networking.IsHost && chunk.NetworkDirty || ChunkData.Count == 0 )
+		if ( Networking.IsHost && chunk.NetworkDirty || ChunkData.Length == 0 )
 			UpdateChunkData();
 		if ( TortureTest || chunk.RenderDirty )
 		{
@@ -39,18 +39,18 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		}
 	}
 
-	void OnChunkDataChanged( NetList<byte> value )
+	void OnChunkDataChanged( byte[] value )
 	{
+		value = value.RunLengthDecodeBy( 2 ).ToArray();
 		var chunk = WorldInstance.GetChunk( ChunkPosition );
-		Log.Info( $"Got chunk update @ {ChunkPosition}" );
 		if ( chunk == null )
 		{
 			Log.Warning( $"Chunk at position {ChunkPosition} not found." );
 			return;
 		}
-		if ( value.Count != Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2 )
+		if ( value.Length != Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2 )
 		{
-			Log.Warning( $"Invalid chunk data length: {value.Count}. Expected {Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2}." );
+			Log.Warning( $"Invalid chunk data length: {value.Length}. Expected {Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2}." );
 			return;
 		}
 
@@ -83,8 +83,8 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			return;
 		}
 		// Serialize the chunk data to a byte array.
-		var data = ChunkData;
-		data.Clear();
+		byte[] data = new byte[Chunk.SIZE.z * Chunk.SIZE.y * Chunk.SIZE.x * 2];
+		int i = 0;
 		for ( int z = 0; z < Chunk.SIZE.z; z++ )
 		{
 			for ( int y = 0; y < Chunk.SIZE.y; y++ )
@@ -92,14 +92,13 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 				for ( int x = 0; x < Chunk.SIZE.x; x++ )
 				{
 					var blockData = chunk.GetBlock( x, y, z );
-					data.Add( blockData.BlockID ); // Assuming BlockID is a byte
-					data.Add( blockData.BlockDataValue );
+					data[i++] = (blockData.BlockID); // Assuming BlockID is a byte
+					data[i++] = (blockData.BlockDataValue);
 				}
 			}
 		}
-		ChunkData = data;
+		ChunkData = data.RunLengthEncodeBy( 2 ).ToArray();
 		chunk.NetworkDirty = false;
-		Log.Info( $"Sent chunk update @ {ChunkPosition}" );
 	}
 
 
