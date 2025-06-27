@@ -191,10 +191,11 @@ public class BlockSpace
 
 	public Chunk GetChunk( Vector3Int position )
 	{
-		if ( !SimulatedChunks.ContainsKey( position ) )
-			if ( !LoadOrMakeChunk( position ) )
-				throw new System.Exception( $"Failed to load or create chunk at {position}." );
-		return SimulatedChunks[position];
+		if ( SimulatedChunks.TryGetValue( position, out var chunk ) )
+			return chunk;
+		if ( !LoadOrMakeChunk( position, out var c ) )
+			throw new System.Exception( $"Failed to load or create chunk at {position}." );
+		return c;
 	}
 
 	public Chunk GetChunkIfExists( Vector3Int position )
@@ -214,13 +215,13 @@ public class BlockSpace
 			.WithIgnoreFilter( pos => !GetBlock( pos ).GetBlock().IsSolid ); // Ignore air blocks
 	}
 
-	private bool LoadOrMakeChunk( Vector3Int position )
+	private bool LoadOrMakeChunk( Vector3Int position, out Chunk chunk )
 	{
-		if ( SimulatedChunks.ContainsKey( position ) )
+		if ( SimulatedChunks.TryGetValue( position, out chunk ) )
 			return true; // Chunk already exists
 
 		// For now, create a blank chunk.
-		var chunk = new Chunk( this, position );
+		chunk = new Chunk( this, position );
 		return SimulatedChunks.TryAdd( position, chunk );
 	}
 	// Get the block in World coordinates.
