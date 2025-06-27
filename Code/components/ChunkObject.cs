@@ -1,37 +1,18 @@
+using System;
 using System.Threading.Tasks;
 using Sandbox;
 
 public sealed class ChunkObject : Component, Component.ExecuteInEditor
 {
+
+	private byte[] cachedData = Array.Empty<byte>();
 	[Sync, Property] public Vector3Int ChunkPosition { get; set; } = Vector3Int.Zero;
-	[Sync( SyncFlags.FromHost | SyncFlags.Query )]
+	[Sync( SyncFlags.FromHost )]
 	public byte[] ChunkData
 	{
 		get
 		{
-			if ( GameObject == null && this.WorldThinkerInstanceOverride == null ) return new byte[0]; // No data if we're not initialized
-			var chunk = WorldInstance.GetChunk( ChunkPosition );
-			if ( chunk == null )
-			{
-				Log.Warning( $"Chunk at position {ChunkPosition} not found." );
-				return new byte[0];
-			}
-			// Serialize the chunk data to a byte array.
-			var data = new byte[Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2]; // Assuming each block is 2 bytes (ID + data value)
-			for ( int z = 0; z < Chunk.SIZE.z; z++ )
-			{
-				for ( int y = 0; y < Chunk.SIZE.y; y++ )
-				{
-					for ( int x = 0; x < Chunk.SIZE.x; x++ )
-					{
-						var blockData = chunk.GetBlock( x, y, z );
-						int index = (z * Chunk.SIZE.y * Chunk.SIZE.x + y * Chunk.SIZE.x + x) * 2;
-						data[index] = blockData.BlockID; // Assuming BlockID is a byte
-						data[index + 1] = blockData.BlockDataValue;
-					}
-				}
-			}
-			return data;
+			return cachedData;
 		}
 		set
 		{
@@ -77,8 +58,38 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		WorldInstance.GetChunk( ChunkPosition ).ChunkObject = this; // Important in case we're loaded by a remote host.
 		if ( TortureTest || WorldInstance.GetChunk( ChunkPosition ).Dirty )
 		{
-			_ = UpdateMesh(); // If the chunk is dirty, update the mesh.
+			if ( Networking.IsHost )
+				UpdateChunkData();
+			if ( Scene is not null )
+				_ = UpdateMesh(); // If the chunk is dirty, update the mesh.
 		}
+	}
+
+	void UpdateChunkData()
+	{
+		if ( GameObject == null && this.WorldThinkerInstanceOverride == null ) return; // No data if we're not initialized
+		var chunk = WorldInstance.GetChunk( ChunkPosition );
+		if ( chunk == null )
+		{
+			Log.Warning( $"Chunk at position {ChunkPosition} not found." );
+			return;
+		}
+		// Serialize the chunk data to a byte array.
+		var data = new byte[Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2]; // Assuming each block is 2 bytes (ID + data value)
+		for ( int z = 0; z < Chunk.SIZE.z; z++ )
+		{
+			for ( int y = 0; y < Chunk.SIZE.y; y++ )
+			{
+				for ( int x = 0; x < Chunk.SIZE.x; x++ )
+				{
+					var blockData = chunk.GetBlock( x, y, z );
+					int index = (z * Chunk.SIZE.y * Chunk.SIZE.x + y * Chunk.SIZE.x + x) * 2;
+					data[index] = blockData.BlockID; // Assuming BlockID is a byte
+					data[index + 1] = blockData.BlockDataValue;
+				}
+			}
+		}
+		cachedData = data;
 	}
 
 
@@ -160,64 +171,67 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			}
 
 			await GameTask.MainThread();
-			foreach ( var blockPos in DestroyBlockObjects )
+			using ( Scene.Push() )
 			{
-				BlockObjects[blockPos].obj.Destroy();
-				BlockObjects.Remove( blockPos );
-			}
-			foreach ( var blockPos in CreateBlockObjects )
-			{
-				if ( !BlockObjects.ContainsKey( blockPos ) )
+				foreach ( var blockPos in DestroyBlockObjects )
 				{
-
-					var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
-					var block = ItemRegistry.GetBlock( blockData.BlockID );
-					var blockObject = block.BlockObject.Clone( GameObject, blockPos * World.BlockScale, Rotation.Identity, Vector3.One );
-					BlockObjects[blockPos] = (blockObject, blockData);
-					if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
+					BlockObjects[blockPos].obj.Destroy();
+					BlockObjects.Remove( blockPos );
+				}
+				foreach ( var blockPos in CreateBlockObjects )
+				{
+					if ( !BlockObjects.ContainsKey( blockPos ) )
 					{
-						receiver.AcceptBlockData( world, blockPos + (chunkPos * Chunk.SIZE), blockData );
+
+						var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
+						var block = ItemRegistry.GetBlock( blockData.BlockID );
+						var blockObject = block.BlockObject.Clone( GameObject, blockPos * World.BlockScale, Rotation.Identity, Vector3.One );
+						BlockObjects[blockPos] = (blockObject, blockData);
+						if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
+						{
+							receiver.AcceptBlockData( world, blockPos + (chunkPos * Chunk.SIZE), blockData );
+						}
+						blockObject.NetworkSpawn();
 					}
-					blockObject.NetworkSpawn();
 				}
-			}
 
-			var toRemove = Renderers.Where( k => !Vertexes.ContainsKey( k.Key ) || Vertexes[k.Key].Count == 0 ); // Remove all renderers where we don't have verts for.
-			foreach ( var r in toRemove )
-			{
-				r.Value.Destroy();
-				Renderers.Remove( r.Key );
-			}
-
-			foreach ( var kv in Vertexes.Where( c => c.Value.Count > 0 ) )
-			{
-				var mat = kv.Key;
-				var verts = kv.Value;
-
-				if ( !Renderers.ContainsKey( mat ) )
+				var toRemove = Renderers.Where( k => !Vertexes.ContainsKey( k.Key ) || Vertexes[k.Key].Count == 0 ); // Remove all renderers where we don't have verts for.
+				foreach ( var r in toRemove )
 				{
-					var renderer = AddComponent<ModelRenderer>();
-					renderer.Flags = ComponentFlags.NotNetworked;
-					renderer.MaterialOverride = mat;
-					Renderers[mat] = renderer;
+					r.Value.Destroy();
+					Renderers.Remove( r.Key );
 				}
-				var indicies = Enumerable.Range( 0, verts.Count ).ToArray();
 
-				var mesh = new Mesh();
-				mesh.CreateVertexBuffer( verts.Count, Vertex.Layout, verts );
-				mesh.CreateIndexBuffer( verts.Count, indicies );
-				mesh.Material = mat;
+				foreach ( var kv in Vertexes.Where( c => c.Value.Count > 0 ) )
+				{
+					var mat = kv.Key;
+					var verts = kv.Value;
 
-				var model = new ModelBuilder();
-				model.AddMesh( mesh );
-				model.AddTraceMesh( verts.Select( c => c.Position ).ToList(), indicies.ToList() );
+					if ( !Renderers.ContainsKey( mat ) )
+					{
+						var renderer = AddComponent<ModelRenderer>();
+						renderer.Flags = ComponentFlags.NotNetworked;
+						renderer.MaterialOverride = mat;
+						Renderers[mat] = renderer;
+					}
+					var indicies = Enumerable.Range( 0, verts.Count ).ToArray();
 
-				Renderers[mat].Model = model.Create();
+					var mesh = new Mesh();
+					mesh.CreateVertexBuffer( verts.Count, Vertex.Layout, verts );
+					mesh.CreateIndexBuffer( verts.Count, indicies );
+					mesh.Material = mat;
+
+					var model = new ModelBuilder();
+					model.AddMesh( mesh );
+					model.AddTraceMesh( verts.Select( c => c.Position ).ToList(), indicies.ToList() );
+
+					Renderers[mat].Model = model.Create();
+				}
+				var collider = GetOrAddComponent<ModelCollider>();
+				collider.Model = collisionModel.Create();
+				collider.Static = true; // Set the collider to static since chunks do not move
+				collider.Enabled = true; // Enable the collider for the chunk object
 			}
-			var collider = GetOrAddComponent<ModelCollider>();
-			collider.Model = collisionModel.Create();
-			collider.Static = true; // Set the collider to static since chunks do not move
-			collider.Enabled = true; // Enable the collider for the chunk object
 		}
 		finally
 		{

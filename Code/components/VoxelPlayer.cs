@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Sandbox.UI;
 using Sandbox.Utility;
 
 public partial class VoxelPlayer : Component
@@ -467,6 +468,8 @@ public partial class VoxelPlayer : Component
             }
             else
             {
+                if ( !Networking.IsHost )
+                    world.SetBlock( BreakingBlock.Value, BlockData.Empty );
                 BreakAndGive( BreakingBlock.Value );
             }
         }
@@ -479,7 +482,7 @@ public partial class VoxelPlayer : Component
     [Rpc.Host]
     public void BreakAndGive( Vector3Int Position )
     {
-        var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( BreakingBlock.Value ) ) );
+        var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( Position ) ) );
         world.Thinker.BreakBlock( Position, false );
     }
 
@@ -532,7 +535,10 @@ public partial class VoxelPlayer : Component
         if ( !simulated )
             inventory.TakeItem( selectedSlot, 1 ); // Remove one item from the hotbar slot
         var pc = GetComponent<PlayerController>();
-        world.Thinker.PlaceBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, Scene.Camera.WorldRotation.Forward ) );
+        if ( Networking.IsHost )
+            world.Thinker.PlaceBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, Scene.Camera.WorldRotation.Forward ) );
+        else
+            world.SetBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, Scene.Camera.WorldRotation.Forward ) );
     }
 
     public void ShowHoveredFace()
