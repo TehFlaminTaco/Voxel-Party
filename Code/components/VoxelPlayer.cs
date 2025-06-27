@@ -259,6 +259,12 @@ public partial class VoxelPlayer : Component
         if ( IsProxy )
             return;
 
+        // Check for stuck
+        var pc = GetComponent<PlayerController>();
+        if ( pc.TraceBody( WorldPosition, WorldPosition + Vector3.Up, 1f, 0.5f ).StartedSolid )
+            WorldPosition += Vector3.Up * 20f;
+
+
         if ( CanBuild )
         {
             HandleBreak();
@@ -573,5 +579,10 @@ public partial class VoxelPlayer : Component
 
         var pc = GetComponent<PlayerController>();
         pc.UseCameraControls = false;
+    }
+    [Rpc.Owner]
+    public void MakeFlying()
+    {
+        IsFlying = true;
     }
 }
