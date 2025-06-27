@@ -128,13 +128,9 @@ public sealed class SpeedBuild : Component
 
 		List<VoxelPlayer> HistoricalPlayers = new();
 
-		foreach ( var player in Scene.GetAll<VoxelPlayer>().Where( c => c.IsReady ) )
+		foreach ( var player in Scene.GetAll<VoxelPlayer>() )
 		{
 			Players.Add( player );
-		}
-		foreach ( var player in Scene.GetAll<VoxelPlayer>().Where( c => !c.IsReady ) )
-		{
-			player.Spectator = true;
 		}
 
 		bool gameRunning = true;
