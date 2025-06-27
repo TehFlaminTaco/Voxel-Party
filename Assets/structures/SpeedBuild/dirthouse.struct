@@ -1,8 +1,8 @@
 {
-  "SpeedBuildStructure": true,
-  "SecondsToBuild": 45,
-  "Difficulty": 0,
   "StructureData": "BgAAAAYAAAAEAAAAQAIAQAMAQQIAQgAAQAIAQwAAAAIAQwAAAAIAQgAAQQIAQAMAQgIAQAYAQQIAQgAAQAIAQwAAAAIAQwAAAAIAQgAAQQIAQAYARwIAQgAAQAIAQgAAQAIAQgAAQAIAQgAARQIAYgMA",
+  "SpeedBuildStructure": true,
+  "SecondsToBuild": 30,
+  "ReplicateDifficulty": "Easy",
   "__references": [],
   "__version": 0
 }
