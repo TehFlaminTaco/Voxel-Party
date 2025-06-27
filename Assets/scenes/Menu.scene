@@ -149,7 +149,714 @@
           "UnloadBatchSize": 10
         }
       ],
-      "Children": []
+      "Children": [
+        {
+          "__guid": "f25c9f6f-088b-4124-bee2-a83bee73dfee",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, -1, 0)",
+          "Position": "-640,-640,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "716fd312-70a8-4c23-8b5f-b9892e65df7a",
+              "__enabled": true,
+              "ChunkPosition": "-1,-1,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "31a9c433-f607-4033-acb7-a2109d16d58c",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "f23bfd6e-3065-4fb1-8520-b1939f5d9d13",
+              "__enabled": true,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "a8ee3f5a-8ef8-4b39-adf3-5c5608e37538",
+              "__version": 1,
+              "__Prefab": "prefabs/blockobjects/torch.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "eac1c917-0ae2-43bc-b477-8c58f16f5f15"
+                    },
+                    "Property": "Position",
+                    "Value": "480,400,40"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "6dd468f6-59ac-44a2-b93d-c2c89186451a"
+                    },
+                    "Property": "Position",
+                    "Value": "20,0,10"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "6dd468f6-59ac-44a2-b93d-c2c89186451a"
+                    },
+                    "Property": "Rotation",
+                    "Value": "-0.2126311,0.2126311,0.6743797,0.6743797"
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "eac1c917-0ae2-43bc-b477-8c58f16f5f15": "a8ee3f5a-8ef8-4b39-adf3-5c5608e37538",
+                "8f167d02-3c14-4df8-9485-45dc17ba680b": "23c6f611-a335-4f40-bf2b-bd806a1929a6",
+                "6dd468f6-59ac-44a2-b93d-c2c89186451a": "843230a1-723f-48dd-ad3f-c4d62fe36df2",
+                "1d23df2b-ed44-42a4-af97-df64d11b5842": "4d16555c-9703-4444-ba91-b5684d54c9f4",
+                "4039f075-e9d5-41f7-9068-6df06380eb26": "c16b3dd5-8557-4dac-aae4-9a0dd5e4bd7f",
+                "6bf7ceaa-dad3-4f6e-bc8c-8acf63f069bb": "a868e3ef-8bdb-41b2-89ac-e67f5692cfa9",
+                "85b15597-3f51-45cd-ac5e-a1f02bc32e62": "3c8ab021-9c7b-47d9-badd-dcaec58404a4",
+                "b93898d9-6dd2-4ea9-9e77-cb53155c2002": "924d713a-123c-47f1-8f2c-1fb799df37c8",
+                "80f82b36-ee9c-4937-b527-68c2b616ba97": "a56ae9a2-e92b-42fa-8507-94db404d4eb7",
+                "d016755f-0592-40b6-bc3b-22898a10153b": "2e800d03-5d15-422b-ba2a-3b459a81d96d"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "7a918f33-d1f4-4f62-a174-5092f29b9311",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, -1, 0)",
+          "Position": "0,-640,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "9e975dd6-2985-44c3-b35b-91ebad261b0c",
+              "__enabled": true,
+              "ChunkPosition": "0,-1,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "0f85cb6f-2cbf-44a3-91de-92a4d347f7d6",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "afceeda4-48e1-4b59-976e-231938360ff7",
+              "__enabled": true,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "561b1b0a-aa62-4a0d-b9ff-1808b647abf4",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, 0, 0)",
+          "Position": "-640,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "f96bca78-329b-4344-88b3-454e2ce7d594",
+              "__enabled": true,
+              "ChunkPosition": "-1,0,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "a16d8b0f-6ede-480b-ba85-b81c4a7fe913",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "3627ec14-f498-4ada-9296-019311072afa",
+              "__enabled": true,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "be3c948f-c4bc-48fe-887a-991f0394e56a",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, -1, -1)",
+          "Position": "-640,-640,-640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "2465fc47-9033-4df1-81ca-b914c7ba672f",
+              "__enabled": true,
+              "ChunkPosition": "-1,-1,-1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "08a2237a-8a1d-40c0-8058-eb305c4e343a",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "1b114000-2832-4659-abf7-e34c8abb041a",
+              "__enabled": true,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "f569f573-e052-417b-bc05-3e3cf9f22230",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, 0, 0)",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "1febda45-9509-4a22-8512-47f3323a4496",
+              "__enabled": true,
+              "ChunkPosition": "0,0,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "fba089e3-46c8-4f19-a660-3044864ba0cd",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "aa866b37-ab8b-4fcf-8847-35f8b1bb8c8e",
+              "__enabled": true,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "33eda804-61bc-4e3d-98e8-3de3c1ffc303",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, -1, -1)",
+          "Position": "0,-640,-640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "6a36b45c-3621-4cb9-affc-15883f3882bf",
+              "__enabled": true,
+              "ChunkPosition": "0,-1,-1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "f71b264d-c7dd-4460-8a78-67f52f48d626",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "40b36b83-3366-41e5-ba37-13d99c872f30",
+              "__enabled": true,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "c82008df-5b26-4238-b2d3-6d6881918acb",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, 0, -1)",
+          "Position": "-640,0,-640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "9c13b012-d7a5-42ec-a8d1-15f1fddfd6c7",
+              "__enabled": true,
+              "ChunkPosition": "-1,0,-1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "a8b288c8-3726-4b42-942e-c1b621abdf2e",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "c9f50e6f-4225-44bf-97d4-03c28eaf3b1d",
+              "__enabled": true,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "95c2ddd8-505b-4bbc-9277-94722800eab6",
+              "__version": 1,
+              "__Prefab": "prefabs/blockobjects/torch.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "eac1c917-0ae2-43bc-b477-8c58f16f5f15"
+                    },
+                    "Property": "Position",
+                    "Value": "480,160,600"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "6dd468f6-59ac-44a2-b93d-c2c89186451a"
+                    },
+                    "Property": "Position",
+                    "Value": "20,40,10"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "6dd468f6-59ac-44a2-b93d-c2c89186451a"
+                    },
+                    "Property": "Rotation",
+                    "Value": "-0.2126311,-0.2126311,0.6743797,-0.6743797"
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "eac1c917-0ae2-43bc-b477-8c58f16f5f15": "95c2ddd8-505b-4bbc-9277-94722800eab6",
+                "8f167d02-3c14-4df8-9485-45dc17ba680b": "ceed8e24-4a6a-400b-a8d0-e48e7942a605",
+                "6dd468f6-59ac-44a2-b93d-c2c89186451a": "1025e47f-853b-497a-a505-7627eb90792e",
+                "1d23df2b-ed44-42a4-af97-df64d11b5842": "e89c9b46-3de7-4dd1-aa46-439440f2ad91",
+                "4039f075-e9d5-41f7-9068-6df06380eb26": "c582f001-9af5-40c8-bee0-45bc42336369",
+                "6bf7ceaa-dad3-4f6e-bc8c-8acf63f069bb": "d9da04dd-d7b8-402c-8016-aa253d99840c",
+                "85b15597-3f51-45cd-ac5e-a1f02bc32e62": "a2578345-6fbf-4834-94e9-e0ab62c144c0",
+                "b93898d9-6dd2-4ea9-9e77-cb53155c2002": "df633cee-e318-4a31-a5db-3be733c41ef1",
+                "80f82b36-ee9c-4937-b527-68c2b616ba97": "6e1491ef-b0dd-4762-8d19-3739e8867342",
+                "d016755f-0592-40b6-bc3b-22898a10153b": "b47531dc-4f64-482a-ac30-71a98c4afb61"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "d2f4be97-8854-4e00-975b-3dbebf0d3e07",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, 0, -1)",
+          "Position": "0,0,-640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "eb9714da-ede7-4110-94ec-fd2502c0a96b",
+              "__enabled": true,
+              "ChunkPosition": "0,0,-1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "ccc17e75-0e55-4c72-9e50-919c22bfc0af",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "e74bd677-485d-4140-bf6f-3b93b9bf2652",
+              "__enabled": true,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        }
+      ]
     },
     {
       "__guid": "0eb06944-96b5-4833-b4ef-c3e5f82f85a5",

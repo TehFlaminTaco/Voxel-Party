@@ -18,13 +18,23 @@ public partial class CharacterCreator : Panel
 
     public static void Initialize()
     {
-	    var path = "materials/models/skins/";
-	    foreach ( var i in FileSystem.Mounted.FindFile( path, "*.png", true ) )
-	    {
-		    if ( Skins.Any( c => c.BaseSkinName == i ) )
-			    continue;
-		    Skins.Add( new Skin { BaseSkinName = i, Texture = Texture.Load( $"{path}{i}" ) } );
-	    }
+        var path = "materials/models/skins/";
+        foreach ( var i in FileSystem.Mounted.FindFile( path, "*.png", true ) )
+        {
+            if ( Skins.Any( c => c.BaseSkinName == i ) )
+                continue;
+            Skins.Add( new Skin { BaseSkinName = i, Texture = Texture.Load( $"{path}{i}" ) } );
+        }
+
+        // Load data-folder skins
+        if ( FileSystem.Data.FileExists( "customskins.txt" ) )
+        {
+            var skins = FileSystem.Data.ReadAllText( "customskins.txt" );
+            foreach ( var s in skins.Split( "\n" ) )
+            {
+                VoxelPlayer.GetTextureFromSkin( s ).ContinueWith( t => Skins.Add( new Skin { Username = s, Texture = t.Result } ) );
+            }
+        }
     }
 
     public override void Tick()
@@ -69,6 +79,13 @@ public partial class CharacterCreator : Panel
         }
 
         Skins.Add( new Skin { Username = name, Texture = tex } );
+
+        SaveSkins();
+    }
+
+    public void SaveSkins()
+    {
+        FileSystem.Data.WriteAllText( "customskins.txt", string.Join( "\n", Skins.Where( c => c.Username != null ).Select( c => c.Username ) ) );
     }
 
     protected override int BuildHash() => HashCode.Combine( Skins.GetHashCode(), Selected );
