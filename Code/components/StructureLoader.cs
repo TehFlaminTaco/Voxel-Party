@@ -50,6 +50,11 @@ public partial class StructureLoader : Component, Component.ExecuteInEditor
 			Retry = true;
 			return;
 		}
+		if(Scene is null )
+		{
+			Retry = true;
+			return;
+		}
 		var KnownMat = Scene.GetAll<WorldThinker>().FirstOrDefault()?.TextureAtlas;
 		var TranslucentMat = Scene.GetAll<WorldThinker>().FirstOrDefault()?.TranslucentTextureAtlas;
 		foreach ( var child in GameObject.Children.ToList() )
@@ -68,6 +73,7 @@ public partial class StructureLoader : Component, Component.ExecuteInEditor
 		var oldWorld = World.Active;
 		var tempThinker = AddComponent<WorldThinker>();
 		tempThinker.TextureAtlas = KnownMat;
+		tempThinker.LoadAroundPlayer = false;
 		tempThinker.TranslucentTextureAtlas = TranslucentMat;
 		try
 		{
