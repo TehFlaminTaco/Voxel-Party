@@ -5,10 +5,7 @@
   "Decibels": 70,
   "SelectionMode": "Random",
   "Sounds": [
-    "sounds/music/lounge jazz.vsnd",
-    "sounds/music/upbeat-motivational-dance-pop-227623.vsnd",
-    "sounds/music/pixel-paradise-358340.vsnd",
-    "sounds/music/416-8-bit-chiptune-instrumental-for-games-339237.vsnd"
+    "sounds/music/lounge jazz.vsnd"
   ],
   "Occlusion": true,
   "AirAbsorption": true,
