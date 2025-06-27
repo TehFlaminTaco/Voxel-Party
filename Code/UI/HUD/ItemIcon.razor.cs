@@ -66,6 +66,7 @@ public partial class ItemIcon : Panel
     ItemStack lastKnownStack = ItemStack.Empty;
     public override void Tick()
     {
+        if ( VoxelPlayer.LocalPlayer is null ) return;
         ItemStack = Inventory.GetItem( Slot );
         if ( RenderTexture == null || ItemStack.Count != lastKnownStack?.Count || ItemStack.ItemID != lastKnownStack?.ItemID )
         {
