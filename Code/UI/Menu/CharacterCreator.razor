@@ -38,7 +38,7 @@
 	
 	<div class="options">
 		<TextEntry class="username-input" @ref="Name" placeholder="@(Connection.Local.DisplayName)" onsubmit=@( () => AddSkin( Name.HasContent ? Name.Text : Name.Placeholder ) )/>
-		<div class="add-button" @onclick=@( () => AddSkin( Name.HasContent ? Name.Text : Name.Placeholder ) )>Add</div>
+		<div class="add-button" @onclick=@( () => AddSkin( !string.IsNullOrWhiteSpace(Name.Text) ? Name.Text : Name.Placeholder ) )>Add</div>
 	</div>
 	<div class="errorMessage">@LastBadReason</div>
 </root>
