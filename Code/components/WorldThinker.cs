@@ -200,7 +200,8 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 	public void BreakBlock( Vector3Int position, bool dropItems = true, bool spawnParticles = true, bool playSound = true )
 	{
 		// Fill the block with SimpleParticles
-		var block = World.GetBlock( position ).GetBlock();
+		var data = World.GetBlock( position );
+		var block = data.GetBlock();
 
 		if ( playSound )
 		{
@@ -218,9 +219,15 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 				)) * World.BlockScale ); // Spawn the item at the center of the block
 		}
 
-		if ( spawnParticles ) World.SpawnBreakParticles( position );
+		if ( spawnParticles ) SpawnBlockBreakParticles( position, data );
 		// Remove the block at the specified position.
 		World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
+	}
+
+	[Rpc.Broadcast]
+	public void SpawnBlockBreakParticles( Vector3Int position, BlockData data )
+	{
+		World.SpawnBreakParticles( position, data );
 	}
 
 	protected override void OnPreRender()

@@ -1,67 +1,75 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 using Sandbox;
 
 public sealed class ChunkObject : Component, Component.ExecuteInEditor
 {
 
-	private byte[] cachedData = Array.Empty<byte>();
 	[Sync, Property] public Vector3Int ChunkPosition { get; set; } = Vector3Int.Zero;
 	[Sync( SyncFlags.FromHost )]
-	public byte[] ChunkData
-	{
-		get
-		{
-			return cachedData;
-		}
-		set
-		{
-			var chunk = WorldInstance.GetChunk( ChunkPosition );
-			if ( chunk == null )
-			{
-				Log.Warning( $"Chunk at position {ChunkPosition} not found." );
-				return;
-			}
-			if ( value.Length != Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2 )
-			{
-				Log.Warning( $"Invalid chunk data length: {value.Length}. Expected {Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2}." );
-				return;
-			}
-
-			for ( int z = 0; z < Chunk.SIZE.z; z++ )
-			{
-				for ( int y = 0; y < Chunk.SIZE.y; y++ )
-				{
-					for ( int x = 0; x < Chunk.SIZE.x; x++ )
-					{
-						int index = (z * Chunk.SIZE.y * Chunk.SIZE.x + y * Chunk.SIZE.x + x) * 2;
-						var blockID = value[index];
-						var blockDataValue = value[index + 1];
-						if ( chunk.GetBlock( x, y, z ).BlockID == blockID && chunk.GetBlock( x, y, z ).BlockDataValue == blockDataValue )
-						{
-							continue; // No change needed
-						}
-						chunk.SetBlock( x, y, z, new BlockData( blockID, blockDataValue ) );
-					}
-				}
-			}
-		}
-	}
+	public NetList<byte> ChunkData { get; set; } = new();
 	[Sync] public WorldThinker WorldThinkerInstanceOverride { get; set; } = null;
 	public WorldThinker WorldThinkerInstance => WorldThinkerInstanceOverride ?? Scene.Get<WorldThinker>();
 	public World WorldInstance => WorldThinkerInstance?.World;
 	[Property] public bool TortureTest = false;
+	int LastChunkDataHash = -1;
 	protected override void OnUpdate()
 	{
 		if ( !ItemRegistry.FinishedLoading )
 			return;
-		WorldInstance.GetChunk( ChunkPosition ).ChunkObject = this; // Important in case we're loaded by a remote host.
-		if ( TortureTest || WorldInstance.GetChunk( ChunkPosition ).Dirty )
+		var chunk = WorldInstance.GetChunk( ChunkPosition );
+		chunk.ChunkObject = this; // Important in case we're loaded by a remote host.
+		if ( !Networking.IsHost )
 		{
-			if ( Networking.IsHost )
-				UpdateChunkData();
+			int hash = Convert.ToBase64String( ChunkData.ToArray() ).GetHashCode();
+			if ( hash != LastChunkDataHash )
+			{
+				LastChunkDataHash = hash;
+				OnChunkDataChanged( ChunkData );
+			}
+		}
+
+		if ( Networking.IsHost && chunk.NetworkDirty || ChunkData.Count == 0 )
+			UpdateChunkData();
+		if ( TortureTest || chunk.RenderDirty )
+		{
 			if ( Scene is not null )
 				_ = UpdateMesh(); // If the chunk is dirty, update the mesh.
+		}
+	}
+
+	void OnChunkDataChanged( NetList<byte> value )
+	{
+		var chunk = WorldInstance.GetChunk( ChunkPosition );
+		Log.Info( $"Got chunk update @ {ChunkPosition}" );
+		if ( chunk == null )
+		{
+			Log.Warning( $"Chunk at position {ChunkPosition} not found." );
+			return;
+		}
+		if ( value.Count != Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2 )
+		{
+			Log.Warning( $"Invalid chunk data length: {value.Count}. Expected {Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2}." );
+			return;
+		}
+
+		for ( int z = 0; z < Chunk.SIZE.z; z++ )
+		{
+			for ( int y = 0; y < Chunk.SIZE.y; y++ )
+			{
+				for ( int x = 0; x < Chunk.SIZE.x; x++ )
+				{
+					int index = (z * Chunk.SIZE.y * Chunk.SIZE.x + y * Chunk.SIZE.x + x) * 2;
+					var blockID = value[index];
+					var blockDataValue = value[index + 1];
+					if ( chunk.GetBlock( x, y, z ).BlockID == blockID && chunk.GetBlock( x, y, z ).BlockDataValue == blockDataValue )
+					{
+						continue; // No change needed
+					}
+					chunk.SetBlock( x, y, z, new BlockData( blockID, blockDataValue ) );
+				}
+			}
 		}
 	}
 
@@ -75,7 +83,8 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			return;
 		}
 		// Serialize the chunk data to a byte array.
-		var data = new byte[Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2]; // Assuming each block is 2 bytes (ID + data value)
+		var data = ChunkData;
+		data.Clear();
 		for ( int z = 0; z < Chunk.SIZE.z; z++ )
 		{
 			for ( int y = 0; y < Chunk.SIZE.y; y++ )
@@ -83,13 +92,14 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 				for ( int x = 0; x < Chunk.SIZE.x; x++ )
 				{
 					var blockData = chunk.GetBlock( x, y, z );
-					int index = (z * Chunk.SIZE.y * Chunk.SIZE.x + y * Chunk.SIZE.x + x) * 2;
-					data[index] = blockData.BlockID; // Assuming BlockID is a byte
-					data[index + 1] = blockData.BlockDataValue;
+					data.Add( blockData.BlockID ); // Assuming BlockID is a byte
+					data.Add( blockData.BlockDataValue );
 				}
 			}
 		}
-		cachedData = data;
+		ChunkData = data;
+		chunk.NetworkDirty = false;
+		Log.Info( $"Sent chunk update @ {ChunkPosition}" );
 	}
 
 
@@ -128,8 +138,8 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			var world = WorldInstance;
 			var thinker = WorldThinkerInstance;
 			var chunkPos = ChunkPosition;
-			world.GetChunk( chunkPos ).Dirty = false; // Mark the chunk as clean before we start updating the mesh.
-													  // Opaque Pass
+			world.GetChunk( chunkPos ).RenderDirty = false; // Mark the chunk as clean before we start updating the mesh.
+															// Opaque Pass
 			Dictionary<Material, List<Vertex>> Vertexes = new();
 
 			_ = TexArrayTool.UpdateMaterialTexture( WorldThinkerInstance.TextureAtlas );
