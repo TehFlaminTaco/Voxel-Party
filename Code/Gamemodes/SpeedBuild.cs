@@ -132,6 +132,7 @@ public sealed class SpeedBuild : Component
 		}
 
 		bool gameRunning = true;
+		Structure lastStructure = new();
 		int RoundNumber = 0;
 		if ( Players.Count < 3 ) // If we're only playing one round, up the difficulty a little.
 		{
@@ -139,7 +140,6 @@ public sealed class SpeedBuild : Component
 		}
 		while ( gameRunning )
 		{
-
 			var structureList = TargetStructures.Where( c => c.ReplicateDifficulty == Difficulty.IndexOrLast( RoundNumber ) ).ToList();
 			if ( structureList.Count == 0 )
 			{
@@ -157,6 +157,12 @@ public sealed class SpeedBuild : Component
 			}
 
 			_currentStructure = structureList[Random.Shared.Int( 0, structureList.Count - 1 )];
+			while ( lastStructure.IsValid() && _currentStructure == lastStructure )
+			{
+				_currentStructure = structureList[Random.Shared.Int( 0, structureList.Count - 1 )];
+				Log.Info("hi");
+			}
+			
 			if ( _currentStructure == null )
 			{
 				Log.Error( "No target structure set for SpeedBuild." );
@@ -198,6 +204,7 @@ public sealed class SpeedBuild : Component
 				structure.Enabled = true;
 
 				player.HasBuildVolume = true;
+				player.CanBuild = false;
 				player.BuildAreaMins = (structure.WorldPosition / World.BlockScale).Floor();
 				player.BuildAreaMaxs = player.BuildAreaMins + size - Vector3Int.One;
 				anyStructureData ??= BlockData.GetAreaInBox( player.BuildAreaMins, size );
@@ -263,14 +270,7 @@ public sealed class SpeedBuild : Component
 			SpeedBuildHud.Instance.Message = "Time's up! Judging the builds...";
 			SpeedBuildHud.Instance.HasTimer = false; // Hide the timer UI
 
-			if ( Players.Count > 3 )
-			{
-				SpeedBuildHud.Instance.KillPercentage = TargetAccuracy.IndexOrLast( RoundNumber );
-			}
-			else
-			{
-				SpeedBuildHud.Instance.KillPercentage = null;
-			}
+			SpeedBuildHud.Instance.KillPercentage = TargetAccuracy.IndexOrLast( RoundNumber );
 
 			foreach ( var player in Players )
 			{
@@ -336,7 +336,7 @@ public sealed class SpeedBuild : Component
 				ScoreByPlayer[player] = player.CorrectBlocksPlaced * 100 / validBlocks;
 			}
 
-			if ( Players.Count > 3 )
+			if ( Players.Count > 0 )
 			{
 				SpeedBuildHud.Instance.Message = "Executing the failures!";
 				await Task.DelayRealtimeSeconds( 1 );
@@ -353,7 +353,7 @@ public sealed class SpeedBuild : Component
 				foreach ( var loser in losers )
 					Players.Remove( loser );
 			}
-			if ( Players.Count <= 3 )
+			if ( Players.Count <= 0 )
 			{
 				SpeedBuildHud.Instance.Message = "Declaring winners...";
 				var podiumObject = GameObject.Children.Find( j => j.Name == "PodiumCamera" );
@@ -397,7 +397,7 @@ public sealed class SpeedBuild : Component
 				allPlayers[0].Spectator = false;
 				allPlayers[0].IsFlying = false;
 				allPlayers[0].MoveTo( gold.WorldTransform );
-				await Task.DelayRealtimeSeconds( 30f ); // Take 30 seconds to celebrate!
+				await Task.DelayRealtimeSeconds( 10f ); // Take 30 seconds to celebrate!
 				SpeedBuildHud.Instance.Message = "Restarting!";
 				// Restart the lobby
 				Scene.LoadFromFile( "scenes/speed build.scene" );

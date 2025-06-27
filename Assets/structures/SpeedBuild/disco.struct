@@ -1,7 +1,7 @@
 {
-  "StructureData": "BQAAAAUAAAABAAAAGAwAIwAMACcADAAiAAwAJgAMACkADAAlAAwAKAAMACkADAAqAAwAJgAMACQADAAlAAwA",
+  "StructureData": "BQAAAAUAAAABAAAAGAwAIwAMACcADAAiAAwAJgAMACkADAAlAAwAKAAMACcADAAqAAwAIwAMACkADAAiAAwA",
   "SpeedBuildStructure": true,
-  "SecondsToBuild": 40,
+  "SecondsToBuild": 50,
   "ReplicateDifficulty": "Hard",
   "__references": [],
   "__version": 0

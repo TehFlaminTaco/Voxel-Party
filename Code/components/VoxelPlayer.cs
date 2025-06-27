@@ -10,7 +10,7 @@ using Sandbox.Utility;
 
 public partial class VoxelPlayer : Component
 {
-    World world => Scene.GetAll<WorldThinker>().First().World;
+    World world => World.Active;
 
     [Sync( SyncFlags.FromHost )]
     public byte[] InventoryData
@@ -56,7 +56,7 @@ public partial class VoxelPlayer : Component
     [Sync( SyncFlags.FromHost )] public bool HasBuildVolume { get; set; } = false;
     [Sync( SyncFlags.FromHost )] public Vector3Int BuildAreaMins { get; set; } = Vector3Int.Zero;
     [Sync( SyncFlags.FromHost )] public Vector3Int BuildAreaMaxs { get; set; } = Vector3Int.Zero;
-    [Sync( SyncFlags.FromHost )] public bool CanBuild { get; set; } = false;
+    [Sync( SyncFlags.FromHost )] public bool CanBuild { get; set; } = true;
 
     [Sync( SyncFlags.FromHost )] public int TotalBlockArea { get; set; } = 0; // Total area of the blocks in the build area, used for gamemode scoring
     [Sync( SyncFlags.FromHost )] public int CorrectBlocksPlaced { get; set; } = 0; // Number of blocks placed correctly by the player, used for gamemode scoring
