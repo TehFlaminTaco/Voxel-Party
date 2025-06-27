@@ -5,46 +5,62 @@
 @inherits PanelComponent
 
 <root>
-	@if ( menuState == State.None ) 
+	@if (menuState == State.None)
 	{
-	<div class="quit" @onclick=@( () => ExitGame() )>Quit</div>
-	<div class="logo"></div>
-    <div class="buttons">
-		<div class="slice">
-			<div class="play" @onclick=@( () => menuState = State.Play )>
-				<div class="top-bar">
-					<span>Play</span>
+		<div class="quit" @onclick=@( () => ExitGame() )>Quit</div>
+		<div class="logo"></div>
+		<div class="buttons">
+			<div class="slice">
+				<div class="play" @onclick=@( () => menuState = State.Play )>
+					<div class="top-bar">
+						<span>Play</span>
+					</div>
+					<div class="play-icon"></div>
 				</div>
-				<div class="play-icon"></div>
-	    	</div>
-			<div class="settings" @onclick=@( () => Game.Overlay.ShowSettingsModal() )>  @*@( () => menuState = State.Settings )>*@
-		    	<span>Settings</span>
-	    	</div>
-		</div>
-
-	    <div class="slice">
-		    <div class="character" @onclick=@( () => menuState = State.Character )>
-				<div class="top-bar">
-					<span>Character</span>
+				<div class="settings" @onclick=@( () => Game.Overlay.ShowSettingsModal() )> @*@( () => menuState = State.Settings )>*@
+					<span>Settings</span>
 				</div>
-				<SkinPreview class="character-preview" SkinTexture=@CharacterCreator.Skins[CharacterCreator.Selected].Texture/>
-		    </div>
+			</div>
 
-		    <div class="news" @onclick=@( () => menuState = State.News )>
-			    <span>News</span>
-		    </div>
+			<div class="slice">
+				<div class="character" @onclick=@( () => menuState = State.Character )>
+					<div class="top-bar">
+						<span>Character</span>
+					</div>
+					<SkinPreview class="character-preview"
+						SkinTexture=@CharacterCreator.Skins[CharacterCreator.Selected].Texture />
+				</div>
+
+				<div class="news" @onclick=@( () => menuState = State.News )>
+					<span>News</span>
+				</div>
+			</div>
 		</div>
-	</div>
 	}
-	@if ( menuState == State.Play ) { <ServerList @ref=serverList></ServerList> }
-	@if ( menuState == State.Create ) { <LobbyCreator @ref=lobbyCreator></LobbyCreator> }
-	@if ( menuState == State.Character ) { <CharacterCreator></CharacterCreator> }
-	@if ( menuState == State.Settings ) { <Settings></Settings> }
-	@if ( menuState == State.News ) { <News></News> }
+	@if (menuState == State.Play)
+	{
+		<ServerList @ref=serverList></ServerList>
+	}
+	@if (menuState == State.Create)
+	{
+		<LobbyCreator @ref=lobbyCreator></LobbyCreator>
+	}
+	@if (menuState == State.Character)
+	{
+		<CharacterCreator></CharacterCreator>
+	}
+	@if (menuState == State.Settings)
+	{
+		<Settings></Settings>
+	}
+	@if (menuState == State.News)
+	{
+		<News></News>
+	}
 </root>
 
 @code
-{	
+{
 	public bool IsVisible { get; set; } = true;
 	public LobbyCreator lobbyCreator { get; set; }
 	public ServerList serverList { get; set; }
@@ -52,31 +68,31 @@
 
 	public static State menuState { get; set; } = State.None;
 
-    protected override int BuildHash() => HashCode.Combine( IsVisible, menuState );
+	protected override int BuildHash() => HashCode.Combine(IsVisible, menuState);
 
-    protected override void OnUpdate()
-    {
-	    if ( Input.EscapePressed ) Input.EscapePressed = false;
-    }
+	protected override void OnUpdate()
+	{
+		if (Input.EscapePressed) Input.EscapePressed = false;
+	}
 
-    protected override void OnStart()
-    {
-	    menuState = State.None;
+	protected override void OnStart()
+	{
+		menuState = State.None;
 		CharacterCreator.Initialize();
-    }
+	}
 
-    private void ExitGame()
-    {
-        Game.Close();
-    }
+	private void ExitGame()
+	{
+		Game.Close();
+	}
 
-    public enum State
-    {
-	    None,
-	    Play,
+	public enum State
+	{
+		None,
+		Play,
 		Create,
 		Character,
-	    Settings,
+		Settings,
 		News
-    }
+	}
 }

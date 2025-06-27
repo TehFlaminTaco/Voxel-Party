@@ -102,16 +102,19 @@ public partial class VoxelPlayer : Component
         LocalPlayer = Scene.GetAllComponents<VoxelPlayer>().FirstOrDefault( x => x.Network.Owner == Connection.Local );
 
         if ( !IsProxy )
-        {
-            if ( CharacterCreator.Skins == null || CharacterCreator.Skins.Count == 0 )
-                CharacterCreator.Initialize();
-            var curSkin = CharacterCreator.Skins[CharacterCreator.Selected];
-            PlayerSkin = curSkin.BaseSkinName ?? $"!{curSkin.Username}";
-        }
+            LoadSkin();
 
         UpdateSkin();
 
         SpawnBlockBreakingEffect();
+    }
+
+    async void LoadSkin()
+    {
+        if ( CharacterCreator.Skins == null || CharacterCreator.Skins.Count == 0 )
+            await CharacterCreator.Initialize();
+        var curSkin = CharacterCreator.Skins[CharacterCreator.Selected];
+        PlayerSkin = curSkin.BaseSkinName ?? $"!{curSkin.Username}";
     }
 
     [Property, Sync, Change] public string PlayerSkin { get; set; } = "";

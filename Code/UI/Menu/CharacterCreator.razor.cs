@@ -6,7 +6,19 @@ using Sandbox.UI;
 public partial class CharacterCreator : Panel
 {
     public static List<Skin> Skins { get; set; } = new();
-    public static int Selected { get; set; }
+    private static int _selected { get; set; }
+    public static int Selected
+    {
+        get
+        {
+            return _selected;
+        }
+        set
+        {
+            _selected = value;
+            FileSystem.Data.WriteAllText( "selectedskin.txt", _selected.ToString() );
+        }
+    }
     public TextEntry Name { get; set; }
 
     public class Skin
@@ -16,14 +28,20 @@ public partial class CharacterCreator : Panel
         public Texture Texture;
     }
 
-    public static void Initialize()
+    public static async Task Initialize()
     {
         var path = "materials/models/skins/";
         foreach ( var i in FileSystem.Mounted.FindFile( path, "*.png", true ) )
         {
             if ( Skins.Any( c => c.BaseSkinName == i ) )
                 continue;
-            Skins.Add( new Skin { BaseSkinName = i, Texture = Texture.Load( $"{path}{i}" ) } );
+            Skins.Add( new Skin { BaseSkinName = i, Texture = await Texture.LoadAsync( FileSystem.Mounted, $"{path}{i}" ) } );
+        }
+
+        if ( FileSystem.Data.FileExists( "selectedskin.txt" ) )
+        {
+            if ( int.TryParse( FileSystem.Data.ReadAllText( "selectedskin.txt" ), out int v ) )
+                Selected = v;
         }
 
         // Load data-folder skins
@@ -32,7 +50,7 @@ public partial class CharacterCreator : Panel
             var skins = FileSystem.Data.ReadAllText( "customskins.txt" );
             foreach ( var s in skins.Split( "\n" ) )
             {
-                VoxelPlayer.GetTextureFromSkin( s ).ContinueWith( t => Skins.Add( new Skin { Username = s, Texture = t.Result } ) );
+                Skins.Add( new Skin { Username = s, Texture = await VoxelPlayer.GetTextureFromSkin( s ) } );
             }
         }
     }
