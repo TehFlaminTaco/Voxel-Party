@@ -6,20 +6,21 @@ public static class ItemRegistry
 	public static Dictionary<int, Item> CachedRegistry = new();
 	public static void UpdateRegistry()
 	{
-		CachedRegistry.Clear();
+		var newRegistry = new Dictionary<int, Item>();
 		foreach ( var item in ResourceLibrary.GetAll<Item>() )
 		{
-			if ( CachedRegistry.ContainsKey( item.ID ) )
-				Log.Warning( $"Duplicate registry entry: {item.ID} = {item.ResourcePath} vs {CachedRegistry[item.ID].ResourcePath}" );
+			if ( newRegistry.ContainsKey( item.ID ) )
+				Log.Warning( $"Duplicate registry entry: {item.ID} = {item.ResourcePath} vs {newRegistry[item.ID].ResourcePath}" );
 			else
-				CachedRegistry[item.ID] = item;
+				newRegistry[item.ID] = item;
 		}
+		CachedRegistry = newRegistry;
 	}
 
 	public static Item GetItem( int ID )
 	{
-		if ( CachedRegistry.ContainsKey( ID ) )
-			return CachedRegistry[ID];
+		if ( CachedRegistry.TryGetValue( ID, out Item i ) )
+			return i;
 		return null;
 	}
 
@@ -41,8 +42,8 @@ public static class ItemRegistry
 
 	public static Block GetBlock( int itemID )
 	{
-		if ( CachedRegistry.ContainsKey( itemID ) )
-			return CachedRegistry[itemID].Block;
+		if ( CachedRegistry.TryGetValue( itemID, out Item i ) )
+			return i.Block;
 		return null;
 	}
 

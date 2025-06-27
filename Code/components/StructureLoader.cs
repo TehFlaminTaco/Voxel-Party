@@ -50,7 +50,7 @@ public partial class StructureLoader : Component, Component.ExecuteInEditor
 			Retry = true;
 			return;
 		}
-		if(Scene is null )
+		if ( Scene is null )
 		{
 			Retry = true;
 			return;
@@ -108,13 +108,13 @@ public partial class StructureLoader : Component, Component.ExecuteInEditor
 
 	protected override void OnEnabled()
 	{
-		Regenerate();
+		_ = Regenerate();
 	}
 
 	protected override void OnValidate()
 	{
 		base.OnValidate();
-		Regenerate();
+		_ = Regenerate();
 	}
 
 	protected override void OnDisabled()

@@ -121,6 +121,8 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 	public async Task UpdateMesh()
 	{
 		if ( locked ) return;
+		if ( Scene is null ) return;
+		if ( !ItemRegistry.FinishedLoading ) return;
 		try
 		{
 			var world = WorldInstance;
@@ -171,6 +173,10 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			}
 
 			await GameTask.MainThread();
+			if ( Scene == null )
+			{
+				return;
+			}
 			using ( Scene.Push() )
 			{
 				foreach ( var blockPos in DestroyBlockObjects )
