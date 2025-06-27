@@ -279,10 +279,9 @@ public class BlockSpace
 		chunk.SetBlock( blockPosition.x, blockPosition.y, blockPosition.z, blockData );
 	}
 
-	public void SpawnBreakParticles( Vector3Int position )
+	public void SpawnBreakParticles( Vector3Int position, BlockData data )
 	{
-		var item = ItemRegistry.GetItem( position );
-		var block = item.Block;
+		var block = data.GetBlock(); ;
 		for ( int i = 0; i < 32; i++ )
 		{
 			var particlePos = (position + new Vector3(
@@ -302,7 +301,7 @@ public class BlockSpace
 			particle.Lifetime = Random.Shared.Float( 3f, 5f ); // Random lifetime for the particles.
 			Vector2 texCoord = new Vector2( Random.Shared.Float() * 14 / 16f, Random.Shared.Float() * 14 / 16f );
 			particle.TextureRect = Rect.FromPoints( texCoord, texCoord + new Vector2( 2 / 16f, 2 / 16f ) );
-			particle.ItemID = item.ID;
+			particle.ItemID = data.BlockID;
 			particle.Scale = new Curve( new List<Curve.Frame>
 			{
 				new Curve.Frame(0f, 30f, -MathF.PI, MathF.PI),

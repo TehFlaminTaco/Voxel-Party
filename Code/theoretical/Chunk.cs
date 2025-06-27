@@ -14,7 +14,8 @@ public class Chunk
 	public int X => Position.x;
 	public int Y => Position.y;
 	public int Z => Position.z;
-	public bool Dirty = true;
+	public bool RenderDirty = true;
+	public bool NetworkDirty = true;
 	public BlockSpace world;
 
 	public Chunk( BlockSpace world, Vector3Int position )
@@ -40,7 +41,8 @@ public class Chunk
 
 	public void MarkDirty()
 	{
-		Dirty = true; // Mark the chunk as dirty to indicate it needs to be updated/rendered.
+		RenderDirty = true; // Mark the chunk as dirty to indicate it needs to be updated/rendered.
+		NetworkDirty = true;
 	}
 
 	public void SetBlock( int x, int y, int z, BlockData blockData )
@@ -57,8 +59,8 @@ public class Chunk
 		if ( blocks[x, y, z] == blockData ) // If we don't actually change, don't update our neighbours at all.
 			return;
 		blocks[x, y, z] = blockData;
-		Dirty = true; // Mark the chunk as dirty to indicate it needs to be updated/rendered.
-					  // If we're on a chunk border (x y or z is 0 or SIZE-1), we might need to update neighboring chunks.
+		MarkDirty(); // Mark the chunk as dirty to indicate it needs to be updated/rendered.
+					 // If we're on a chunk border (x y or z is 0 or SIZE-1), we might need to update neighboring chunks.
 		world.GetBlock( Position + new Vector3Int( -1, 0, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( -1, 0, 0 ), Position );
 		world.GetBlock( Position + new Vector3Int( 1, 0, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 1, 0, 0 ), Position );
 		world.GetBlock( Position + new Vector3Int( 0, -1, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 0, -1, 0 ), Position );
@@ -128,6 +130,6 @@ public class Chunk
 				}
 			}
 		}
-		Dirty = true;
+		MarkDirty();
 	}
 }
