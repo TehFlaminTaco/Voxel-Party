@@ -44,9 +44,11 @@ public partial class SpeedBuildHud : PanelComponent
     {
         // Update goodbar and badbar widths based on player stats
         var player = VoxelPlayer.LocalPlayer;
-        var goodBar = Panel.Children.First( c => c.Id == "score" ).Children.First( c => c.HasClass( "goodbar" ) );
-        var badBar = Panel.Children.First( c => c.Id == "score" ).Children.First( c => c.HasClass( "badbar" ) );
-        var killBar = Panel.FindChild( "failPointer" );
+        var goodBar = Panel.FindChild( "#score", false )?.FindChild( "goodbar" );
+        var badBar = Panel.FindChild( "#score", false )?.FindChild( "badbar" );
+        var killBar = Panel.FindChild( "failPointer", false );
+
+        if ( goodBar == null || badBar == null || killBar == null ) return;
 
         if ( KillPercentage.HasValue )
             killBar.Style.Width = Length.Fraction( KillPercentage.Value / 100f );
