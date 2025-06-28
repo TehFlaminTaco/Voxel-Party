@@ -1,4 +1,5 @@
 using System;
+using System.Configuration.Assemblies;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 using Sandbox;
@@ -14,6 +15,9 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 	public World WorldInstance => WorldThinkerInstance?.World;
 	[Property] public bool TortureTest = false;
 	int LastChunkDataHash = -1;
+	int RequestedHashCode = -1;
+	TimeUntil RequestedHashTimeout = 0f;
+	Queue<(int hash, byte[] data)> LastFewPackets = new();
 	protected override void OnUpdate()
 	{
 		if ( !ItemRegistry.FinishedLoading )
@@ -23,7 +27,12 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		if ( !Networking.IsHost )
 		{
 			int hash = Convert.ToBase64String( ChunkData.ToArray() ).GetHashCode();
-			if ( hash != LastChunkDataHash )
+			if ( RequestedHashTimeout > 0f && hash != RequestedHashCode )
+			{
+				LastFewPackets.Enqueue( (hash, ChunkData) );
+				while ( LastFewPackets.Count > 5 ) LastFewPackets.Dequeue();
+			}
+			else if ( hash != LastChunkDataHash )
 			{
 				LastChunkDataHash = hash;
 				OnChunkDataChanged( ChunkData );
@@ -36,6 +45,21 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 		{
 			if ( Scene is not null )
 				_ = UpdateMesh(); // If the chunk is dirty, update the mesh.
+		}
+	}
+
+	[Rpc.Broadcast]
+	public void UpdateRequstedHash( int HashCode )
+	{
+		RequestedHashCode = HashCode;
+		RequestedHashTimeout = 1f;
+		foreach ( var packet in LastFewPackets )
+		{
+			if ( packet.hash == HashCode )
+			{
+				LastChunkDataHash = HashCode;
+				OnChunkDataChanged( packet.data );
+			}
 		}
 	}
 
@@ -53,7 +77,6 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 			Log.Warning( $"Invalid chunk data length: {value.Length}. Expected {Chunk.SIZE.x * Chunk.SIZE.y * Chunk.SIZE.z * 2}." );
 			return;
 		}
-
 		for ( int z = 0; z < Chunk.SIZE.z; z++ )
 		{
 			for ( int y = 0; y < Chunk.SIZE.y; y++ )
@@ -63,11 +86,12 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 					int index = (z * Chunk.SIZE.y * Chunk.SIZE.x + y * Chunk.SIZE.x + x) * 2;
 					var blockID = value[index];
 					var blockDataValue = value[index + 1];
-					if ( chunk.GetBlock( x, y, z ).BlockID == blockID && chunk.GetBlock( x, y, z ).BlockDataValue == blockDataValue )
+					var newData = new BlockData( blockID, blockDataValue );
+					if ( chunk.GetBlock( x, y, z ) == newData )
 					{
 						continue; // No change needed
 					}
-					chunk.SetBlock( x, y, z, new BlockData( blockID, blockDataValue ) );
+					chunk.SetBlock( x, y, z, newData );
 				}
 			}
 		}
@@ -97,7 +121,9 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 				}
 			}
 		}
-		ChunkData = data.RunLengthEncodeBy( 2 ).ToArray();
+		data = data.RunLengthEncodeBy( 2 ).ToArray();
+		ChunkData = data;
+		UpdateRequstedHash( Convert.ToBase64String( data ).GetHashCode() );
 		chunk.NetworkDirty = false;
 	}
 

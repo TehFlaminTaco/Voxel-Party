@@ -70,10 +70,13 @@ public sealed class SpeedBuild : Component
 		Structure.StructureDifficulty.Hard,
 	};
 
+	public bool IsPlaying = false;
 	async void GameModeLogic()
 	{
 		if ( !Networking.IsHost )
 			return;
+		if ( IsPlaying ) return;
+		IsPlaying = true;
 
 		foreach ( var ply in Scene.GetAll<VoxelPlayer>() )
 		{
@@ -151,18 +154,12 @@ public sealed class SpeedBuild : Component
 				structureList = TargetStructures;
 			}
 
-			foreach ( var s in structureList )
-			{
-				Log.Info( $"OPTION: {s.ResourceName}" );
-			}
-
 			_currentStructure = structureList[Random.Shared.Int( 0, structureList.Count - 1 )];
 			while ( lastStructure.IsValid() && _currentStructure == lastStructure )
 			{
 				_currentStructure = structureList[Random.Shared.Int( 0, structureList.Count - 1 )];
-				Log.Info("hi");
 			}
-			
+
 			if ( _currentStructure == null )
 			{
 				Log.Error( "No target structure set for SpeedBuild." );
@@ -183,12 +180,12 @@ public sealed class SpeedBuild : Component
 				SetPlayerTransform( player, Islands[index].GetComponentInChildren<SpawnPoint>().WorldPosition,
 					Rotation.LookAt( Vector3.Zero ).Angles().WithRoll( 0 ) );
 				player.MakeFlying();
-
+				player.IslandIndex = index;
+				index++;
 			}
 
 
 			await Task.DelayRealtimeSeconds( 1f );
-
 			foreach ( var player in Players )
 			{
 				// Spawn a copy of the target structure on the player's island
@@ -196,7 +193,7 @@ public sealed class SpeedBuild : Component
 				var structure = obj.AddComponent<StructureLoader>( false );
 				structure.LoadedStructure = _currentStructure;
 
-				var targetPosition = Islands[index].Children.FirstOrDefault( c => c.Name == "StructureAnchor" ).WorldPosition;
+				var targetPosition = Islands[player.IslandIndex].Children.FirstOrDefault( c => c.Name == "StructureAnchor" ).WorldPosition;
 
 				var size = structure.StructureSize;
 
@@ -208,8 +205,6 @@ public sealed class SpeedBuild : Component
 				player.BuildAreaMins = (structure.WorldPosition / World.BlockScale).Floor();
 				player.BuildAreaMaxs = player.BuildAreaMins + size - Vector3Int.One;
 				anyStructureData ??= BlockData.GetAreaInBox( player.BuildAreaMins, size );
-
-				index++;
 			}
 
 			SpeedBuildHud.Instance.TimerEnd = MemorizeTime.IndexOrLast( RoundNumber ); // Set the timer for 60 seconds
@@ -293,8 +288,10 @@ public sealed class SpeedBuild : Component
 				}
 			}
 
+			List<(Vector3Int mins, Vector3Int maxes)> CleanupAreas = new();
 			foreach ( var player in Players )
 			{
+				CleanupAreas.Add( (player.BuildAreaMins, player.BuildAreaMaxs) );
 				player.TotalBlockArea = validBlocks; // Set total block area
 				player.CorrectBlocksPlaced = 0; // Reset correct blocks placed
 				player.IncorrectBlocksPlaced = 0; // Reset incorrect blocks placed
@@ -402,7 +399,21 @@ public sealed class SpeedBuild : Component
 				// Restart the lobby
 				Scene.LoadFromFile( "scenes/speed build.scene" );
 				break;
+			}
 
+			// Clean up all player structures.
+			foreach ( var area in CleanupAreas )
+			{
+				for ( int z = area.mins.z; z <= area.maxes.z; z++ )
+				{
+					for ( int y = area.mins.y; y <= area.maxes.y; y++ )
+					{
+						for ( int x = area.mins.x; x <= area.maxes.x; x++ )
+						{
+							World.Active.SetBlock( new Vector3Int( x, y, z ), BlockData.Empty );
+						}
+					}
+				}
 			}
 			SpeedBuildHud.Instance.Message = "Get ready for the next round!";
 			await Task.DelayRealtimeSeconds( 3 );

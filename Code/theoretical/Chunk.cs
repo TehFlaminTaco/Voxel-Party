@@ -61,12 +61,9 @@ public class Chunk
 		blocks[x, y, z] = blockData;
 		MarkDirty(); // Mark the chunk as dirty to indicate it needs to be updated/rendered.
 					 // If we're on a chunk border (x y or z is 0 or SIZE-1), we might need to update neighboring chunks.
-		world.GetBlock( Position + new Vector3Int( -1, 0, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( -1, 0, 0 ), Position );
-		world.GetBlock( Position + new Vector3Int( 1, 0, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 1, 0, 0 ), Position );
-		world.GetBlock( Position + new Vector3Int( 0, -1, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 0, -1, 0 ), Position );
-		world.GetBlock( Position + new Vector3Int( 0, 1, 0 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 0, 1, 0 ), Position );
-		world.GetBlock( Position + new Vector3Int( 0, 0, -1 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 0, 0, -1 ), Position );
-		world.GetBlock( Position + new Vector3Int( 0, 0, 1 ) ).GetBlock().OnNeighbourUpdated( world, Position + new Vector3Int( 0, 0, 1 ), Position );
+		var pos = Position * Chunk.SIZE + new Vector3Int( x, y, z );
+		foreach ( var dir in Directions.All )
+			world.GetBlock( pos + dir.Forward() ).GetBlock().OnNeighbourUpdated( world, pos + dir.Forward(), pos );
 
 	}
 

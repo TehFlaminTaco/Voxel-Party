@@ -52,11 +52,13 @@ public partial class VoxelPlayer : Component
     public bool IsFlying;
     SceneCustomObject blockBreakEffect;
 
+    public int IslandIndex = 0;
+
     // Gamemode stuff
     [Sync( SyncFlags.FromHost )] public bool HasBuildVolume { get; set; } = false;
     [Sync( SyncFlags.FromHost )] public Vector3Int BuildAreaMins { get; set; } = Vector3Int.Zero;
     [Sync( SyncFlags.FromHost )] public Vector3Int BuildAreaMaxs { get; set; } = Vector3Int.Zero;
-    [Sync( SyncFlags.FromHost )] public bool CanBuild { get; set; } = true;
+    [Property][Sync( SyncFlags.FromHost )] public bool CanBuild { get; set; } = false;
 
     [Sync( SyncFlags.FromHost )] public int TotalBlockArea { get; set; } = 0; // Total area of the blocks in the build area, used for gamemode scoring
     [Sync( SyncFlags.FromHost )] public int CorrectBlocksPlaced { get; set; } = 0; // Number of blocks placed correctly by the player, used for gamemode scoring
@@ -236,6 +238,8 @@ public partial class VoxelPlayer : Component
     {
         // TODO: Sound, Blood?
         Spectator = true;
+        HasBuildVolume = false;
+        CanBuild = false;
     }
 
     public TimeSince TimeSinceLastJump { get; set; } = 0;
@@ -335,7 +339,7 @@ public partial class VoxelPlayer : Component
             var closestWall = walls.OrderBy( c => c.Item3 ).First();
             // Mutate the trace to hit the closest wall instead of the block.
             trace.Hit = true;
-            trace.HitBlockPosition = (closestWall.Item1 / World.BlockScale).Floor() + closestWall.Item2.Forward();
+            trace.HitBlockPosition = (closestWall.Item1 / World.BlockScale + Vector3.One / 128f).Floor() + closestWall.Item2.Forward();
             if ( closestWall.Item2 is Direction.North or Direction.West or Direction.Up )
             {
                 trace.HitBlockPosition -= closestWall.Item2.Forward();
@@ -436,13 +440,11 @@ public partial class VoxelPlayer : Component
         {
             if ( !GiveBrokenBlocks )
             {
-                world.Thinker.BreakBlock( BreakingBlock.Value );
+                world.Thinker.BreakBlock( BreakingBlock.Value, world.GetBlock( BreakingBlock.Value ) );
             }
             else
             {
-                if ( !Networking.IsHost )
-                    world.SetBlock( BreakingBlock.Value, BlockData.Empty );
-                BreakAndGive( BreakingBlock.Value );
+                BreakAndGive( BreakingBlock.Value, world.GetBlock( BreakingBlock.Value ) );
             }
         }
 
@@ -451,31 +453,40 @@ public partial class VoxelPlayer : Component
         TimeSinceLastBreak = 0;
     }
 
-    [Rpc.Host( NetFlags.SendImmediate )]
-    public void BreakAndGive( Vector3Int Position )
+    [Rpc.Broadcast]
+    public void BreakAndGive( Vector3Int Position, BlockData expectedBlock )
     {
         var i = inventory.PutInFirstAvailableSlot( new ItemStack( ItemRegistry.GetItem( Position ) ) );
-        world.Thinker.BreakBlock( Position, false );
+        world.Thinker.BreakBlock( Position, expectedBlock, false );
     }
 
     public void HandlePlace()
     {
         if ( Input.Pressed( "Attack2" ) )
         {
-            TryPlace( Scene.Camera.WorldPosition, Scene.Camera.WorldRotation.Forward, SelectedSlot, !Networking.IsHost );
-            if ( !Networking.IsHost )
-                PlaceSync( Scene.Camera.WorldPosition, Scene.Camera.WorldRotation.Forward, SelectedSlot );
+            TryPlace( Scene.Camera.WorldPosition, Scene.Camera.WorldRotation.Forward, SelectedSlot );
         }
     }
 
 
-    [Rpc.Host( NetFlags.SendImmediate )]
-    public void PlaceSync( Vector3 eyePos, Vector3 eyeForward, int selectedSlot )
+    [Rpc.Broadcast]
+    public void NetPlace( Vector3Int BlockPos, BlockData data, int selectedSlot )
     {
-        TryPlace( eyePos, eyeForward, selectedSlot );
+        // Check that we CAN place here, and if so, decremen the item in the slot
+        if ( !world.GetBlock( BlockPos ).GetBlock().Replaceable ) // If we can't put a block here, give up.
+            return;
+        if ( HasBuildVolume && (BlockPos.x < BuildAreaMins.x || BlockPos.y < BuildAreaMins.y || BlockPos.z < BuildAreaMins.z || BlockPos.x > BuildAreaMaxs.x || BlockPos.y > BuildAreaMaxs.y || BlockPos.z > BuildAreaMaxs.z) )
+        {
+            return;
+        }
+        inventory.TakeItem( selectedSlot, 1 ); // Remove one item from the hotbar slot
+        if ( Networking.IsHost )
+            world.Thinker.PlaceBlock( BlockPos, data );
+        else
+            world.SetBlock( BlockPos, data );
     }
 
-    public void TryPlace( Vector3 eyePos, Vector3 eyeForward, int selectedSlot, bool simulated = false )
+    public void TryPlace( Vector3 eyePos, Vector3 eyeForward, int selectedSlot )
     {
         var item = inventory.GetItem( selectedSlot );
         if ( ItemStack.IsNullOrEmpty( item ) )
@@ -504,13 +515,10 @@ public partial class VoxelPlayer : Component
         {
             return;
         }
-        if ( !simulated )
-            inventory.TakeItem( selectedSlot, 1 ); // Remove one item from the hotbar slot
         var pc = GetComponent<PlayerController>();
-        if ( Networking.IsHost )
-            world.Thinker.PlaceBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, Scene.Camera.WorldRotation.Forward ) );
-        else
-            world.SetBlock( placePos, BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, Scene.Camera.WorldRotation.Forward ) );
+        var newData = BlockData.WithPlacementBlockData( (byte)item.Item.ID, trace.HitFace, Scene.Camera.WorldRotation.Forward );
+        NetPlace( placePos, newData, selectedSlot );
+
     }
 
     public void ShowHoveredFace()

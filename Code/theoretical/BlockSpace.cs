@@ -198,6 +198,16 @@ public class BlockSpace
 		return c;
 	}
 
+	public Chunk GetChunkFromBlockPos( Vector3Int position )
+	{
+		var chunkPosition = new Vector3Int(
+			(position.x + 15 * (position.x >> 31)) / 16,
+			(position.y + 15 * (position.y >> 31)) / 16,
+			(position.z + 15 * (position.z >> 31)) / 16
+		);
+		return GetChunk( chunkPosition );
+	}
+
 	public Chunk GetChunkIfExists( Vector3Int position )
 	{
 		if ( SimulatedChunks.TryGetValue( position, out var chunk ) )
@@ -281,7 +291,6 @@ public class BlockSpace
 
 	public void SpawnBreakParticles( Vector3Int position, BlockData data )
 	{
-		var block = data.GetBlock(); ;
 		for ( int i = 0; i < 32; i++ )
 		{
 			var particlePos = (position + new Vector3(
@@ -307,7 +316,6 @@ public class BlockSpace
 				new Curve.Frame(0f, 30f, -MathF.PI, MathF.PI),
 				new Curve.Frame(1f, 0f, 0f, 0f)
 			} );
-			particle.GameObject.NetworkSpawn();
 		}
 
 		/*var particle = item.Block.BreakParticle.IsValid() 
