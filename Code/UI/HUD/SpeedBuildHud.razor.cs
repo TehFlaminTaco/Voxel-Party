@@ -35,10 +35,10 @@ public partial class SpeedBuildHud : PanelComponent
             TotalTime.GetHashCode(),
             HasTimer.GetHashCode(),
             HasReadyCheck.GetHashCode() ),
-        VoxelPlayer.LocalPlayer.TotalBlockArea.GetHashCode(),
-        VoxelPlayer.LocalPlayer.CorrectBlocksPlaced.GetHashCode(),
-        VoxelPlayer.LocalPlayer.IncorrectBlocksPlaced.GetHashCode(),
-        VoxelPlayer.LocalPlayer.IsReady.GetHashCode() );
+        VoxelPlayer.LocalPlayer?.TotalBlockArea.GetHashCode(),
+        VoxelPlayer.LocalPlayer?.CorrectBlocksPlaced.GetHashCode(),
+        VoxelPlayer.LocalPlayer?.IncorrectBlocksPlaced.GetHashCode(),
+        VoxelPlayer.LocalPlayer?.IsReady.GetHashCode() );
 
     protected override void OnTreeBuilt()
     {

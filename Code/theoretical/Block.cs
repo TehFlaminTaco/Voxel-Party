@@ -174,7 +174,7 @@ public class Block
 
 	public void OnNeighbourUpdated( BlockSpace world, Vector3Int blockPos, Vector3Int neighbourPos )
 	{
-		world.GetChunk( blockPos )?.MarkDirty();
+		world.GetChunkFromBlockPos( blockPos )?.MarkDirty();
 		if ( !IsValidPlacement( world, blockPos, this.Rotateable ? world.GetBlock( blockPos ).FacingFromData() : Direction.None ) )
 		{
 			this.Pop( world, blockPos );
@@ -214,7 +214,7 @@ public class Block
 		if ( world is World w )
 		{
 			// Pop off as an item.
-			w.Thinker.BreakBlock( pos, true );
+			w.Thinker.BreakBlock( pos, world.GetBlock( pos ), true );
 			return;
 		}
 
