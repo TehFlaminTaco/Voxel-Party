@@ -297,7 +297,7 @@ public partial class VoxelPlayer : Component
     public BlockTraceResult EyeTrace()
     {
         var pc = GetComponent<PlayerController>();
-        if ( Scene == null || Scene.Camera == null ) return;
+        if ( Scene == null || Scene.Camera == null ) return default;
         return EyeTrace( Scene.Camera.WorldPosition, Scene.Camera.WorldRotation.Forward );
     }
 
