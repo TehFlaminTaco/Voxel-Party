@@ -266,7 +266,7 @@ public static class Helpers
 			&& pos.x <= maxes.x && pos.y <= maxes.y && pos.z <= maxes.z;
 	}
 
-	public static Panel FindChild( this Panel parent, string condition )
+	public static Panel FindChild( this Panel parent, string condition, bool throwOnFail = false )
 	{
 		if ( parent == null )
 		{
@@ -277,7 +277,7 @@ public static class Helpers
 			? (Func<Panel, bool>)(x => x.Id == condition.Substring( 1 ))
 			: (Func<Panel, bool>)(x => x.HasClass( condition ));
 		return parent.Children.FirstOrDefault( predicate ) ??
-			   parent.Children.Select( child => child.FindChild( condition ) ).FirstOrDefault( x => x != null );
+			   parent.Children.Select( child => child.FindChild( condition, false ) ).FirstOrDefault( x => x != null ) ?? (throwOnFail ? throw new Exception( $"Failed to find child with name {condition} on {parent}" ) : null);
 	}
 
 	public static T ParentOfType<T>( this Panel p ) where T : Panel

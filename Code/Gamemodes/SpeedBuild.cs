@@ -186,6 +186,10 @@ public sealed class SpeedBuild : Component
 
 
 			await Task.DelayRealtimeSeconds( 1f );
+			foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
+				Players.Remove( p ); // Cleanup any players we lost.
+
+			List<(Vector3Int mins, Vector3Int maxes)> CleanupAreas = new();
 			foreach ( var player in Players )
 			{
 				// Spawn a copy of the target structure on the player's island
@@ -205,6 +209,8 @@ public sealed class SpeedBuild : Component
 				player.BuildAreaMins = (structure.WorldPosition / World.BlockScale).Floor();
 				player.BuildAreaMaxs = player.BuildAreaMins + size - Vector3Int.One;
 				anyStructureData ??= BlockData.GetAreaInBox( player.BuildAreaMins, size );
+
+				CleanupAreas.Add( (player.BuildAreaMins, player.BuildAreaMaxs) );
 			}
 
 			SpeedBuildHud.Instance.TimerEnd = MemorizeTime.IndexOrLast( RoundNumber ); // Set the timer for 60 seconds
@@ -217,7 +223,8 @@ public sealed class SpeedBuild : Component
 
 			SpeedBuildHud.Instance.Message = "Time's up! Starting the build phase...";
 			SpeedBuildHud.Instance.HasTimer = false; // Hide the timer UI
-
+			foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
+				Players.Remove( p ); // Cleanup any players we lost.
 			foreach ( var player in Players )
 			{
 				// Clear the blocks in the player's build area;
@@ -266,7 +273,8 @@ public sealed class SpeedBuild : Component
 			SpeedBuildHud.Instance.HasTimer = false; // Hide the timer UI
 
 			SpeedBuildHud.Instance.KillPercentage = TargetAccuracy.IndexOrLast( RoundNumber );
-
+			foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
+				Players.Remove( p ); // Cleanup any players we lost.
 			foreach ( var player in Players )
 			{
 				player.CanBuild = false; // Disable building for all players
@@ -287,11 +295,10 @@ public sealed class SpeedBuild : Component
 					}
 				}
 			}
-
-			List<(Vector3Int mins, Vector3Int maxes)> CleanupAreas = new();
+			foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
+				Players.Remove( p ); // Cleanup any players we lost.
 			foreach ( var player in Players )
 			{
-				CleanupAreas.Add( (player.BuildAreaMins, player.BuildAreaMaxs) );
 				player.TotalBlockArea = validBlocks; // Set total block area
 				player.CorrectBlocksPlaced = 0; // Reset correct blocks placed
 				player.IncorrectBlocksPlaced = 0; // Reset incorrect blocks placed
@@ -328,6 +335,8 @@ public sealed class SpeedBuild : Component
 				}
 			}
 			await Task.DelayRealtimeSeconds( 0.5f );
+			foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
+				Players.Remove( p ); // Cleanup any players we lost.
 			foreach ( var player in Players )
 			{
 				ScoreByPlayer[player] = player.CorrectBlocksPlaced * 100 / validBlocks;
@@ -337,9 +346,13 @@ public sealed class SpeedBuild : Component
 			{
 				SpeedBuildHud.Instance.Message = "Executing the failures!";
 				await Task.DelayRealtimeSeconds( 1 );
+				foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
+					Players.Remove( p ); // Cleanup any players we lost.
 				var losers = Players.Where( k => ScoreByPlayer[k] < TargetAccuracy.IndexOrLast( RoundNumber ) ).OrderByDescending( k => ScoreByPlayer[k] ).ToList();
 				foreach ( var player in losers )
 				{
+					if ( !(player?.IsValid() ?? false) )
+						continue;
 					if ( ScoreByPlayer[player] < TargetAccuracy.IndexOrLast( RoundNumber ) )
 					{
 						player.TotalBlockArea = 0;
@@ -351,6 +364,8 @@ public sealed class SpeedBuild : Component
 				foreach ( var loser in losers )
 					Players.Remove( loser );
 			}
+			foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
+				Players.Remove( p ); // Cleanup any players we lost.
 			if ( Players.Count <= 0 )
 			{
 				SpeedBuildHud.Instance.Message = "Declaring winners...";
@@ -362,39 +377,60 @@ public sealed class SpeedBuild : Component
 					ply.MoveCameraTo( podiumObject.WorldTransform, true );
 				}
 
-				var allPlayers = Players.OrderByDescending( k => ScoreByPlayer[k] ).Concat( HistoricalPlayers.Reverse<VoxelPlayer>() ).ToArray();
+				var allPlayers = Players.OrderByDescending( k => ScoreByPlayer[k] ).Concat( HistoricalPlayers.Reverse<VoxelPlayer>() ).Where( c => c?.IsValid() ?? false ).ToArray();
 				await Task.DelayRealtimeSeconds( 1 );
 				if ( allPlayers.Length > 2 )
 				{
 					SpeedBuildHud.Instance.Message = "Third Place";
 					await Task.DelayRealtimeSeconds( 3f );
-					var bronze = GameObject.Children.Find( j => j.Name == "Bronze" );
-					SpeedBuildHud.Instance.Message = allPlayers[2].Network.Owner.DisplayName;
-					allPlayers[2].Spectator = false;
-					allPlayers[2].IsFlying = false;
-					allPlayers[2].MoveTo( bronze.WorldTransform );
+					if ( allPlayers[2].IsValid() )
+					{
+						var bronze = GameObject.Children.Find( j => j.Name == "Bronze" );
+						SpeedBuildHud.Instance.Message = allPlayers[2].Network.Owner.DisplayName;
+						allPlayers[2].Spectator = false;
+						allPlayers[2].IsFlying = false;
+						allPlayers[2].MoveTo( bronze.WorldTransform );
+					}
+					else
+					{
+						SpeedBuildHud.Instance.Message = "Someone who left!";
+					}
 					await Task.DelayRealtimeSeconds( 5f );
 				}
 				if ( allPlayers.Length > 1 )
 				{
 					SpeedBuildHud.Instance.Message = "Second Place";
 					await Task.DelayRealtimeSeconds( 3f );
-					var silver = GameObject.Children.Find( j => j.Name == "Silver" );
-					SpeedBuildHud.Instance.Message = allPlayers[1].Network.Owner.DisplayName;
-					allPlayers[1].Spectator = false;
-					allPlayers[1].IsFlying = false;
-					allPlayers[1].MoveTo( silver.WorldTransform );
+					if ( allPlayers[1].IsValid() )
+					{
+						var silver = GameObject.Children.Find( j => j.Name == "Silver" );
+						SpeedBuildHud.Instance.Message = allPlayers[1].Network.Owner.DisplayName;
+						allPlayers[1].Spectator = false;
+						allPlayers[1].IsFlying = false;
+						allPlayers[1].MoveTo( silver.WorldTransform );
+					}
+					else
+					{
+						SpeedBuildHud.Instance.Message = "Someone who left!";
+					}
 					await Task.DelayRealtimeSeconds( 5f );
 				}
 				SpeedBuildHud.Instance.Message = "The winner is...";
 				await Task.DelayRealtimeSeconds( 3f );
-				var gold = GameObject.Children.Find( j => j.Name == "Gold" );
-				SpeedBuildHud.Instance.Message = allPlayers[0].Network.Owner.DisplayName;
-				if ( allPlayers.Length == 1 )
-					SpeedBuildHud.Instance.Message = allPlayers[0].Network.Owner.DisplayName + " (By default)";
-				allPlayers[0].Spectator = false;
-				allPlayers[0].IsFlying = false;
-				allPlayers[0].MoveTo( gold.WorldTransform );
+				if ( allPlayers[0].IsValid() )
+				{
+					var gold = GameObject.Children.Find( j => j.Name == "Gold" );
+					SpeedBuildHud.Instance.Message = allPlayers[0].Network.Owner.DisplayName;
+					if ( allPlayers.Length == 1 )
+						SpeedBuildHud.Instance.Message = allPlayers[0].Network.Owner.DisplayName + " (By default)";
+					allPlayers[0].Spectator = false;
+					allPlayers[0].IsFlying = false;
+					allPlayers[0].MoveTo( gold.WorldTransform );
+				}
+				else
+				{
+					SpeedBuildHud.Instance.Message = "Someone who left!";
+				}
 				await Task.DelayRealtimeSeconds( 10f ); // Take 30 seconds to celebrate!
 				SpeedBuildHud.Instance.Message = "Restarting!";
 				// Restart the lobby
@@ -402,6 +438,8 @@ public sealed class SpeedBuild : Component
 				break;
 			}
 
+			foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
+				Players.Remove( p ); // Cleanup any players we lost.
 			foreach ( var ply in Players )
 				ply.TotalBlockArea = 0;
 
