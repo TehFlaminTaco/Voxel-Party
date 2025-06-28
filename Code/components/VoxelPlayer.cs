@@ -297,6 +297,7 @@ public partial class VoxelPlayer : Component
     public BlockTraceResult EyeTrace()
     {
         var pc = GetComponent<PlayerController>();
+        if ( Scene == null || Scene.Camera == null ) return;
         return EyeTrace( Scene.Camera.WorldPosition, Scene.Camera.WorldRotation.Forward );
     }
 
@@ -365,6 +366,7 @@ public partial class VoxelPlayer : Component
         {
             if ( BreakingBlock == null )
                 return;
+            if ( world == null ) return;
             var block = world.GetBlock( BreakingBlock.Value ).GetBlock();
             var pos = (BreakingBlock.Value + Vector3.One * 0.5f) * World.BlockScale;
             pos += BreakingFace.Forward() * World.BlockScale * 0.501f; // Offset slightly to avoid z-fighting
