@@ -342,6 +342,7 @@ public sealed class SpeedBuild : Component
 				{
 					if ( ScoreByPlayer[player] < TargetAccuracy.IndexOrLast( RoundNumber ) )
 					{
+						player.TotalBlockArea = 0;
 						player.Explode();
 						await Task.DelayRealtime( 500 );
 					}
@@ -400,6 +401,9 @@ public sealed class SpeedBuild : Component
 				Scene.LoadFromFile( "scenes/speed build.scene" );
 				break;
 			}
+
+			foreach ( var ply in Players )
+				ply.TotalBlockArea = 0;
 
 			// Clean up all player structures.
 			foreach ( var area in CleanupAreas )
