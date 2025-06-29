@@ -265,7 +265,7 @@ public partial class VoxelPlayer : Component
 
         // Check for stuck
         var pc = GetComponent<PlayerController>();
-        if ( pc.TraceBody( WorldPosition, WorldPosition + Vector3.Up, 1f, 0.5f ).StartedSolid )
+        if ( pc.TraceBody( WorldPosition + Vector3.Up, WorldPosition + Vector3.Up, 1f, 0.5f ).StartedSolid )
             WorldPosition += Vector3.Up * 20f;
 
 
