@@ -224,7 +224,6 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 		World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
 	}
 
-	[Rpc.Broadcast]
 	public void SpawnBlockBreakParticles( Vector3Int position, BlockData data )
 	{
 		World.SpawnBreakParticles( position, data );
