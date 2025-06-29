@@ -2,8 +2,8 @@
   "clampu": false,
   "clampv": false,
   "clampw": false,
-  "nolod": false,
-  "nomip": false,
+  "nolod": true,
+  "nomip": true,
   "nocompress": true,
   "brightness": 1
 }

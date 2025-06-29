@@ -2,10 +2,7 @@
 
 Layer0
 {
-	shader "materials/pointshader.shader"
-
-	//---- Texture Filtering ----
-	F_TEXTURE_FILTERING 3 // Point Sample
+	shader "shaders/pointshader.shader"
 
 	Abledo "materials/block/oak_planks.png"
 
