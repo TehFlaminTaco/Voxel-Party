@@ -31,8 +31,9 @@ public class ItemPreview : AssetPreview
 
 
 	SceneCustomObject so;
-	Scene prefabScene;
-	SceneLight light;
+	Scene prefabScene = null;
+	GameObject prefabObject = null;
+	PointLight light;
 	public override async Task InitializeAsset()
 	{
 		await Task.Yield();
@@ -40,26 +41,23 @@ public class ItemPreview : AssetPreview
 		if ( item.Block?.BlockObject != null )
 		{
 			var prefab = item.Block.BlockObject;
-			prefabScene = new Scene()
+			using ( Scene.Push() )
 			{
-				WantsSystemScene = false
-			};
-			using ( prefabScene.Push() )
-			{
-				prefab.Clone( prefabScene, Vector3.Zero, Rotation.Identity, Vector3.One );
+				prefabObject = prefab.Clone( prefabScene, Vector3.Zero, Rotation.Identity, Vector3.One );
 			}
-			this.World = prefabScene.SceneWorld;
-			Camera = new SceneCamera();
-			Camera.World = World;
 			Camera.BackgroundColor = Color.Transparent;
-			Camera.Angles = new Angles( 20, 180 + 45, 0 );
+			Camera.WorldRotation = new Angles( 20, 180 + 45, 0 );
 			Camera.FieldOfView = 30.0f;
 			Camera.ZFar = 15000.0f;
-			Camera.World.AmbientLightColor = Color.White * 0.05f;
+			Scene.SceneWorld.AmbientLightColor = Color.White * 0.05f;
 			SceneSize = new Vector3( 40 );
-			SceneCenter = new Vector3( -20, 20, 20 );
+			SceneCenter = new Vector3( 20, 20, 20 );
 
-			light = new SceneLight( World, Camera.Position + Vector3.Up * 500.0f + Vector3.Backward * 100.0f, 500f, new Color( 1.0f, 0.9f, 0.9f ) * 50.0f );
+			light = new GameObject().AddComponent<PointLight>();
+			light.WorldPosition = Camera.WorldPosition + Vector3.Up * 500.0f + Vector3.Backward * 100.0f;
+			light.Radius = 500f;
+			light.LightColor = new Color( 1.0f, 0.9f, 0.9f ) * 50.0f;
+			PrimaryObject = prefabObject;
 
 		}
 		else if ( item.Block == null )
@@ -68,18 +66,19 @@ public class ItemPreview : AssetPreview
 		}
 		else
 		{
-			so = new SceneCustomObject( World );
+			so = new SceneCustomObject( Scene.SceneWorld );
 			so.Transform = Transform.Zero;
 			so.Flags.CastShadows = false;
 			so.Flags.IsOpaque = true;
 
 			so.RenderOverride = RenderObject;
 
-			PrimarySceneObject = so;
+			// PrimaryObject = so;
 
 			SceneSize = new Vector3( 10 );
 			SceneCenter = new Vector3( 5 );
-
+			var fakeObj = new GameObject();
+			PrimaryObject = fakeObj;
 			FrameScene();
 		}
 
@@ -103,16 +102,12 @@ public class ItemPreview : AssetPreview
 
 	public override void UpdateScene( float cycle, float timeStep )
 	{
-		Camera.Rotation = Rotation.FromYaw( timeStep * 30 ) * Camera.Rotation;
-		if ( prefabScene?.IsValid() ?? false )
-		{
-			PrimarySceneObject = World.SceneObjects.First();
-		}
-		if ( PrimarySceneObject?.IsValid() ?? false )
-			FrameScene();
+		Camera.WorldRotation = Rotation.FromYaw( timeStep * 30 ) * Camera.WorldRotation;
+		//if ( PrimarySceneObject?.IsValid() ?? false )
+		FrameScene();
 		if ( light?.IsValid() ?? false )
 		{
-			light.Position = Camera.Position + Vector3.Up;
+			light.WorldPosition = Camera.WorldPosition + Vector3.Up;
 		}
 	}
 }
