@@ -9,7 +9,7 @@ using Sandbox.theoretical;
 
 */
 
-public class Telephone : Component
+public class Telephone : Gamemode
 {
     private struct ChainLink
     {
@@ -23,14 +23,6 @@ public class Telephone : Component
     }
 
     [Property] Structure BuildBox { get; set; }
-    [Property] GameObject Spawn { get; set; }
-
-    public NetList<VoxelPlayer> Players { get; set; } = new();
-
-    protected override void OnStart()
-    {
-        GameModeLogic();
-    }
 
     [Rpc.Broadcast]
     public void SetPlayerTransform( VoxelPlayer player, Vector3 position, Rotation rotation )
@@ -39,7 +31,7 @@ public class Telephone : Component
         player.GetComponent<PlayerController>().EyeAngles = rotation;
     }
 
-    public bool IsPlaying = false;
+
     public const int MIN_PLAYERS = 1;
 
     [Property] public int LoopArounds { get; set; } = 1; // How many times to go back over the loop. Ideally should be 1, may be higher for debugging.
@@ -86,20 +78,15 @@ public class Telephone : Component
         return new Vector3Int( chainIndex * 19 + 2, linkIndex * 19 + 2, 1 );
     }
 
-    async void GameModeLogic()
+    public async override Task GameModeLogic()
     {
-        if ( !Networking.IsHost )
-            return;
-        if ( IsPlaying ) return;
-        IsPlaying = true;
-
         foreach ( var ply in Scene.GetAll<VoxelPlayer>() )
         {
             ply.IsReady = false; // Reset player readiness
         }
 
         TimeUntil readyCheckDone = 120f;
-        TelephoneHud.Instance.Message = $"Waiting for at least {MIN_PLAYERS} players to be ready!";
+        Hud.Message = $"Waiting for at least {MIN_PLAYERS} players to be ready!";
 
         while ( readyCheckDone > 0f || Scene.GetAll<VoxelPlayer>().Count( p => p.IsReady ) < MIN_PLAYERS )
         {
@@ -107,11 +94,11 @@ public class Telephone : Component
             if ( Scene.GetAll<VoxelPlayer>().Count( p => p.IsReady ) < MIN_PLAYERS )
             {
                 readyCheckDone = 120f;
-                TelephoneHud.Instance.HasTimer = false; // Hide the timer UI whilst waiting for players to be ready
+                Hud.HasTimer = false; // Hide the timer UI whilst waiting for players to be ready
             }
             else
             {
-                TelephoneHud.Instance.HasTimer = true;
+                Hud.HasTimer = true;
             }
 
             // If half the online players are ready, set the timer to 30 seconds
@@ -128,19 +115,19 @@ public class Telephone : Component
 
             if ( Scene.GetAll<VoxelPlayer>().Any( p => p.IsReady ) )
             {
-                TelephoneHud.Instance.TotalTime = 120f;
-                TelephoneHud.Instance.TimerEnd = readyCheckDone;
+                Hud.TotalTime = 120f;
+                Hud.TimerEnd = readyCheckDone;
             }
             else
             {
-                TelephoneHud.Instance.TotalTime = 0f; // No total time if no players are ready
-                TelephoneHud.Instance.TimerEnd = 0f; // No timer if no players are ready
+                Hud.TotalTime = 0f; // No total time if no players are ready
+                Hud.TimerEnd = 0f; // No timer if no players are ready
             }
             await Task.DelayRealtime( 100 );
         }
 
-        TelephoneHud.Instance.HasTimer = false;
-        TelephoneHud.Instance.HasReadyCheck = false; // Hide the ready check UI
+        Hud.HasTimer = false;
+        Hud.HasReadyCheck = false; // Hide the ready check UI
         await Task.DelayRealtimeSeconds( 1 );
 
         foreach ( var player in Scene.GetAll<VoxelPlayer>().OrderBy( c => Guid.NewGuid() ) )
@@ -149,16 +136,16 @@ public class Telephone : Component
             Chains.Add( new List<ChainLink>() );
         }
 
-        TelephoneHud.Instance.Message = "Write something for someone else to build!";
+        Hud.Message = "Write something for someone else to build!";
         foreach ( var ply in Players )
             ply.TextBoxVisible = true;
-        TelephoneHud.Instance.RequestTextBox();
+        Hud.RequestTextBox();
 
-        TelephoneHud.Instance.HasTimer = true;
-        TelephoneHud.Instance.TotalTime = DescribeTime;
-        TelephoneHud.Instance.TimerEnd = DescribeTime;
+        Hud.HasTimer = true;
+        Hud.TotalTime = DescribeTime;
+        Hud.TimerEnd = DescribeTime;
         await Task.DelayRealtimeSeconds( DescribeTime );
-        TelephoneHud.Instance.HasTimer = false;
+        Hud.HasTimer = false;
         await HandleBrokenChain();
 
         for ( int i = 0; i < Players.Count; i++ )
@@ -173,7 +160,7 @@ public class Telephone : Component
 
         // Main game loop.
         int RoundNumber = 2;
-        while ( RoundNumber < Players.Count * LoopArounds )
+        while ( RoundNumber <= Players.Count * LoopArounds )
         {
             // EVERYBODY, BUILD!
             for ( int i = 0; i < Players.Count; i++ )
@@ -196,14 +183,14 @@ public class Telephone : Component
                 ply.BuildAreaMaxs = point + new Vector3Int( 15, 15, 15 );
                 ply.CanBuild = true;
             }
-            TelephoneHud.Instance.Message = "Build Phase!";
-            TelephoneHud.Instance.HasTimer = true;
-            TelephoneHud.Instance.TotalTime = BuildTime;
-            TelephoneHud.Instance.TimerEnd = BuildTime;
+            Hud.Message = "Build Phase!";
+            Hud.HasTimer = true;
+            Hud.TotalTime = BuildTime;
+            Hud.TimerEnd = BuildTime;
             await Task.DelayRealtimeSeconds( BuildTime );
             await HandleBrokenChain();
-            TelephoneHud.Instance.HasTimer = false;
-            TelephoneHud.Instance.Message = "";
+            Hud.HasTimer = false;
+            Hud.Message = "";
             BackToSpawn();
             for ( int i = 0; i < Players.Count; i++ )
             {
@@ -223,7 +210,7 @@ public class Telephone : Component
 
             RoundNumber++;
 
-            if ( RoundNumber >= Players.Count * LoopArounds )
+            if ( RoundNumber > Players.Count * LoopArounds )
                 break;
 
             for ( int i = 0; i < Players.Count; i++ )
@@ -236,26 +223,26 @@ public class Telephone : Component
                 SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
             }
 
-            TelephoneHud.Instance.Message = "Examine the build";
-            TelephoneHud.Instance.HasTimer = true;
-            TelephoneHud.Instance.TotalTime = ExamineTime;
-            TelephoneHud.Instance.TimerEnd = ExamineTime;
+            Hud.Message = "Examine the build";
+            Hud.HasTimer = true;
+            Hud.TotalTime = ExamineTime;
+            Hud.TimerEnd = ExamineTime;
             await Task.DelayRealtimeSeconds( ExamineTime );
-            TelephoneHud.Instance.HasTimer = false;
+            Hud.HasTimer = false;
             await HandleBrokenChain();
 
             BackToSpawn();
-            TelephoneHud.Instance.RequestTextBox();
+            Hud.RequestTextBox();
             foreach ( var ply in Players )
                 ply.TextBoxVisible = true;
 
-            TelephoneHud.Instance.Message = "Describe the build";
+            Hud.Message = "Describe the build";
 
-            TelephoneHud.Instance.HasTimer = true;
-            TelephoneHud.Instance.TotalTime = DescribeTime;
-            TelephoneHud.Instance.TimerEnd = DescribeTime;
+            Hud.HasTimer = true;
+            Hud.TotalTime = DescribeTime;
+            Hud.TimerEnd = DescribeTime;
             await Task.DelayRealtimeSeconds( DescribeTime );
-            TelephoneHud.Instance.HasTimer = false;
+            Hud.HasTimer = false;
             await HandleBrokenChain();
 
             for ( int i = 0; i < Players.Count; i++ )
@@ -276,19 +263,19 @@ public class Telephone : Component
         }
 
         // Let's go through all the chains!
-        TelephoneHud.Instance.Message = "Let's see the builds!";
+        Hud.Message = "Let's see the builds!";
         await Task.DelayRealtimeSeconds( 2f );
         await HandleBrokenChain( true );
 
         for ( int chainIndex = 0; chainIndex < Chains.Count; chainIndex++ )
         {
             BackToSpawn();
-            TelephoneHud.Instance.Message = $"Initial Prompt by {Chains[chainIndex][0].PromptBy}";
-            await Task.DelayRealtimeSeconds( 2f );
+            Hud.Message = $"Initial Prompt by {Chains[chainIndex][0].PromptBy}";
+            await Task.DelayRealtimeSeconds( 4f );
             await HandleBrokenChain( true );
 
-            TelephoneHud.Instance.Message = $"\"{Chains[chainIndex][0].Description}\"";
-            await Task.DelayRealtimeSeconds( 2f );
+            Hud.Message = $"\"{Chains[chainIndex][0].Description}\"";
+            await Task.DelayRealtimeSeconds( 4f );
             await HandleBrokenChain( true );
 
             foreach ( var ply in Players )
@@ -297,18 +284,18 @@ public class Telephone : Component
                 SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
             }
 
-            TelephoneHud.Instance.Message = $"As imagined by {Chains[chainIndex][0].BuiltBy}";
-            await Task.DelayRealtimeSeconds( 30f );
+            Hud.Message = $"As imagined by {Chains[chainIndex][0].BuiltBy}";
+            await Task.DelayRealtimeSeconds( 20f );
             await HandleBrokenChain( true );
 
             for ( int linkIndex = 1; linkIndex < Chains[chainIndex].Count; linkIndex++ )
             {
-                TelephoneHud.Instance.Message = $"Described by {Chains[chainIndex][0].PromptBy} as";
-                await Task.DelayRealtimeSeconds( 2f );
+                Hud.Message = $"Described by {Chains[chainIndex][0].PromptBy} as";
+                await Task.DelayRealtimeSeconds( 4f );
                 await HandleBrokenChain( true );
 
-                TelephoneHud.Instance.Message = $"\"{Chains[chainIndex][linkIndex].Description}\"";
-                await Task.DelayRealtimeSeconds( 2f );
+                Hud.Message = $"\"{Chains[chainIndex][linkIndex].Description}\"";
+                await Task.DelayRealtimeSeconds( 4f );
                 await HandleBrokenChain( true );
 
                 if ( Chains[chainIndex][linkIndex].BuiltBy == null ) break;
@@ -317,12 +304,12 @@ public class Telephone : Component
                     var examineTransform = GetIslandSpawn( chainIndex, linkIndex );
                     SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
                 }
-                TelephoneHud.Instance.Message = $"As imagined by {Chains[chainIndex][linkIndex].BuiltBy}";
+                Hud.Message = $"As imagined by {Chains[chainIndex][linkIndex].BuiltBy}";
                 await Task.DelayRealtimeSeconds( 20f );
                 await HandleBrokenChain( true );
             }
         }
-        TelephoneHud.Instance.Message = "";
+        Hud.Message = "";
         await Task.DelayRealtimeSeconds( 1f );
         await HandleBrokenChain( true );
 
@@ -346,7 +333,7 @@ public class Telephone : Component
             }
         }
 
-        TelephoneHud.Instance.Message = "Ending the round";
+        Hud.Message = "Ending the round";
         await Task.DelayRealtimeSeconds( 120f );
         Scene.LoadFromFile( "scens/telephone.scene" );
     }

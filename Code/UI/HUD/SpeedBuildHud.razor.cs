@@ -4,9 +4,6 @@ using Sandbox.UI;
 public partial class SpeedBuildHud : PanelComponent
 {
     // a HUD used for Speed Build specific stuff
-    GameTimer timer;
-    Panel message;
-
     public static SpeedBuildHud Instance { get; private set; }
     public SpeedBuildHud()
     {
@@ -14,31 +11,9 @@ public partial class SpeedBuildHud : PanelComponent
     }
 
     [Sync( SyncFlags.FromHost )]
-    public TimeUntil TimerEnd { get; set; } = 0f; // Default to 60 seconds
-
-    [Sync( SyncFlags.FromHost )]
-    public float TotalTime { get; set; } = 0f; // Default to 60 seconds
-    [Sync( SyncFlags.FromHost )]
-    public bool HasTimer { get; set; } = false; // Default to true, indicating that the timer is active
-    [Sync( SyncFlags.FromHost )]
-    public bool HasReadyCheck { get; set; } = true; // Default to true, indicating that the ready check is active
-
-    [Sync( SyncFlags.FromHost )] public string Message { get; set; } = "Memorize the structure!";
-
-    [Sync( SyncFlags.FromHost )]
     public int? KillPercentage { get; set; } = null;
 
-    protected override int BuildHash() => HashCode.Combine(
-        HashCode.Combine(
-            Message.GetHashCode(),
-            TimerEnd.Absolute.GetHashCode(),
-            TotalTime.GetHashCode(),
-            HasTimer.GetHashCode(),
-            HasReadyCheck.GetHashCode() ),
-        VoxelPlayer.LocalPlayer?.TotalBlockArea.GetHashCode(),
-        VoxelPlayer.LocalPlayer?.CorrectBlocksPlaced.GetHashCode(),
-        VoxelPlayer.LocalPlayer?.IncorrectBlocksPlaced.GetHashCode(),
-        VoxelPlayer.LocalPlayer?.IsReady.GetHashCode() );
+    protected override int BuildHash() => HashCode.Combine( KillPercentage.GetHashCode(), (VoxelPlayer.LocalPlayer?.CorrectBlocksPlaced ?? 0).GetHashCode(), (VoxelPlayer.LocalPlayer?.IncorrectBlocksPlaced ?? 0).GetHashCode(), (VoxelPlayer.LocalPlayer?.TotalBlockArea ?? 0).GetHashCode() );
 
     protected override void OnTreeBuilt()
     {

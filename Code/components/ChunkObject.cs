@@ -197,7 +197,7 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 							if ( mat != null )
 								AddBlockMesh( world, blockPos + (chunkPos * Chunk.SIZE), Vertexes.GetOrCreate( mat ) );
 						}
-						if ( block.IsSolid )
+						if ( block.IsSolid && block.BlockObject == null )
 						{
 							var aabb = block.GetCollisionAABBChunk( world, blockPos + (chunkPos * Chunk.SIZE) );
 							foreach ( var bbox in aabb )
@@ -221,11 +221,12 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 				}
 				foreach ( var blockPos in CreateBlockObjects )
 				{
+
+					var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
+					var block = ItemRegistry.GetBlock( blockData.BlockID );
 					if ( !BlockObjects.ContainsKey( blockPos ) )
 					{
 
-						var blockData = world.GetBlock( blockPos + (chunkPos * Chunk.SIZE) );
-						var block = ItemRegistry.GetBlock( blockData.BlockID );
 						var blockObject = block.BlockObject.Clone( GameObject, blockPos * World.BlockScale, Rotation.Identity, Vector3.One );
 						BlockObjects[blockPos] = (blockObject, blockData);
 						if ( blockObject.GetComponent<IBlockDataReceiver>() is IBlockDataReceiver receiver )
@@ -233,6 +234,12 @@ public sealed class ChunkObject : Component, Component.ExecuteInEditor
 							receiver.AcceptBlockData( world, blockPos + (chunkPos * Chunk.SIZE), blockData );
 						}
 						blockObject.NetworkSpawn();
+					}
+					if ( block.IsSolid )
+					{
+						var aabb = block.GetCollisionAABBChunk( world, blockPos + (chunkPos * Chunk.SIZE) );
+						foreach ( var bbox in aabb )
+							collisionModel.AddCollisionBox( bbox.Extents, bbox.Center );
 					}
 				}
 

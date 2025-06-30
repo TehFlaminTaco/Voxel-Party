@@ -4,21 +4,11 @@ using System.Threading.Tasks;
 using Sandbox;
 using Sandbox.theoretical;
 
-public sealed class SpeedBuild : Component
+public sealed class SpeedBuild : Gamemode
 {
-	[Property] List<GameObject> Islands { get; set; } = new();
-	[Property] GameObject Spawn { get; set; }
-
-	public NetList<VoxelPlayer> Players { get; set; } = new();
-
-	public List<Structure> TargetStructures => ResourceLibrary.GetAll<Structure>( "structures/speedbuild/", false ).ToList();
+	[Property] List<GameObject> Islands { get; set; } = new(); public List<Structure> TargetStructures => ResourceLibrary.GetAll<Structure>( "structures/speedbuild/", false ).ToList();
 
 	Structure _currentStructure;
-
-	protected override void OnStart()
-	{
-		GameModeLogic();
-	}
 
 	[Rpc.Broadcast]
 	public void SetPlayerTransform( VoxelPlayer player, Vector3 position, Rotation rotation )
@@ -70,32 +60,26 @@ public sealed class SpeedBuild : Component
 		Structure.StructureDifficulty.Hard,
 	};
 
-	public bool IsPlaying = false;
-	async void GameModeLogic()
+	public async override Task GameModeLogic()
 	{
-		if ( !Networking.IsHost )
-			return;
-		if ( IsPlaying ) return;
-		IsPlaying = true;
-
 		foreach ( var ply in Scene.GetAll<VoxelPlayer>() )
 		{
 			ply.IsReady = false; // Reset player readiness
 		}
 
 		TimeUntil readyCheckDone = 120f;
-		SpeedBuildHud.Instance.Message = "Waiting for players to be ready...";
+		Hud.Message = "Waiting for players to be ready...";
 		while ( readyCheckDone > 0f || !Scene.GetAll<VoxelPlayer>().Any( p => p.IsReady ) )
 		{
 			// If NO-ONE is ready, reset the ready check timer
 			if ( !Scene.GetAll<VoxelPlayer>().Any( p => p.IsReady ) )
 			{
 				readyCheckDone = 120f;
-				SpeedBuildHud.Instance.HasTimer = false; // Hide the timer UI whilst waiting for players to be ready
+				Hud.HasTimer = false; // Hide the timer UI whilst waiting for players to be ready
 			}
 			else
 			{
-				SpeedBuildHud.Instance.HasTimer = true;
+				Hud.HasTimer = true;
 			}
 
 			// If half the online players are ready, set the timer to 30 seconds
@@ -112,19 +96,19 @@ public sealed class SpeedBuild : Component
 
 			if ( Scene.GetAll<VoxelPlayer>().Any( p => p.IsReady ) )
 			{
-				SpeedBuildHud.Instance.TotalTime = 120f;
-				SpeedBuildHud.Instance.TimerEnd = readyCheckDone;
+				Hud.TotalTime = 120f;
+				Hud.TimerEnd = readyCheckDone;
 			}
 			else
 			{
-				SpeedBuildHud.Instance.TotalTime = 0f; // No total time if no players are ready
-				SpeedBuildHud.Instance.TimerEnd = 0f; // No timer if no players are ready
+				Hud.TotalTime = 0f; // No total time if no players are ready
+				Hud.TimerEnd = 0f; // No timer if no players are ready
 			}
 			await Task.DelayRealtime( 100 );
 		}
 
-		SpeedBuildHud.Instance.HasTimer = false;
-		SpeedBuildHud.Instance.HasReadyCheck = false; // Hide the ready check UI
+		Hud.HasTimer = false;
+		Hud.HasReadyCheck = false; // Hide the ready check UI
 		await Task.DelayRealtimeSeconds( 1 );
 
 		List<VoxelPlayer> HistoricalPlayers = new();
@@ -213,16 +197,16 @@ public sealed class SpeedBuild : Component
 				CleanupAreas.Add( (player.BuildAreaMins, player.BuildAreaMaxs) );
 			}
 
-			SpeedBuildHud.Instance.TimerEnd = MemorizeTime.IndexOrLast( RoundNumber ); // Set the timer for 60 seconds
-			SpeedBuildHud.Instance.TotalTime = MemorizeTime.IndexOrLast( RoundNumber ); // Set the total time for the game mode	
-			SpeedBuildHud.Instance.HasTimer = true; // Show the timer UI
+			Hud.TimerEnd = MemorizeTime.IndexOrLast( RoundNumber ); // Set the timer for 60 seconds
+			Hud.TotalTime = MemorizeTime.IndexOrLast( RoundNumber ); // Set the total time for the game mode	
+			Hud.HasTimer = true; // Show the timer UI
 
-			SpeedBuildHud.Instance.Message = "Memorize the structure!";
+			Hud.Message = "Memorize the structure!";
 
 			await Task.DelayRealtimeSeconds( MemorizeTime.IndexOrLast( RoundNumber ) ); // Wait for players to memorize the structure
 
-			SpeedBuildHud.Instance.Message = "Time's up! Starting the build phase...";
-			SpeedBuildHud.Instance.HasTimer = false; // Hide the timer UI
+			Hud.Message = "Time's up! Starting the build phase...";
+			Hud.HasTimer = false; // Hide the timer UI
 			foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
 				Players.Remove( p ); // Cleanup any players we lost.
 			foreach ( var player in Players )
@@ -262,15 +246,15 @@ public sealed class SpeedBuild : Component
 				player.CanBuild = true; // Allow players to start building
 			}
 
-			SpeedBuildHud.Instance.Message = "Build!";
-			SpeedBuildHud.Instance.TimerEnd = _currentStructure.SecondsToBuild + BuildTimeOffset.IndexOrLast( RoundNumber ); // Set the timer for 5 minutes
-			SpeedBuildHud.Instance.TotalTime = _currentStructure.SecondsToBuild + BuildTimeOffset.IndexOrLast( RoundNumber ); // Set the total time for the game mode
-			SpeedBuildHud.Instance.HasTimer = true; // Show the timer UI
+			Hud.Message = "Build!";
+			Hud.TimerEnd = _currentStructure.SecondsToBuild + BuildTimeOffset.IndexOrLast( RoundNumber ); // Set the timer for 5 minutes
+			Hud.TotalTime = _currentStructure.SecondsToBuild + BuildTimeOffset.IndexOrLast( RoundNumber ); // Set the total time for the game mode
+			Hud.HasTimer = true; // Show the timer UI
 
 			await Task.DelayRealtimeSeconds( _currentStructure.SecondsToBuild + BuildTimeOffset.IndexOrLast( RoundNumber ) ); // Wait for the build phase to end
 
-			SpeedBuildHud.Instance.Message = "Time's up! Judging the builds...";
-			SpeedBuildHud.Instance.HasTimer = false; // Hide the timer UI
+			Hud.Message = "Time's up! Judging the builds...";
+			Hud.HasTimer = false; // Hide the timer UI
 
 			SpeedBuildHud.Instance.KillPercentage = TargetAccuracy.IndexOrLast( RoundNumber );
 			foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
@@ -344,7 +328,7 @@ public sealed class SpeedBuild : Component
 
 			if ( Players.Count > 0 )
 			{
-				SpeedBuildHud.Instance.Message = "Executing the failures!";
+				Hud.Message = "Executing the failures!";
 				await Task.DelayRealtimeSeconds( 1 );
 				foreach ( var p in Players.Where( c => !(c?.IsValid() ?? false) ).ToList() )
 					Players.Remove( p ); // Cleanup any players we lost.
@@ -368,7 +352,7 @@ public sealed class SpeedBuild : Component
 				Players.Remove( p ); // Cleanup any players we lost.
 			if ( Players.Count <= 0 )
 			{
-				SpeedBuildHud.Instance.Message = "Declaring winners...";
+				Hud.Message = "Declaring winners...";
 				var podiumObject = GameObject.Children.Find( j => j.Name == "PodiumCamera" );
 				foreach ( var ply in Scene.GetAll<VoxelPlayer>() )
 				{
@@ -381,58 +365,58 @@ public sealed class SpeedBuild : Component
 				await Task.DelayRealtimeSeconds( 1 );
 				if ( allPlayers.Length > 2 )
 				{
-					SpeedBuildHud.Instance.Message = "Third Place";
+					Hud.Message = "Third Place";
 					await Task.DelayRealtimeSeconds( 3f );
 					if ( allPlayers[2].IsValid() )
 					{
 						var bronze = GameObject.Children.Find( j => j.Name == "Bronze" );
-						SpeedBuildHud.Instance.Message = allPlayers[2].Network.Owner.DisplayName;
+						Hud.Message = allPlayers[2].Network.Owner.DisplayName;
 						allPlayers[2].Spectator = false;
 						allPlayers[2].IsFlying = false;
 						allPlayers[2].MoveTo( bronze.WorldTransform );
 					}
 					else
 					{
-						SpeedBuildHud.Instance.Message = "Someone who left!";
+						Hud.Message = "Someone who left!";
 					}
 					await Task.DelayRealtimeSeconds( 5f );
 				}
 				if ( allPlayers.Length > 1 )
 				{
-					SpeedBuildHud.Instance.Message = "Second Place";
+					Hud.Message = "Second Place";
 					await Task.DelayRealtimeSeconds( 3f );
 					if ( allPlayers[1].IsValid() )
 					{
 						var silver = GameObject.Children.Find( j => j.Name == "Silver" );
-						SpeedBuildHud.Instance.Message = allPlayers[1].Network.Owner.DisplayName;
+						Hud.Message = allPlayers[1].Network.Owner.DisplayName;
 						allPlayers[1].Spectator = false;
 						allPlayers[1].IsFlying = false;
 						allPlayers[1].MoveTo( silver.WorldTransform );
 					}
 					else
 					{
-						SpeedBuildHud.Instance.Message = "Someone who left!";
+						Hud.Message = "Someone who left!";
 					}
 					await Task.DelayRealtimeSeconds( 5f );
 				}
-				SpeedBuildHud.Instance.Message = "The winner is...";
+				Hud.Message = "The winner is...";
 				await Task.DelayRealtimeSeconds( 3f );
 				if ( allPlayers[0].IsValid() )
 				{
 					var gold = GameObject.Children.Find( j => j.Name == "Gold" );
-					SpeedBuildHud.Instance.Message = allPlayers[0].Network.Owner.DisplayName;
+					Hud.Message = allPlayers[0].Network.Owner.DisplayName;
 					if ( allPlayers.Length == 1 )
-						SpeedBuildHud.Instance.Message = allPlayers[0].Network.Owner.DisplayName + " (By default)";
+						Hud.Message = allPlayers[0].Network.Owner.DisplayName + " (By default)";
 					allPlayers[0].Spectator = false;
 					allPlayers[0].IsFlying = false;
 					allPlayers[0].MoveTo( gold.WorldTransform );
 				}
 				else
 				{
-					SpeedBuildHud.Instance.Message = "Someone who left!";
+					Hud.Message = "Someone who left!";
 				}
 				await Task.DelayRealtimeSeconds( 10f ); // Take 30 seconds to celebrate!
-				SpeedBuildHud.Instance.Message = "Restarting!";
+				Hud.Message = "Restarting!";
 				// Restart the lobby
 				Scene.LoadFromFile( "scenes/speed build.scene" );
 				break;
@@ -457,65 +441,10 @@ public sealed class SpeedBuild : Component
 					}
 				}
 			}
-			SpeedBuildHud.Instance.Message = "Get ready for the next round!";
+			Hud.Message = "Get ready for the next round!";
 			await Task.DelayRealtimeSeconds( 3 );
 			RoundNumber++;
 		}
 
 	}
-
-
-	/*public async void PreRound()
-	{
-		if ( Players.Count == 0 )
-		{
-			foreach ( var i in Scene.GetAllComponents<PlayerController>() )
-			{
-				Players.Add( i );
-				//SetPlayerTransform( i, Spawn.WorldPosition, Rotation.Identity );
-			}
-		}
-
-
-		//await Task.DelayRealtimeSeconds( 5 );
-
-		var targetStructure = Random.Shared.FromList( TargetObjects );
-		if ( targetStructure == null )
-		{
-			Log.Error( "No target structure set for SpeedBuild." );
-			return;
-		}
-
-		var index = 0;
-		foreach ( var i in Players )
-		{
-			Islands[index].Enabled = true;
-			SetPlayerTransform( i, Islands[index].WorldPosition + Vector3.Up * 40f, Rotation.LookAt( Vector3.Zero ).Angles().WithRoll( 0 ) );
-
-			// Spawn a copy of the target structure on the player's island
-			var obj = new GameObject();
-			var structure = obj.AddComponent<StructureLoader>( false );
-			structure.LoadedStructure = targetStructure;
-
-			var targetPosition = Islands[index].Children.FirstOrDefault( c => c.Name == "StructureAnchor" ).WorldPosition;
-
-			var size = structure.StructureSize;
-
-			structure.WorldPosition = targetPosition - ((size.WithZ( 0 ) - Vector3Int.One) * World.BlockScale * 0.5f);
-			structure.Enabled = true;
-
-			index++;
-		}
-
-		CurrentState = State.Starting;
-	}*/
-	//repeat until there's 1 player left:
-	//place build to replicate, optionally layer by layer
-	//after 10 seconds, delete build
-	//after 60 seconds, place build in the center island
-	//compare every player's score, lowest scoring player is killed and their island removed, then given a spectator camera
-
-	//Put top 3 on a pillar, confetti and shit
-	//wait 15 seconds
-	//reload the scene
 }

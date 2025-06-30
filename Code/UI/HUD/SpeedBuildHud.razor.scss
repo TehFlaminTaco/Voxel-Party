@@ -24,60 +24,6 @@ SpeedBuildHud {
     flex-direction: column;
     text-shadow: 5px 5px 2px 0 black;
 
-    GameTimer {
-        left: 0;
-        transition: all 40ms cubic-bezier(.47,1.64,.41,.8);
-        &.hidden {
-            left: -200px;
-        }
-    }
-    
-    .message, .readyCheck {
-        font-size: 40px;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        height: 80px;
-        backdrop-filter: blur(5px);
-        background-color: rgb($slate-background, 0.8);
-        border-left: 4px $slate-border;
-        border-top: 4px $slate-border;
-        border-right: 4px  $slate-border-dark;
-        border-bottom: 4px  $slate-border-dark;
-    }
-
-    .message {
-        position: relative;
-        top: 15px;
-        color: white;
-    }
-
-    .readyCheck {
-        position: absolute;
-        top: 15px;
-        right: 32px;
-        
-        Image {
-            width: 40px;
-            aspect-ratio: 1;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-        
-        &.hidden {
-            top: -100px;
-        }
-        
-        &.Ready {
-            background-color: $green-background;
-            border-left: 4px $green-border;
-            border-top: 4px $green-border;
-            border-right: 4px  $green-border-dark;
-            border-bottom: 4px  $green-border-dark;
-        }
-    }
-
     #score {
         position: relative;
         bottom: 150px;
@@ -127,11 +73,5 @@ SpeedBuildHud {
                 display:none;
             }
         }
-    }
-
-    .key {
-        border-right: 2px solid black;
-        padding-right: 8px;
-        margin-right: 8px;
     }
 }
