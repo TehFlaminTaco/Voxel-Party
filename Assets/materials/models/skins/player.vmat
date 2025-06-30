@@ -2,13 +2,10 @@
 
 Layer0
 {
-	shader "materials/pixel.shader"
-
-	//---- Texture Filtering ----
-	F_TEXTURE_FILTERING 3 // Point Sample
+	shader "shaders/pixel.shader"
 
 	Albedo "materials/models/skins/1-terry.png"
-	Roughness "[1.000000 1.000000 1.000000 1.000000]"
+	Roughness "materials/default/default_color.tga"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
