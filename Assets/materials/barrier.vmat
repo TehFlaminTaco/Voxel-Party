@@ -2,5 +2,5 @@
 
 Layer0
 {
-	shader "materials/barriereffect.shader"
+	shader "shaders/barriereffect.shader"
 }

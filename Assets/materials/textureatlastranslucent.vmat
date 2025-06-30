@@ -2,12 +2,9 @@
 
 Layer0
 {
-	shader "materials/pointshadertranslucent.shader"
+	shader "shaders/pointshadertranslucent.shader"
 
-	//---- Texture Filtering ----
-	F_TEXTURE_FILTERING 3 // Point Sample
-
-	Abledo "materials/atlas.png"
+	Abledo "materials/default/default_color.tga"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
