@@ -3183,6 +3183,22 @@
           {
             "Target": {
               "Type": "Component",
+              "IdValue": "e75bd04f-b35b-4dd4-b604-45b9a871f4f4"
+            },
+            "Property": "StepDownHeight",
+            "Value": 22
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "e75bd04f-b35b-4dd4-b604-45b9a871f4f4"
+            },
+            "Property": "StepUpHeight",
+            "Value": 22
+          },
+          {
+            "Target": {
+              "Type": "Component",
               "IdValue": "703e9780-3857-4ba6-bb52-3d01f3dbbb3b"
             },
             "Property": "HasCreativeInventory",
@@ -3288,14 +3304,11 @@
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
-          "Spawn": {
-            "_type": "gameobject",
-            "go": "849bc8e6-7016-4b71-8ccf-483ee6abdfa7"
-          }
+          "Spawn": null
         },
         {
-          "__type": "TelephoneHud",
-          "__guid": "ca328f37-15c6-4521-8c23-0d65902dbbc0",
+          "__type": "GamemodeHud",
+          "__guid": "3bd50120-e3ad-40b9-bc49-fb6e46104fc2",
           "__enabled": true,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
