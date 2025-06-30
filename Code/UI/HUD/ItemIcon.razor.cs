@@ -18,7 +18,9 @@ public partial class ItemIcon : Panel
     public void Render()
     {
         var inv = Inventory;
-        var item = inv.GetItem( Slot ).Item;
+        if ( ItemStack.IsNullOrEmpty( ItemStack ) )
+            return;
+        var item = ItemStack.Item;
         if ( item == null ) return;
         RenderTexture = Texture.CreateRenderTarget( "Item", ImageFormat.RGBA8888, new Vector2( 100, 100 ) );
         Scene scene = new Scene();
@@ -67,7 +69,8 @@ public partial class ItemIcon : Panel
     public override void Tick()
     {
         if ( VoxelPlayer.LocalPlayer is null ) return;
-        ItemStack = Inventory.GetItem( Slot );
+        if ( Slot != -1 )
+            ItemStack = Inventory.GetItem( Slot );
         if ( RenderTexture == null || ItemStack.Count != lastKnownStack?.Count || ItemStack.ItemID != lastKnownStack?.ItemID )
         {
             lastKnownStack = ItemStack;

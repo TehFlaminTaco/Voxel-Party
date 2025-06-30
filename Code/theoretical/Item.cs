@@ -7,11 +7,14 @@ public partial class Item : GameResource
 	public string Name { get; set; } // Name of the item, e.g. "Stick".
 	public int MaxStackSize { get; set; } = 64; // Maximum stack size for this item, e.g. 64 for most items.
 
+	[Property] public bool InPallete { get; set; } = true;
 	[Property, ToggleGroup( "IsBlock" )]
 	public bool IsBlock { get; set; }
 
 	[Property, ToggleGroup( "IsBlock" ), InlineEditor]
 	public Block Block { get; set; }
+
+	// Is this item spawnable by players?
 
 	[Button]
 	public void FixIDConflict()

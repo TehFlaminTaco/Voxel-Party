@@ -18,4 +18,10 @@ ItemIcon {
         margin: 8px;
         position: absolute;
     }
+
+    &.held {
+        > .slot-number {
+            display: none;
+        }
+    }
  }

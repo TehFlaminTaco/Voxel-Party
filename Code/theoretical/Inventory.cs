@@ -5,7 +5,8 @@ public class Inventory
     public List<ItemStack> Items { get; private set; } = new();
     public int InventorySize { get; set; }
     public int HotbarSize { get; set; }
-    public int TotalSize => HotbarSize + InventorySize;
+    public int TotalSize => HotbarSize + InventorySize + 1;
+    public int CursorSlot => InventorySize + HotbarSize;
 
     public Inventory( int inventorySize = 27, int hotbarSize = 9 )
     {
@@ -116,29 +117,41 @@ public class Inventory
             return stack; // Nothing to insert
         }
 
-        if ( hotbarFirst )
+        // Check if this itemstack exists in the inventory already, and try to merge it onto it.
+        for ( int slot = 0; slot < TotalSize; slot++ )
         {
-            for ( int i = InventorySize; i < TotalSize; i++ )
+            int id = slot;
+            if ( hotbarFirst )
             {
-                var result = PutInSlot( i, stack, simulate );
-                if ( ItemStack.IsNullOrEmpty( result ) )
-                {
-                    return result; // Successfully inserted
-                }
-                stack = result; // Update stack to remaining items
+                slot += InventorySize;
+                slot = slot % (InventorySize + HotbarSize);
+            }
+
+            if ( GetItem( id ).Item == stack.Item )
+            {
+                if ( GetItem( id ).Count < 0 )
+                    return ItemStack.Empty;
+                stack = PutInSlot( id, stack, false );
+                if ( ItemStack.IsNullOrEmpty( stack ) )
+                    return stack;
             }
         }
-        else
+
+        for ( int i = 0; i < InventorySize + HotbarSize; i++ )
         {
-            for ( int i = 0; i < TotalSize; i++ )
+            int id = i;
+            if ( hotbarFirst )
             {
-                var result = PutInSlot( i, stack, simulate );
-                if ( ItemStack.IsNullOrEmpty( result ) )
-                {
-                    return result; // Successfully inserted
-                }
-                stack = result; // Update stack to remaining items
+                i += InventorySize;
+                i = i % (InventorySize + HotbarSize);
             }
+
+            var result = PutInSlot( id, stack, simulate );
+            if ( ItemStack.IsNullOrEmpty( result ) )
+            {
+                return result; // Successfully inserted
+            }
+            stack = result; // Update stack to remaining items
         }
 
         return stack; // If we reach here, the stack could not be fully inserted

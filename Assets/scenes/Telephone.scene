@@ -1,0 +1,3624 @@
+{
+  "__guid": "8ffb715a-7223-42db-b596-15efdb8441c0",
+  "GameObjects": [
+    {
+      "__guid": "43f7a4e1-b8e6-49b1-9dfb-679d29df356e",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Sun",
+      "Position": "0,0,0",
+      "Rotation": "-0.0729315,0.4822396,0.1305433,0.8631827",
+      "Scale": "1,1,1",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.DirectionalLight",
+          "__guid": "5ccdf8d6-73d4-4105-82e2-d1b37d3de042",
+          "__enabled": true,
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.94419,0.97767,1,1",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Shadows": true,
+          "SkyColor": "0.2532,0.32006,0.35349,1"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "4e30640f-85f2-49a1-87f7-59184f447a2d",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "2D Skybox",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "skybox",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.SkyBox2D",
+          "__guid": "2502f74e-6cea-4cad-9474-d2c3f9198ac4",
+          "__enabled": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "SkyIndirectLighting": true,
+          "SkyMaterial": "2.vmat",
+          "Tint": "1,1,1,1"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "e1ceffcb-886a-4c00-bf38-aad3d1005d5f",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "World",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 1,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "WorldThinker",
+          "__guid": "9641efba-79ab-482f-9003-fbe4eeb5c528",
+          "__enabled": true,
+          "BatchSize": 10,
+          "LoadAroundPlayer": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RenderChunkRadius": 5,
+          "RenderForgetRadius": 8,
+          "SerializedWorld": "AAAAAP////8AAAAAQgAAAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAGkAAAEAAAD/////AAAAAEIAAAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AABpAAAAAAAAAAAAAAAAAABCAAAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAAaQAAAQAAAAAAAAAAAAAAQgAAAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAGkAAP//////////AgAAAH4BAAD/AAD/AAD/AAD/AAD/AAD/AABRAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwDXAAAACABEBgBHAAAABgBAKwBLAAABBgArAEwAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAN0AAAAIAEQGAEcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAN0AAAAIAEQGAEcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAN0AAAEIAAQAQwYARwAAAAQATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYA3QAAAAgAQAQAQgYARwAAAAQATQAAAAQATQAAAAYATQAAAAYATQAAAAYATQAAAAYA3QAAAAgARAQARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYA1wAAAAgA/wAA/wAA/wAA/wAA/wAA3wAAAAAAAAAAAAACAAAAgQEAAP8AAP8AAP8AAP8AAP8AAHkAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAN0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAEwAAAErAAYASwAAQCsAAAYARwAARAYAAAgA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARAYAAAgA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARAYAAAgA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAQARwAAQwYAAQQACADdAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABABNAAAABABHAABCBgBABAAACADXAABEBgAABABHAABEBgAABABHAABEBgAABABHAABEBgAABABHAABEBgAABABHAABEBgAABABHAABEBAAACAD/AAB8AAAACAD/AAD/AAD/AAD/AAD/AAD/AABRAAAAAAAA/////wIAAAB+AQAA/wAA/wAA/wAA/wAA/wAA/wAASAAARQcARwAARQcARwAARQcARwAARQcARwAARQcARwAARQcARwAARQcA1wAARAYAAAgASwAAQCsAAAYATAAAASsABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDXAABEBgAACABNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDXAABEBgAACABNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDXAABDBgABBAAIAE0AAAAEAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEIGAEAEAAAIAE0AAAAEAE0AAAAEAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEQEAAAIAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAN0AAAAIAP8AAP8AAP8AAP8AAP8AAOIAAP////8AAAAAAgAAAIEBAAD/AAD/AAD/AAD/AAD/AACCAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAABBgArAEwAAAAGAEArAEsAAAAIAEQGANcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAIAEQGANcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAIAEQGANcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAEAE0AAAEIAAQAQwYA1wAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAQATQAAAAQATQAAAAgAQAQAQgYA1wAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAgARAQA/wAAdgAAAAgA/wAA/wAA/wAA/wAA/wAA/wAATgAA+v///wYAAAAAAAAARQAAALoAAAAGAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAK0AAAAAAAADAAAAAAAAAEgAAAD/AABhAAAAMAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AABFAAD/////AwAAAAAAAABIAAAA/wAAXQAAQDAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAASAAA/f///+b///8AAAAARQAAAIsAAAAgAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AANwAAAAAAAD/////AQAAAEIAAAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AABpAAABAAAA/////wEAAABCAAAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAAaQAAAAAAAAAAAAABAAAAQgAAAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAGkAAAEAAAAAAAAAAQAAAEIAAAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AABpAAA=",
+          "TextureAtlas": "materials/textureatlas.vmat",
+          "TranslucentTextureAtlas": "materials/textureatlastranslucent.vmat",
+          "UnloadBatchSize": 10
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "bf963b1a-bdf6-4847-8f33-12c1a7b16af5",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, -1, 0)",
+          "Position": "0,-640,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "932ca1d0-8bb6-4857-8f41-e8ecfdd6720e",
+              "__enabled": true,
+              "ChunkPosition": "0,-1,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "885577b3-668b-4fa4-aa23-071c10efcd1a",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "6758c86e-a6be-46ea-b3ec-3e668a871bc5",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (1, -1, 0)",
+          "Position": "640,-640,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "89b0da30-8d87-4fbe-a8b9-6f7578cb91c7",
+              "__enabled": true,
+              "ChunkPosition": "1,-1,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "9fe0810a-c711-4380-bc1c-6ea3a410b5ed",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "1ac2f1bc-53ff-462f-906d-70d713bee7db",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, 0, 0)",
+          "Position": "0,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "1bea54c5-05d1-4f6f-9ede-3fcfe30377be",
+              "__enabled": true,
+              "ChunkPosition": "0,0,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "02b8806c-2602-450b-8cc0-f2a8deb77d15",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "869593f9-e290-4a2f-b52c-b04900a2b43b",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (1, 0, 0)",
+          "Position": "640,0,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "1233064f-263f-4beb-9e8b-cb29cbf2784d",
+              "__enabled": true,
+              "ChunkPosition": "1,0,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "91f1d78c-c968-45a0-96ba-feea318e197d",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "ecc6a9c9-9eac-48c3-ae87-da848d437bb5",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, -1, 2)",
+          "Position": "-640,-640,1280",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "56ba4459-bb1c-45ae-be5b-97e5bb0ab6fc",
+              "__enabled": true,
+              "ChunkPosition": "-1,-1,2",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "3480837d-f49b-4e0c-a7b2-8e82c5836e9b",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "060d8f79-d0d0-4f24-a4ec-b6e7039ed984",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/glass.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "e15f1acf-7ad8-4406-875d-138c385d996a",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "1eb440d9-c098-495d-a0c1-676b7ffc2c03",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "400,400,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "-220,-220,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "0.0002441406,0.0002441406",
+                        "0.0002441406,0.0002441406",
+                        "256,511.8004",
+                        "255.998,511.8002",
+                        "511.9998,511.998",
+                        "0.0002441406,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "1eb440d9-c098-495d-a0c1-676b7ffc2c03",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "8312fef8-65e5-475c-ae8f-07addb6027f0",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "e6a7c820-5d84-4178-a43a-5a89d31e6528",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "7524b511-82fb-4f1c-936a-05d1bc5d5918"
+              }
+            },
+            {
+              "__guid": "7eda0f52-9593-4e26-ad38-bac2469d86f4",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Name",
+                    "Value": "oak_slab (1)"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "440,400,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "-180,-220,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "0.0002441406,0.0002441406",
+                        "0.0002441406,0.0001220703",
+                        "256,511.8004",
+                        "255.998,511.8001",
+                        "511.9998,511.998",
+                        "0.0002441406,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "7eda0f52-9593-4e26-ad38-bac2469d86f4",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "3b57bac9-9ee6-42e9-b0d0-67fe7979f595",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "72a4fae0-9bc6-413f-a2ff-eafe9b134139",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "c0e45150-fa84-4113-b28b-25a8d18a3b88"
+              }
+            },
+            {
+              "__guid": "924ca1fd-028e-452f-96fa-2624200fc693",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Name",
+                    "Value": "oak_slab (2)"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "400,440,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "-220,-180,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "0.0001220703,0.0002441406",
+                        "0.0001220703,0.0002441406",
+                        "256,511.8004",
+                        "255.998,511.8002",
+                        "511.9998,511.998",
+                        "0.0002441406,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "924ca1fd-028e-452f-96fa-2624200fc693",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "a47a716f-29a8-4850-8ec7-c1ffe6fcf203",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "58d05f66-c8e0-4097-9e25-d8892a47fe36",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "28994ad7-5ad3-450f-89e1-7ec7783f4c39"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "eae58028-8a15-4768-9776-95b97f602abd",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, 0, 2)",
+          "Position": "0,0,1280",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "8883482e-ddae-4628-998a-0c580c6a12fe",
+              "__enabled": true,
+              "ChunkPosition": "0,0,2",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "c4f6dc56-0b7e-44b7-88c9-0ca2f9108eff",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "632094cd-0edc-4056-9efa-5a51e842ab82",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/glass.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "a8394e2d-9621-4d3e-82bf-cc9e1bbf4d11",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "a12fd93b-e87a-414c-8e67-7499455618a9",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "200,160,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "220,180,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "511.9998,511.9998",
+                        "511.9998,511.9998",
+                        "256,511.7996",
+                        "255.998,511.7997",
+                        "0.0001220703,511.998",
+                        "511.9999,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "a12fd93b-e87a-414c-8e67-7499455618a9",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "cf0e581b-865b-4999-b56d-8ab8d9408452",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "b1a50c5b-cd0a-4568-a21c-ec3ac83adfa5",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "4f708aaa-eba7-4fc7-9d30-66e96ceed529"
+              }
+            },
+            {
+              "__guid": "4bdf3b24-e4db-406b-98ce-dd442d38ae35",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Name",
+                    "Value": "oak_slab (1)"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "160,200,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "180,220,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "511.9998,511.9999",
+                        "511.9998,511.9998",
+                        "256,511.7998",
+                        "255.998,511.7997",
+                        "0.0002441406,511.998",
+                        "511.9998,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "4bdf3b24-e4db-406b-98ce-dd442d38ae35",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "5fd86745-03ae-46e4-b493-edccc422f1f5",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "e0a200c9-e592-4a9a-93ad-b584ed02c515",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "4c43f32e-b919-4525-9a3c-5b30e6140d4f"
+              }
+            },
+            {
+              "__guid": "4ec1565a-f962-4605-829f-067b3ddaa341",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Name",
+                    "Value": "oak_slab (2)"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "200,200,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "220,220,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "511.9998,511.9998",
+                        "511.9998,511.9998",
+                        "256,511.7996",
+                        "255.998,511.7997",
+                        "0.0002441406,511.998",
+                        "511.9998,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "4ec1565a-f962-4605-829f-067b3ddaa341",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "acdcee88-8461-4688-9e10-3d3065117c0a",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "8cacdb75-9ce8-4127-84d2-d5c0dab72a8f",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "0216925a-d948-4045-8b96-87a10d013029"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "a54bb7c5-96f0-436c-bdb5-89d376016c9b",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, -1, 2)",
+          "Position": "0,-640,1280",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "041f261b-5d11-4b1b-b347-adadb583305a",
+              "__enabled": true,
+              "ChunkPosition": "0,-1,2",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "dc1fcd5b-d47a-4323-97fa-6dcfbc753e31",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "a1452af0-c53c-4b45-be29-9d136fa1848f",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/glass.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "4ea18bc8-bea9-42df-aa6b-dd1a0032fa74",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "b34c5014-dcf4-4b58-9f33-67dd0d26e44a",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "160,400,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "180,-220,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "0.0002441406,511.9999",
+                        "0.0002441406,511.9998",
+                        "256,511.7998",
+                        "255.998,511.7997",
+                        "511.9998,511.998",
+                        "0.0002441406,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "b34c5014-dcf4-4b58-9f33-67dd0d26e44a",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "821c81d5-7f9b-4760-beaa-ecca1059ca06",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "6c698304-e4ef-4351-91db-0bc44420335e",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "3954f9f0-ff48-4323-acc7-3aafd4fe7770"
+              }
+            },
+            {
+              "__guid": "2eeda3ac-f86c-4dab-ba25-32ace5f9ca1e",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Name",
+                    "Value": "oak_slab (1)"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "200,400,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "220,-220,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "0.0002441406,511.9998",
+                        "0.0002441406,511.9998",
+                        "256,511.7996",
+                        "255.998,511.7997",
+                        "511.9998,511.998",
+                        "0.0002441406,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "2eeda3ac-f86c-4dab-ba25-32ace5f9ca1e",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "1090e7c2-e376-41b5-8001-0c936b72f789",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "9af8c1f0-ecbc-4a35-a3ce-de33ea90afa1",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "c4c938ac-a89f-4c54-8d57-3baf2ebed8ae"
+              }
+            },
+            {
+              "__guid": "85d6970a-5f95-48af-906d-a5f462a63336",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Name",
+                    "Value": "oak_slab (2)"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "200,440,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "220,-180,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "0.0001220703,511.9998",
+                        "0.0001220703,511.9998",
+                        "256,511.7996",
+                        "255.998,511.7997",
+                        "511.9998,511.998",
+                        "0.0002441406,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "85d6970a-5f95-48af-906d-a5f462a63336",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "f23f0f0d-e8f9-45c3-876e-8d9eb900ad13",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "d6acc20a-0022-4c90-a3b5-c0816148b908",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "60687602-cf04-4d80-8952-5812a960f623"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "98584fcb-e153-406a-a994-678271947adb",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, 0, 2)",
+          "Position": "-640,0,1280",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "11e5935a-b5a0-42ca-b0a5-1390086841af",
+              "__enabled": true,
+              "ChunkPosition": "-1,0,2",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "cad2d83d-ee7a-4ba8-9ac2-4e9f3160994e",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "1aa0dc42-f815-4ea7-bd9b-c239988c2851",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/glass.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "dff55c81-4ccf-4075-ae54-c06a0782e895",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "08c0a1b9-efb9-41b7-808e-2f699cc6f3ca",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "400,160,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "-220,180,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "511.9998,0.0002441406",
+                        "511.9998,0.0002441406",
+                        "256,511.8004",
+                        "255.998,511.8002",
+                        "0.0001220703,511.998",
+                        "511.9999,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "08c0a1b9-efb9-41b7-808e-2f699cc6f3ca",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "1ad85d49-9291-4883-8d3b-d14abcff5ff5",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "fdc71967-e8ba-4c6b-992c-8b1bb5aafd76",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "bfec81fe-9fb9-4fe0-8b00-72330132c786"
+              }
+            },
+            {
+              "__guid": "24b18aee-88d3-4655-b663-fc2fda09f0f9",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Name",
+                    "Value": "oak_slab (1)"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "400,200,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "-220,220,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "511.9998,0.0002441406",
+                        "511.9998,0.0002441406",
+                        "256,511.8004",
+                        "255.998,511.8002",
+                        "0.0002441406,511.998",
+                        "511.9998,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "24b18aee-88d3-4655-b663-fc2fda09f0f9",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "f1c86e24-fe43-45f7-bf44-263a8a007798",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "8b3bf511-c0b3-4093-873e-e788c4d0a235",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "103cde36-60f3-4646-86c6-e1f08290e3ec"
+              }
+            },
+            {
+              "__guid": "a04c0b38-ef5e-405f-8e0f-35f9684dbf46",
+              "__version": 1,
+              "__Prefab": "items/wood/oak/oak_slab.prefab",
+              "__PrefabInstancePatch": {
+                "AddedObjects": [],
+                "RemovedObjects": [],
+                "PropertyOverrides": [
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Name",
+                    "Value": "oak_slab (2)"
+                  },
+                  {
+                    "Target": {
+                      "Type": "GameObject",
+                      "IdValue": "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed"
+                    },
+                    "Property": "Position",
+                    "Value": "440,200,200"
+                  },
+                  {
+                    "Target": {
+                      "Type": "Component",
+                      "IdValue": "8cfc94a1-b7bb-4000-a191-a1c1b197edc8"
+                    },
+                    "Property": "Mesh",
+                    "Value": {
+                      "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f+laMRGsohUVbFn1+t04ANs+Z0VsM69AwfgBFyAKZ9MPXdgk3qLnsI+Um/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt+ivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                      "Position": "-180,220,1490",
+                      "Rotation": "0,0,-0.7071067,0.7071068",
+                      "Positions": [
+                        "-20,-20,10",
+                        "20,-20,10",
+                        "20,20,10",
+                        "-20,20,10",
+                        "-20,20,-10",
+                        "20,20,-10",
+                        "20,-20,-10",
+                        "-20,-20,-10"
+                      ],
+                      "TextureCoord": [
+                        "1,1",
+                        "0,0.5",
+                        "1,0",
+                        "0,0.9996093",
+                        "0,0",
+                        "0,0.5",
+                        "0,1",
+                        "1,-0.00039047",
+                        "1,0",
+                        "1,1",
+                        "1,1",
+                        "0.5,-0.0003907084",
+                        "0,1",
+                        "1,1",
+                        "0,0",
+                        "0.5,0.9996095",
+                        "1,0.9996095",
+                        "0,1",
+                        "0.5,-0.00039047",
+                        "1,0.5",
+                        "0.5,0.9996093",
+                        "1,0.5",
+                        "0,-0.0003907084",
+                        "0,1"
+                      ],
+                      "TextureUAxis": [
+                        "0,-1,0",
+                        "0,-1,0",
+                        "0,0,1",
+                        "0,0,-1",
+                        "0,1,0",
+                        "0,-1,0"
+                      ],
+                      "TextureVAxis": [
+                        "-1,0,0",
+                        "-1,0,-0",
+                        "-1,0,0",
+                        "-1,0,0",
+                        "0,0,-1",
+                        "0,0,-1"
+                      ],
+                      "TextureScale": [
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.078125,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501",
+                        "0.07812501,0.07812501"
+                      ],
+                      "TextureOffset": [
+                        "511.9998,0.0002441406",
+                        "511.9998,0.0001220703",
+                        "256,511.8004",
+                        "255.998,511.8001",
+                        "0.0002441406,511.998",
+                        "511.9998,511.998"
+                      ],
+                      "MaterialIndex": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "EdgeFlags": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      "Materials": [
+                        "materials/dev/reflectivity_30.vmat",
+                        "items/wood/oak/oak_slab.vmat"
+                      ]
+                    }
+                  }
+                ],
+                "MovedObjects": []
+              },
+              "__PrefabIdToInstanceId": {
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "a04c0b38-ef5e-405f-8e0f-35f9684dbf46",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "b905c772-a22b-4b92-a58f-1421a98b0935",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "19417852-0d74-4973-97b7-421352699a63",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "b8408334-b0d5-46b7-a12d-46a8b56830c4"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "b8c79381-5134-4a43-9381-575ae04c6696",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-6, 6, 0)",
+          "Position": "-3840,3840,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "a89121cc-00e3-4b51-ac01-d93d2a1705c3",
+              "__enabled": true,
+              "ChunkPosition": "-6,6,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "bac28cdc-75fc-43ca-b826-4368d73352b9",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/glass.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "978fff52-199c-49dd-815c-711fe89ad08e",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "29c926db-98f6-4973-b3c8-90fb4e7a47f0",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, 3, 0)",
+          "Position": "0,1920,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "26eb88fc-71a6-4432-b40f-0b5bd9eefb94",
+              "__enabled": true,
+              "ChunkPosition": "0,3,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "de49b0da-309a-4129-8aee-e7824674571d",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/barrier.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "7531bef9-37b7-4433-b282-19029134ff97",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "b14bff72-5641-45a0-be2b-9167c75696f8",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-1, 3, 0)",
+          "Position": "-640,1920,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "1b21a052-51c5-4bf4-a7af-98cc29640d22",
+              "__enabled": true,
+              "ChunkPosition": "-1,3,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "c2a0660a-f7d8-47fd-bec8-84c523753b79",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/barrier.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "1ae2dd30-2ca1-459a-8f4a-2580fefcc3da",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "57530bd1-6204-4559-ad5d-b3b35a6e3b99",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (-3, -26, 0)",
+          "Position": "-1920,-16640,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "7395d135-8752-42f9-9fdb-db89de3fab3a",
+              "__enabled": true,
+              "ChunkPosition": "-3,-26,0",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "3be8b2a9-88e7-4f58-956f-ea8ae1d75d4e",
+              "__enabled": true,
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "ec867038-a70e-418c-8782-83a884388c89",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "6c28305d-ea63-442d-b74f-cd6c490c1a6d",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, 0, 1)",
+          "Position": "0,0,640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "6ceb2056-69ce-4aaa-9e09-6a85e2764575",
+              "__enabled": true,
+              "ChunkPosition": "0,0,1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "167d6847-6709-4125-9cf5-b9efb3e19122",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "80b83e77-eb9d-4486-9fcb-45d05d1eab95",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (1, 0, 1)",
+          "Position": "640,0,640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "cb49204d-8108-44f0-8932-cb4a11c307b3",
+              "__enabled": true,
+              "ChunkPosition": "1,0,1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "16bcd588-3591-43e9-a2b0-57c40ec815d6",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "966dfc07-5a82-4392-917c-53d6395e9c72",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (0, -1, 1)",
+          "Position": "0,-640,640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "74685ac1-9431-4f4c-8ab2-c0529e101fda",
+              "__enabled": true,
+              "ChunkPosition": "0,-1,1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "7908a73e-9a28-489f-b482-9efa9d05804d",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "1845f15d-a3d7-485d-8f44-b5a7b382b2a3",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Chunk (1, -1, 1)",
+          "Position": "640,-640,640",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "ChunkObject",
+              "__guid": "f32bdf4f-024e-4f69-a830-8c67727dce00",
+              "__enabled": true,
+              "ChunkPosition": "1,-1,1",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "TortureTest": false
+            },
+            {
+              "__type": "Sandbox.ModelCollider",
+              "__guid": "f8ca8934-fb14-4e79-b96a-0c1a39de7590",
+              "__enabled": true,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": false,
+              "Model": "sbox_procedural_model.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ],
+          "Children": []
+        }
+      ]
+    },
+    {
+      "__guid": "51167e43-3ddd-4d29-ae6f-cdd766cdb1f7",
+      "__version": 1,
+      "Flags": 2048,
+      "Name": "Camera",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "68188fbb-a3a5-4f05-85eb-e694419aedb1",
+          "__enabled": true,
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "FovAxis": "Horizontal",
+          "IsMainCamera": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "spectator",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        },
+        {
+          "__type": "Sandbox.Bloom",
+          "__guid": "5280e434-91ce-485c-8e73-830edf306fb8",
+          "__enabled": true,
+          "__version": 1,
+          "Gamma": 2.2,
+          "Mode": "Additive",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Strength": 0.5,
+          "Threshold": 1.25,
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.Tonemapping",
+          "__guid": "abd08e57-f746-45f2-bd6b-cf8194e31b7a",
+          "__enabled": true,
+          "__version": 3,
+          "AutoExposureEnabled": true,
+          "ExposureCompensation": 0,
+          "ExposureMethod": "RGB",
+          "MaximumExposure": 2,
+          "MinimumExposure": 1,
+          "Mode": "ReinhardJodie",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Rate": 1
+        },
+        {
+          "__type": "Sandbox.Sharpen",
+          "__guid": "69a81fe6-db38-49e7-93b0-94865cbe0cdd",
+          "__enabled": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Scale": 0.2
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "3939c138-6174-4ef1-abbb-b6e50e0d2253",
+      "__version": 1,
+      "__Prefab": "prefabs/player.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "5accbbb2-a453-4a8a-b74a-ec3d99ee4113"
+            },
+            "Property": "Name",
+            "Value": "Player"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "5accbbb2-a453-4a8a-b74a-ec3d99ee4113"
+            },
+            "Property": "Enabled",
+            "Value": false
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "703e9780-3857-4ba6-bb52-3d01f3dbbb3b"
+            },
+            "Property": "HasCreativeInventory",
+            "Value": true
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "703e9780-3857-4ba6-bb52-3d01f3dbbb3b"
+            },
+            "Property": "HasInventory",
+            "Value": false
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "5accbbb2-a453-4a8a-b74a-ec3d99ee4113": "3939c138-6174-4ef1-abbb-b6e50e0d2253",
+        "0170a4e6-1ecd-410a-9cb5-66e752491c6a": "c5cd5fdb-35e5-4c82-9203-3a1c822e64e5",
+        "45864397-1173-4ad8-8d55-d9738cd16790": "b8667713-50da-4e81-afb0-9e402e06a7dc",
+        "e75bd04f-b35b-4dd4-b604-45b9a871f4f4": "e6840740-4493-4103-ae36-06ac157e6a61",
+        "c5272133-3d34-48b1-b83a-cae48c518558": "c0e6cd45-440e-492e-936e-fcb8b3d33db9",
+        "2f28f0de-60ca-48a7-b731-e97896a9104a": "dacc267d-ddfa-4e75-bc49-cc6b0645ed7b",
+        "d2a34b5a-2649-45b0-bfc1-61ce4a13f81e": "413b3418-0be1-4e91-918e-edf68b6ea3de",
+        "703e9780-3857-4ba6-bb52-3d01f3dbbb3b": "d83407ae-8345-4be7-ab64-4eadc615eaf2",
+        "d514ff34-f7a1-460d-b48b-4658adb795a2": "c8d543f0-33c3-4a3a-aaca-e1a3aca3464f",
+        "c6134cca-7543-45e3-bb98-a776effd5d88": "a84a744b-0d88-46ca-9467-e439812ec3f3",
+        "6bca5cb4-fd64-46de-a2c6-a32c45c25e6c": "5c52c02c-a2da-4a88-ab18-881449102252",
+        "6004a5ce-ee62-44d0-82c1-ea064262749f": "e368b1e9-a80b-4f98-8ec0-9988dcaed3d8",
+        "703f8946-c56e-43b3-a0e5-df98ba67ebf4": "0cf58b7a-2192-469d-8453-51156fe1e40f",
+        "bff842e3-98b3-490d-a607-c849da58a53a": "92a7bd24-b218-420e-9602-07d689e39f93",
+        "7f0a02f7-a9fc-4413-a69c-cedd04bf79b5": "fd919e7b-8256-4cf2-a865-0df9798dc915",
+        "78e5f13f-cefb-41f7-90e6-7c6d40d4d701": "2c7cdbdc-4138-4d71-8704-f43dba072f1f",
+        "deff5d8d-679f-4cea-bcdc-cd2b4b630151": "9d7cb880-c594-423b-870e-6a2e6d1dd28f"
+      }
+    },
+    {
+      "__guid": "22bdb425-c21a-43c4-b89d-f52298412004",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Telephone Manager",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 1,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.NetworkHelper",
+          "__guid": "daf55d86-4618-4584-a46e-50a014b80120",
+          "__enabled": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "go": "3939c138-6174-4ef1-abbb-b6e50e0d2253"
+          },
+          "SpawnPoints": [
+            {
+              "_type": "gameobject",
+              "go": "849bc8e6-7016-4b71-8ccf-483ee6abdfa7"
+            }
+          ],
+          "StartServer": true
+        },
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "0e1b778e-46b8-4f88-9b73-4e4eeb8ea148",
+          "__enabled": true,
+          "AutoScreenScale": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Opacity": 1,
+          "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
+          "TargetCamera": null,
+          "ZIndex": 100
+        },
+        {
+          "__type": "Telephone",
+          "__guid": "1d346869-4670-48bd-9968-941014510b24",
+          "__enabled": true,
+          "BuildBox": "structures/buildbox.struct",
+          "BuildTime": 120,
+          "DescribeTime": 30,
+          "ExamineTime": 30,
+          "LoopArounds": 4,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Spawn": {
+            "_type": "gameobject",
+            "go": "849bc8e6-7016-4b71-8ccf-483ee6abdfa7"
+          }
+        },
+        {
+          "__type": "TelephoneHud",
+          "__guid": "ca328f37-15c6-4521-8c23-0d65902dbbc0",
+          "__enabled": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "63b133e7-03fb-49e9-ad74-ff4bb4fdb1fb",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Gold",
+          "Position": "20,-20,200",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [],
+          "Children": []
+        },
+        {
+          "__guid": "90214ebc-5318-4b6f-9eba-3443848d836f",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Silver",
+          "Position": "-60,-20,160",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [],
+          "Children": []
+        },
+        {
+          "__guid": "90acd5f5-f057-4707-a1c4-5376d78b2ca2",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Bronze",
+          "Position": "100,-20,120",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [],
+          "Children": []
+        },
+        {
+          "__guid": "97bbc7b1-f9be-413c-8ba1-e5374101b559",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "PodiumCamera",
+          "Position": "20,340,100",
+          "Rotation": "0,-0,-0.7071068,0.7071068",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "OwnerTransfer": 1,
+          "Components": [],
+          "Children": []
+        }
+      ]
+    },
+    {
+      "__guid": "849bc8e6-7016-4b71-8ccf-483ee6abdfa7",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Spawn",
+      "Position": "0,0,1535.43",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.SpawnPoint",
+          "__guid": "55ead302-ea36-4687-996a-595f1bbc4a4a",
+          "__enabled": true,
+          "Color": "0.8902,0.31765,0.05098,1",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "ac2863af-de2e-419c-91c1-71f3914b0f4d",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Music Player",
+      "Position": "62.21489,-39.11253,103.2405",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.SoundPointComponent",
+          "__guid": "4822236a-2198-437d-95ea-35305c9b04b5",
+          "__enabled": true,
+          "Distance": 512,
+          "DistanceAttenuation": false,
+          "DistanceAttenuationOverride": false,
+          "Falloff": [
+            {
+              "x": 0,
+              "y": 1,
+              "in": 3.1415927,
+              "out": -3.1415927,
+              "mode": "Mirrored"
+            },
+            {
+              "x": 1,
+              "y": 0,
+              "in": 0,
+              "out": 0,
+              "mode": "Mirrored"
+            }
+          ],
+          "Force2d": true,
+          "MaxRepeatTime": 1,
+          "MinRepeatTime": 1,
+          "Occlusion": false,
+          "OcclusionOverride": false,
+          "OcclusionRadius": 32,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Pitch": 1,
+          "PlayOnStart": true,
+          "ReflectionOverride": false,
+          "Reflections": false,
+          "Repeat": true,
+          "SoundEvent": "sounds/music/speed build.sound",
+          "SoundOverride": true,
+          "StopOnNew": false,
+          "TargetMixer": {
+            "Name": "music",
+            "Id": "98f98a25-2b8d-4c4c-b1c9-12ca63c84d90"
+          },
+          "Volume": 1
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "bab6d2f5-db6a-4870-9337-c4a9b4881aab",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Envmap Probe",
+      "Position": "0,0,1586.089",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.EnvmapProbe",
+          "__guid": "517129cd-5d86-40d0-8b9d-3b6fd1787176",
+          "__enabled": true,
+          "Bounds": {
+            "Mins": "-307.1526,-314.8674,-175.1863",
+            "Maxs": "297.8467,329.4226,159.1275"
+          },
+          "DelayBetweenUpdates": 0.1,
+          "Feathering": 0.02,
+          "FrameInterval": 5,
+          "MaxDistance": 512,
+          "MultiBounce": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Projection": "Box",
+          "RenderDynamically": true,
+          "Resolution": "Small",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "TintColor": "1,1,1,1",
+          "UpdateStrategy": "OnEnabled",
+          "ZFar": 4096,
+          "ZNear": 16
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "d596f7bd-d525-470c-9642-c8d966af06bb",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Envmap Probe (1)",
+      "Position": "0,0,105.1321",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.EnvmapProbe",
+          "__guid": "2a2a3323-3086-42f0-9d4b-ce45c28b1031",
+          "__enabled": true,
+          "Bounds": {
+            "Mins": "-1626.531,-1459.279,-149.998",
+            "Maxs": "1585.734,1456.905,907.7946"
+          },
+          "DelayBetweenUpdates": 0.1,
+          "Feathering": 0.02,
+          "FrameInterval": 5,
+          "MaxDistance": 1024,
+          "MultiBounce": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Projection": "Box",
+          "RenderDynamically": true,
+          "Resolution": "Small",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "TintColor": "1,1,1,1",
+          "UpdateStrategy": "OnEnabled",
+          "ZFar": 4096,
+          "ZNear": 16
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "9cf03deb-359f-4cc6-82e2-3d1ec5cdc98c",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Pasted Object",
+      "Position": "120,-640,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.StructureLoader",
+          "__guid": "2234a51b-35ba-424b-af3b-e368968eeb0f",
+          "__enabled": true,
+          "LoadedStructure": null,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null
+        }
+      ],
+      "Children": []
+    }
+  ],
+  "SceneProperties": {
+    "NetworkInterpolation": true,
+    "TimeScale": 1,
+    "WantsSystemScene": true,
+    "Metadata": {},
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "ResourceVersion": 3,
+  "Title": null,
+  "Description": null,
+  "__references": [
+    "wujekfoliarz.sl_skybox3#34512"
+  ],
+  "__version": 3
+}

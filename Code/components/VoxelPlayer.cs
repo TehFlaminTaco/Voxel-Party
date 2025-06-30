@@ -29,8 +29,10 @@ public partial class VoxelPlayer : Component
 
     [Property] public bool CreativeMode { get; set; } = false;
     [Property] public bool GiveBrokenBlocks { get; set; } = false;
-    [Property] public bool HasInventory { get; set; } = true;
+    [Property] public bool HasInventory { get; set; } = false;
+    [Property] public bool HasCreativeInventory { get; set; } = false;
     [Property] public bool HasHotbar { get; set; } = true;
+    public bool ShowInventory { get; set; } = false;
 
     [Property, Alias( "Reach Distance" ), Description( "In blocks, not inches" )]
     public float ReachDistanceProperty { get; set; } = 3.5f;
@@ -63,6 +65,11 @@ public partial class VoxelPlayer : Component
     [Sync( SyncFlags.FromHost )] public int TotalBlockArea { get; set; } = 0; // Total area of the blocks in the build area, used for gamemode scoring
     [Sync( SyncFlags.FromHost )] public int CorrectBlocksPlaced { get; set; } = 0; // Number of blocks placed correctly by the player, used for gamemode scoring
     [Sync( SyncFlags.FromHost )] public int IncorrectBlocksPlaced { get; set; } = 0; // Number of blocks placed incorrectly by the player, used for gamemode scoring
+
+    [Sync( SyncFlags.FromHost )] public bool TextBoxVisible { get; set; } = false;
+    [Sync] public string TextBoxValue { get; set; } = "";
+
+    [Sync( SyncFlags.FromHost )] public string SpecialMessage { get; set; } = null;
 
     [Sync] public bool IsReady { get; set; } = false; // Whether the player is ready for the gamemode to start
 
@@ -280,17 +287,20 @@ public partial class VoxelPlayer : Component
 
     protected override void OnPreRender()
     {
-        ShowHoveredFace();
-
-        if ( !IsProxy && HasBuildVolume )
+        if ( !ShowInventory && !TextBoxVisible )
         {
-            Gizmo.Draw.Color = Color.Green.WithAlpha( 0.5f );
-            Gizmo.Draw.LineThickness = 8f;
-            var bbox = BBox.FromPoints( new[]{
+            ShowHoveredFace();
+
+            if ( !IsProxy && HasBuildVolume )
+            {
+                Gizmo.Draw.Color = Color.Green.WithAlpha( 0.5f );
+                Gizmo.Draw.LineThickness = 8f;
+                var bbox = BBox.FromPoints( new[]{
                 BuildAreaMins * World.BlockScale,
                 (BuildAreaMaxs + Vector3.One) * World.BlockScale
             } );
-            Gizmo.Draw.LineBBox( bbox );
+                Gizmo.Draw.LineBBox( bbox );
+            }
         }
     }
 
@@ -354,6 +364,22 @@ public partial class VoxelPlayer : Component
 
         return trace;
     }
+
+    [Rpc.Broadcast]
+    public void SwapSlots( int slot1, int slot2 )
+    {
+        var item1 = inventory.GetItem( slot1 );
+        var item2 = inventory.GetItem( slot2 );
+        inventory.SetItem( slot1, item2 );
+        inventory.SetItem( slot2, item1 );
+    }
+
+    [Rpc.Broadcast]
+    public void SetSlot( int slot, ItemStack item )
+    {
+        inventory.SetItem( slot, item );
+    }
+
 
     public static int SelectedSlot = 0;
     public void SpawnBlockBreakingEffect()
