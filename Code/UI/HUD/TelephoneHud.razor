@@ -1,0 +1,17 @@
+@using Sandbox.UI;
+@inherits PanelComponent
+<root class="@((VoxelPlayer.LocalPlayer?.TextBoxVisible ?? false) ? "dim" : "")">
+    <GameTimer class="@(HasTimer ? "" : "hidden")" @ref=timer TimerEnd=@(TimerEnd) TotalTime=@(TotalTime) />
+    <div @ref=message
+        class="message @(string.IsNullOrWhiteSpace(VoxelPlayer.LocalPlayer?.SpecialMessage ?? Message) ? "hidden" : "")">
+        @(VoxelPlayer.LocalPlayer?.SpecialMessage ?? Message)</div>
+
+    <div class="readyCheck @(HasReadyCheck ? "" : "hidden") @(VoxelPlayer.LocalPlayer.IsReady ? "Ready" : "")">
+        <Image class="key" Texture=@Input.GetGlyph("use", InputGlyphSize.Small, true)>
+            @(VoxelPlayer.LocalPlayer.IsReady ? "Ready" : "Not Ready")
+    </div>
+
+    <div class="textinput @((VoxelPlayer.LocalPlayer?.TextBoxVisible ?? false) ? "" : "hidden")">
+        <TextEntry Placeholder="..." MaxLength=@(50) @ref=textBox />
+    </div>
+</root>

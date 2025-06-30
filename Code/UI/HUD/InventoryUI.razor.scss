@@ -19,13 +19,11 @@ InventoryUI {
   color: white;
   font-family: "Perfect DOS VGA 437";
   border-radius: 30px;
-  flex-direction: row;
+  flex-direction: column-reverse;
   pointer-events: none;
-  align-self: flex-end;
   width: 100%;
   height: 100%;
-  align-items: flex-end;
-  justify-content: center;
+  align-items: center;
   
   .container
   {
@@ -40,17 +38,55 @@ InventoryUI {
     justify-content: space-evenly;
   }
   
-  .hotbar-slot
+  ItemIcon:not(.held)
   {
     background-color: rgba(27, 27, 27, 0.1);
     border: 2px $slate-border-dark;
     width: auto;
     aspect-ratio: 1;
-    border-radius: 10px;
+    border-radius: 10px;    
+    cursor: pointer;
 
     &.selected
     {
       border: 2px solid white;
+    }
+
+    &:hover {
+      background-color: rgba(0,0,0,0.5);
+    }
+  }
+
+  .pallete-container {
+    width: 45%;
+    flex-grow: 1;
+    gap: 4px;
+    align-items: center;
+    > .container {
+      max-height: 75%;
+      // overflow-y: scroll; // TODO: Add if we need it later.
+      width:100%;
+      backdrop-filter: blur(5);
+      justify-content: space-evenly;
+      height: auto;
+      > ItemIcon {
+        width: 8%;
+      }
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+
+  }
+
+  .held-item {
+    pointer-events: none;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    > ItemIcon {
+      position: absolute;
+      left:-50%;
+      top:-50%;
     }
   }
 }

@@ -3,26 +3,48 @@
 @using System;
 @inherits PanelComponent
 
-<root>
+<root onclick=@((e) => { if (Player.HasCreativeInventory && e.Target == Panel) DropHeldItem(); })>
 	<div class="container">
-		@if ( Player.HasHotbar )
+		@if (Player.HasHotbar)
 		{
-			@for ( var i = _inventory.InventorySize; i < _inventory.TotalSize; i++ )
+			@for (var i = _inventory.InventorySize; i < _inventory.InventorySize + _inventory.HotbarSize; i++)
 			{
-				<div class="hotbar-slot @(VoxelPlayer.SelectedSlot == i ? "selected" : "")">
-					<ItemIcon Slot=@(i)></ItemIcon>
+				int k = i;
+				<div class="hotbar-slot">
+					<ItemIcon class="@(VoxelPlayer.SelectedSlot == i ? "selected" : "")" Slot=@(i)
+						onclick=@(()=>Player.SwapSlots(k, Player.inventory.CursorSlot))></ItemIcon>
 				</div>
 			}
 		}
-		@if ( Player.HasInventory && ShowInventory )
-		{
-			@for ( var i = 0; i < _inventory.InventorySize; i++ )
+	</div>
+	@if (Player.HasInventory && Player.ShowInventory)
+	{
+		<div class="inventory-container">
+			@for (var i = 0; i < _inventory.InventorySize; i++)
 			{
 				<div class="inventory-slot">
-					<ItemIcon Slot=@(i)></ItemIcon>
+					<ItemIcon Slot=@(i)>
+					</ItemIcon>
 				</div>
 			}
-		}
+		</div>
+	}
+	@if (Player.HasCreativeInventory && Player.ShowInventory)
+	{
+		<div class="pallete-container">
+			<div class="container">
+				@foreach (var i in ItemRegistry.CachedRegistry.Where(c => c.Value.InPallete && c.Value.IsBlock).OrderBy(c =>
+							c.Key).Select(c =>
+							c.Value))
+				{
+					<ItemIcon ItemStack=@(new ItemStack(i)) onclick=@(()=>Player.SetSlot(Player.inventory.CursorSlot, new
+																   ItemStack(i, -1)))></ItemIcon>
+				}
+			</div>
+		</div>
+	}
+	<div class="held-item" @ref=HeldItemSlot>
+		<ItemIcon class="held" slot=@(Player.inventory.CursorSlot)></ItemIcon>
 	</div>
 </root>
 
@@ -31,13 +53,43 @@
 	PlayerController Controller => Player.GetComponent<PlayerController>();
 	VoxelPlayer Player => VoxelPlayer.LocalPlayer;
 	Inventory _inventory => Player.inventory;
-
-	public bool ShowInventory;
+	Panel HeldItemSlot;
 
 	protected override void OnFixedUpdate()
 	{
-		if ( Input.Pressed("score") ) ShowInventory = !ShowInventory;
+		Panel.Style.PointerEvents = (Player.HasInventory || Player.HasCreativeInventory) && Player.ShowInventory ?
+		PointerEvents.All : PointerEvents.None;
+		if (Input.Pressed("score"))
+		{
+			Player.ShowInventory = !Player.ShowInventory;
+			if (!Player.ShowInventory)
+				DropHeldItem();
+		}
 	}
 
-	protected override int BuildHash() => HashCode.Combine(_inventory.GetHashCode(), VoxelPlayer.SelectedSlot.GetHashCode());
+	void DropHeldItem()
+	{
+		var stack = Player.inventory.GetItem(Player.inventory.CursorSlot);
+		if (ItemStack.IsNullOrEmpty(stack)) return;
+		Player.SetSlot(Player.inventory.CursorSlot, ItemStack.Empty);
+		if (!Player.HasCreativeInventory)
+		{
+			Player.inventory.PutInFirstAvailableSlot(stack);
+		}
+	}
+
+	protected override void OnUpdate()
+	{
+		if (Input.EscapePressed && Player.ShowInventory)
+		{
+			Input.EscapePressed = false;
+			Player.ShowInventory = false;
+			DropHeldItem();
+		}
+		HeldItemSlot.Style.Left = Length.Percent(100f * Panel.MousePosition.x / Panel.Box.Rect.Width);
+		HeldItemSlot.Style.Top = Length.Percent(100f * Panel.MousePosition.y / Panel.Box.Rect.Height);
+	}
+
+	protected override int BuildHash() => HashCode.Combine(_inventory.GetHashCode(),
+	VoxelPlayer.SelectedSlot.GetHashCode(), Player.ShowInventory.GetHashCode());
 }
