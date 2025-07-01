@@ -23,13 +23,13 @@ public abstract class Gamemode : Component
 
     public async Task ReadyCheck( int minPlayers = 1, string message = null )
     {
-        message ??= minPlayers > 1 ? "Waiting for players to be ready!" : $"Waiting for {message} players to be ready!";
+        message ??= minPlayers <= 1 ? "Waiting for players to be ready!" : $"Waiting for {minPlayers} players to be ready!";
         Hud.Message = message;
         TimeUntil readyCheckDone = 120f;
-        while ( readyCheckDone > 0f || Scene.GetAll<VoxelPlayer>().Count( p => p.IsReady ) < minPlayers )
+        while ( readyCheckDone > 0f || Scene.GetAll<VoxelPlayer>().Count() < minPlayers || !Scene.GetAll<VoxelPlayer>().Any( c => c.IsReady ) )
         {
             // If NO-ONE is ready, reset the ready check timer
-            if ( Scene.GetAll<VoxelPlayer>().Count( p => p.IsReady ) < minPlayers )
+            if ( Scene.GetAll<VoxelPlayer>().Count() < minPlayers || !Scene.GetAll<VoxelPlayer>().Any( c => c.IsReady ) )
             {
                 readyCheckDone = 120f;
                 Hud.HasTimer = false; // Hide the timer UI whilst waiting for players to be ready
