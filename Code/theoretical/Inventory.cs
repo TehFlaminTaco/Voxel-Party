@@ -123,8 +123,8 @@ public class Inventory
             int id = slot;
             if ( hotbarFirst )
             {
-                slot += InventorySize;
-                slot = slot % (InventorySize + HotbarSize);
+                id += InventorySize;
+                id = id % (InventorySize + HotbarSize);
             }
 
             if ( GetItem( id ).Item == stack.Item )
@@ -142,8 +142,8 @@ public class Inventory
             int id = i;
             if ( hotbarFirst )
             {
-                i += InventorySize;
-                i = i % (InventorySize + HotbarSize);
+                id += InventorySize;
+                id = id % (InventorySize + HotbarSize);
             }
 
             var result = PutInSlot( id, stack, simulate );

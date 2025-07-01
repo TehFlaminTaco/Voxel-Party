@@ -96,7 +96,7 @@
           "OnComponentUpdate": null,
           "RenderChunkRadius": 5,
           "RenderForgetRadius": 8,
-          "SerializedWorld": "AAAAAP////8AAAAAQgAAAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAGkAAAEAAAD/////AAAAAEIAAAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AABpAAAAAAAAAAAAAAAAAABCAAAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAAaQAAAQAAAAAAAAAAAAAAQgAAAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAGkAAP//////////AgAAAH4BAAD/AAD/AAD/AAD/AAD/AAD/AABRAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwDXAAAACABEBgBHAAAABgBAKwBLAAABBgArAEwAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAN0AAAAIAEQGAEcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAN0AAAAIAEQGAEcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAN0AAAEIAAQAQwYARwAAAAQATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYA3QAAAAgAQAQAQgYARwAAAAQATQAAAAQATQAAAAYATQAAAAYATQAAAAYATQAAAAYA3QAAAAgARAQARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYA1wAAAAgA/wAA/wAA/wAA/wAA/wAA3wAAAAAAAAAAAAACAAAAgQEAAP8AAP8AAP8AAP8AAP8AAHkAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAN0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAEwAAAErAAYASwAAQCsAAAYARwAARAYAAAgA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARAYAAAgA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYARwAARAYAAAgA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAQARwAAQwYAAQQACADdAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABABNAAAABABHAABCBgBABAAACADXAABEBgAABABHAABEBgAABABHAABEBgAABABHAABEBgAABABHAABEBgAABABHAABEBgAABABHAABEBAAACAD/AAB8AAAACAD/AAD/AAD/AAD/AAD/AAD/AABRAAAAAAAA/////wIAAAB+AQAA/wAA/wAA/wAA/wAA/wAA/wAASAAARQcARwAARQcARwAARQcARwAARQcARwAARQcARwAARQcARwAARQcA1wAARAYAAAgASwAAQCsAAAYATAAAASsABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDXAABEBgAACABNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDXAABEBgAACABNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDXAABDBgABBAAIAE0AAAAEAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEIGAEAEAAAIAE0AAAAEAE0AAAAEAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEQEAAAIAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAN0AAAAIAP8AAP8AAP8AAP8AAP8AAOIAAP////8AAAAAAgAAAIEBAAD/AAD/AAD/AAD/AAD/AACCAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAABBgArAEwAAAAGAEArAEsAAAAIAEQGANcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAIAEQGANcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAIAEQGANcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAEAE0AAAEIAAQAQwYA1wAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAQATQAAAAQATQAAAAgAQAQAQgYA1wAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAQARAYARwAAAAgARAQA/wAAdgAAAAgA/wAA/wAA/wAA/wAA/wAA/wAATgAA+v///wYAAAAAAAAARQAAALoAAAAGAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAK0AAAAAAAADAAAAAAAAAEgAAAD/AABhAAAAMAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AABFAAD/////AwAAAAAAAABIAAAA/wAAXQAAQDAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAASAAA/f///+b///8AAAAARQAAAIsAAAAgAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AANwAAAAAAAD/////AQAAAEIAAAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AABpAAABAAAA/////wEAAABCAAAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAAaQAAAAAAAAAAAAABAAAAQgAAAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAP8AAGkAAAEAAAAAAAAAAQAAAEIAAAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AABpAAA=",
+          "SerializedWorld": "//////////8CAAAAfgEAAP8AAP8AAP8AAP8AAP8AAP8AAFEAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHANcAAAAIAEQGAEcAAAAGAEArAEsAAAEGACsATAAAAAYATQAAAAYATQAAAAYATQAAAAYA3QAAAAgARAYARwAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYA3QAAAAgARAYARwAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYA3QAAAQgABABDBgBHAAAABABNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAAAACABABABCBgBHAAAABABNAAAABABNAAAABgBNAAAABgBNAAAABgBNAAAABgDdAAAACABEBABHAAAABABEBgBHAAAABABEBgBHAAAABABEBgBHAAAABABEBgBHAAAABABEBgBHAAAABABEBgDXAAAACAD/AAD/AAD/AAD/AAD/AADfAAAAAAAAAAAAAAIAAACBAQAA/wAA/wAA/wAA/wAA/wAAeQAARQcARwAARQcARwAARQcARwAARQcARwAARQcARwAARQcARwAARQcA3QAAAAYATQAAAAYATQAAAAYATQAAAAYATAAAASsABgBLAABAKwAABgBHAABEBgAACADdAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBHAABEBgAACADdAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBHAABEBgAACADdAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABABHAABDBgABBAAIAN0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAEAE0AAAAEAEcAAEIGAEAEAAAIANcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQGAAAEAEcAAEQEAAAIAP8AAHwAAAAIAP8AAP8AAP8AAP8AAP8AAP8AAFEAAAAAAAD/////AgAAAH4BAAD/AAD/AAD/AAD/AAD/AAD/AABIAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwBHAABFBwDXAABEBgAACABLAABAKwAABgBMAAABKwAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEQGAAAIAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEQGAAAIAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAAGANcAAEMGAAEEAAgATQAAAAQATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYA1wAAQgYAQAQAAAgATQAAAAQATQAAAAQATQAAAAYATQAAAAYATQAAAAYATQAAAAYA1wAARAQAAAgARwAARAYAAAQARwAARAYAAAQARwAARAYAAAQARwAARAYAAAQARwAARAYAAAQARwAARAYAAAQA3QAAAAgA/wAA/wAA/wAA/wAA/wAA4gAA/////wAAAAACAAAAgQEAAP8AAP8AAP8AAP8AAP8AAIIAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHAEcAAEUHANcAAAAGAE0AAAAGAE0AAAAGAE0AAAAGAE0AAAEGACsATAAAAAYAQCsASwAAAAgARAYA1wAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAgARAYA1wAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAgARAYA1wAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAYATQAAAAQATQAAAQgABABDBgDXAAAABgBNAAAABgBNAAAABgBNAAAABgBNAAAABABNAAAABABNAAAACABABABCBgDXAAAABABEBgBHAAAABABEBgBHAAAABABEBgBHAAAABABEBgBHAAAABABEBgBHAAAABABEBgBHAAAACABEBAD/AAB2AAAACAD/AAD/AAD/AAD/AAD/AAD/AABOAAD9////5v///wAAAABFAAAAiwAAACAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA/wAA3AAA",
           "TextureAtlas": "materials/textureatlas.vmat",
           "TranslucentTextureAtlas": "materials/textureatlastranslucent.vmat",
           "UnloadBatchSize": 10
@@ -104,223 +104,7 @@
       ],
       "Children": [
         {
-          "__guid": "bf963b1a-bdf6-4847-8f33-12c1a7b16af5",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (0, -1, 0)",
-          "Position": "0,-640,0",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "932ca1d0-8bb6-4857-8f41-e8ecfdd6720e",
-              "__enabled": true,
-              "ChunkPosition": "0,-1,0",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "885577b3-668b-4fa4-aa23-071c10efcd1a",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "6758c86e-a6be-46ea-b3ec-3e668a871bc5",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (1, -1, 0)",
-          "Position": "640,-640,0",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "89b0da30-8d87-4fbe-a8b9-6f7578cb91c7",
-              "__enabled": true,
-              "ChunkPosition": "1,-1,0",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "9fe0810a-c711-4380-bc1c-6ea3a410b5ed",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "1ac2f1bc-53ff-462f-906d-70d713bee7db",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (0, 0, 0)",
-          "Position": "0,0,0",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "1bea54c5-05d1-4f6f-9ede-3fcfe30377be",
-              "__enabled": true,
-              "ChunkPosition": "0,0,0",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "02b8806c-2602-450b-8cc0-f2a8deb77d15",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "869593f9-e290-4a2f-b52c-b04900a2b43b",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (1, 0, 0)",
-          "Position": "640,0,0",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "1233064f-263f-4beb-9e8b-cb29cbf2784d",
-              "__enabled": true,
-              "ChunkPosition": "1,0,0",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "91f1d78c-c968-45a0-96ba-feea318e197d",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "ecc6a9c9-9eac-48c3-ae87-da848d437bb5",
+          "__guid": "24b281ac-e0c5-45b7-829e-e8de743e2753",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, 2)",
@@ -336,7 +120,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "56ba4459-bb1c-45ae-be5b-97e5bb0ab6fc",
+              "__guid": "265d4bfa-9a63-4812-979b-d97de6991cd5",
               "__enabled": true,
               "ChunkPosition": "-1,-1,2",
               "OnComponentDestroy": null,
@@ -349,7 +133,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "3480837d-f49b-4e0c-a7b2-8e82c5836e9b",
+              "__guid": "a4892c1f-3b30-477a-a1f4-2a5980235972",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -374,7 +158,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "060d8f79-d0d0-4f24-a4ec-b6e7039ed984",
+              "__guid": "1d2cec12-e8fd-4edc-8eab-afcff5a8046a",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -399,7 +183,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "e15f1acf-7ad8-4406-875d-138c385d996a",
+              "__guid": "0b05c60e-f36a-4ce8-9d34-44093b9bb0a6",
               "__enabled": true,
               "Elasticity": null,
               "Friction": null,
@@ -423,7 +207,7 @@
           ],
           "Children": [
             {
-              "__guid": "1eb440d9-c098-495d-a0c1-676b7ffc2c03",
+              "__guid": "3410a05d-6c3f-4feb-9c6c-63497f1c6e96",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -560,14 +344,14 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "1eb440d9-c098-495d-a0c1-676b7ffc2c03",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "8312fef8-65e5-475c-ae8f-07addb6027f0",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "e6a7c820-5d84-4178-a43a-5a89d31e6528",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "7524b511-82fb-4f1c-936a-05d1bc5d5918"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "3410a05d-6c3f-4feb-9c6c-63497f1c6e96",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "b2207bea-8d16-4693-ad11-d5a5a6b56ec5",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "133f18fc-b53d-425b-9388-f5fd7cc24fbd",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "34b4ebc5-b796-43bf-a1a2-c23ca385ed4c"
               }
             },
             {
-              "__guid": "7eda0f52-9593-4e26-ad38-bac2469d86f4",
+              "__guid": "0d8f8b7c-bf30-45a4-a44a-c40b7a3ca1c4",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -712,14 +496,14 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "7eda0f52-9593-4e26-ad38-bac2469d86f4",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "3b57bac9-9ee6-42e9-b0d0-67fe7979f595",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "72a4fae0-9bc6-413f-a2ff-eafe9b134139",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "c0e45150-fa84-4113-b28b-25a8d18a3b88"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "0d8f8b7c-bf30-45a4-a44a-c40b7a3ca1c4",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "0c781acf-99ca-469f-bbfc-ab932bf18f52",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "476c5d5a-b1c9-498a-a1c8-6bf42eb1edc9",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "c50b2156-36c0-4df3-bf45-cd939590f7f4"
               }
             },
             {
-              "__guid": "924ca1fd-028e-452f-96fa-2624200fc693",
+              "__guid": "b5ceccf6-5e4d-4da1-ae79-afc404a9e13c",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -864,16 +648,16 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "924ca1fd-028e-452f-96fa-2624200fc693",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "a47a716f-29a8-4850-8ec7-c1ffe6fcf203",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "58d05f66-c8e0-4097-9e25-d8892a47fe36",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "28994ad7-5ad3-450f-89e1-7ec7783f4c39"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "b5ceccf6-5e4d-4da1-ae79-afc404a9e13c",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "ba6ec1f4-99a7-4149-8ada-cd73ddd692c5",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "52592c72-49ee-42d5-b9a2-7aa54b357504",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "746988ed-2e04-4cef-a972-2bb4f77a564e"
               }
             }
           ]
         },
         {
-          "__guid": "eae58028-8a15-4768-9776-95b97f602abd",
+          "__guid": "5ff4c5d4-7615-4606-a4bf-d019ac4434fa",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, 0, 2)",
@@ -889,7 +673,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "8883482e-ddae-4628-998a-0c580c6a12fe",
+              "__guid": "a2973678-ba07-40e4-81cc-125e5da6da8d",
               "__enabled": true,
               "ChunkPosition": "0,0,2",
               "OnComponentDestroy": null,
@@ -902,7 +686,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "c4f6dc56-0b7e-44b7-88c9-0ca2f9108eff",
+              "__guid": "45a33abd-ecc6-40cd-9822-3587ad59ee90",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -927,7 +711,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "632094cd-0edc-4056-9efa-5a51e842ab82",
+              "__guid": "70fe858d-691a-4bff-bf5c-e3ac1e5c7bdd",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -952,7 +736,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "a8394e2d-9621-4d3e-82bf-cc9e1bbf4d11",
+              "__guid": "d6e56721-8243-4266-a166-262611a9daf1",
               "__enabled": true,
               "Elasticity": null,
               "Friction": null,
@@ -976,7 +760,7 @@
           ],
           "Children": [
             {
-              "__guid": "a12fd93b-e87a-414c-8e67-7499455618a9",
+              "__guid": "f86f671f-68a3-4e13-8324-cfcd8fb6dcaf",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -1113,14 +897,14 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "a12fd93b-e87a-414c-8e67-7499455618a9",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "cf0e581b-865b-4999-b56d-8ab8d9408452",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "b1a50c5b-cd0a-4568-a21c-ec3ac83adfa5",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "4f708aaa-eba7-4fc7-9d30-66e96ceed529"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "f86f671f-68a3-4e13-8324-cfcd8fb6dcaf",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "189a4791-c76c-42b4-88ab-23641bc7bf3f",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "8e45cfe3-b968-417e-96ca-faa50139256a",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "8c116fb1-5e8f-4081-ab53-c0b8b019d470"
               }
             },
             {
-              "__guid": "4bdf3b24-e4db-406b-98ce-dd442d38ae35",
+              "__guid": "b16d8fd7-a17d-4c0c-87ff-d42f66dbbd27",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -1265,14 +1049,14 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "4bdf3b24-e4db-406b-98ce-dd442d38ae35",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "5fd86745-03ae-46e4-b493-edccc422f1f5",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "e0a200c9-e592-4a9a-93ad-b584ed02c515",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "4c43f32e-b919-4525-9a3c-5b30e6140d4f"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "b16d8fd7-a17d-4c0c-87ff-d42f66dbbd27",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "2008c62c-0e94-4ba8-8cf6-09317b8fffb7",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "dd63f1be-4db7-4774-9334-aef295229b15",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "5af5c8e2-50f3-4705-94ea-2f187e591b4d"
               }
             },
             {
-              "__guid": "4ec1565a-f962-4605-829f-067b3ddaa341",
+              "__guid": "f5fd0d0e-f561-4e6a-8f8a-3e98e0518144",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -1417,16 +1201,16 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "4ec1565a-f962-4605-829f-067b3ddaa341",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "acdcee88-8461-4688-9e10-3d3065117c0a",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "8cacdb75-9ce8-4127-84d2-d5c0dab72a8f",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "0216925a-d948-4045-8b96-87a10d013029"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "f5fd0d0e-f561-4e6a-8f8a-3e98e0518144",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "a47ec940-cdfc-4c32-9f17-0f97d1247813",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "6eed5186-ecd4-4359-985d-8fdea7a54dae",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "98cbd6b5-0a8a-46a5-8921-c3b30c8bc89e"
               }
             }
           ]
         },
         {
-          "__guid": "a54bb7c5-96f0-436c-bdb5-89d376016c9b",
+          "__guid": "15ca654b-2264-41c8-8b43-9b86d12d8cff",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, -1, 2)",
@@ -1442,7 +1226,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "041f261b-5d11-4b1b-b347-adadb583305a",
+              "__guid": "41147bae-e5e3-49cd-8a3c-237f06335ae6",
               "__enabled": true,
               "ChunkPosition": "0,-1,2",
               "OnComponentDestroy": null,
@@ -1455,7 +1239,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "dc1fcd5b-d47a-4323-97fa-6dcfbc753e31",
+              "__guid": "03df7bc7-e5f7-4b7c-b62d-4dd09645c50b",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -1480,7 +1264,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "a1452af0-c53c-4b45-be29-9d136fa1848f",
+              "__guid": "22ff3c96-26a6-4303-a345-f7ef2656180f",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -1505,7 +1289,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "4ea18bc8-bea9-42df-aa6b-dd1a0032fa74",
+              "__guid": "ed1439bd-49cb-450c-95be-bd8768b634b7",
               "__enabled": true,
               "Elasticity": null,
               "Friction": null,
@@ -1529,7 +1313,7 @@
           ],
           "Children": [
             {
-              "__guid": "b34c5014-dcf4-4b58-9f33-67dd0d26e44a",
+              "__guid": "a7dd226a-cb5c-46bc-a807-83040e2561da",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -1666,14 +1450,14 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "b34c5014-dcf4-4b58-9f33-67dd0d26e44a",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "821c81d5-7f9b-4760-beaa-ecca1059ca06",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "6c698304-e4ef-4351-91db-0bc44420335e",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "3954f9f0-ff48-4323-acc7-3aafd4fe7770"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "a7dd226a-cb5c-46bc-a807-83040e2561da",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "e2a21785-54a9-44d6-a6a9-a9b045d99326",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "8fe9eaca-ab43-4a86-9a3e-b54d4fbe6632",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "c0d58fac-ee94-43fa-8e98-98a8d9b310df"
               }
             },
             {
-              "__guid": "2eeda3ac-f86c-4dab-ba25-32ace5f9ca1e",
+              "__guid": "0bd096a9-84c6-405d-b26e-267c01d0143a",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -1818,14 +1602,14 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "2eeda3ac-f86c-4dab-ba25-32ace5f9ca1e",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "1090e7c2-e376-41b5-8001-0c936b72f789",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "9af8c1f0-ecbc-4a35-a3ce-de33ea90afa1",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "c4c938ac-a89f-4c54-8d57-3baf2ebed8ae"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "0bd096a9-84c6-405d-b26e-267c01d0143a",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "8e916ef0-2dd9-4f97-b088-5955f85422cd",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "5c4ac2fe-4b61-4fcc-a028-7958fb6a9bb1",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "5febd7b8-b85f-4a14-a016-519833f28486"
               }
             },
             {
-              "__guid": "85d6970a-5f95-48af-906d-a5f462a63336",
+              "__guid": "d4808fd7-d81c-44c9-8243-35c809ff861d",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -1970,16 +1754,16 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "85d6970a-5f95-48af-906d-a5f462a63336",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "f23f0f0d-e8f9-45c3-876e-8d9eb900ad13",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "d6acc20a-0022-4c90-a3b5-c0816148b908",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "60687602-cf04-4d80-8952-5812a960f623"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "d4808fd7-d81c-44c9-8243-35c809ff861d",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "58456524-82a4-4d47-bc60-18205fb8e818",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "c7b59c3d-ea8f-4c64-8b0a-6ecc593aae9f",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "85052044-87df-4fec-895f-39c555816f87"
               }
             }
           ]
         },
         {
-          "__guid": "98584fcb-e153-406a-a994-678271947adb",
+          "__guid": "0ae74c8b-bf07-4731-922c-986e58f20426",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, 2)",
@@ -1995,7 +1779,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "11e5935a-b5a0-42ca-b0a5-1390086841af",
+              "__guid": "a1fb939a-0ba3-4972-8fd5-4dde4a4a5b6d",
               "__enabled": true,
               "ChunkPosition": "-1,0,2",
               "OnComponentDestroy": null,
@@ -2008,7 +1792,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "cad2d83d-ee7a-4ba8-9ac2-4e9f3160994e",
+              "__guid": "52d6b42c-9284-48cb-a5ee-f365166d83ba",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -2033,7 +1817,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "1aa0dc42-f815-4ea7-bd9b-c239988c2851",
+              "__guid": "3e17ae7a-597f-4088-9d65-4fb69d4123a4",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -2058,7 +1842,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "dff55c81-4ccf-4075-ae54-c06a0782e895",
+              "__guid": "28bffe79-a3e5-4805-9c06-0a6ad9962403",
               "__enabled": true,
               "Elasticity": null,
               "Friction": null,
@@ -2082,7 +1866,7 @@
           ],
           "Children": [
             {
-              "__guid": "08c0a1b9-efb9-41b7-808e-2f699cc6f3ca",
+              "__guid": "5a9157c3-bc42-4ff3-8d5c-ca11dff107c9",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -2219,14 +2003,14 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "08c0a1b9-efb9-41b7-808e-2f699cc6f3ca",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "1ad85d49-9291-4883-8d3b-d14abcff5ff5",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "fdc71967-e8ba-4c6b-992c-8b1bb5aafd76",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "bfec81fe-9fb9-4fe0-8b00-72330132c786"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "5a9157c3-bc42-4ff3-8d5c-ca11dff107c9",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "0da34338-f886-4ed3-8fa5-ccbe4427bc89",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "11229fed-1b2e-4801-9318-8ce287ec95dc",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "b2dd1f0d-9556-45f3-9ec3-050b303ec3c9"
               }
             },
             {
-              "__guid": "24b18aee-88d3-4655-b663-fc2fda09f0f9",
+              "__guid": "24111aa5-7287-4677-82ac-64c0b9a64eb5",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -2371,14 +2155,14 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "24b18aee-88d3-4655-b663-fc2fda09f0f9",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "f1c86e24-fe43-45f7-bf44-263a8a007798",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "8b3bf511-c0b3-4093-873e-e788c4d0a235",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "103cde36-60f3-4646-86c6-e1f08290e3ec"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "24111aa5-7287-4677-82ac-64c0b9a64eb5",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "4b9c460e-f864-439e-b9b7-983137d19800",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "978945af-24f7-4576-8673-6097f0b144ba",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "22db5346-7f04-45be-bcdd-42bb88813d8b"
               }
             },
             {
-              "__guid": "a04c0b38-ef5e-405f-8e0f-35f9684dbf46",
+              "__guid": "5e0a3cee-0662-46e9-b221-949208c4427c",
               "__version": 1,
               "__Prefab": "items/wood/oak/oak_slab.prefab",
               "__PrefabInstancePatch": {
@@ -2523,253 +2307,16 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "a04c0b38-ef5e-405f-8e0f-35f9684dbf46",
-                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "b905c772-a22b-4b92-a58f-1421a98b0935",
-                "9268070c-e24d-4e11-8620-5b5d99313351": "19417852-0d74-4973-97b7-421352699a63",
-                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "b8408334-b0d5-46b7-a12d-46a8b56830c4"
+                "b0f72748-b7fb-401e-8a0e-a55cc8ae27ed": "5e0a3cee-0662-46e9-b221-949208c4427c",
+                "64644fe7-ab08-42b4-a0c3-140f22fb35b8": "92888849-92eb-49ea-bdd8-ade94a57a226",
+                "9268070c-e24d-4e11-8620-5b5d99313351": "593b73fb-393f-4128-9a1a-2ba8c7c705d7",
+                "8cfc94a1-b7bb-4000-a191-a1c1b197edc8": "ab00cca1-3a14-4b53-ad0c-8f01fc41f96c"
               }
             }
           ]
         },
         {
-          "__guid": "b8c79381-5134-4a43-9381-575ae04c6696",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (-6, 6, 0)",
-          "Position": "-3840,3840,0",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "a89121cc-00e3-4b51-ac01-d93d2a1705c3",
-              "__enabled": true,
-              "ChunkPosition": "-6,6,0",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "bac28cdc-75fc-43ca-b826-4368d73352b9",
-              "__enabled": true,
-              "BodyGroups": 18446744073709551615,
-              "CreateAttachments": false,
-              "MaterialGroup": null,
-              "MaterialOverride": "materials/glass.vmat",
-              "Materials": null,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "RenderOptions": {
-                "GameLayer": true,
-                "OverlayLayer": false,
-                "BloomLayer": false,
-                "AfterUILayer": false
-              },
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "978fff52-199c-49dd-815c-711fe89ad08e",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "29c926db-98f6-4973-b3c8-90fb4e7a47f0",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (0, 3, 0)",
-          "Position": "0,1920,0",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "26eb88fc-71a6-4432-b40f-0b5bd9eefb94",
-              "__enabled": true,
-              "ChunkPosition": "0,3,0",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "de49b0da-309a-4129-8aee-e7824674571d",
-              "__enabled": true,
-              "BodyGroups": 18446744073709551615,
-              "CreateAttachments": false,
-              "MaterialGroup": null,
-              "MaterialOverride": "materials/barrier.vmat",
-              "Materials": null,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "RenderOptions": {
-                "GameLayer": true,
-                "OverlayLayer": false,
-                "BloomLayer": false,
-                "AfterUILayer": false
-              },
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "7531bef9-37b7-4433-b282-19029134ff97",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "b14bff72-5641-45a0-be2b-9167c75696f8",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (-1, 3, 0)",
-          "Position": "-640,1920,0",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "1b21a052-51c5-4bf4-a7af-98cc29640d22",
-              "__enabled": true,
-              "ChunkPosition": "-1,3,0",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "c2a0660a-f7d8-47fd-bec8-84c523753b79",
-              "__enabled": true,
-              "BodyGroups": 18446744073709551615,
-              "CreateAttachments": false,
-              "MaterialGroup": null,
-              "MaterialOverride": "materials/barrier.vmat",
-              "Materials": null,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "RenderOptions": {
-                "GameLayer": true,
-                "OverlayLayer": false,
-                "BloomLayer": false,
-                "AfterUILayer": false
-              },
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "1ae2dd30-2ca1-459a-8f4a-2580fefcc3da",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "57530bd1-6204-4559-ad5d-b3b35a6e3b99",
+          "__guid": "eb8c6919-c620-4930-8c0f-6f1ff3ddd3d9",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-3, -26, 0)",
@@ -2785,7 +2332,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "7395d135-8752-42f9-9fdb-db89de3fab3a",
+              "__guid": "13762a72-741f-4774-a873-7a632f6a630c",
               "__enabled": true,
               "ChunkPosition": "-3,-26,0",
               "OnComponentDestroy": null,
@@ -2798,7 +2345,7 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "3be8b2a9-88e7-4f58-956f-ea8ae1d75d4e",
+              "__guid": "be82597f-f6b0-40ce-84d6-2704263fc7c8",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
@@ -2823,223 +2370,7 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "ec867038-a70e-418c-8782-83a884388c89",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "6c28305d-ea63-442d-b74f-cd6c490c1a6d",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (0, 0, 1)",
-          "Position": "0,0,640",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "6ceb2056-69ce-4aaa-9e09-6a85e2764575",
-              "__enabled": true,
-              "ChunkPosition": "0,0,1",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "167d6847-6709-4125-9cf5-b9efb3e19122",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "80b83e77-eb9d-4486-9fcb-45d05d1eab95",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (1, 0, 1)",
-          "Position": "640,0,640",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "cb49204d-8108-44f0-8932-cb4a11c307b3",
-              "__enabled": true,
-              "ChunkPosition": "1,0,1",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "16bcd588-3591-43e9-a2b0-57c40ec815d6",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "966dfc07-5a82-4392-917c-53d6395e9c72",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (0, -1, 1)",
-          "Position": "0,-640,640",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "74685ac1-9431-4f4c-8ab2-c0529e101fda",
-              "__enabled": true,
-              "ChunkPosition": "0,-1,1",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "7908a73e-9a28-489f-b482-9efa9d05804d",
-              "__enabled": true,
-              "Elasticity": null,
-              "Friction": null,
-              "IsTrigger": false,
-              "Model": "sbox_procedural_model.vmdl",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnObjectTriggerEnter": null,
-              "OnObjectTriggerExit": null,
-              "OnTriggerEnter": null,
-              "OnTriggerExit": null,
-              "RollingResistance": null,
-              "Static": true,
-              "Surface": null,
-              "SurfaceVelocity": "0,0,0"
-            }
-          ],
-          "Children": []
-        },
-        {
-          "__guid": "1845f15d-a3d7-485d-8f44-b5a7b382b2a3",
-          "__version": 1,
-          "Flags": 0,
-          "Name": "Chunk (1, -1, 1)",
-          "Position": "640,-640,640",
-          "Rotation": "0,0,0,1",
-          "Scale": "1,1,1",
-          "Tags": "",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "NetworkOrphaned": 0,
-          "OwnerTransfer": 1,
-          "Components": [
-            {
-              "__type": "ChunkObject",
-              "__guid": "f32bdf4f-024e-4f69-a830-8c67727dce00",
-              "__enabled": true,
-              "ChunkPosition": "1,-1,1",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "TortureTest": false
-            },
-            {
-              "__type": "Sandbox.ModelCollider",
-              "__guid": "f8ca8934-fb14-4e79-b96a-0c1a39de7590",
+              "__guid": "21195e6f-a3b1-4509-a6cb-3eacda068e10",
               "__enabled": true,
               "Elasticity": null,
               "Friction": null,
@@ -3211,6 +2542,19 @@
             },
             "Property": "HasInventory",
             "Value": false
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "78e5f13f-cefb-41f7-90e6-7c6d40d4d701"
+            },
+            "Property": "RenderOptions",
+            "Value": {
+              "GameLayer": true,
+              "OverlayLayer": true,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            }
           }
         ],
         "MovedObjects": []
@@ -3297,14 +2641,17 @@
           "BuildTime": 120,
           "DescribeTime": 30,
           "ExamineTime": 30,
-          "LoopArounds": 4,
+          "LoopArounds": 1,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
-          "Spawn": null
+          "Spawn": {
+            "_type": "gameobject",
+            "go": "849bc8e6-7016-4b71-8ccf-483ee6abdfa7"
+          }
         },
         {
           "__type": "GamemodeHud",
@@ -3574,36 +2921,6 @@
           "UpdateStrategy": "OnEnabled",
           "ZFar": 4096,
           "ZNear": 16
-        }
-      ],
-      "Children": []
-    },
-    {
-      "__guid": "9cf03deb-359f-4cc6-82e2-3d1ec5cdc98c",
-      "__version": 1,
-      "Flags": 0,
-      "Name": "Pasted Object",
-      "Position": "120,-640,0",
-      "Rotation": "0,0,0,1",
-      "Scale": "1,1,1",
-      "Tags": "",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "NetworkOrphaned": 0,
-      "OwnerTransfer": 1,
-      "Components": [
-        {
-          "__type": "Sandbox.StructureLoader",
-          "__guid": "2234a51b-35ba-424b-af3b-e368968eeb0f",
-          "__enabled": true,
-          "LoadedStructure": null,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null
         }
       ],
       "Children": []

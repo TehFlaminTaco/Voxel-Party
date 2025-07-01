@@ -32,7 +32,7 @@ public class Telephone : Gamemode
     }
 
 
-    public const int MIN_PLAYERS = 1;
+    public const int MIN_PLAYERS = 3;
 
     [Property] public int LoopArounds { get; set; } = 1; // How many times to go back over the loop. Ideally should be 1, may be higher for debugging.
     [Property] public int BuildTime { get; set; } = 120; // How long each player gets to build the prompt.
@@ -88,47 +88,7 @@ public class Telephone : Gamemode
         TimeUntil readyCheckDone = 120f;
         Hud.Message = $"Waiting for at least {MIN_PLAYERS} players to be ready!";
 
-        while ( readyCheckDone > 0f || Scene.GetAll<VoxelPlayer>().Count( p => p.IsReady ) < MIN_PLAYERS )
-        {
-            // If NO-ONE is ready, reset the ready check timer
-            if ( Scene.GetAll<VoxelPlayer>().Count( p => p.IsReady ) < MIN_PLAYERS )
-            {
-                readyCheckDone = 120f;
-                Hud.HasTimer = false; // Hide the timer UI whilst waiting for players to be ready
-            }
-            else
-            {
-                Hud.HasTimer = true;
-            }
-
-            // If half the online players are ready, set the timer to 30 seconds
-            if ( Scene.GetAll<VoxelPlayer>().Count( p => p.IsReady ) >= Scene.GetAll<VoxelPlayer>().Count() / 2 )
-            {
-                readyCheckDone = MathF.Min( readyCheckDone, 30f );
-            }
-
-            // If EVERYONE is ready, set the timer to 3 seconds
-            if ( Scene.GetAll<VoxelPlayer>().All( p => p.IsReady ) )
-            {
-                readyCheckDone = MathF.Min( readyCheckDone, 3f );
-            }
-
-            if ( Scene.GetAll<VoxelPlayer>().Any( p => p.IsReady ) )
-            {
-                Hud.TotalTime = 120f;
-                Hud.TimerEnd = readyCheckDone;
-            }
-            else
-            {
-                Hud.TotalTime = 0f; // No total time if no players are ready
-                Hud.TimerEnd = 0f; // No timer if no players are ready
-            }
-            await Task.DelayRealtime( 100 );
-        }
-
-        Hud.HasTimer = false;
-        Hud.HasReadyCheck = false; // Hide the ready check UI
-        await Task.DelayRealtimeSeconds( 1 );
+        await ReadyCheck( MIN_PLAYERS );
 
         foreach ( var player in Scene.GetAll<VoxelPlayer>().OrderBy( c => Guid.NewGuid() ) )
         {
@@ -314,27 +274,43 @@ public class Telephone : Gamemode
         await HandleBrokenChain( true );
 
         // Bring down the walls.
+        // And add messages.
 
         for ( int chainIndex = 0; chainIndex < Chains.Count; chainIndex++ )
         {
             for ( int linkIndex = 0; linkIndex < Chains[chainIndex].Count; linkIndex++ )
             {
+                var link = Chains[chainIndex][linkIndex];
+                var messageDescriber = $"Described by {link.PromptBy}";
+                if ( linkIndex == 0 )
+                {
+                    messageDescriber = $"Prompt by {link.PromptBy}";
+                }
                 var anchor = new Vector3Int( chainIndex * 19, linkIndex * 19, 0 );
+                TextPanel.Make( (anchor + new Vector3( 10f, 0f, 5f )) * World.BlockScale, messageDescriber );
+                TextPanel.Make( (anchor + new Vector3( 10f, 0f, 4f )) * World.BlockScale, link.Description );
+
+                if ( link.BuiltBy != null )
+                {
+                    TextPanel.Make( (anchor + new Vector3( 10f, 10f, 10f )) * World.BlockScale, $"Built by {link.BuiltBy}" );
+                }
                 for ( int x = 0; x < 20; x++ )
                 {
                     for ( int z = 1; z <= 16; z++ )
                     {
-                        World.Active.SetBlock( anchor + new Vector3Int( x, 0, z ), BlockData.Empty );
-                        World.Active.SetBlock( anchor + new Vector3Int( 0, x, z ), BlockData.Empty );
-                        World.Active.SetBlock( anchor + new Vector3Int( x, 19, z ), BlockData.Empty );
-                        World.Active.SetBlock( anchor + new Vector3Int( 19, x, z ), BlockData.Empty );
+                        if ( x > 0 && x < 19 )
+                        {
+                            World.Active.SetBlock( anchor + new Vector3Int( x, 0, z ), BlockData.Empty );
+                            World.Active.SetBlock( anchor + new Vector3Int( x, 19, z ), BlockData.Empty );
+                        }
+                        World.Active.SetBlock( anchor + new Vector3Int( 0, x, z + 1 ), BlockData.Empty );
+                        World.Active.SetBlock( anchor + new Vector3Int( 19, x, z + 1 ), BlockData.Empty );
                     }
                 }
             }
         }
 
-        Hud.Message = "Ending the round";
-        await Task.DelayRealtimeSeconds( 120f );
-        Scene.LoadFromFile( "scens/telephone.scene" );
+        await ReadyCheck( 1, "Round over! Ready up to restart!" );
+        Scene.LoadFromFile( "scenes/telephone.scene" );
     }
 }

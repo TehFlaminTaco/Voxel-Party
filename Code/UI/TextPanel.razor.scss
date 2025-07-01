@@ -1,0 +1,25 @@
+TextPanel
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	justify-content: center;
+	align-items: center;
+	font-family: "perfect dos vga 437";
+
+	.text
+	{
+		position: relative;
+		justify-content: center;
+		align-items: center;
+		padding: 8px 16px;
+		border: 2px black;
+		border-radius: 20px;
+		font-size: 80px;
+		background-color: rgba(48, 48, 48, 0.73);
+		color: white;
+		text-shadow: 2px 8px 2px 0 black;
+	}
+}
