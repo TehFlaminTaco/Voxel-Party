@@ -219,7 +219,7 @@ public sealed class WorldThinker : Component, Component.ExecuteInEditor
 				)) * World.BlockScale ); // Spawn the item at the center of the block
 		}
 
-		//if ( spawnParticles ) SpawnBlockBreakParticles( position, expectedData );
+		if ( spawnParticles ) SpawnBlockBreakParticles( position, expectedData );
 		// Remove the block at the specified position.
 		World.SetBlock( position, new BlockData( 0 ) ); // Assuming 0 is the ID for air.
 	}

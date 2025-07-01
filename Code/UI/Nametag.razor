@@ -4,10 +4,6 @@
 @namespace Sandbox
 
 <root>
-	@if ( !IsProxy ) return;
+	@if (!IsProxy) return;
 	<div class="username">@Network.Owner.DisplayName</div>
 </root>
-
-@code
-{
-}
