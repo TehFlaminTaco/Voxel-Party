@@ -88,7 +88,7 @@
 		};
 		
 		Networking.CreateLobby( lobbyConfig );
-		Scene.LoadFromFile( "scenes/speed build.scene" );
+		_ = Transition.Run( () => Scene.LoadFromFile( "scenes/speed build.scene" ) );
 	}
 
 	private LobbyPrivacy GetPrivacyLabel( string privacy )

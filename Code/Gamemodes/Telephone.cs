@@ -43,10 +43,13 @@ public class Telephone : Gamemode
     // Chains[i] gets the Chain represented by index i, and then Chain[i][k] gets Link k of Chain i.
     List<List<ChainLink>> Chains = new();
 
-    void BackToSpawn()
+    async Task BackToSpawn()
     {
-        foreach ( var ply in Scene.GetAll<VoxelPlayer>() )
-            SetPlayerTransform( ply, Spawn.WorldPosition, Spawn.WorldRotation );
+        await Transition.Run( () =>
+        {
+            foreach ( var ply in Scene.GetAll<VoxelPlayer>() )
+                SetPlayerTransform( ply, Spawn.WorldPosition, Spawn.WorldRotation );
+        }, true );
     }
 
     async Task HandleBrokenChain( bool soft = false )
@@ -123,26 +126,29 @@ public class Telephone : Gamemode
         while ( RoundNumber <= Players.Count * LoopArounds )
         {
             // EVERYBODY, BUILD!
-            for ( int i = 0; i < Players.Count; i++ )
+            await Transition.Run( () =>
             {
-                var ply = Players[i];
-                int chainIndex = (i + RoundNumber) % Chains.Count;
+                for ( int i = 0; i < Players.Count; i++ )
+                {
+                    var ply = Players[i];
+                    int chainIndex = (i + RoundNumber) % Chains.Count;
 
-                int IslandXIndex = chainIndex;
-                int IslandYIndex = (RoundNumber / 2) - 1;
+                    int IslandXIndex = chainIndex;
+                    int IslandYIndex = (RoundNumber / 2) - 1;
 
-                SpawnIsland( IslandXIndex, IslandYIndex );
-                var examineTransform = GetIslandSpawn( IslandXIndex, IslandYIndex );
+                    SpawnIsland( IslandXIndex, IslandYIndex );
+                    var examineTransform = GetIslandSpawn( IslandXIndex, IslandYIndex );
 
 
-                SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
-                var point = GetIslandBuildPoint( IslandXIndex, IslandYIndex );
-                ply.SpecialMessage = $"Build: {Chains[chainIndex].Last().Description}";
-                ply.HasBuildVolume = true;
-                ply.BuildAreaMins = point;
-                ply.BuildAreaMaxs = point + new Vector3Int( 15, 15, 15 );
-                ply.CanBuild = true;
-            }
+                    SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
+                    var point = GetIslandBuildPoint( IslandXIndex, IslandYIndex );
+                    ply.SpecialMessage = $"Build: {Chains[chainIndex].Last().Description}";
+                    ply.HasBuildVolume = true;
+                    ply.BuildAreaMins = point;
+                    ply.BuildAreaMaxs = point + new Vector3Int( 15, 15, 15 );
+                    ply.CanBuild = true;
+                }
+            }, true );
             Hud.Message = "Build Phase!";
             Hud.HasTimer = true;
             Hud.TotalTime = BuildTime;
@@ -151,7 +157,7 @@ public class Telephone : Gamemode
             await HandleBrokenChain();
             Hud.HasTimer = false;
             Hud.Message = "";
-            BackToSpawn();
+            await BackToSpawn();
             for ( int i = 0; i < Players.Count; i++ )
             {
                 var ply = Players[i];
@@ -172,16 +178,18 @@ public class Telephone : Gamemode
 
             if ( RoundNumber > Players.Count * LoopArounds )
                 break;
-
-            for ( int i = 0; i < Players.Count; i++ )
+            await Transition.Run( () =>
             {
-                var ply = Players[i];
-                int chainIndex = (i + RoundNumber) % Chains.Count;
-                int IslandXIndex = chainIndex;
-                int IslandYIndex = (RoundNumber / 2) - 1;
-                var examineTransform = GetIslandSpawn( IslandXIndex, IslandYIndex );
-                SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
-            }
+                for ( int i = 0; i < Players.Count; i++ )
+                {
+                    var ply = Players[i];
+                    int chainIndex = (i + RoundNumber) % Chains.Count;
+                    int IslandXIndex = chainIndex;
+                    int IslandYIndex = (RoundNumber / 2) - 1;
+                    var examineTransform = GetIslandSpawn( IslandXIndex, IslandYIndex );
+                    SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
+                }
+            }, true );
 
             Hud.Message = "Examine the build";
             Hud.HasTimer = true;
@@ -191,7 +199,7 @@ public class Telephone : Gamemode
             Hud.HasTimer = false;
             await HandleBrokenChain();
 
-            BackToSpawn();
+            await BackToSpawn();
             Hud.RequestTextBox();
             foreach ( var ply in Players )
                 ply.TextBoxVisible = true;
@@ -229,7 +237,7 @@ public class Telephone : Gamemode
 
         for ( int chainIndex = 0; chainIndex < Chains.Count; chainIndex++ )
         {
-            BackToSpawn();
+            await BackToSpawn();
             Hud.Message = $"Initial Prompt by {Chains[chainIndex][0].PromptBy}";
             await Task.DelayRealtimeSeconds( 4f );
             await HandleBrokenChain( true );
@@ -237,12 +245,14 @@ public class Telephone : Gamemode
             Hud.Message = $"\"{Chains[chainIndex][0].Description}\"";
             await Task.DelayRealtimeSeconds( 4f );
             await HandleBrokenChain( true );
-
-            foreach ( var ply in Players )
+            await Transition.Run( () =>
             {
-                var examineTransform = GetIslandSpawn( chainIndex, 0 );
-                SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
-            }
+                foreach ( var ply in Players )
+                {
+                    var examineTransform = GetIslandSpawn( chainIndex, 0 );
+                    SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
+                }
+            }, true );
 
             Hud.Message = $"As imagined by {Chains[chainIndex][0].BuiltBy}";
             await Task.DelayRealtimeSeconds( 20f );
@@ -259,11 +269,14 @@ public class Telephone : Gamemode
                 await HandleBrokenChain( true );
 
                 if ( Chains[chainIndex][linkIndex].BuiltBy == null ) break;
-                foreach ( var ply in Players )
+                await Transition.Run( () =>
                 {
-                    var examineTransform = GetIslandSpawn( chainIndex, linkIndex );
-                    SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
-                }
+                    foreach ( var ply in Players )
+                    {
+                        var examineTransform = GetIslandSpawn( chainIndex, linkIndex );
+                        SetPlayerTransform( ply, examineTransform.Position, examineTransform.Rotation );
+                    }
+                }, true );
                 Hud.Message = $"As imagined by {Chains[chainIndex][linkIndex].BuiltBy}";
                 await Task.DelayRealtimeSeconds( 20f );
                 await HandleBrokenChain( true );
@@ -311,6 +324,6 @@ public class Telephone : Gamemode
         }
 
         await ReadyCheck( 1, "Round over! Ready up to restart!" );
-        Scene.LoadFromFile( "scenes/telephone.scene" );
+        await Transition.Run( () => Scene.LoadFromFile( "scenes/telephone.scene" ) );
     }
 }
