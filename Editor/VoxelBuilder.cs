@@ -137,19 +137,25 @@ public partial class VoxelBuilder : EditorTool
 		toolWindow.WindowTitle = "Voxel Builder Tools";
 		toolWindow.Layout.Margin = 16;
 
-		var toolBin = new ToolbarGroup( toolWindow, "Tools", null );
+		var toolBin = new ToolBar( toolWindow, "Tools" );
 		for ( i = 0; i < VoxelTools.Length; i++ )
 		{
 			int _i = i;
 			var tool = VoxelTools[i];
 			tool.ToolID = i; // Assign the tool ID
 			var name = (tool.Shortcut != null) ? $"{tool.Name} ({EditorShortcuts.GetKeys( tool.Shortcut )})" : tool.Name;
-			toolBin.AddButton( name, tool.Icon, () =>
+			var opt = toolBin.AddOption( name, tool.Icon, () =>
 			{
 				SelectedTool?.OnDeselected(); // Deselect the last tool
 				SelectedTool = tool; // Set the new tool as selected
 				SelectedTool.OnSelected(); // Select the new tool
-			}, () => SelectedTool == tool );
+			} );
+			/*toolBin.AddButton( name, tool.Icon, () =>
+			{
+				SelectedTool?.OnDeselected(); // Deselect the last tool
+				SelectedTool = tool; // Set the new tool as selected
+				SelectedTool.OnSelected(); // Select the new tool
+			}, () => SelectedTool == tool );*/
 		}
 
 		toolWindow.Layout.Add( toolBin );

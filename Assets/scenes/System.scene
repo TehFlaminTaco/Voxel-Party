@@ -135,6 +135,30 @@
           "Quality": "High",
           "Radius": 128,
           "ThinCompensation": 0
+        },
+        {
+          "__type": "Transition",
+          "__guid": "ca59a4ec-8f0a-4607-b35b-f1e1f1a5d660",
+          "__enabled": true,
+          "CommonShaders": [
+            "shaders/transitions/fade.shader",
+            "shaders/transitions/pixelate.shader"
+          ],
+          "IntroShaders": [
+            "shaders/transitions/antispiral.shader"
+          ],
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "OutroShaders": [
+            "shaders/transitions/spiral.shader"
+          ],
+          "TransitionTime": 1,
+          "UseIntro": true,
+          "UseOutro": true
         }
       ],
       "Children": []

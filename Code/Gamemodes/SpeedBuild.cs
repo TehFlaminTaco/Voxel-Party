@@ -110,21 +110,24 @@ public sealed class SpeedBuild : Gamemode
 
 			var index = 0;
 			BlockData[,,] anyStructureData = null;
-			foreach ( var player in Players )
+			await Transition.Run( () =>
 			{
-				if ( index >= Islands.Count )
+				foreach ( var player in Players )
 				{
-					Log.Error( "Not enough islands for all players." );
-					return;
-				}
+					if ( index >= Islands.Count )
+					{
+						Log.Error( "Not enough islands for all players." );
+						return;
+					}
 
-				Islands[index].Enabled = true;
-				SetPlayerTransform( player, Islands[index].GetComponentInChildren<SpawnPoint>().WorldPosition,
-					Rotation.LookAt( Vector3.Zero ).Angles().WithRoll( 0 ) );
-				player.MakeFlying();
-				player.IslandIndex = index;
-				index++;
-			}
+					Islands[index].Enabled = true;
+					SetPlayerTransform( player, Islands[index].GetComponentInChildren<SpawnPoint>().WorldPosition,
+						Rotation.LookAt( Vector3.Zero ).Angles().WithRoll( 0 ) );
+					player.MakeFlying();
+					player.IslandIndex = index;
+					index++;
+				}
+			}, true );
 
 
 			await Task.DelayRealtimeSeconds( 1f );
@@ -312,12 +315,15 @@ public sealed class SpeedBuild : Gamemode
 			{
 				Hud.Message = "Declaring winners...";
 				var podiumObject = GameObject.Children.Find( j => j.Name == "PodiumCamera" );
-				foreach ( var ply in Scene.GetAll<VoxelPlayer>() )
+				await Transition.Run( () =>
 				{
-					ply.Spectator = true;
-					ply.Lock();
-					ply.MoveCameraTo( podiumObject.WorldTransform, true );
-				}
+					foreach ( var ply in Scene.GetAll<VoxelPlayer>() )
+					{
+						ply.Spectator = true;
+						ply.Lock();
+						ply.MoveCameraTo( podiumObject.WorldTransform, true );
+					}
+				}, true );
 
 				var allPlayers = Players.OrderByDescending( k => ScoreByPlayer[k] ).Concat( HistoricalPlayers.Reverse<VoxelPlayer>() ).Where( c => c?.IsValid() ?? false ).ToArray();
 				await Task.DelayRealtimeSeconds( 1 );
@@ -376,7 +382,7 @@ public sealed class SpeedBuild : Gamemode
 				await Task.DelayRealtimeSeconds( 10f ); // Take 30 seconds to celebrate!
 				Hud.Message = "Restarting!";
 				// Restart the lobby
-				Scene.LoadFromFile( "scenes/speed build.scene" );
+				await Transition.Run( () => Scene.LoadFromFile( "scenes/speed build.scene" ) );
 				break;
 			}
 
