@@ -12,18 +12,19 @@
 	</div>
 
 	<div class="lobby-filters">
-		<div class="refresh-button @(CanRefresh() ? "" : "disabled")" onclick="@( () => { if (CanRefresh()) _ = FetchLobbies(); } )"><i>refresh</i></div>
-		@if ( !CanRefresh() )
+		<div class="refresh-button @(CanRefresh() ? "" : "disabled")"
+			onclick="@( () => { if (CanRefresh()) _ = FetchLobbies(); } )"><i>refresh</i></div>
+		@if (!CanRefresh())
 		{
-		<div class="refresh-countdown">Can refresh in @(GetRemainingSeconds())s...</div>
+			<div class="refresh-countdown">Can refresh in @(GetRemainingSeconds())s...</div>
 		}
-		
+
 		<div class="create-button" onclick=@( () => Menu.menuState = Menu.State.Create )>Create+</div>
-	</div>	
+	</div>
 
 	<div class="server-list">
 
-		@foreach ( var i in Lobbies )
+		@foreach (var i in Lobbies)
 		{
 			<div class="server-entry">
 				<div class="info-wrapper">
@@ -33,7 +34,9 @@
 
 					<div>
 						<div class="player-count"><i>person</i>@(i.Members) / @(i.MaxMembers)</div>
-						<div class="map-name"> <i>map</i> <div style="padding-right: 3px"></div>@i.Map</div>
+						<div class="map-name"> <i>map</i>
+							<div style="padding-right: 3px"></div>@i.Map
+						</div>
 					</div>
 				</div>
 				<div class="join-button-wrapper">
@@ -41,45 +44,10 @@
 				</div>
 			</div>
 		}
-		
-		@if ( !Lobbies.Any() && !Refreshing )
+
+		@if (!Lobbies.Any() && !Refreshing)
 		{
 			<div class="no-lobbies">No Lobbies Found :(</div>
 		}
 	</div>
 </root>
-
-@code
-{
-	List<LobbyInformation> Lobbies { get; set; } = new();
-	bool Refreshing { get; set; } = false;
-	DateTime LastRefreshTime { get; set; } = DateTime.MinValue;
-
-	protected override void OnAfterTreeRender( bool firstTime )
-	{
-		base.OnAfterTreeRender(firstTime);
-
-		if (firstTime)
-			_ = FetchLobbies();
-	}
-	async Task FetchLobbies()
-	{
-		Lobbies.Clear();
-		Refreshing = true;
-		LastRefreshTime = DateTime.Now;
-		Lobbies = await Networking.QueryLobbies();
-		Refreshing = false;
-	}
-
-	bool CanRefresh()
-	{
-		return !Refreshing && (DateTime.Now - LastRefreshTime).TotalSeconds >= 10;
-	}
-	int GetRemainingSeconds()
-	{
-		var elapsed = (DateTime.Now - LastRefreshTime).TotalSeconds;
-		return Math.Max(0, (int)(10 - elapsed));
-	}
-
-	protected override int BuildHash() => HashCode.Combine( IsVisible, Lobbies, GetRemainingSeconds(), CanRefresh() );
-}

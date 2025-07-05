@@ -32,7 +32,7 @@ public class Telephone : Gamemode
     }
 
 
-    public const int MIN_PLAYERS = 3;
+    public override int MinPlayersToPlay => 3;
 
     [Property] public int LoopArounds { get; set; } = 1; // How many times to go back over the loop. Ideally should be 1, may be higher for debugging.
     [Property] public int BuildTime { get; set; } = 120; // How long each player gets to build the prompt.
@@ -89,9 +89,9 @@ public class Telephone : Gamemode
         }
 
         TimeUntil readyCheckDone = 120f;
-        Hud.Message = $"Waiting for at least {MIN_PLAYERS} players to be ready!";
+        Hud.Message = $"Waiting for at least {MinPlayersToPlay} players to be ready!";
 
-        await ReadyCheck( MIN_PLAYERS );
+        await ReadyCheck( MinPlayersToPlay );
 
         foreach ( var player in Scene.GetAll<VoxelPlayer>().OrderBy( c => Guid.NewGuid() ) )
         {
