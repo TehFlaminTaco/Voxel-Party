@@ -11,6 +11,8 @@ public abstract class Gamemode : Component
 
     public bool IsPlaying = false;
 
+    public virtual int MinPlayersToPlay => 1;
+
     protected override void OnStart()
     {
         if ( Networking.IsHost )

@@ -151,7 +151,7 @@
       ],
       "Children": [
         {
-          "__guid": "f25c9f6f-088b-4124-bee2-a83bee73dfee",
+          "__guid": "3a8657b9-299f-41a5-b87c-a5438153d7c2",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, 0)",
@@ -167,7 +167,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "716fd312-70a8-4c23-8b5f-b9892e65df7a",
+              "__guid": "218d8798-0091-4e76-8ec6-5c5d32976696",
               "__enabled": true,
               "ChunkPosition": "-1,-1,0",
               "OnComponentDestroy": null,
@@ -180,12 +180,13 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "31a9c433-f607-4033-acb7-a2109d16d58c",
+              "__guid": "0f3de3e5-01a2-481a-ba05-6575597c1cd9",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
               "Model": "sbox_procedural_model.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -204,8 +205,9 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "f23bfd6e-3065-4fb1-8520-b1939f5d9d13",
+              "__guid": "ecd74fd2-6e0e-453b-b5aa-0e85fe1cbc43",
               "__enabled": true,
+              "Elasticity": null,
               "Friction": null,
               "IsTrigger": false,
               "Model": "sbox_procedural_model.vmdl",
@@ -219,6 +221,7 @@
               "OnObjectTriggerExit": null,
               "OnTriggerEnter": null,
               "OnTriggerExit": null,
+              "RollingResistance": null,
               "Static": true,
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
@@ -226,7 +229,7 @@
           ],
           "Children": [
             {
-              "__guid": "a8ee3f5a-8ef8-4b39-adf3-5c5608e37538",
+              "__guid": "1c60b1ba-af3a-485d-b96f-930f8c9bf55a",
               "__version": 1,
               "__Prefab": "prefabs/blockobjects/torch.prefab",
               "__PrefabInstancePatch": {
@@ -261,22 +264,22 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "eac1c917-0ae2-43bc-b477-8c58f16f5f15": "a8ee3f5a-8ef8-4b39-adf3-5c5608e37538",
-                "8f167d02-3c14-4df8-9485-45dc17ba680b": "23c6f611-a335-4f40-bf2b-bd806a1929a6",
-                "6dd468f6-59ac-44a2-b93d-c2c89186451a": "843230a1-723f-48dd-ad3f-c4d62fe36df2",
-                "1d23df2b-ed44-42a4-af97-df64d11b5842": "4d16555c-9703-4444-ba91-b5684d54c9f4",
-                "4039f075-e9d5-41f7-9068-6df06380eb26": "c16b3dd5-8557-4dac-aae4-9a0dd5e4bd7f",
-                "6bf7ceaa-dad3-4f6e-bc8c-8acf63f069bb": "a868e3ef-8bdb-41b2-89ac-e67f5692cfa9",
-                "85b15597-3f51-45cd-ac5e-a1f02bc32e62": "3c8ab021-9c7b-47d9-badd-dcaec58404a4",
-                "b93898d9-6dd2-4ea9-9e77-cb53155c2002": "924d713a-123c-47f1-8f2c-1fb799df37c8",
-                "80f82b36-ee9c-4937-b527-68c2b616ba97": "a56ae9a2-e92b-42fa-8507-94db404d4eb7",
-                "d016755f-0592-40b6-bc3b-22898a10153b": "2e800d03-5d15-422b-ba2a-3b459a81d96d"
+                "eac1c917-0ae2-43bc-b477-8c58f16f5f15": "1c60b1ba-af3a-485d-b96f-930f8c9bf55a",
+                "8f167d02-3c14-4df8-9485-45dc17ba680b": "1048c079-b440-4ce9-b1a5-70eee23cf367",
+                "6dd468f6-59ac-44a2-b93d-c2c89186451a": "a3c4450a-135e-41cd-ba18-3a0bcd61edcc",
+                "1d23df2b-ed44-42a4-af97-df64d11b5842": "81b8d1bc-3dc9-4e0b-be55-ef137dbf3cca",
+                "4039f075-e9d5-41f7-9068-6df06380eb26": "9c315cd7-197a-4f25-80be-6d6c2f1a855b",
+                "6bf7ceaa-dad3-4f6e-bc8c-8acf63f069bb": "c328a9a6-c15a-4fb3-9bb8-5e07b560ffa3",
+                "85b15597-3f51-45cd-ac5e-a1f02bc32e62": "ac492c42-9769-489f-9e81-477dce48db8f",
+                "b93898d9-6dd2-4ea9-9e77-cb53155c2002": "32772963-5a29-470f-97ea-2961726501b0",
+                "80f82b36-ee9c-4937-b527-68c2b616ba97": "5613add9-a2c2-40bb-8b9e-33ae85fbab39",
+                "d016755f-0592-40b6-bc3b-22898a10153b": "867faf29-9db7-40fc-a276-690a80708243"
               }
             }
           ]
         },
         {
-          "__guid": "7a918f33-d1f4-4f62-a174-5092f29b9311",
+          "__guid": "733c6093-c450-4d54-8b4c-3d9f78963e0e",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, -1, 0)",
@@ -292,7 +295,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "9e975dd6-2985-44c3-b35b-91ebad261b0c",
+              "__guid": "24ea9b4f-e709-4eca-80b7-9236f2142925",
               "__enabled": true,
               "ChunkPosition": "0,-1,0",
               "OnComponentDestroy": null,
@@ -305,12 +308,13 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "0f85cb6f-2cbf-44a3-91de-92a4d347f7d6",
+              "__guid": "7db23cc3-8cc9-42ad-bf77-ab215fe6f38c",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
               "Model": "sbox_procedural_model.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -329,8 +333,9 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "afceeda4-48e1-4b59-976e-231938360ff7",
+              "__guid": "4b462aaa-7c96-4abe-99ea-06a23d49afa8",
               "__enabled": true,
+              "Elasticity": null,
               "Friction": null,
               "IsTrigger": false,
               "Model": "sbox_procedural_model.vmdl",
@@ -344,6 +349,7 @@
               "OnObjectTriggerExit": null,
               "OnTriggerEnter": null,
               "OnTriggerExit": null,
+              "RollingResistance": null,
               "Static": true,
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
@@ -352,7 +358,7 @@
           "Children": []
         },
         {
-          "__guid": "561b1b0a-aa62-4a0d-b9ff-1808b647abf4",
+          "__guid": "d39149fe-a749-4ce0-a51a-16f684737af1",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, 0)",
@@ -368,7 +374,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "f96bca78-329b-4344-88b3-454e2ce7d594",
+              "__guid": "a0aa2d7f-f5fc-4bad-9d3b-69da53188052",
               "__enabled": true,
               "ChunkPosition": "-1,0,0",
               "OnComponentDestroy": null,
@@ -381,12 +387,13 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "a16d8b0f-6ede-480b-ba85-b81c4a7fe913",
+              "__guid": "e6dcddb0-b3ad-45b9-92aa-de7b7e4044a7",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
               "Model": "sbox_procedural_model.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -405,8 +412,9 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "3627ec14-f498-4ada-9296-019311072afa",
+              "__guid": "d93716e1-a148-4bdd-9e90-81d14cbde338",
               "__enabled": true,
+              "Elasticity": null,
               "Friction": null,
               "IsTrigger": false,
               "Model": "sbox_procedural_model.vmdl",
@@ -420,6 +428,7 @@
               "OnObjectTriggerExit": null,
               "OnTriggerEnter": null,
               "OnTriggerExit": null,
+              "RollingResistance": null,
               "Static": true,
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
@@ -428,7 +437,7 @@
           "Children": []
         },
         {
-          "__guid": "be3c948f-c4bc-48fe-887a-991f0394e56a",
+          "__guid": "a6217261-301f-4477-bb0b-561ff73c8a87",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, -1, -1)",
@@ -444,7 +453,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "2465fc47-9033-4df1-81ca-b914c7ba672f",
+              "__guid": "1ec2406e-08b3-485e-b4c2-e03dac4bba35",
               "__enabled": true,
               "ChunkPosition": "-1,-1,-1",
               "OnComponentDestroy": null,
@@ -457,12 +466,13 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "08a2237a-8a1d-40c0-8058-eb305c4e343a",
+              "__guid": "14332fd7-d455-4331-ae79-2196a67013d6",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
               "Model": "sbox_procedural_model.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -481,8 +491,9 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "1b114000-2832-4659-abf7-e34c8abb041a",
+              "__guid": "b316d536-93be-4f7a-8234-9a50d48e041f",
               "__enabled": true,
+              "Elasticity": null,
               "Friction": null,
               "IsTrigger": false,
               "Model": "sbox_procedural_model.vmdl",
@@ -496,6 +507,7 @@
               "OnObjectTriggerExit": null,
               "OnTriggerEnter": null,
               "OnTriggerExit": null,
+              "RollingResistance": null,
               "Static": true,
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
@@ -504,7 +516,7 @@
           "Children": []
         },
         {
-          "__guid": "f569f573-e052-417b-bc05-3e3cf9f22230",
+          "__guid": "8b824920-74a6-421a-a7d9-cbc757e03b2e",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, 0, 0)",
@@ -520,7 +532,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "1febda45-9509-4a22-8512-47f3323a4496",
+              "__guid": "30dcd435-72f9-4e49-a513-647f8fbe7913",
               "__enabled": true,
               "ChunkPosition": "0,0,0",
               "OnComponentDestroy": null,
@@ -533,12 +545,13 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "fba089e3-46c8-4f19-a660-3044864ba0cd",
+              "__guid": "62f4d3ee-03ed-4d56-ba58-45dd018f4537",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
               "Model": "sbox_procedural_model.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -557,8 +570,9 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "aa866b37-ab8b-4fcf-8847-35f8b1bb8c8e",
+              "__guid": "6d74b8c5-7de4-4eac-a5a8-1fd8c1db4114",
               "__enabled": true,
+              "Elasticity": null,
               "Friction": null,
               "IsTrigger": false,
               "Model": "sbox_procedural_model.vmdl",
@@ -572,6 +586,7 @@
               "OnObjectTriggerExit": null,
               "OnTriggerEnter": null,
               "OnTriggerExit": null,
+              "RollingResistance": null,
               "Static": true,
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
@@ -580,7 +595,7 @@
           "Children": []
         },
         {
-          "__guid": "33eda804-61bc-4e3d-98e8-3de3c1ffc303",
+          "__guid": "e368acac-947d-46b7-ad59-244aa09f63b5",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, -1, -1)",
@@ -596,7 +611,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "6a36b45c-3621-4cb9-affc-15883f3882bf",
+              "__guid": "4aa6ed0f-d047-4fec-ba14-ecb9dd73c220",
               "__enabled": true,
               "ChunkPosition": "0,-1,-1",
               "OnComponentDestroy": null,
@@ -609,12 +624,13 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "f71b264d-c7dd-4460-8a78-67f52f48d626",
+              "__guid": "c070eaac-e3a7-4ef3-afa3-28be0081aaa5",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
               "Model": "sbox_procedural_model.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -633,8 +649,9 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "40b36b83-3366-41e5-ba37-13d99c872f30",
+              "__guid": "72487bfb-9a96-4ae5-bb1d-35bb11e6d766",
               "__enabled": true,
+              "Elasticity": null,
               "Friction": null,
               "IsTrigger": false,
               "Model": "sbox_procedural_model.vmdl",
@@ -648,6 +665,7 @@
               "OnObjectTriggerExit": null,
               "OnTriggerEnter": null,
               "OnTriggerExit": null,
+              "RollingResistance": null,
               "Static": true,
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
@@ -656,7 +674,7 @@
           "Children": []
         },
         {
-          "__guid": "c82008df-5b26-4238-b2d3-6d6881918acb",
+          "__guid": "5140b8ad-ef6a-4c3b-8ad1-7e82581a2de9",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (-1, 0, -1)",
@@ -672,7 +690,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "9c13b012-d7a5-42ec-a8d1-15f1fddfd6c7",
+              "__guid": "3e83002a-4924-47cf-b010-409a5b2167a5",
               "__enabled": true,
               "ChunkPosition": "-1,0,-1",
               "OnComponentDestroy": null,
@@ -685,12 +703,13 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "a8b288c8-3726-4b42-942e-c1b621abdf2e",
+              "__guid": "e04d34d3-6737-4dd1-9cce-69ae618d8fbf",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
               "Model": "sbox_procedural_model.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -709,8 +728,9 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "c9f50e6f-4225-44bf-97d4-03c28eaf3b1d",
+              "__guid": "26e6639a-f1a1-451f-9e21-4747de30844d",
               "__enabled": true,
+              "Elasticity": null,
               "Friction": null,
               "IsTrigger": false,
               "Model": "sbox_procedural_model.vmdl",
@@ -724,6 +744,7 @@
               "OnObjectTriggerExit": null,
               "OnTriggerEnter": null,
               "OnTriggerExit": null,
+              "RollingResistance": null,
               "Static": true,
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
@@ -731,7 +752,7 @@
           ],
           "Children": [
             {
-              "__guid": "95c2ddd8-505b-4bbc-9277-94722800eab6",
+              "__guid": "ac2a3285-c198-4577-b27e-bbb49dedd686",
               "__version": 1,
               "__Prefab": "prefabs/blockobjects/torch.prefab",
               "__PrefabInstancePatch": {
@@ -766,22 +787,22 @@
                 "MovedObjects": []
               },
               "__PrefabIdToInstanceId": {
-                "eac1c917-0ae2-43bc-b477-8c58f16f5f15": "95c2ddd8-505b-4bbc-9277-94722800eab6",
-                "8f167d02-3c14-4df8-9485-45dc17ba680b": "ceed8e24-4a6a-400b-a8d0-e48e7942a605",
-                "6dd468f6-59ac-44a2-b93d-c2c89186451a": "1025e47f-853b-497a-a505-7627eb90792e",
-                "1d23df2b-ed44-42a4-af97-df64d11b5842": "e89c9b46-3de7-4dd1-aa46-439440f2ad91",
-                "4039f075-e9d5-41f7-9068-6df06380eb26": "c582f001-9af5-40c8-bee0-45bc42336369",
-                "6bf7ceaa-dad3-4f6e-bc8c-8acf63f069bb": "d9da04dd-d7b8-402c-8016-aa253d99840c",
-                "85b15597-3f51-45cd-ac5e-a1f02bc32e62": "a2578345-6fbf-4834-94e9-e0ab62c144c0",
-                "b93898d9-6dd2-4ea9-9e77-cb53155c2002": "df633cee-e318-4a31-a5db-3be733c41ef1",
-                "80f82b36-ee9c-4937-b527-68c2b616ba97": "6e1491ef-b0dd-4762-8d19-3739e8867342",
-                "d016755f-0592-40b6-bc3b-22898a10153b": "b47531dc-4f64-482a-ac30-71a98c4afb61"
+                "eac1c917-0ae2-43bc-b477-8c58f16f5f15": "ac2a3285-c198-4577-b27e-bbb49dedd686",
+                "8f167d02-3c14-4df8-9485-45dc17ba680b": "d791ca74-a7d8-4ee3-b538-abd797d443f3",
+                "6dd468f6-59ac-44a2-b93d-c2c89186451a": "59fd2b4b-5933-444e-987b-c69ba426705b",
+                "1d23df2b-ed44-42a4-af97-df64d11b5842": "02c904a2-e3df-46ac-8c58-9b13ed75636e",
+                "4039f075-e9d5-41f7-9068-6df06380eb26": "f97ce66a-0b54-4966-8b88-1d1709313f65",
+                "6bf7ceaa-dad3-4f6e-bc8c-8acf63f069bb": "dee8037f-0b7c-4c3e-a7b6-5508b1806ec2",
+                "85b15597-3f51-45cd-ac5e-a1f02bc32e62": "bf2ae77d-cb47-4fc3-a826-938893883a7c",
+                "b93898d9-6dd2-4ea9-9e77-cb53155c2002": "fb28cdf9-daca-4c56-8c14-b5220a299de2",
+                "80f82b36-ee9c-4937-b527-68c2b616ba97": "cd856357-6c92-4e09-86e1-29acd8a5799d",
+                "d016755f-0592-40b6-bc3b-22898a10153b": "84ff544c-3c7d-4557-8943-fb12a2de26f9"
               }
             }
           ]
         },
         {
-          "__guid": "d2f4be97-8854-4e00-975b-3dbebf0d3e07",
+          "__guid": "3fee790d-c208-4a74-8a8f-d02f6b3f3e23",
           "__version": 1,
           "Flags": 0,
           "Name": "Chunk (0, 0, -1)",
@@ -797,7 +818,7 @@
           "Components": [
             {
               "__type": "ChunkObject",
-              "__guid": "eb9714da-ede7-4110-94ec-fd2502c0a96b",
+              "__guid": "3fd7d51e-320e-48b1-a679-e3309b1d3097",
               "__enabled": true,
               "ChunkPosition": "0,0,-1",
               "OnComponentDestroy": null,
@@ -810,12 +831,13 @@
             },
             {
               "__type": "Sandbox.ModelRenderer",
-              "__guid": "ccc17e75-0e55-4c72-9e50-919c22bfc0af",
+              "__guid": "6053a47c-66dc-49f0-860b-21064e32ea28",
               "__enabled": true,
               "BodyGroups": 18446744073709551615,
               "CreateAttachments": false,
               "MaterialGroup": null,
               "MaterialOverride": "materials/textureatlas.vmat",
+              "Materials": null,
               "Model": "sbox_procedural_model.vmdl",
               "OnComponentDestroy": null,
               "OnComponentDisabled": null,
@@ -834,8 +856,9 @@
             },
             {
               "__type": "Sandbox.ModelCollider",
-              "__guid": "e74bd677-485d-4140-bf6f-3b93b9bf2652",
+              "__guid": "c3ed8217-d242-4827-8826-aaf7272d3361",
               "__enabled": true,
+              "Elasticity": null,
               "Friction": null,
               "IsTrigger": false,
               "Model": "sbox_procedural_model.vmdl",
@@ -849,6 +872,7 @@
               "OnObjectTriggerExit": null,
               "OnTriggerEnter": null,
               "OnTriggerExit": null,
+              "RollingResistance": null,
               "Static": true,
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
@@ -884,6 +908,7 @@
           "CreateBoneObjects": false,
           "MaterialGroup": null,
           "MaterialOverride": null,
+          "Materials": null,
           "Model": "models/player/player.vmdl",
           "Morphs": {},
           "OnComponentDestroy": null,
@@ -1095,6 +1120,30 @@
           "Quality": "High",
           "Radius": 128,
           "ThinCompensation": 0
+        },
+        {
+          "__type": "Transition",
+          "__guid": "0b196f2f-3982-4f20-bf1e-18a438abd6c4",
+          "__enabled": true,
+          "CommonShaders": [
+            "shaders/transitions/fade.shader",
+            "shaders/transitions/pixelate.shader"
+          ],
+          "IntroShaders": [
+            "shaders/transitions/antispiral.shader"
+          ],
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "OutroShaders": [
+            "shaders/transitions/spiral.shader"
+          ],
+          "TransitionTime": 1,
+          "UseIntro": true,
+          "UseOutro": true
         }
       ],
       "Children": []

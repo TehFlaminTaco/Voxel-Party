@@ -13,7 +13,17 @@
 
 	<TextEntry class="lobby-name" @ref="LobbyNameInput" placeholder="@(Connection.Local.DisplayName + "'s Lobby")" />
 
+	<div class="category">GAME SETTINGS</div>
 	<div class="slice">
+		<div class="option">
+			<div class="option-label">Gamemode</div>
+			<Dropdown Text="Speed-Build" @ref=GamemodeChoice>
+				<Options>
+					<Option Text="Speed-Build" />
+					<Option Text="Telephone" />
+				</Options>
+			</Dropdown>
+		</div>
 		<div class="option">
 			<div class="option-label">Max Players</div>
 			<div class="number-input">
@@ -40,65 +50,28 @@
 		</div>
 		<div class="option">
 			<div class="option-label">Destroy When Host Leaves</div>
-			<div class="toggle-button @(DestroyWhenHostLeaves ? "active" : "")" @onclick=@( () => DestroyWhenHostLeaves = !DestroyWhenHostLeaves )>
+			<div class="toggle-button @(DestroyWhenHostLeaves ? "active" : "")" @onclick=@( () => DestroyWhenHostLeaves
+			   																	   = !DestroyWhenHostLeaves )>
 				<div class="toggle-thumb"></div>
 			</div>
 		</div>
 		<div class="option">
 			<div class="option-label">Auto-Switch to Best Host</div>
-			<div class="toggle-button @(AutoSwitchToBestHost ? "active" : "")" @onclick=@( () => AutoSwitchToBestHost = !AutoSwitchToBestHost )>
+			<div class="toggle-button @(AutoSwitchToBestHost ? "active" : "")" @onclick=@( () => AutoSwitchToBestHost =
+			   																	  !AutoSwitchToBestHost )>
 				<div class="toggle-thumb"></div>
 			</div>
 		</div>
 	</div>
 
+	<!--
+	<div class="category">GAMEMODE SETTINGS</div>
+	<div class="slice">
+		<div class="option">
+			<div class="option-label">Soup</div>
+		</div>
+	</div>
+	-->
+
 	<button class="create" @onclick=@ApplyLobbyCreation>CREATE</button>
 </root>
-
-@code
-{
-	TextEntry LobbyNameInput { get; set; }
-	Dropdown PrivacyOption { get; set; }
-	string LobbyName => LobbyNameInput?.Text.Length > 0 ? LobbyNameInput?.Text : Connection.Local.DisplayName + "'s Lobby";
-	int MaxPlayers { get; set; } = 8;
-	bool Hidden { get; set; } = false;
-	bool DestroyWhenHostLeaves { get; set; } = false;
-	bool AutoSwitchToBestHost { get; set; } = true;
-	bool ShowPrivacyDropdown { get; set; }
-	
-	protected override int BuildHash() => HashCode.Combine( IsVisible );
-	
-	private void AdjustMaxPlayers( int delta )
-	{
-		MaxPlayers = Math.Clamp( MaxPlayers + delta, 1, 8 );
-		StateHasChanged();
-	}
-
-	private void ApplyLobbyCreation()
-	{
-		Log.Info( $"Creating lobby: {LobbyName}, Max Players: {MaxPlayers}, Privacy: {PrivacyOption.Text}, Hidden: {Hidden}, DestroyWhenHostLeaves: {DestroyWhenHostLeaves}, AutoSwitchToBestHost: {AutoSwitchToBestHost}" );
-		var lobbyConfig = new LobbyConfig
-		{
-			Name = LobbyName,
-			MaxPlayers = MaxPlayers,
-			Privacy = GetPrivacyLabel( (string)PrivacyOption.Text ),
-			Hidden = Hidden,
-			DestroyWhenHostLeaves = DestroyWhenHostLeaves,
-			AutoSwitchToBestHost = AutoSwitchToBestHost
-		};
-		
-		Networking.CreateLobby( lobbyConfig );
-		_ = Transition.Run( () => Scene.LoadFromFile( "scenes/speed build.scene" ) );
-	}
-
-	private LobbyPrivacy GetPrivacyLabel( string privacy )
-	{
-		return privacy switch
-		{
-			"Private" => LobbyPrivacy.Private,
-			"Friends" => LobbyPrivacy.FriendsOnly,
-			"Public" => LobbyPrivacy.Public,
-			_ => LobbyPrivacy.Private
-		};
-	}
-}

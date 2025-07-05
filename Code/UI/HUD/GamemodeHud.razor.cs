@@ -36,8 +36,8 @@ public partial class GamemodeHud : PanelComponent
 
     protected override void OnFixedUpdate()
     {
-        if ( VoxelPlayer.LocalPlayer != null )
-            VoxelPlayer.LocalPlayer.TextBoxValue = textBox.Value ?? "";
+        if ( VoxelPlayer.LocalPlayer.IsValid() )
+            VoxelPlayer.LocalPlayer.TextBoxValue = textBox?.Value ?? "";
     }
 
     protected override int BuildHash() => HashCode.Combine(
